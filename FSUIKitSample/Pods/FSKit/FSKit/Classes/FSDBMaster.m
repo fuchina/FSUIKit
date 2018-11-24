@@ -174,6 +174,58 @@ static FSDBMaster *_instance = nil;
     return [self execSQL:sql type:@"新增数据"];
 }
 
+- (NSString *)insert_fields_values:(NSDictionary<NSString *,id> *)list table:(NSString *)table{
+    if (!([table isKindOfClass:NSString.class] && table.length)) {
+        return @"insertSQL : table name is null or non_length";
+    }
+    
+    if (!([list isKindOfClass:NSDictionary.class] && list.count)) {
+        return nil;
+    }
+    
+    NSArray *keys = list.allKeys;
+    BOOL isTableExist = [self checkTableExist:table];
+    if (!isTableExist) {
+        [self insertSQL:nil fields:keys table:table];
+    }
+    
+    NSInteger count = keys.count;
+    NSMutableString *whys = [[NSMutableString alloc] init];
+    NSString *fies = [keys componentsJoinedByString:@","];
+    static NSString *_key_why = @"?";
+    static NSString *_key_why_space = @",?";
+    for (int x = 0; x < count; x ++) {
+        if (x) {
+            [whys appendString:_key_why_space];
+        }else{
+            [whys appendString:_key_why];
+        }
+    }
+    NSString *insert_sql = [[NSString alloc] initWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)",table,fies,whys];
+
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(_sqlite3, insert_sql.UTF8String, -1, &stmt, nil) == SQLITE_OK) {
+        for (NSString *k in keys) {
+            @autoreleasepool{
+                NSString *nk = [[NSString alloc] initWithFormat:@":%@",k];
+                const char *kc = nk.UTF8String;
+                int idx = sqlite3_bind_parameter_index(stmt, kc);
+                if (idx > 0) {
+                    NSString *v = [list objectForKey:k];
+                    sqlite3_bind_text(stmt, idx, v.UTF8String, -1, SQLITE_STATIC);
+                }
+            }
+        }
+    }
+    
+    int result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+        sqlite3_finalize(stmt);
+        return @"insertSQL : sqlite3_step(stmt) failed";
+    }
+    return nil;
+}
+
 - (NSString *)deleteSQL:(NSString *)sql{
     return [self execSQL:sql type:@"删除数据"];
 }
@@ -324,32 +376,34 @@ static FSDBMaster *_instance = nil;
 }
 
 - (NSString *)addField:(NSString *)field defaultValue:(NSString *)value toTable:(NSString *)table{
-    BOOL checkField = [field isKindOfClass:NSString.class] && field.length;
+    Class _class_NSString = NSString.class;
+    BOOL checkField = [field isKindOfClass:_class_NSString] && field.length;
     if (!checkField) {
         return @"字段不是字符串";
-    }
-    BOOL checkTable = [table isKindOfClass:NSString.class] && table.length;
-    if (!checkTable) {
-        return @"表不是字符串";
     }
     NSArray *keys = [self keywords];
     if ([keys containsObject:field]) {
         return @"字段名不能使用关键字";
+    }
+    BOOL checkTable = [table isKindOfClass:_class_NSString] && table.length;
+    if (!checkTable) {
+        return @"表名错误";
     }
     BOOL exist = [self checkTableExist:table];
     if (!exist) {
         return @"表不存在";
     }
     NSArray *fs = [self allFields:table];
-    BOOL fe = NO;
+    BOOL isFieldExist = NO;
+    NSString *_key_field_name = @"field_name";
     for (NSDictionary *dic in fs) {
-        NSString *f = [dic objectForKey:@"field_name"];
+        NSString *f = [dic objectForKey:_key_field_name];
         if ([f isEqualToString:field]) {
-            fe = YES;
+            isFieldExist = YES;
             break;
         }
     }
-    if (fe) {   // 表中已有改字段，算是增加成功了
+    if (isFieldExist) {   // 表中已有改字段，算是增加成功了
         return nil;
     }
     
@@ -407,9 +461,9 @@ int checkTableCallBack(void *param, int f_num, char **f_value, char **f_name){
     }
     
     if (number) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:p];
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:p];
     }else{
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:p];
+        [[NSUserDefaults standardUserDefaults] setObject:@0 forKey:p];
     }
     return 0;
 }

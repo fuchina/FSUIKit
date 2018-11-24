@@ -79,6 +79,9 @@ static NSString *_db_first_name = @"sql_ling";
  */
 - (NSString *)insertSQL:(NSString *)sql fields:(NSArray<NSString *> *)fields table:(NSString *)table;
 
+#pragma mark DEVELOPING CANNT FOR USING
+- (NSString *)insert_fields_values:(NSDictionary<NSString *,id> *)list table:(NSString *)table;
+
 /*
  删除  eg
  @"DELETE FROM %@ WHERE time = '%@';"

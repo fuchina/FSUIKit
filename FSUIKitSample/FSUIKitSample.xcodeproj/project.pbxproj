@@ -13,7 +13,6 @@
 		71BA7DA521A978DA00CE42AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71BA7DA421A978DA00CE42AB /* Assets.xcassets */; };
 		71BA7DA821A978DA00CE42AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71BA7DA621A978DA00CE42AB /* LaunchScreen.storyboard */; };
 		71BA7DAB21A978DA00CE42AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA7DAA21A978DA00CE42AB /* main.m */; };
-		71BA7DB421A9793400CE42AB /* FSUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA7DB321A9793400CE42AB /* FSUIKit.m */; };
 		7F7812BAA684A841A7E41EF8 /* libPods-FSUIKitSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C04D58E0BEADDAB2830949C /* libPods-FSUIKitSample.a */; };
 /* End PBXBuildFile section */
 
@@ -28,8 +27,6 @@
 		71BA7DA721A978DA00CE42AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71BA7DA921A978DA00CE42AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71BA7DAA21A978DA00CE42AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		71BA7DB221A9793400CE42AB /* FSUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUIKit.h; sourceTree = "<group>"; };
-		71BA7DB321A9793400CE42AB /* FSUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUIKit.m; sourceTree = "<group>"; };
 		73448E4E616011A97B7364B8 /* Pods-FSUIKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSUIKitSample.debug.xcconfig"; path = "Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample.debug.xcconfig"; sourceTree = "<group>"; };
 		7C04D58E0BEADDAB2830949C /* libPods-FSUIKitSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FSUIKitSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5B5DD844ED0CF1FB3BFBD5 /* Pods-FSUIKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSUIKitSample.release.xcconfig"; path = "Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,7 +65,6 @@
 		71BA7D9A21A978D900CE42AB /* FSUIKitSample */ = {
 			isa = PBXGroup;
 			children = (
-				71BA7DB121A9793400CE42AB /* FSUIKit */,
 				71BA7D9B21A978D900CE42AB /* AppDelegate.h */,
 				71BA7D9C21A978D900CE42AB /* AppDelegate.m */,
 				71BA7D9E21A978D900CE42AB /* ViewController.h */,
@@ -80,16 +76,6 @@
 				71BA7DAA21A978DA00CE42AB /* main.m */,
 			);
 			path = FSUIKitSample;
-			sourceTree = "<group>";
-		};
-		71BA7DB121A9793400CE42AB /* FSUIKit */ = {
-			isa = PBXGroup;
-			children = (
-				71BA7DB221A9793400CE42AB /* FSUIKit.h */,
-				71BA7DB321A9793400CE42AB /* FSUIKit.m */,
-			);
-			name = FSUIKit;
-			path = ../../FSUIKit;
 			sourceTree = "<group>";
 		};
 		7B8599BE979DEEBCAAB9F4FC /* Frameworks */ = {
@@ -106,7 +92,6 @@
 				73448E4E616011A97B7364B8 /* Pods-FSUIKitSample.debug.xcconfig */,
 				BB5B5DD844ED0CF1FB3BFBD5 /* Pods-FSUIKitSample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,7 +194,6 @@
 				71BA7DA021A978D900CE42AB /* ViewController.m in Sources */,
 				71BA7DAB21A978DA00CE42AB /* main.m in Sources */,
 				71BA7D9D21A978D900CE42AB /* AppDelegate.m in Sources */,
-				71BA7DB421A9793400CE42AB /* FSUIKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

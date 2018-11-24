@@ -1,9 +1,9 @@
 PODS:
   - FSCalculator (0.0.1)
-  - FSKit (1.3.1)
+  - FSKit (1.3.2)
   - FSUIKit (0.0.1):
     - FSCalculator (= 0.0.1)
-    - FSKit (= 1.3.1)
+    - FSKit (= 1.3.2)
     - FSWindow (= 0.0.1)
   - FSWindow (0.0.1)
 
@@ -22,8 +22,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FSCalculator: 3ab79307b008ebf07b4fa7fe827f418d7c65fd14
-  FSKit: e4fa462539482a9abd982c7a2fc6d27e0ef9db07
-  FSUIKit: b7e5dae6ce069d2cc70d5863bf2c1a511b94bdbd
+  FSKit: bb301adf2e24e297bd7ce1108a068040fbea7b6c
+  FSUIKit: 639f35acce5562ea2522d78442ad770217abbf5d
   FSWindow: 54dce45874a001ba7761303c89f478a7b9197ad2
 
 PODFILE CHECKSUM: 44de26bab1ee9ef7bff6b7099e22982eb3d780de

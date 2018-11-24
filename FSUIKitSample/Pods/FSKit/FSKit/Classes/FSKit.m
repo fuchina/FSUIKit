@@ -314,10 +314,8 @@ void _fs_clearUserDefaults(void){
     double max = [array[0] doubleValue];
     double min = max;
     
-    for (i = 1; i < array.count; i++)
-    {
+    for (i = 1; i < array.count; i++){
         CGFloat number = [array[i] doubleValue];
-        
         if (number > max)
             max = number;
         
