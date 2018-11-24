@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/fuchina/FSUIKit.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
-  s.source_files = 'FSUIKit/*'
+  s.source_files = 'FSUIKit/Classes/*'
   
   s.dependency   'FSCalculator','0.0.1'
   s.dependency   'FSWindow','0.0.1'

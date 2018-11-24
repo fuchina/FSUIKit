@@ -11,7 +11,7 @@
 		0817E8958CE15E501DA791A6AF53B14C /* FSEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E15E3390DA090B06B87D9B73FAB3B78 /* FSEntity.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		108DE328A397D29A4DB1E2BAFCD89D53 /* FSFile.h in Headers */ = {isa = PBXBuildFile; fileRef = BB353DD75A3B2A4107F0580F028BF3E7 /* FSFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		16E4CFA219019F68D39C1201424250D3 /* FSDBMaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 837425F096B5BB13CAAD8618AD7F9DAD /* FSDBMaster.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1A7B0B6967383B0658543E226B097416 /* FSUIKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F825C63A4B61E68FFB01CEE388CE5B79 /* FSUIKit-dummy.m */; };
+		1A7B0B6967383B0658543E226B097416 /* FSUIKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE79E7D57356674BCE043AEC7393BC1 /* FSUIKit-dummy.m */; };
 		3CAF6AA624EC4021308C78D80D2ABF1F /* FSTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE78FA6453B2AFF39EFC44ABB14B13F /* FSTuple.m */; };
 		4455529D71E90F358A8025777A6FF473 /* FSConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = D007629F04AC15283976EABD65752010 /* FSConstant.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		491FC7CD4A221D23F4FA0573048B9F58 /* FSHook.h in Headers */ = {isa = PBXBuildFile; fileRef = D669089D6472B1ED9451D10A61F0DD01 /* FSHook.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -30,10 +30,9 @@
 		7684D371BE5EC7CAE60D5255EB394A7B /* FSTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BFB8846BC5F150169A30E36D5E8E53C /* FSTuple.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7BAA58EE4B1A6AE6EC5C7C2CD9532A70 /* FSURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = FD971DB2DE45F55B2A0F3062A45BC305 /* FSURLSession.m */; };
 		7C7F55F74AD0307918E9C38ACEDD295B /* FuSoft.h in Headers */ = {isa = PBXBuildFile; fileRef = 47FF110583BADB5AD9603AB38B57C48C /* FuSoft.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		88AE46EC6C75006B0C035C77855C29F8 /* FSUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D9DF642E90008660F78CFA59E7AF6 /* FSUIKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8181D1BD77E13CF3AF2854C974A52A8C /* FSUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C8CB69B948A1EC5E591ADE4895E2DC /* FSUIKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		90B9C006B030D6CC9DE6F85275D77532 /* FSEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BD551E625B99D61514B079F68B842A00 /* FSEntity.m */; };
 		9347DEE2A88CB60B0820A4974A3A194C /* FSKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C2F21989C67F004A3EA1A0F290EFD3DA /* FSKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9D0977662475DFA398BAEE7D92C5D9B5 /* FSUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 738F1875741C6C11CA512955C11683E8 /* FSUIKit.m */; };
 		A225067A722283F6B465FBEB94E86CB7 /* FSPdf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F77ED8D98BEC7E1C4D9A143EFE40CFF /* FSPdf.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		ACAD97C1531B61D20E0C9B000CA53FB6 /* FSAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F12787DC239938D05FBF0CC395C858 /* FSAlgorithm.m */; };
 		B03BAAA7DBCA2885E569B843BD977862 /* FSPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFFEF5F284865ADD6577BDA349484E5 /* FSPdf.m */; };
@@ -42,6 +41,7 @@
 		CA603FAB6828D1135BC10D416D88D605 /* FSURLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C2B7EE4C94570DA07BDC322BAA416B3D /* FSURLSession.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CAA9E9382B42D0C292B8E86F4428DA91 /* FSDBMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F6734C672CBD06E4856E1C0545768C /* FSDBMaster.m */; };
 		D368345F9835CEFD92CAF9E351800723 /* FSWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F851DB3F5D7F37B6C0B6F30B86A6FC9 /* FSWindow.m */; };
+		D3C047B832F71914621A54A225497925 /* FSUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = DA008D3397D060CC67B160091D27D679 /* FSUIKit.m */; };
 		D600856003266AC25674188BB8217ED8 /* FSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDE69C2AB135FDF8318E47DC4CDB9A1 /* FSDate.m */; };
 		DA89378167F785132C633F0DB92FF02E /* FSCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8A3046076E819C7C1877D8310E2473 /* FSCalculator.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		EE0653B1FF99DCB67FD2BA2E29684CAA /* FSAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E17DCFE9A46E8EFFE2C9028BA193FE4 /* FSAlgorithm.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -102,8 +102,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		075D9DF642E90008660F78CFA59E7AF6 /* FSUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSUIKit.h; path = FSUIKit/FSUIKit.h; sourceTree = "<group>"; };
+		0DD6C6819A2346D543F05AF1D38338BD /* FSUIKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSUIKit-prefix.pch"; sourceTree = "<group>"; };
 		0E209F617972941FA46156FBA2A29AED /* FSWindow-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSWindow-dummy.m"; sourceTree = "<group>"; };
+		0EE79E7D57356674BCE043AEC7393BC1 /* FSUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSUIKit-dummy.m"; sourceTree = "<group>"; };
 		1075BF83F1D517CC03644FD1D31843E3 /* FSWindow.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSWindow.xcconfig; sourceTree = "<group>"; };
 		1E15E3390DA090B06B87D9B73FAB3B78 /* FSEntity.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSEntity.h; path = FSKit/Classes/FSEntity.h; sourceTree = "<group>"; };
 		1E17DCFE9A46E8EFFE2C9028BA193FE4 /* FSAlgorithm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSAlgorithm.h; path = FSKit/Classes/FSAlgorithm.h; sourceTree = "<group>"; };
@@ -111,17 +112,15 @@
 		29C8FF9A0D90E4E0E87E220B98F54B31 /* FSAVKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSAVKit.m; path = FSKit/Classes/FSAVKit.m; sourceTree = "<group>"; };
 		29EE47DA0F57766942A66E63D2A98F27 /* libFSUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFSUIKit.a; path = libFSUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A3E864A67D208DEAA21E597239D6C92 /* FSKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSKit-dummy.m"; sourceTree = "<group>"; };
-		2ACEA5E211400DBDD01ED0A94AB2025E /* FSUIKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FSUIKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2CEDF4CC418DBD05F81647BAE1FEE556 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		3669C9B48BEBBEBDD3925C11878BD85D /* FSHook.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSHook.m; path = FSKit/Classes/FSHook.m; sourceTree = "<group>"; };
 		380DCE200956099E909C1264685F1AAE /* libPods-FSUIKitSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-FSUIKitSample.a"; path = "libPods-FSUIKitSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BDE69C2AB135FDF8318E47DC4CDB9A1 /* FSDate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSDate.m; path = FSKit/Classes/FSDate.m; sourceTree = "<group>"; };
 		47FF110583BADB5AD9603AB38B57C48C /* FuSoft.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FuSoft.h; path = FSKit/Classes/FuSoft.h; sourceTree = "<group>"; };
 		4CCDD77F968D29C0902EB48D5C440DF4 /* FSCalculator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalculator.m; path = FSCalculator/Classes/FSCalculator.m; sourceTree = "<group>"; };
-		554035F928C30F89000D7631CD94036C /* FSUIKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSUIKit-prefix.pch"; sourceTree = "<group>"; };
 		56C7A107F140539AC8E023B9DBC47BFB /* FSConstant.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSConstant.m; path = FSKit/Classes/FSConstant.m; sourceTree = "<group>"; };
 		5BFB8846BC5F150169A30E36D5E8E53C /* FSTuple.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSTuple.h; path = FSKit/Classes/FSTuple.h; sourceTree = "<group>"; };
 		5D18EE4E31936E78058C41F226D4E571 /* FSCalculator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSCalculator-dummy.m"; sourceTree = "<group>"; };
-		5D5F8BDFD681FDF03572ADF3D94F187F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		5F77ED8D98BEC7E1C4D9A143EFE40CFF /* FSPdf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSPdf.h; path = FSKit/Classes/FSPdf.h; sourceTree = "<group>"; };
 		5F8342067E499A70AFF72D1D0C8B336B /* libFSWindow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFSWindow.a; path = libFSWindow.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61F12787DC239938D05FBF0CC395C858 /* FSAlgorithm.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSAlgorithm.m; path = FSKit/Classes/FSAlgorithm.m; sourceTree = "<group>"; };
@@ -130,7 +129,6 @@
 		67B07225455E88DD912F78B3BC18C8CF /* FSKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSKit.m; path = FSKit/Classes/FSKit.m; sourceTree = "<group>"; };
 		69912CA940BAAF18A86F48C0D3FD00DF /* FSWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSWindow.h; path = FSWindow/Classes/FSWindow.h; sourceTree = "<group>"; };
 		6F851DB3F5D7F37B6C0B6F30B86A6FC9 /* FSWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSWindow.m; path = FSWindow/Classes/FSWindow.m; sourceTree = "<group>"; };
-		738F1875741C6C11CA512955C11683E8 /* FSUIKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSUIKit.m; path = FSUIKit/FSUIKit.m; sourceTree = "<group>"; };
 		764ACF51393B3962DC27C020D1C2DFEE /* libFSKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFSKit.a; path = libFSKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		837425F096B5BB13CAAD8618AD7F9DAD /* FSDBMaster.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSDBMaster.h; path = FSKit/Classes/FSDBMaster.h; sourceTree = "<group>"; };
 		854FC33B1DF5E719EFFE0B8CC44F2D09 /* FSRuntime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSRuntime.h; path = FSKit/Classes/FSRuntime.h; sourceTree = "<group>"; };
@@ -142,24 +140,26 @@
 		9B8A3046076E819C7C1877D8310E2473 /* FSCalculator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalculator.h; path = FSCalculator/Classes/FSCalculator.h; sourceTree = "<group>"; };
 		9D6AAD055A9559CFE02C36577865314E /* Pods-FSUIKitSample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FSUIKitSample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9FE2BACCF0851371B2658C4004B44B7D /* FSAVKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSAVKit.h; path = FSKit/Classes/FSAVKit.h; sourceTree = "<group>"; };
-		AA66260AA57D6E760F4E9335B1725098 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		AD8CF0838DE0DFE8450524DC4EE0FF71 /* FSCalculator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSCalculator-prefix.pch"; sourceTree = "<group>"; };
-		B29A59C232BB12F527DBDE1BA31C9718 /* FSUIKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSUIKit.xcconfig; sourceTree = "<group>"; };
 		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BAE78FA6453B2AFF39EFC44ABB14B13F /* FSTuple.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSTuple.m; path = FSKit/Classes/FSTuple.m; sourceTree = "<group>"; };
 		BB353DD75A3B2A4107F0580F028BF3E7 /* FSFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSFile.h; path = FSKit/Classes/FSFile.h; sourceTree = "<group>"; };
 		BD1B9EE32B819BC127FB0867C894EDE8 /* FSDate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSDate.h; path = FSKit/Classes/FSDate.h; sourceTree = "<group>"; };
 		BD551E625B99D61514B079F68B842A00 /* FSEntity.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSEntity.m; path = FSKit/Classes/FSEntity.m; sourceTree = "<group>"; };
+		C1C8CB69B948A1EC5E591ADE4895E2DC /* FSUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSUIKit.h; path = FSUIKit/Classes/FSUIKit.h; sourceTree = "<group>"; };
 		C2B7EE4C94570DA07BDC322BAA416B3D /* FSURLSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSURLSession.h; path = FSKit/Classes/FSURLSession.h; sourceTree = "<group>"; };
 		C2F21989C67F004A3EA1A0F290EFD3DA /* FSKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSKit.h; path = FSKit/Classes/FSKit.h; sourceTree = "<group>"; };
 		C7F387C27749B39B54310BB6D419CB65 /* FSLocalNotification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSLocalNotification.h; path = FSKit/Classes/FSLocalNotification.h; sourceTree = "<group>"; };
 		CB8A83D39F8ECA3E517305004BACD67F /* FSKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSKit-prefix.pch"; sourceTree = "<group>"; };
+		CD9AD3713F14A93A685E87775485A15C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		D007629F04AC15283976EABD65752010 /* FSConstant.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSConstant.h; path = FSKit/Classes/FSConstant.h; sourceTree = "<group>"; };
 		D669089D6472B1ED9451D10A61F0DD01 /* FSHook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSHook.h; path = FSKit/Classes/FSHook.h; sourceTree = "<group>"; };
+		DA008D3397D060CC67B160091D27D679 /* FSUIKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSUIKit.m; path = FSUIKit/Classes/FSUIKit.m; sourceTree = "<group>"; };
 		E28F60743993BE96F1549F309EEEBB58 /* libFSCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFSCalculator.a; path = libFSCalculator.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E32C88E5DDD0E285A8E1614D135CD98A /* FSUIKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FSUIKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E9D6CAAD73909412787414D048E4B923 /* FSFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSFile.m; path = FSKit/Classes/FSFile.m; sourceTree = "<group>"; };
 		ECCCEC7CD96911700C47F0F59F532C64 /* Pods-FSUIKitSample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FSUIKitSample-dummy.m"; sourceTree = "<group>"; };
-		F825C63A4B61E68FFB01CEE388CE5B79 /* FSUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSUIKit-dummy.m"; sourceTree = "<group>"; };
+		EFA70DBECF2FA59BC0992CAD99439B65 /* FSUIKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSUIKit.xcconfig; sourceTree = "<group>"; };
 		FAD86A319715FA5C4EBE6D56649FCFDB /* FSWindow-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSWindow-prefix.pch"; sourceTree = "<group>"; };
 		FD971DB2DE45F55B2A0F3062A45BC305 /* FSURLSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSURLSession.m; path = FSKit/Classes/FSURLSession.m; sourceTree = "<group>"; };
 		FEFFEF5F284865ADD6577BDA349484E5 /* FSPdf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSPdf.m; path = FSKit/Classes/FSPdf.m; sourceTree = "<group>"; };
@@ -295,6 +295,18 @@
 			path = "../Target Support Files/FSKit";
 			sourceTree = "<group>";
 		};
+		5DCDC1206AF33D1D103EE214F1F0ED22 /* FSUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				C1C8CB69B948A1EC5E591ADE4895E2DC /* FSUIKit.h */,
+				DA008D3397D060CC67B160091D27D679 /* FSUIKit.m */,
+				D0292EB7A35779967EF3D95E82EDCD42 /* Pod */,
+				9B1829C30FFB30C31BDA197C61B73230 /* Support Files */,
+			);
+			name = FSUIKit;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		62F83954A3E3B447C70219E9916CF631 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,35 +338,33 @@
 			);
 			sourceTree = "<group>";
 		};
+		9B1829C30FFB30C31BDA197C61B73230 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EFA70DBECF2FA59BC0992CAD99439B65 /* FSUIKit.xcconfig */,
+				0EE79E7D57356674BCE043AEC7393BC1 /* FSUIKit-dummy.m */,
+				0DD6C6819A2346D543F05AF1D38338BD /* FSUIKit-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "FSUIKitSample/Pods/Target Support Files/FSUIKit";
+			sourceTree = "<group>";
+		};
 		A836035A1B09675E0E6A8111F72E6014 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AC842C4854F0667B8E680257AB46AC2D /* FSUIKit */,
+				5DCDC1206AF33D1D103EE214F1F0ED22 /* FSUIKit */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		AC842C4854F0667B8E680257AB46AC2D /* FSUIKit */ = {
+		D0292EB7A35779967EF3D95E82EDCD42 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				075D9DF642E90008660F78CFA59E7AF6 /* FSUIKit.h */,
-				738F1875741C6C11CA512955C11683E8 /* FSUIKit.m */,
-				EE2CAF739E0F1BB512D1AB50A13242BC /* Pod */,
-				E3F4F7A8623785649430B57FB85BD02E /* Support Files */,
+				E32C88E5DDD0E285A8E1614D135CD98A /* FSUIKit.podspec */,
+				2CEDF4CC418DBD05F81647BAE1FEE556 /* LICENSE */,
+				CD9AD3713F14A93A685E87775485A15C /* README.md */,
 			);
-			name = FSUIKit;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		E3F4F7A8623785649430B57FB85BD02E /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B29A59C232BB12F527DBDE1BA31C9718 /* FSUIKit.xcconfig */,
-				F825C63A4B61E68FFB01CEE388CE5B79 /* FSUIKit-dummy.m */,
-				554035F928C30F89000D7631CD94036C /* FSUIKit-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "FSUIKitSample/Pods/Target Support Files/FSUIKit";
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		E4FF502361319F629F18812E683476DA /* FSCalculator */ = {
@@ -379,16 +389,6 @@
 			path = "../Target Support Files/FSWindow";
 			sourceTree = "<group>";
 		};
-		EE2CAF739E0F1BB512D1AB50A13242BC /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				2ACEA5E211400DBDD01ED0A94AB2025E /* FSUIKit.podspec */,
-				AA66260AA57D6E760F4E9335B1725098 /* LICENSE */,
-				5D5F8BDFD681FDF03572ADF3D94F187F /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
 		FDFE1070A60AD1546194B9311E44BF7F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,7 +407,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88AE46EC6C75006B0C035C77855C29F8 /* FSUIKit.h in Headers */,
+				8181D1BD77E13CF3AF2854C974A52A8C /* FSUIKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A7B0B6967383B0658543E226B097416 /* FSUIKit-dummy.m in Sources */,
-				9D0977662475DFA398BAEE7D92C5D9B5 /* FSUIKit.m in Sources */,
+				D3C047B832F71914621A54A225497925 /* FSUIKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,7 +782,7 @@
 		};
 		6A92E63EEBBDB3A01B64C3734535F073 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B29A59C232BB12F527DBDE1BA31C9718 /* FSUIKit.xcconfig */;
+			baseConfigurationReference = EFA70DBECF2FA59BC0992CAD99439B65 /* FSUIKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -830,7 +830,7 @@
 		};
 		AA6B7C226DFFC0A91496B1698369F3CF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B29A59C232BB12F527DBDE1BA31C9718 /* FSUIKit.xcconfig */;
+			baseConfigurationReference = EFA70DBECF2FA59BC0992CAD99439B65 /* FSUIKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

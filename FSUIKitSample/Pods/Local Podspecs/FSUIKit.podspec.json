@@ -18,7 +18,7 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "FSUIKit/*",
+  "source_files": "FSUIKit/Classes/*",
   "dependencies": {
     "FSCalculator": [
       "0.0.1"
