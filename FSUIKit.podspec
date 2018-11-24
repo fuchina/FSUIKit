@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.source_files = 'FSUIKit/Classes/*'
   
-  s.dependency   'FSCalculator','0.0.1'
-  s.dependency   'FSWindow','0.0.1'
-  s.dependency   'FSKit','1.3.2'
+  s.dependency   'FSCalculator'
+  s.dependency   'FSWindow'
+  s.dependency   'FSKit'
 
   s.frameworks = 'UIKit'
 
