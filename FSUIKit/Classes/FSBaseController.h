@@ -10,7 +10,10 @@
 #import "FSNavigationController.h"
 #import "FSTapScrollView.h"
 #import "FSVanView.h"
-//#import "FSTrackKeys.h"
+#import "FSViewManager.h"
+#import "UIViewExt.h"
+#import "FSToast.h"
+#import <FuSoft.h>
 
 #define FS_iPhone_X     [FSBaseController isIPhoneX]
 
