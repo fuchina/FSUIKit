@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FSUIKit'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'FSUIKit is a tool for show logs when app run'
   s.description      = <<-DESC
 		This is a very small software library, offering a few methods to help with programming.
@@ -17,6 +17,9 @@ Pod::Spec.new do |s|
   s.dependency   'FSCalculator'
   s.dependency   'FSWindow'
   s.dependency   'FSKit'
+  s.dependency   'FSTrack'
+  
+  s.dependency   'MJRefresh'
 
   s.frameworks = 'UIKit'
 

@@ -1,0 +1,1 @@
+../../../../../FSUIKit/Classes/FSShakeBaseController.h
