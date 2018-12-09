@@ -7,7 +7,7 @@
 //
 
 #import "FSReuseTableView.h"
-#import <MJRefresh.h>
+#import "MJRefresh.h"
 
 @interface FSReuseTableView ()<UITableViewDelegate,UITableViewDataSource>
 
