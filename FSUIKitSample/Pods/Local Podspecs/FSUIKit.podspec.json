@@ -1,6 +1,6 @@
 {
   "name": "FSUIKit",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "summary": "FSUIKit is a tool for show logs when app run",
   "description": "This is a very small software library, offering a few methods to help with programming.",
   "homepage": "https://github.com/fuchina/FSUIKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/fuchina/FSUIKit.git",
-    "tag": "0.0.3"
+    "tag": "0.0.5"
   },
   "platforms": {
     "ios": "8.0"

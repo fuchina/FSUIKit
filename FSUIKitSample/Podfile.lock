@@ -4,7 +4,7 @@ PODS:
   - FSToast (0.0.1)
   - FSTrack (0.0.1):
     - UMengAnalytics
-  - FSUIKit (0.0.3):
+  - FSUIKit (0.0.5):
     - FSCalculator
     - FSKit
     - FSToast
@@ -37,7 +37,7 @@ SPEC CHECKSUMS:
   FSKit: 1578169720d621fb12b806a8d0faf8ba95afb0e2
   FSToast: c168e006b160e4305f6bf828da66cdffcc20dbe7
   FSTrack: f71ebfd16b15dad94cd816333fd1cb3ba2cd775e
-  FSUIKit: f7d80836c61096666ae0cfba4a82ff58a138cf93
+  FSUIKit: f79db9ee79d06d26956541f9d966d3f83b21153c
   FSWindow: 54dce45874a001ba7761303c89f478a7b9197ad2
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
