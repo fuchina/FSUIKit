@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FSUIKit'
-  s.version          = '0.0.6.2'
+  s.version          = '0.0.6.3'
   s.summary          = 'FSUIKit is a tool for show logs when app run'
   s.description      = <<-DESC
 		This is a very small software library, offering a few methods to help with programming.
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.author           = { 'fudon' => '1245102331@qq.com' }
   s.source           = { :git => 'https://github.com/fuchina/FSUIKit.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '8.2'
   s.source_files = 'FSUIKit/Classes/*'
 
   s.dependency   'FSWindow'
