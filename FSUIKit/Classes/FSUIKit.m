@@ -7,7 +7,6 @@
 
 #import "FSUIKit.h"
 #import "FSWindow.h"
-#import "FSKit.h"
 #import "FSCalculator.h"
 
 static CGRect oldframe;
@@ -199,7 +198,7 @@ static CGRect oldframe;
     if (![message respondsToSelector:@selector(length)] || [message length] == 0) {
         return;
     }
-    _fs_dispatch_main_queue_async(^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self showMessageInMainThread:message];
     });
 }

@@ -1,19 +1,11 @@
 PODS:
   - FSCalculator (0.0.1)
-  - FSKit (1.3.2.2)
-  - FSToast (0.0.1)
-  - FSTrack (0.0.1):
-    - UMengAnalytics
-  - FSUIKit (0.0.5):
+  - FSUIKit (0.0.6):
     - FSCalculator
-    - FSKit
-    - FSToast
-    - FSTrack
     - FSWindow
-    - MJRefresh
+    - MJRefresh (= 3.1.15.7)
   - FSWindow (0.0.1)
   - MJRefresh (3.1.15.7)
-  - UMengAnalytics (4.2.4)
 
 DEPENDENCIES:
   - FSUIKit (from `../`)
@@ -21,12 +13,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - FSCalculator
-    - FSKit
-    - FSToast
-    - FSTrack
     - FSWindow
     - MJRefresh
-    - UMengAnalytics
 
 EXTERNAL SOURCES:
   FSUIKit:
@@ -34,13 +22,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FSCalculator: 3ab79307b008ebf07b4fa7fe827f418d7c65fd14
-  FSKit: 1578169720d621fb12b806a8d0faf8ba95afb0e2
-  FSToast: c168e006b160e4305f6bf828da66cdffcc20dbe7
-  FSTrack: f71ebfd16b15dad94cd816333fd1cb3ba2cd775e
-  FSUIKit: f79db9ee79d06d26956541f9d966d3f83b21153c
+  FSUIKit: 0438cea8299dd42c7305b3c6769f35bd2035fd9b
   FSWindow: 54dce45874a001ba7761303c89f478a7b9197ad2
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
-  UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
 
 PODFILE CHECKSUM: 44de26bab1ee9ef7bff6b7099e22982eb3d780de
 

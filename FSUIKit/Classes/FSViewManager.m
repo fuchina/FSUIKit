@@ -7,7 +7,6 @@
 //
 
 #import "FSViewManager.h"
-#import "FuSoft.h"
 #import "UIViewExt.h"
 
 @implementation FSViewManager
@@ -21,10 +20,10 @@
     return view;
 }
 
-+ (UIView *)seprateViewWithFrame:(CGRect)frame
-{
++ (UIView *)seprateViewWithFrame:(CGRect)frame {
     UIView *view = [[UIView alloc] initWithFrame:frame];
-    view.backgroundColor = RGBCOLOR(230, 230, 230, 1);
+    CGFloat rgb = 230 / 255.0;
+    view.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1];
     return view;
 }
 
@@ -65,7 +64,7 @@
         [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     }
     if (fontInt) {
-        button.titleLabel.font = FONTFC(fontInt);
+        button.titleLabel.font =  [UIFont systemFontOfSize:fontInt];
     }
     if (tag) {
         button.tag = tag;
@@ -76,7 +75,7 @@
 
 + (UIButton *)submitButtonWithTop:(CGFloat)top tag:(NSInteger)tag target:(id)target selector:(SEL)selector {
     UIColor *color = [UIColor colorWithRed:18/255.0 green:152/255.0 blue:233/255.0 alpha:1];
-   UIButton *button = [self buttonWithFrame:CGRectMake(20, top, WIDTHFC - 40, 44) title:NSLocalizedString(@"Commit", nil) titleColor:[UIColor whiteColor] backColor:color fontInt:0 tag:tag target:target selector:selector];
+   UIButton *button = [self buttonWithFrame:CGRectMake(20, top, UIScreen.mainScreen.bounds.size.width - 40, 44) title:NSLocalizedString(@"Commit", nil) titleColor:[UIColor whiteColor] backColor:color fontInt:0 tag:tag target:target selector:selector];
     button.layer.cornerRadius = 3;
     return button;
 }
@@ -206,7 +205,7 @@
     if (block) {
         cell.block = block;
     }
-    cell.width = WIDTHFC;
+    cell.width = UIScreen.mainScreen.bounds.size.width;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -250,7 +249,7 @@
 + (PHTextView *)phTextViewWithFrame:(CGRect)frame placeholder:(NSString *)ph
 {
     PHTextView *textView = [[PHTextView alloc] initWithFrame:frame];
-    textView.font = FONTFC(14);
+    textView.font = [UIFont systemFontOfSize:14];
     textView.placeholder = ph;
     CGFloat rgb = 88/255.0;
     textView.textColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1];
