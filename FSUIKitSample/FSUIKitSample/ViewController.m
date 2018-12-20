@@ -14,7 +14,9 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    UIImageView     *_imageView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,15 +27,18 @@
     [button setTitle:@"TEST" forState:UIControlStateNormal];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _imageView = [[UIImageView alloc] init];
+    [self.view addSubview:_imageView];
 }
 
 - (void)buttonClick:(UIButton *)button{
-    UIImage *image = [FSImage imageFromColor:UIColor.redColor size:CGSizeMake(64, 64)];
-    NSData *data = UIImagePNGRepresentation(image);
-    BOOL result = [data writeToFile:@"/Users/fudongdong/Desktop/aimage/a.png" atomically:YES];
-    if (result) {
-        NSLog(@"写入成功");
-    }
+//    va_list list = @0.33,@0.33,@0.33,nil;
+//    va_list colors = UIColor.redColor,UIColor.blackColor,UIColor.greenColor,nil;
+//
+//    UIImage *image = [FSImage imageWithSize:CGSizeMake(90, 90) direction:NO segements:3 ratios:list colors:colors];
+//    _imageView.image = image;
+//    _imageView.frame = CGRectMake(self.view.bounds.size.width / 2 - image.size.width / 2, self.view.bounds.size.height / 2 - image.size.height / 2, image.size.width, image.size.height);
 }
 
 @end

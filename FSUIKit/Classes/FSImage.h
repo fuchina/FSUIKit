@@ -14,6 +14,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)imageFromColor:(UIColor *)color;
 + (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size;
 
+/*
+ * @param size：整个视图的大小
+ * @param direction：YES为水平分段，NO为垂直分段
+ * @param segements：分段数目
+ * @param ratios：段数参数列表，每段占比，个数必须跟segements相同，值类型为NSNumber，所有值加起来等于1
+ * @param colors：段数参数列表，每段颜色，个数必须跟segements相同，值类型为UIColor
+ */
++ (UIImage *)imageWithSize:(CGSize)size
+                 direction:(BOOL)isHorizon
+                 segements:(NSInteger)segements
+                    ratios:(va_list)ratios
+                    colors:(va_list)colors;
+
 @end
 
 NS_ASSUME_NONNULL_END
