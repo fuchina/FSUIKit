@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3FF50C759F7D333F0B12763B497532F"
-               BlueprintName = "FSUIKit"
+               BlueprintIdentifier = "D2FA897812114597E7DFB5FA3019BBE7"
+               BlueprintName = "MJRefresh"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libFSUIKit.a">
+               BuildableName = "libMJRefresh.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

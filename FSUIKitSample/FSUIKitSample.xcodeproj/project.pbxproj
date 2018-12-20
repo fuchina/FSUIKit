@@ -7,106 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		71BA7D9D21A978D900CE42AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA7D9C21A978D900CE42AB /* AppDelegate.m */; };
-		71BA7DA021A978D900CE42AB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA7D9F21A978D900CE42AB /* ViewController.m */; };
-		71BA7DA321A978D900CE42AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71BA7DA121A978D900CE42AB /* Main.storyboard */; };
-		71BA7DA521A978DA00CE42AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71BA7DA421A978DA00CE42AB /* Assets.xcassets */; };
-		71BA7DA821A978DA00CE42AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71BA7DA621A978DA00CE42AB /* LaunchScreen.storyboard */; };
-		71BA7DAB21A978DA00CE42AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA7DAA21A978DA00CE42AB /* main.m */; };
-		7F7812BAA684A841A7E41EF8 /* libPods-FSUIKitSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C04D58E0BEADDAB2830949C /* libPods-FSUIKitSample.a */; };
+		2D41138321CB955300686A56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D41138221CB955300686A56 /* AppDelegate.m */; };
+		2D41138621CB955300686A56 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D41138521CB955300686A56 /* ViewController.m */; };
+		2D41138921CB955300686A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D41138721CB955300686A56 /* Main.storyboard */; };
+		2D41138B21CB955400686A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D41138A21CB955400686A56 /* Assets.xcassets */; };
+		2D41138E21CB955400686A56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D41138C21CB955400686A56 /* LaunchScreen.storyboard */; };
+		2D41139121CB955400686A56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D41139021CB955400686A56 /* main.m */; };
+		A67FAB4C82FC1FE51B483AF3 /* libPods-FSUIKitSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49134AD5362DF4DB0D5BC696 /* libPods-FSUIKitSample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		71BA7D9821A978D900CE42AB /* FSUIKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSUIKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		71BA7D9B21A978D900CE42AB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		71BA7D9C21A978D900CE42AB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		71BA7D9E21A978D900CE42AB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		71BA7D9F21A978D900CE42AB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		71BA7DA221A978D900CE42AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		71BA7DA421A978DA00CE42AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		71BA7DA721A978DA00CE42AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		71BA7DA921A978DA00CE42AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71BA7DAA21A978DA00CE42AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		73448E4E616011A97B7364B8 /* Pods-FSUIKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSUIKitSample.debug.xcconfig"; path = "Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample.debug.xcconfig"; sourceTree = "<group>"; };
-		7C04D58E0BEADDAB2830949C /* libPods-FSUIKitSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FSUIKitSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB5B5DD844ED0CF1FB3BFBD5 /* Pods-FSUIKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSUIKitSample.release.xcconfig"; path = "Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample.release.xcconfig"; sourceTree = "<group>"; };
+		2D41137E21CB955300686A56 /* FSUIKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSUIKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D41138121CB955300686A56 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2D41138221CB955300686A56 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2D41138421CB955300686A56 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2D41138521CB955300686A56 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2D41138821CB955300686A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2D41138A21CB955400686A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D41138D21CB955400686A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2D41138F21CB955400686A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D41139021CB955400686A56 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49134AD5362DF4DB0D5BC696 /* libPods-FSUIKitSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FSUIKitSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DEA34B17A4184E142B6ADF8 /* Pods-FSUIKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSUIKitSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample.release.xcconfig"; sourceTree = "<group>"; };
+		94C3115C4E8FBFFF492C08A8 /* Pods-FSUIKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSUIKitSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		71BA7D9521A978D900CE42AB /* Frameworks */ = {
+		2D41137B21CB955300686A56 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F7812BAA684A841A7E41EF8 /* libPods-FSUIKitSample.a in Frameworks */,
+				A67FAB4C82FC1FE51B483AF3 /* libPods-FSUIKitSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		71BA7D8F21A978D900CE42AB = {
+		2D41137521CB955300686A56 = {
 			isa = PBXGroup;
 			children = (
-				71BA7D9A21A978D900CE42AB /* FSUIKitSample */,
-				71BA7D9921A978D900CE42AB /* Products */,
-				FB27064B0C1B82DCB61D3A89 /* Pods */,
-				7B8599BE979DEEBCAAB9F4FC /* Frameworks */,
+				2D41138021CB955300686A56 /* FSUIKitSample */,
+				2D41137F21CB955300686A56 /* Products */,
+				B59251B61D02A29F0B5D8DC7 /* Pods */,
+				EA572D9681B778723BD3054E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		71BA7D9921A978D900CE42AB /* Products */ = {
+		2D41137F21CB955300686A56 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71BA7D9821A978D900CE42AB /* FSUIKitSample.app */,
+				2D41137E21CB955300686A56 /* FSUIKitSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		71BA7D9A21A978D900CE42AB /* FSUIKitSample */ = {
+		2D41138021CB955300686A56 /* FSUIKitSample */ = {
 			isa = PBXGroup;
 			children = (
-				71BA7D9B21A978D900CE42AB /* AppDelegate.h */,
-				71BA7D9C21A978D900CE42AB /* AppDelegate.m */,
-				71BA7D9E21A978D900CE42AB /* ViewController.h */,
-				71BA7D9F21A978D900CE42AB /* ViewController.m */,
-				71BA7DA121A978D900CE42AB /* Main.storyboard */,
-				71BA7DA421A978DA00CE42AB /* Assets.xcassets */,
-				71BA7DA621A978DA00CE42AB /* LaunchScreen.storyboard */,
-				71BA7DA921A978DA00CE42AB /* Info.plist */,
-				71BA7DAA21A978DA00CE42AB /* main.m */,
+				2D41138121CB955300686A56 /* AppDelegate.h */,
+				2D41138221CB955300686A56 /* AppDelegate.m */,
+				2D41138421CB955300686A56 /* ViewController.h */,
+				2D41138521CB955300686A56 /* ViewController.m */,
+				2D41138721CB955300686A56 /* Main.storyboard */,
+				2D41138A21CB955400686A56 /* Assets.xcassets */,
+				2D41138C21CB955400686A56 /* LaunchScreen.storyboard */,
+				2D41138F21CB955400686A56 /* Info.plist */,
+				2D41139021CB955400686A56 /* main.m */,
 			);
 			path = FSUIKitSample;
 			sourceTree = "<group>";
 		};
-		7B8599BE979DEEBCAAB9F4FC /* Frameworks */ = {
+		B59251B61D02A29F0B5D8DC7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7C04D58E0BEADDAB2830949C /* libPods-FSUIKitSample.a */,
+				94C3115C4E8FBFFF492C08A8 /* Pods-FSUIKitSample.debug.xcconfig */,
+				4DEA34B17A4184E142B6ADF8 /* Pods-FSUIKitSample.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		FB27064B0C1B82DCB61D3A89 /* Pods */ = {
+		EA572D9681B778723BD3054E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				73448E4E616011A97B7364B8 /* Pods-FSUIKitSample.debug.xcconfig */,
-				BB5B5DD844ED0CF1FB3BFBD5 /* Pods-FSUIKitSample.release.xcconfig */,
+				49134AD5362DF4DB0D5BC696 /* libPods-FSUIKitSample.a */,
 			);
-			path = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		71BA7D9721A978D900CE42AB /* FSUIKitSample */ = {
+		2D41137D21CB955300686A56 /* FSUIKitSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 71BA7DAE21A978DA00CE42AB /* Build configuration list for PBXNativeTarget "FSUIKitSample" */;
+			buildConfigurationList = 2D41139421CB955400686A56 /* Build configuration list for PBXNativeTarget "FSUIKitSample" */;
 			buildPhases = (
-				A9B7B8F18080B8A26D052469 /* [CP] Check Pods Manifest.lock */,
-				71BA7D9421A978D900CE42AB /* Sources */,
-				71BA7D9521A978D900CE42AB /* Frameworks */,
-				71BA7D9621A978D900CE42AB /* Resources */,
-				19BBD580975CABB1457DE334 /* [CP] Copy Pods Resources */,
+				1A5D86692CB9BFCA26221C39 /* [CP] Check Pods Manifest.lock */,
+				2D41137A21CB955300686A56 /* Sources */,
+				2D41137B21CB955300686A56 /* Frameworks */,
+				2D41137C21CB955300686A56 /* Resources */,
+				C4153AD6811BC1CFDECEF86C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -114,24 +114,24 @@
 			);
 			name = FSUIKitSample;
 			productName = FSUIKitSample;
-			productReference = 71BA7D9821A978D900CE42AB /* FSUIKitSample.app */;
+			productReference = 2D41137E21CB955300686A56 /* FSUIKitSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		71BA7D9021A978D900CE42AB /* Project object */ = {
+		2D41137621CB955300686A56 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = FudonFuchina;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = fudongdong;
 				TargetAttributes = {
-					71BA7D9721A978D900CE42AB = {
-						CreatedOnToolsVersion = 10.1;
+					2D41137D21CB955300686A56 = {
+						CreatedOnToolsVersion = 10.0;
 					};
 				};
 			};
-			buildConfigurationList = 71BA7D9321A978D900CE42AB /* Build configuration list for PBXProject "FSUIKitSample" */;
+			buildConfigurationList = 2D41137921CB955300686A56 /* Build configuration list for PBXProject "FSUIKitSample" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -139,53 +139,31 @@
 				en,
 				Base,
 			);
-			mainGroup = 71BA7D8F21A978D900CE42AB;
-			productRefGroup = 71BA7D9921A978D900CE42AB /* Products */;
+			mainGroup = 2D41137521CB955300686A56;
+			productRefGroup = 2D41137F21CB955300686A56 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				71BA7D9721A978D900CE42AB /* FSUIKitSample */,
+				2D41137D21CB955300686A56 /* FSUIKitSample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		71BA7D9621A978D900CE42AB /* Resources */ = {
+		2D41137C21CB955300686A56 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71BA7DA821A978DA00CE42AB /* LaunchScreen.storyboard in Resources */,
-				71BA7DA521A978DA00CE42AB /* Assets.xcassets in Resources */,
-				71BA7DA321A978D900CE42AB /* Main.storyboard in Resources */,
+				2D41138E21CB955400686A56 /* LaunchScreen.storyboard in Resources */,
+				2D41138B21CB955400686A56 /* Assets.xcassets in Resources */,
+				2D41138921CB955300686A56 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19BBD580975CABB1457DE334 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample-resources.sh",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A9B7B8F18080B8A26D052469 /* [CP] Check Pods Manifest.lock */ = {
+		1A5D86692CB9BFCA26221C39 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -207,34 +185,56 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C4153AD6811BC1CFDECEF86C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FSUIKitSample/Pods-FSUIKitSample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		71BA7D9421A978D900CE42AB /* Sources */ = {
+		2D41137A21CB955300686A56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71BA7DA021A978D900CE42AB /* ViewController.m in Sources */,
-				71BA7DAB21A978DA00CE42AB /* main.m in Sources */,
-				71BA7D9D21A978D900CE42AB /* AppDelegate.m in Sources */,
+				2D41138621CB955300686A56 /* ViewController.m in Sources */,
+				2D41139121CB955400686A56 /* main.m in Sources */,
+				2D41138321CB955300686A56 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		71BA7DA121A978D900CE42AB /* Main.storyboard */ = {
+		2D41138721CB955300686A56 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				71BA7DA221A978D900CE42AB /* Base */,
+				2D41138821CB955300686A56 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		71BA7DA621A978DA00CE42AB /* LaunchScreen.storyboard */ = {
+		2D41138C21CB955400686A56 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				71BA7DA721A978DA00CE42AB /* Base */,
+				2D41138D21CB955400686A56 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -242,7 +242,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		71BA7DAC21A978DA00CE42AB /* Debug */ = {
+		2D41139221CB955400686A56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -293,7 +293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -301,7 +301,7 @@
 			};
 			name = Debug;
 		};
-		71BA7DAD21A978DA00CE42AB /* Release */ = {
+		2D41139321CB955400686A56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -346,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -354,9 +354,9 @@
 			};
 			name = Release;
 		};
-		71BA7DAF21A978DA00CE42AB /* Debug */ = {
+		2D41139521CB955400686A56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73448E4E616011A97B7364B8 /* Pods-FSUIKitSample.debug.xcconfig */;
+			baseConfigurationReference = 94C3115C4E8FBFFF492C08A8 /* Pods-FSUIKitSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -365,15 +365,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fuhope.FSUIKitSample;
+				PRODUCT_BUNDLE_IDENTIFIER = mt.FSUIKitSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		71BA7DB021A978DA00CE42AB /* Release */ = {
+		2D41139621CB955400686A56 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB5B5DD844ED0CF1FB3BFBD5 /* Pods-FSUIKitSample.release.xcconfig */;
+			baseConfigurationReference = 4DEA34B17A4184E142B6ADF8 /* Pods-FSUIKitSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -382,7 +382,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fuhope.FSUIKitSample;
+				PRODUCT_BUNDLE_IDENTIFIER = mt.FSUIKitSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -391,25 +391,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		71BA7D9321A978D900CE42AB /* Build configuration list for PBXProject "FSUIKitSample" */ = {
+		2D41137921CB955300686A56 /* Build configuration list for PBXProject "FSUIKitSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71BA7DAC21A978DA00CE42AB /* Debug */,
-				71BA7DAD21A978DA00CE42AB /* Release */,
+				2D41139221CB955400686A56 /* Debug */,
+				2D41139321CB955400686A56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		71BA7DAE21A978DA00CE42AB /* Build configuration list for PBXNativeTarget "FSUIKitSample" */ = {
+		2D41139421CB955400686A56 /* Build configuration list for PBXNativeTarget "FSUIKitSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71BA7DAF21A978DA00CE42AB /* Debug */,
-				71BA7DB021A978DA00CE42AB /* Release */,
+				2D41139521CB955400686A56 /* Debug */,
+				2D41139621CB955400686A56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 71BA7D9021A978D900CE42AB /* Project object */;
+	rootObject = 2D41137621CB955300686A56 /* Project object */;
 }

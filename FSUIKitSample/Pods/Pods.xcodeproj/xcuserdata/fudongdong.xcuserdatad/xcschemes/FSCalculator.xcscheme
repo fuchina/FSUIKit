@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4A38B9EA82EB5FF02106CFE9C7E4AF73"
-               BlueprintName = "MJRefresh"
+               BlueprintIdentifier = "461962E2B44222BBECE0FCAA9EBE9803"
+               BlueprintName = "FSCalculator"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libMJRefresh.a">
+               BuildableName = "libFSCalculator.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

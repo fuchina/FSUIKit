@@ -1,6 +1,7 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FSCalculator" "${PODS_ROOT}/Headers/Public/FSUIKit" "${PODS_ROOT}/Headers/Public/FSWindow" "${PODS_ROOT}/Headers/Public/MJRefresh"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FSCalculator" "${PODS_CONFIGURATION_BUILD_DIR}/FSUIKit" "${PODS_CONFIGURATION_BUILD_DIR}/FSWindow" "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/FSCalculator" -isystem "${PODS_ROOT}/Headers/Public/FSUIKit" -isystem "${PODS_ROOT}/Headers/Public/FSWindow" -isystem "${PODS_ROOT}/Headers/Public/MJRefresh"
 OTHER_LDFLAGS = $(inherited) -ObjC -l"FSCalculator" -l"FSUIKit" -l"FSWindow" -l"MJRefresh" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

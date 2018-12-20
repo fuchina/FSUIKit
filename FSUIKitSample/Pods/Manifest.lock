@@ -1,6 +1,6 @@
 PODS:
   - FSCalculator (0.0.1)
-  - FSUIKit (0.0.6.1):
+  - FSUIKit (0.0.6.3):
     - FSCalculator
     - FSWindow
     - MJRefresh (= 3.1.15.7)
@@ -22,10 +22,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FSCalculator: 3ab79307b008ebf07b4fa7fe827f418d7c65fd14
-  FSUIKit: c07a5e774583bd2032d58501ecffc20c2bd11654
+  FSUIKit: bb5cb747c3fea5ec5373ed53bca94f472519bfb8
   FSWindow: 54dce45874a001ba7761303c89f478a7b9197ad2
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
 
-PODFILE CHECKSUM: 44de26bab1ee9ef7bff6b7099e22982eb3d780de
+PODFILE CHECKSUM: da87b4273e5317b2b1228d28552ca2cd6c476679
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.5.3
