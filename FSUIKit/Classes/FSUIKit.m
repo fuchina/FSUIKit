@@ -566,29 +566,6 @@ static CGRect oldframe;
     return newimg;
 }
 
-+ (UIImage *)imageFromColor:(UIColor *)color{
-    CGRect rect = CGRectMake(0, 0, 1, 10);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
-}
-
-+ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size{
-    CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
-}
-
-
 + (UIImage *)QRImageFromString:(NSString *)sourceString{
     if (sourceString == nil) {
         sourceString = @"";

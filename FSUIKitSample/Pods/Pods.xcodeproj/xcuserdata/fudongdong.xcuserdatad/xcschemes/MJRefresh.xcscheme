@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2FA897812114597E7DFB5FA3019BBE7"
+               BlueprintIdentifier = "2FC7D4F7D76A5F487A37919DFFEDD37B"
                BlueprintName = "MJRefresh"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libMJRefresh.a">

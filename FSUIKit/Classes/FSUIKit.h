@@ -60,8 +60,6 @@
                           lineSpacing:(int)spacing
                             lineColor:(UIColor *)color;
 + (UIImage *)QRImageFromString:(NSString *)string;
-+ (UIImage *)imageFromColor:(UIColor *)color;
-+ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size;
 + (UIImage*)circleImage:(UIImage*)image withParam:(CGFloat)inset;
 + (UIImage *)imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth; // 将图片大小设置为目标大小，用于压缩图片
 + (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth;
