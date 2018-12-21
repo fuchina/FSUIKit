@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "FSUIKit.h"
 #import "FSImage.h"
+#import "FSModalView.h"
 
 @interface ViewController ()
 
@@ -16,6 +17,7 @@
 
 @implementation ViewController{
     UIImageView     *_imageView;
+    FSModalView     *_modelView;
 }
 
 - (void)viewDidLoad {
@@ -33,12 +35,39 @@
 }
 
 - (void)buttonClick:(UIButton *)button{
+    [self modalAnimatiton];
+    
 //    va_list list = @0.33,@0.33,@0.33,nil;
 //    va_list colors = UIColor.redColor,UIColor.blackColor,UIColor.greenColor,nil;
 //
 //    UIImage *image = [FSImage imageWithSize:CGSizeMake(90, 90) direction:NO segements:3 ratios:list colors:colors];
 //    _imageView.image = image;
 //    _imageView.frame = CGRectMake(self.view.bounds.size.width / 2 - image.size.width / 2, self.view.bounds.size.height / 2 - image.size.height / 2, image.size.width, image.size.height);
+}
+
+- (void)modalAnimatiton{
+    FSModalView *view = [[FSModalView alloc] initWithFrame:CGRectZero];
+    view.backgroundColor = UIColor.redColor;
+    [self.view addSubview:view];
+    [view pushAnimated:YES completion:^(FSModalView * _Nonnull modalView) {
+        
+    }];
+    _modelView = view;
+    
+    UIButton *b = [UIButton buttonWithType:UIButtonTypeSystem];
+    b.frame = CGRectMake(10, 100, self.view.frame.size.width - 20, 50);
+    b.backgroundColor = UIColor.whiteColor;
+    [view addSubview:b];
+    [b addTarget:self action:@selector(bClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)bClick{
+    [_modelView popAnimated:YES completion:^(FSModalView * _Nonnull modalView) {
+        
+    }];
+}
+
+- (void)tapClick:(UITapGestureRecognizer *)tap{
 }
 
 @end
