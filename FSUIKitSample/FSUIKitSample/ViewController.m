@@ -35,14 +35,17 @@
 }
 
 - (void)buttonClick:(UIButton *)button{
-    [self modalAnimatiton];
-    
-//    va_list list = @0.33,@0.33,@0.33,nil;
-//    va_list colors = UIColor.redColor,UIColor.blackColor,UIColor.greenColor,nil;
-//
-//    UIImage *image = [FSImage imageWithSize:CGSizeMake(90, 90) direction:NO segements:3 ratios:list colors:colors];
-//    _imageView.image = image;
-//    _imageView.frame = CGRectMake(self.view.bounds.size.width / 2 - image.size.width / 2, self.view.bounds.size.height / 2 - image.size.height / 2, image.size.width, image.size.height);
+    [self drawClick];
+}
+
+- (void)drawClick{
+    UIColor *mainColor = [UIColor colorWithRed:0x00/255.0 green:0x97/255.0 blue:0xff/255.0 alpha:1];
+//    UIColor *marginColor = [UIColor colorWithRed:0xff/255.0 green:0xff/255.0 blue:0xff/255.0 alpha:0.8];
+    UIColor *marginColor = [UIColor colorWithRed:0x00/255.0 green:0x97/255.0 blue:0xff/255.0 alpha:0.8];
+
+    UIImage *image = [FSImage imageWithSize:CGSizeMake(64, 64) backgroundColor:UIColor.clearColor mainColor:mainColor marginColor:marginColor];
+    _imageView.image = image;
+    _imageView.frame = CGRectMake(self.view.bounds.size.width / 2 - image.size.width / 2, self.view.bounds.size.height / 2 - image.size.height / 2, image.size.width, image.size.height);
 }
 
 - (void)modalAnimatiton{

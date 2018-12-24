@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D00FB0D21D0D8B7008C0600 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D00FB0B21D0D8B7008C0600 /* arrow@2x.png */; };
+		2D00FB0E21D0D8B7008C0600 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D00FB0C21D0D8B7008C0600 /* arrow@3x.png */; };
 		2D41138321CB955300686A56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D41138221CB955300686A56 /* AppDelegate.m */; };
 		2D41138621CB955300686A56 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D41138521CB955300686A56 /* ViewController.m */; };
 		2D41138921CB955300686A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D41138721CB955300686A56 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D00FB0B21D0D8B7008C0600 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
+		2D00FB0C21D0D8B7008C0600 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
 		2D41137E21CB955300686A56 /* FSUIKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSUIKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D41138121CB955300686A56 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2D41138221CB955300686A56 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				2D41138221CB955300686A56 /* AppDelegate.m */,
 				2D41138421CB955300686A56 /* ViewController.h */,
 				2D41138521CB955300686A56 /* ViewController.m */,
+				2D00FB0B21D0D8B7008C0600 /* arrow@2x.png */,
+				2D00FB0C21D0D8B7008C0600 /* arrow@3x.png */,
 				2D41138721CB955300686A56 /* Main.storyboard */,
 				2D41138A21CB955400686A56 /* Assets.xcassets */,
 				2D41138C21CB955400686A56 /* LaunchScreen.storyboard */,
@@ -154,6 +160,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D00FB0D21D0D8B7008C0600 /* arrow@2x.png in Resources */,
+				2D00FB0E21D0D8B7008C0600 /* arrow@3x.png in Resources */,
 				2D41138E21CB955400686A56 /* LaunchScreen.storyboard in Resources */,
 				2D41138B21CB955400686A56 /* Assets.xcassets in Resources */,
 				2D41138921CB955300686A56 /* Main.storyboard in Resources */,

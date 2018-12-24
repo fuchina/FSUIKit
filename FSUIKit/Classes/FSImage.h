@@ -23,9 +23,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIImage *)imageWithSize:(CGSize)size
                  direction:(BOOL)isHorizon
-                 segements:(NSInteger)segements
-                    ratios:(va_list)ratios
-                    colors:(va_list)colors;
+                offsetLeft:(CGFloat)left
+               offsetRight:(CGFloat)right
+                    ratios:(NSArray<NSNumber *> *)ratios
+                    colors:(NSArray<UIColor *> *)colors;
+
++ (UIImage *)imageWithSize:(CGSize)size
+           backgroundColor:(UIColor *)backgroundColor
+                 mainColor:(UIColor *)mainColor
+               marginColor:(UIColor *)marginColor;
 
 @end
 
