@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "FSUIKit.h"
 #import "FSImage.h"
-#import "FSModalView.h"
+#import "UIView+ModalAnimation.h"
 
 @interface ViewController ()
 
@@ -17,7 +17,7 @@
 
 @implementation ViewController{
     UIImageView     *_imageView;
-    FSModalView     *_modelView;
+    UIView          *_modelView;
 }
 
 - (void)viewDidLoad {
@@ -35,7 +35,8 @@
 }
 
 - (void)buttonClick:(UIButton *)button{
-    [self drawClick];
+//    [self drawClick];
+    [self modalAnimatiton];
 }
 
 - (void)drawClick{
@@ -49,12 +50,13 @@
 }
 
 - (void)modalAnimatiton{
-    FSModalView *view = [[FSModalView alloc] initWithFrame:CGRectZero];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     view.backgroundColor = UIColor.redColor;
     [self.view addSubview:view];
-    [view pushAnimated:YES completion:^(FSModalView * _Nonnull modalView) {
-        
+    [view pushAnimated:YES completion:^(UIView * _Nonnull modalView) {
+        NSLog(@"called PUSH");
     }];
+
     _modelView = view;
     
     UIButton *b = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -65,8 +67,11 @@
 }
 
 - (void)bClick{
-    [_modelView popAnimated:YES completion:^(FSModalView * _Nonnull modalView) {
+    [_modelView popAnimated:YES completion:^(UIView * _Nonnull modalView) {
+        NSLog(@"called POP");
         
+        [modalView removeFromSuperview];
+        self->_modelView = nil;
     }];
 }
 
