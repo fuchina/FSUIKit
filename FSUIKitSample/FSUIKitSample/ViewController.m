@@ -35,8 +35,37 @@
 }
 
 - (void)buttonClick:(UIButton *)button{
-//    [self drawClick];
-    [self modalAnimatiton];
+    UIImage *image = [self monkeyKing];
+    
+    _imageView.image = image;
+    _imageView.frame = CGRectMake(self.view.bounds.size.width / 2 - image.size.width / 2, self.view.bounds.size.height / 2 - image.size.height / 2, image.size.width, image.size.height);
+}
+
+- (UIImage *)monkeyKing{
+    CGSize size = CGSizeMake(60, 60);
+    UIColor *backgroundColor = [UIColor colorWithRed:0x1f/255.0 green:0xbc/255.0 blue:0xec/255.0 alpha:1];
+    UIColor *mainColor = UIColor.whiteColor;
+    
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    Class _class_Color = UIColor.class;
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if ([backgroundColor isKindOfClass:_class_Color]) {
+        CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        CGContextFillRect(context, CGRectMake(0, 0, size.width,size.height));
+    }
+    
+    if ([mainColor isKindOfClass:_class_Color]) {
+        CGContextSetFillColorWithColor(context, mainColor.CGColor);
+        CGContextFillRect(context, CGRectMake(size.width * .2, .5 * size.height, size.width * .2,1));
+        CGContextFillRect(context, CGRectMake(size.width * .6, .5 * size.height, size.width * .2,1));
+    }
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
 }
 
 - (void)drawClick{
@@ -47,32 +76,6 @@
     UIImage *image = [FSImage imageWithSize:CGSizeMake(64, 64) backgroundColor:UIColor.clearColor mainColor:mainColor marginColor:marginColor];
     _imageView.image = image;
     _imageView.frame = CGRectMake(self.view.bounds.size.width / 2 - image.size.width / 2, self.view.bounds.size.height / 2 - image.size.height / 2, image.size.width, image.size.height);
-}
-
-- (void)modalAnimatiton{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-    view.backgroundColor = UIColor.redColor;
-    [self.view addSubview:view];
-    [view pushAnimated:YES completion:^(UIView * _Nonnull modalView) {
-        NSLog(@"called PUSH");
-    }];
-
-    _modelView = view;
-    
-    UIButton *b = [UIButton buttonWithType:UIButtonTypeSystem];
-    b.frame = CGRectMake(10, 100, self.view.frame.size.width - 20, 50);
-    b.backgroundColor = UIColor.whiteColor;
-    [view addSubview:b];
-    [b addTarget:self action:@selector(bClick) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)bClick{
-    [_modelView popAnimated:YES completion:^(UIView * _Nonnull modalView) {
-        NSLog(@"called POP");
-        
-        [modalView removeFromSuperview];
-        self->_modelView = nil;
-    }];
 }
 
 - (void)tapClick:(UITapGestureRecognizer *)tap{
