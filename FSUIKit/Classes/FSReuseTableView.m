@@ -31,12 +31,28 @@
         _tableView.estimatedSectionHeaderHeight = 0;
         _tableView.estimatedSectionFooterHeight = 0;
         [self addSubview:_tableView];
+        
+    }
+}
+
+- (void)setRefresh_header:(void (^)(void))refresh_header{
+    _refresh_header = refresh_header;
+    
+    if (refresh_header) {
         __weak typeof(self)this = self;
         _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             if (this.refresh_header) {
                 this.refresh_header();
             }
         }];
+    }
+}
+
+- (void)setRefresh_footer:(void (^)(void))refresh_footer{
+    _refresh_footer = refresh_footer;
+    
+    if (refresh_footer) {
+        __weak typeof(self)this = self;
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             if (this.refresh_footer) {
                 this.refresh_footer();
@@ -104,6 +120,11 @@
 - (void)endRefresh{
     [_tableView.mj_header endRefreshing];
     [_tableView.mj_footer endRefreshing];
+}
+
+- (void)deleteRefresh{
+    [_tableView.mj_header removeFromSuperview];
+    [_tableView.mj_footer removeFromSuperview];
 }
 
 /*

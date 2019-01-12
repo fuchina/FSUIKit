@@ -26,5 +26,6 @@
 @property (nonatomic,copy) void (^didSelectRowAtIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 
 - (void)endRefresh;
+- (void)deleteRefresh;
 
 @end
