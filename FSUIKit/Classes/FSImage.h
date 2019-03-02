@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface FSImage : NSObject
 
 + (UIImage *)imageFromColor:(UIColor *)color;
@@ -33,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
                  mainColor:(UIColor *)mainColor
                marginColor:(UIColor *)marginColor;
 
-@end
+// 图片解码
++ (UIImage *)decodedImageWithImage:(UIImage *)image;
 
-NS_ASSUME_NONNULL_END
+// 压缩图片
++ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth;// 将图片大小设置为目标大小，用于压缩图片
++ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)minWidth;
++ (UIImage*)imageForUIView:(UIView *)view;
+
+@end

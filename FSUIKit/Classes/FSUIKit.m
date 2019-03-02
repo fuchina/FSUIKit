@@ -241,92 +241,6 @@ static CGRect oldframe;
     }];
 }
 
-+ (UIImage *)compressImageData:(NSData *)imageData{
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    if (imageData.length < 500 * 1024) {
-        return image;
-    }
-    NSInteger compressRate = 0;
-    if (image.size.height > image.size.width) {
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:750 maxNumOfPixels:1334 * 750];  // 安卓:1240 * 860
-    }else{
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:750 maxNumOfPixels:750 * 1334];
-    }
-    
-    NSInteger width = image.size.width / compressRate;
-    return [self compressImage:image targetWidth:width];
-}
-
-+ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)minWidth minHeight:(NSInteger)minHeight{
-    if (![image isKindOfClass:UIImage.class]) {
-        return nil;
-    }
-    CGSize size = [UIScreen mainScreen].bounds.size;
-    if (image.size.width < size.width) {
-        return image;
-    }
-    NSInteger compressRate = 0;
-    if (image.size.height > image.size.width) {
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:minWidth maxNumOfPixels:minWidth * minHeight];  // 安卓:1240 * 860
-    }else{
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:minWidth maxNumOfPixels:minWidth * minHeight];
-    }
-    NSInteger width = image.size.width / compressRate;
-    return [self compressImage:image targetWidth:width];
-}
-
-+ (UIImage *)compressImage:(UIImage *)image{
-    if (![image isKindOfClass:UIImage.class]) {
-        return nil;
-    }
-    if (image.size.width < [UIScreen mainScreen].bounds.size.width){
-        return image;
-    }
-    NSInteger compressRate = 0;
-    if (image.size.height > image.size.width) {
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:640 maxNumOfPixels:1136 * 640];  // 安卓:1240 * 860
-    }else{
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:640 maxNumOfPixels:1136 * 640];
-    }
-    NSInteger width = image.size.width / compressRate;
-    return [self compressImage:image targetWidth:width];
-}
-
-+ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width{
-    if (![image isKindOfClass:UIImage.class]) {
-        return nil;
-    }
-    if (image.size.width < [UIScreen mainScreen].bounds.size.width) {
-        return image;
-    }
-    NSInteger compressRate = 0;
-    if (image.size.height > image.size.width) {
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:width maxNumOfPixels:width * 1.775 * width];  // 安卓:1240 * 860
-    }else{
-        compressRate = [FSCalculator computeSampleSize:image minSideLength:width maxNumOfPixels:width * width * 1.775];
-    }
-    
-    NSInteger targetWidth = image.size.width / compressRate;
-    return [self compressImage:image targetWidth:targetWidth];
-}
-
-+ (UIImage*)imageForUIView:(UIView*)view{
-    //    UIGraphicsBeginImageContext(view.bounds.size);// 只会生成屏幕所见的部分
-    CGSize size = view.bounds.size;
-    if ([view isKindOfClass:UIScrollView.class]) {
-        UIScrollView *sView = (UIScrollView *)view;
-        size = CGSizeMake(sView.frame.size.width,sView.contentSize.height+ sView.contentInset.top+ sView.contentInset.bottom);
-    }
-    UIGraphicsBeginImageContextWithOptions(size, YES, view.layer.contentsScale);
-    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
-    [view.layer renderInContext:currnetContext];
-    //    CGContextRestoreGState(currnetContext);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 + (UIImage *)captureScrollView:(UIScrollView *)scrollView{
     CGRect frame = scrollView.frame;
     //设置控件显示的区域大小     key:显示
@@ -450,40 +364,6 @@ static CGRect oldframe;
     UIImage *resultImage = [UIImage imageWithCGImage:cgImage];
     CGImageRelease(cgImage);
     return resultImage;
-}
-
-+ (UIImage *)imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth{
-    if (sourceImage.size.width < defineWidth) {
-        return sourceImage;
-    }
-    
-    CGSize imageSize = sourceImage.size;
-    CGFloat width = imageSize.width;
-    CGFloat height = imageSize.height;
-    CGFloat targetWidth = defineWidth;
-    CGFloat targetHeight = (targetWidth / width) * height;
-    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
-    [sourceImage drawInRect:CGRectMake(0,0,targetWidth,  targetHeight)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
-+ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth{
-    CGFloat sourceWidth = sourceImage.size.width;
-    CGFloat sourceHeight = sourceImage.size.height;
-    CGFloat targetHeight = (targetWidth / sourceWidth) * sourceHeight;
-    
-    CGFloat compressRate = sourceWidth * sourceHeight / (targetWidth * targetHeight);
-    if (compressRate <= 1.0f) {
-        return sourceImage;
-    }
-    
-    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
-    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 // 怀旧 --> CIPhotoEffectInstant                         单色 --> CIPhotoEffectMono

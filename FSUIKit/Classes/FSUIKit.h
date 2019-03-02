@@ -35,14 +35,6 @@
 + (void)showAlertWithMessage:(NSString *)message controller:(UIViewController *)controller handler:(void (^)(UIAlertAction *action))handler;
 + (void)showAlertWithTitle:(NSString *)title message:(NSString *)message ok:(NSString *)ok controller:(UIViewController *)pController handler:(void (^)(UIAlertAction *action))handler;
 
-// 压缩图片
-+ (UIImage *)compressImageData:(NSData *)imageData;
-+ (UIImage *)compressImage:(UIImage *)imageData;
-+ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)minWidth minHeight:(NSInteger)minHeight;
-
-+ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width;
-+ (UIImage*)imageForUIView:(UIView *)view;
-
 // 创建一张实时模糊效果 View (毛玻璃效果)
 + (UIVisualEffectView *)effectViewWithFrame:(CGRect)frame;
 // 全屏截图
@@ -61,8 +53,6 @@
                             lineColor:(UIColor *)color;
 + (UIImage *)QRImageFromString:(NSString *)string;
 + (UIImage*)circleImage:(UIImage*)image withParam:(CGFloat)inset;
-+ (UIImage *)imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth; // 将图片大小设置为目标大小，用于压缩图片
-+ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth;
 #pragma mark - 对图片进行滤镜处理
 + (UIImage *)filterWithOriginalImage:(UIImage *)image filterName:(NSString *)name;
 #pragma mark -  对图片进行模糊处理

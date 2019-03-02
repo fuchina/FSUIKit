@@ -6,6 +6,7 @@
 //
 
 #import "FSImage.h"
+#import "FSCalculator.h"
 
 @implementation FSImage
 
@@ -164,5 +165,122 @@
     return img;
 }
 
++ (UIImage *)decodedImageWithImage:(UIImage *)image {
+    if (image.images) {
+        // Do not decode animated images
+        return image;
+    }
+    
+    CGImageRef imageRef = image.CGImage;
+    CGSize imageSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
+    CGRect imageRect = (CGRect){.origin = CGPointZero, .size = imageSize};
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+    
+    int infoMask = (bitmapInfo & kCGBitmapAlphaInfoMask);
+    BOOL anyNonAlpha = (infoMask == kCGImageAlphaNone ||
+                        infoMask == kCGImageAlphaNoneSkipFirst ||
+                        infoMask == kCGImageAlphaNoneSkipLast);
+    
+    // CGBitmapContextCreate doesn't support kCGImageAlphaNone with RGB.
+    // https://developer.apple.com/library/mac/#qa/qa1037/_index.html
+    if (infoMask == kCGImageAlphaNone && CGColorSpaceGetNumberOfComponents(colorSpace) > 1) {
+        // Unset the old alpha info.
+        bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+        
+        // Set noneSkipFirst.
+        bitmapInfo |= kCGImageAlphaNoneSkipFirst;
+    }
+    // Some PNGs tell us they have alpha but only 3 components. Odd.
+    else if (!anyNonAlpha && CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
+        // Unset the old alpha info.
+        bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+        bitmapInfo |= kCGImageAlphaPremultipliedFirst;
+    }
+    
+    // It calculates the bytes-per-row based on the bitsPerComponent and width arguments.
+    CGContextRef context = CGBitmapContextCreate(NULL,
+                                                 imageSize.width,
+                                                 imageSize.height,
+                                                 CGImageGetBitsPerComponent(imageRef),
+                                                 0,
+                                                 colorSpace,
+                                                 bitmapInfo);
+    CGColorSpaceRelease(colorSpace);
+    
+    // If failed, return undecompressed image
+    if (!context) return image;
+    
+    CGContextDrawImage(context, imageRect, imageRef);
+    CGImageRef decompressedImageRef = CGBitmapContextCreateImage(context);
+    
+    CGContextRelease(context);
+    
+    UIImage *decompressedImage = [UIImage imageWithCGImage:decompressedImageRef scale:image.scale orientation:image.imageOrientation];
+    CGImageRelease(decompressedImageRef);
+    return decompressedImage;
+}
+
++ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth{
+    CGFloat sourceWidth = sourceImage.size.width;
+    CGFloat sourceHeight = sourceImage.size.height;
+    CGFloat targetHeight = (targetWidth / sourceWidth) * sourceHeight;
+    
+    CGFloat compressRate = sourceWidth * sourceHeight / (targetWidth * targetHeight);
+    if (compressRate <= 1.0f) {
+        return sourceImage;
+    }
+    
+    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
++ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)minWidth {
+    if (![image isKindOfClass:UIImage.class]) {
+        return nil;
+    }
+    if (image.size.width < 1) {
+        return image;
+    }
+    NSInteger comp = 1;
+    NSInteger targetWidth = image.size.width;
+    while (targetWidth > minWidth) {
+        comp *= 2;
+        targetWidth /= comp;
+    }
+    if (targetWidth < minWidth) {
+        comp /= 2;
+    }
+    if (comp < 2) {
+        return image;
+    }
+    
+    if (comp > 0) {
+        NSInteger width = image.size.width / comp;
+        return [self compressImage:image targetWidth:width];
+    }
+    return image;
+}
+
++ (UIImage*)imageForUIView:(UIView*)view{
+    //    UIGraphicsBeginImageContext(view.bounds.size);// 只会生成屏幕所见的部分
+    CGSize size = view.bounds.size;
+    if ([view isKindOfClass:UIScrollView.class]) {
+        UIScrollView *sView = (UIScrollView *)view;
+        size = CGSizeMake(sView.frame.size.width,sView.contentSize.height+ sView.contentInset.top+ sView.contentInset.bottom);
+    }
+    UIGraphicsBeginImageContextWithOptions(size, YES, view.layer.contentsScale);
+    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:currnetContext];
+    //    CGContextRestoreGState(currnetContext);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 @end
