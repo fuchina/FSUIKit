@@ -45,13 +45,15 @@ static CGRect oldframe;
         }];
         [controller addAction:action];
     }
-    UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [FSWindow dismiss];
-        if (cancel) {
-            cancel(action);
-        }
-    }];
-    [controller addAction:archiveAction];
+    if ([cancelTitle isKindOfClass:NSString.class] && cancelTitle.length) {
+        UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [FSWindow dismiss];
+            if (cancel) {
+                cancel(action);
+            }
+        }];
+        [controller addAction:archiveAction];
+    }
     return controller;
 }
 
