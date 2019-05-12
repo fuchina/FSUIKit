@@ -5,7 +5,7 @@
 //  Created by Fudongdong on 2018/4/3.
 //
 
-#import <UIKit/UIkit.h>
+#import <UIKit/UIKit.h>
 
 @interface FSUIKit : NSObject
 
