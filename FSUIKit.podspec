@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source_files = 'FSUIKit/Classes/*'
 
   s.dependency   'FSWindow'
-  s.dependency   'MJRefresh','3.1.15.7'
+  s.dependency   'MJRefresh','3.2.3'
   s.dependency   'FSCalculator'
   
   s.frameworks = 'UIKit'
