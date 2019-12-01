@@ -46,7 +46,7 @@
     return control;
 }
 
-+ (UIButton *)buttonWithFrame:(CGRect)frame title:(NSString *)title titleColor:(UIColor *)color backColor:(UIColor *)backColor fontInt:(NSInteger)fontInt tag:(NSInteger)tag target:(id)target selector:(SEL)selector{
++ (UIButton *)buttonWithFrame:(CGRect)frame title:(NSString *)title titleColor:(UIColor *)color backColor:(UIColor *)backColor font:(UIFont *)font tag:(NSInteger)tag target:(id)target selector:(SEL)selector{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = frame;
     if (title) {
@@ -63,8 +63,8 @@
     if (target && selector) {
         [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     }
-    if (fontInt) {
-        button.titleLabel.font =  [UIFont systemFontOfSize:fontInt];
+    if (font) {
+        button.titleLabel.font =  font;
     }
     if (tag) {
         button.tag = tag;
@@ -75,7 +75,7 @@
 
 + (UIButton *)submitButtonWithTop:(CGFloat)top tag:(NSInteger)tag target:(id)target selector:(SEL)selector {
     UIColor *color = [UIColor colorWithRed:18/255.0 green:152/255.0 blue:233/255.0 alpha:1];
-   UIButton *button = [self buttonWithFrame:CGRectMake(20, top, UIScreen.mainScreen.bounds.size.width - 40, 44) title:NSLocalizedString(@"Commit", nil) titleColor:[UIColor whiteColor] backColor:color fontInt:0 tag:tag target:target selector:selector];
+    UIButton *button = [self buttonWithFrame:CGRectMake(20, top, UIScreen.mainScreen.bounds.size.width - 40, 44) title:NSLocalizedString(@"Commit", nil) titleColor:[UIColor whiteColor] backColor:color font:nil tag:tag target:target selector:selector];
     button.layer.cornerRadius = 3;
     return button;
 }

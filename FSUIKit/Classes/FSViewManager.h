@@ -25,7 +25,7 @@
 + (UIBarButtonItem *)bbiWithSystemType:(UIBarButtonSystemItem)type target:(id)target action:(SEL)selector;
 + (UISegmentedControl *)segmentedControlWithTitles:(NSArray<NSString *> *)titles target:(id)target action:(SEL)selector;
 
-+ (UIButton *)buttonWithFrame:(CGRect)frame title:(NSString *)title titleColor:(UIColor *)color backColor:(UIColor *)backColor fontInt:(NSInteger)fontInt tag:(NSInteger)tag target:(id)target selector:(SEL)selector;
++ (UIButton *)buttonWithFrame:(CGRect)frame title:(NSString *)title titleColor:(UIColor *)color backColor:(UIColor *)backColor font:(UIFont *)font tag:(NSInteger)tag target:(id)target selector:(SEL)selector;
 + (UIButton *)submitButtonWithTop:(CGFloat)top tag:(NSInteger)tag target:(id)target selector:(SEL)selector;
 
 + (UIBarButtonItem *)barButtonItemWithCustomButton:(UIButton *)button;
