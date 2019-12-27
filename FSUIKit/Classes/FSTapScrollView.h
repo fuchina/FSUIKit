@@ -10,4 +10,6 @@
 
 @interface FSTapScrollView : UIScrollView
 
+@property (nonatomic,copy) void (^click)(FSTapScrollView *view);
+
 @end

@@ -20,7 +20,9 @@
 }
 
 - (void)tapActionInTapScrollView{
-    [self endEditing:YES];
+    if (self.click) {
+        self.click(self);
+    }
 }
 
 /*
