@@ -46,5 +46,10 @@
  */
 + (UIImage *)imageGradualFromColorWithARed:(CGFloat)aRed aGreen:(CGFloat)aGreen aBlue:(CGFloat)aBlue aAlpha:(CGFloat)aAlpha toColorWithBRed:(CGFloat)bRed bGreen:(CGFloat)bGreen bBlue:(CGFloat)bBlue bAlpha:(CGFloat)bAlpha width:(CGFloat)width height:(CGFloat)height;
 
+/**
+ * 压缩图片，MT项目中实用
+ */
++ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width height:(NSInteger)height;
+
 @end
 

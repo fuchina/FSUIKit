@@ -301,5 +301,15 @@
     return image;
 }
 
++ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width height:(NSInteger)height {
+    if (width <= 0 || height <= 0 || [image isKindOfClass:UIImage.class] == NO) {
+        return nil;
+    }
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, width, height)];
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resultImage;
+}
 
 @end
