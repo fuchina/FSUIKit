@@ -41,7 +41,7 @@
 
 /**
  * 根据两个颜色渐变生成图片
- *@param aRed，颜色值的红色值，其他类似
+ * @param aRed，颜色值的红色值，其他类似
  *return UIImage对象
  */
 + (UIImage *)imageGradualFromColorWithARed:(CGFloat)aRed aGreen:(CGFloat)aGreen aBlue:(CGFloat)aBlue aAlpha:(CGFloat)aAlpha toColorWithBRed:(CGFloat)bRed bGreen:(CGFloat)bGreen bBlue:(CGFloat)bBlue bAlpha:(CGFloat)bAlpha width:(CGFloat)width height:(CGFloat)height;
@@ -50,6 +50,11 @@
  * 压缩图片，MT项目中实用
  */
 + (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width height:(NSInteger)height;
+
+/**
+ * 屏幕截图，MT DEMO项目中有用
+ */
++ (UIImage *)screenShot;
 
 @end
 
