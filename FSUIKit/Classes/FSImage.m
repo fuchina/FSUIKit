@@ -232,7 +232,8 @@
         return sourceImage;
     }
     
-    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+//    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(targetWidth, targetHeight), NO, 0.0);
     [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -247,10 +248,11 @@
         return image;
     }
     NSInteger comp = 1;
-    NSInteger targetWidth = image.size.width;
+    NSInteger oriWith = image.size.width;
+    NSInteger targetWidth = oriWith;
     while (targetWidth > minWidth) {
-        comp *= 2;
-        targetWidth /= comp;
+         comp *= 2;
+        targetWidth = oriWith / comp;
     }
     if (targetWidth < minWidth) {
         comp /= 2;
@@ -260,7 +262,7 @@
     }
     
     if (comp > 0) {
-        NSInteger width = image.size.width / comp;
+        NSInteger width = oriWith / comp;
         return [self compressImage:image targetWidth:width];
     }
     return image;
@@ -299,17 +301,6 @@
     CGContextDrawLinearGradient(context, backGradient, CGPointMake(0, 0), CGPointMake(1.0, 0), kCGGradientDrawsBeforeStartLocation);
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     return image;
-}
-
-+ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width height:(NSInteger)height {
-    if (width <= 0 || height <= 0 || [image isKindOfClass:UIImage.class] == NO) {
-        return nil;
-    }
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, width, height)];
-    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return resultImage;
 }
 
 /**

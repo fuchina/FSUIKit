@@ -34,9 +34,16 @@
 // 图片解码
 + (UIImage *)decodedImageWithImage:(UIImage *)image;
 
-// 压缩图片
-+ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth;// 将图片大小设置为目标大小，用于压缩图片
+/*
+ * 按照2的倍数压缩图片
+ */
 + (UIImage *)compressImage:(UIImage *)image width:(NSInteger)minWidth;
+
+/*
+ * 压缩图片，MT项目中实用
+ */
++ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth;
+
 + (UIImage*)imageForUIView:(UIView *)view;
 
 /**
@@ -45,11 +52,6 @@
  *return UIImage对象
  */
 + (UIImage *)imageGradualFromColorWithARed:(CGFloat)aRed aGreen:(CGFloat)aGreen aBlue:(CGFloat)aBlue aAlpha:(CGFloat)aAlpha toColorWithBRed:(CGFloat)bRed bGreen:(CGFloat)bGreen bBlue:(CGFloat)bBlue bAlpha:(CGFloat)bAlpha width:(CGFloat)width height:(CGFloat)height;
-
-/**
- * 压缩图片，MT项目中实用
- */
-+ (UIImage *)compressImage:(UIImage *)image width:(NSInteger)width height:(NSInteger)height;
 
 /**
  * 屏幕截图，MT DEMO项目中有用
