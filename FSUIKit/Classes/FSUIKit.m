@@ -512,5 +512,14 @@ static CGRect oldframe;
     return dashedLine;
 }
 
++ (CGFloat)scrollViewPage:(UIScrollView *)scrollView {
+    CGFloat pageWidth = scrollView.frame.size.width;
+    if (pageWidth < 0.01) {
+        return 0;
+    }
+    CGFloat page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    int currentPage = page;
+    return currentPage;
+}
 
 @end

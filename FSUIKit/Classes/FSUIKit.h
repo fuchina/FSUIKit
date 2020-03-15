@@ -58,6 +58,6 @@
 #pragma mark -  对图片进行模糊处理
 + (UIImage *)blurWithOriginalImage:(UIImage *)image blurName:(NSString *)name radius:(NSInteger)radius;
 
-    
++ (CGFloat)scrollViewPage:(UIScrollView *)scrollView;
 
 @end
