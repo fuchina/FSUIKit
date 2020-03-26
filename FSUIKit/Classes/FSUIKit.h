@@ -44,7 +44,8 @@
 //截取view生成一张图片
 + (UIImage *)shotWithView:(UIView *)view;
 
-+ (UIImage *)captureScrollView:(UIScrollView *)scrollView;
+//+ (UIImage *)captureScrollView:(UIScrollView *)scrollView;
++ (void)captureScrollView:(UIScrollView *)scrollView finished:(void(^)(UIImage *image))completion;
 
 // 绘制虚线
 + (UIView *)createDashedLineWithFrame:(CGRect)lineFrame
