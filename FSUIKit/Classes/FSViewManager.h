@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FSTapLabel.h"
 #import "FSTapCell.h"
-#import "PHTextView.h"
 
 #define FS_LineThickness        0.5
 
@@ -64,7 +63,5 @@
                         placeholder:(NSString *)holder
                           textColor:(UIColor *)textColor
                           onlyChars:(BOOL)only;
-
-+ (PHTextView *)phTextViewWithFrame:(CGRect)frame placeholder:(NSString *)ph;
 
 @end

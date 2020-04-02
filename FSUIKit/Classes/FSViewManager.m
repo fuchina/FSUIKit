@@ -246,17 +246,6 @@
     return textField;
 }
 
-+ (PHTextView *)phTextViewWithFrame:(CGRect)frame placeholder:(NSString *)ph
-{
-    PHTextView *textView = [[PHTextView alloc] initWithFrame:frame];
-    textView.font = [UIFont systemFontOfSize:14];
-    textView.placeholder = ph;
-    CGFloat rgb = 88/255.0;
-    textView.textColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1];
-    textView.autocorrectionType = UITextAutocorrectionTypeNo;
-    return textView;
-}
-
 + (UIImageView *)imageViewWithFrame:(CGRect)frame imageName:(NSString *)imageName
 {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
