@@ -29,7 +29,7 @@ static CGRect oldframe;
 }
 
 + (void)alert:(UIAlertControllerStyle)style controller:(UIViewController *)pController title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler{
-    UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:NSLocalizedString(@"Cancel", nil) cancel:nil];
+    UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:@"取消" cancel:nil];
     [pController presentViewController:controller animated:YES completion:nil];
 }
 
