@@ -21,10 +21,10 @@
     UITapGestureRecognizer *one = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_fs_tap_click_event:)];
     one.numberOfTapsRequired = 1;
     [self addGestureRecognizer:one];
-    UITapGestureRecognizer *two = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_fs_tap_click_event:)];
-    two.numberOfTapsRequired = 2;
-    [self addGestureRecognizer:two];
-    [one requireGestureRecognizerToFail:two];
+//    UITapGestureRecognizer *two = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_fs_tap_click_event:)];
+//    two.numberOfTapsRequired = 2;
+//    [self addGestureRecognizer:two];
+//    [one requireGestureRecognizerToFail:two]; // 响应很慢
 }
 
 - (void)_fs_tap_click_event:(UITapGestureRecognizer *)tap{
