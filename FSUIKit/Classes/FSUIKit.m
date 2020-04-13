@@ -548,4 +548,21 @@ static CGRect oldframe;
     return currentPage;
 }
 
++ (void)findSubView:(Class)ClassOfSubView inView:(UIView *)view completion:(void(^)(id subView))completion {
+    if (![view isKindOfClass:UIView.class]) {
+        return;
+    }
+    if (!completion) {
+        return;
+    }
+    if (!ClassOfSubView) {
+        return;
+    }
+    for (UIView *sub in view.subviews) {
+        if ([sub isKindOfClass:ClassOfSubView]) {
+            completion(sub);
+        }
+    }
+}
+
 @end

@@ -61,4 +61,6 @@
 
 + (CGFloat)scrollViewPage:(UIScrollView *)scrollView;
 
++ (void)findSubView:(Class)ClassOfSubView inView:(UIView *)view completion:(void(^)(id subView))completion;
+
 @end
