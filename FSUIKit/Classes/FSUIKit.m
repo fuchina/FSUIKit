@@ -565,4 +565,16 @@ static CGRect oldframe;
     }
 }
 
++ (void)setCornerRadii:(CGSize)size forView:(UIView *)view withRectCorner:(UIRectCorner)corners {
+    if (![view isKindOfClass:UIView.class]) {
+        return;
+    }
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:corners cornerRadii:size];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = view.bounds;
+    maskLayer.path = maskPath.CGPath;
+    view.layer.mask = maskLayer;
+}
+
 @end

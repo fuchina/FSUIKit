@@ -63,4 +63,6 @@
 
 + (void)findSubView:(Class)ClassOfSubView inView:(UIView *)view completion:(void(^)(id subView))completion;
 
++ (void)setCornerRadii:(CGSize)size forView:(UIView *)view withRectCorner:(UIRectCorner)corners;
+
 @end
