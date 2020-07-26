@@ -142,11 +142,11 @@ static CGRect oldframe;
 }
 
 + (void)showAlertWithMessage:(NSString *)message controller:(UIViewController *)controller{
-    [self showAlertWithTitle:NSLocalizedString(@"Tips", nil) message:message ok:NSLocalizedString(@"OK", nil) controller:controller handler:nil];
+    [self showAlertWithTitle:@"温馨提示" message:message ok:@"确定" controller:controller handler:nil];
 }
 
 + (void)showAlertWithMessage:(NSString *)message controller:(UIViewController *)controller handler:(void (^)(UIAlertAction *action))handler{
-    [self showAlertWithTitle:NSLocalizedString(@"Tips", nil) message:message ok:NSLocalizedString(@"OK", nil) controller:controller handler:handler];
+    [self showAlertWithTitle:@"温馨提示" message:message ok:@"确定" controller:controller handler:handler];
 }
 
 + (void)showAlertWithTitle:(NSString *)title message:(NSString *)message ok:(NSString *)ok controller:(UIViewController *)pController handler:(void (^)(UIAlertAction *action))handler{
