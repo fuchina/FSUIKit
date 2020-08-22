@@ -33,6 +33,13 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+    [UIView animateWithDuration:.25 animations:^{
+        self.alpha = 0.28;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25 animations:^{
+            self.alpha = 1;
+        }];
+    }];
     // Configure the view for the selected state
 }
 
