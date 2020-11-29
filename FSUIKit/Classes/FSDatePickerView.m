@@ -49,8 +49,12 @@
     _mainView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_mainView];
     
-    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, self.bounds.size.width, 200)];
+    _datePicker = [[UIDatePicker alloc] init];
     _datePicker.datePickerMode = UIDatePickerModeDate;
+    if (@available(iOS 13.4, *)) {
+        _datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+    _datePicker.frame = CGRectMake(0, 40, self.bounds.size.width, 200);
     [_datePicker setLocale:[NSLocale localeWithLocaleIdentifier:@"zh-CN"]];
     _datePicker.minimumDate = [[NSDate date] dateByAddingTimeInterval:- 100 * 365 * 24 * 3600];
     _datePicker.maximumDate = [[NSDate date] dateByAddingTimeInterval:100 * 365 * 24 * 3600];
