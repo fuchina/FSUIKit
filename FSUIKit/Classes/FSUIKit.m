@@ -256,30 +256,57 @@ static CGRect oldframe;
     return viewImage;
 }
 
+// 从FSViewToImage组件拷贝而来
++ (UIImage *)imageForUIView:(nonnull UIView *)view{
+    CGSize size = view.bounds.size;
+    CGRect savedFrame = view.frame;
+    BOOL isScrollView = [view isKindOfClass:UIScrollView.class];
+    if (isScrollView) {
+        UIScrollView *sView = (UIScrollView *)view;
+        size = CGSizeMake(sView.frame.size.width,sView.contentSize.height + sView.contentInset.top + sView.contentInset.bottom);
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, size.width, size.height);
+    }
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:currnetContext];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    if (isScrollView) {
+        view.frame = savedFrame;
+    }
+    return image;
+}
+
 + (void)captureScrollView:(UIScrollView *)scrollView finished:(void(^)(UIImage *image))completion{
     if (!completion) {
         return;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGRect frame = scrollView.frame;
-          //设置控件显示的区域大小     key:显示
-        scrollView.frame = CGRectMake(0, scrollView.frame.origin.y, scrollView.contentSize.width, scrollView.contentSize.height);
-        CALayer *layer = scrollView.layer;
-        CGRect fr = scrollView.frame;
-          
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            //设置截屏大小(截屏区域的大小必须要跟视图控件的大小一样)
-                UIGraphicsBeginImageContextWithOptions(fr.size, YES, 0.0);
-                [layer renderInContext:UIGraphicsGetCurrentContext()];
-                UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                scrollView.frame = frame;
-                completion(viewImage);
-            });
-        });
-    });
+    
+    UIImage * tableViewScreenshot = [self imageForUIView:scrollView];
+    completion(tableViewScreenshot);
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        CGRect frame = scrollView.frame;
+//          //设置控件显示的区域大小     key:显示
+//        scrollView.frame = CGRectMake(0, scrollView.frame.origin.y, scrollView.contentSize.width, scrollView.contentSize.height);
+//        CALayer *layer = scrollView.layer;
+//        CGRect fr = scrollView.frame;
+//
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//            //设置截屏大小(截屏区域的大小必须要跟视图控件的大小一样)
+//                UIGraphicsBeginImageContextWithOptions(fr.size, YES, 0.0);
+//                [layer renderInContext:UIGraphicsGetCurrentContext()];
+//                UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+//                UIGraphicsEndImageContext();
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                scrollView.frame = frame;
+//                completion(viewImage);
+//            });
+//        });
+//    });
 }
 
 //截取view生成一张图片
