@@ -25,7 +25,7 @@
     
     CGSize size = self.frame.size;
     for (int x = 0; x < 2; x ++) {
-        FSLabelTextField *textField = [[FSLabelTextField alloc] initWithFrame:CGRectMake(0, 10 + 45 * x, size.width, 44) text:x?NSLocalizedString(@"Note", nil):NSLocalizedString(@"Money", nil) textFieldText:nil placeholder:x?NSLocalizedString(@"Please input message", nil):NSLocalizedString(@"Please input money", nil)];
+        FSLabelTextField *textField = [[FSLabelTextField alloc] initWithFrame:CGRectMake(0, 10 + 45 * x, size.width, 44) text:x?@"备注":@"金额" textFieldText:nil placeholder:x?@"输入备注":@"请输入金额"];
         textField.textField.keyboardType = x? UIKeyboardTypeDefault:UIKeyboardTypeDecimalPad;
         [self addSubview:textField];
         textField.label.font = [UIFont systemFontOfSize:17];

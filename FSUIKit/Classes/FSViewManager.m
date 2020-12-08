@@ -75,7 +75,7 @@
 
 + (UIButton *)submitButtonWithTop:(CGFloat)top tag:(NSInteger)tag target:(id)target selector:(SEL)selector {
     UIColor *color = [UIColor colorWithRed:18/255.0 green:152/255.0 blue:233/255.0 alpha:1];
-    UIButton *button = [self buttonWithFrame:CGRectMake(20, top, UIScreen.mainScreen.bounds.size.width - 40, 44) title:NSLocalizedString(@"Commit", nil) titleColor:[UIColor whiteColor] backColor:color font:nil tag:tag target:target selector:selector];
+    UIButton *button = [self buttonWithFrame:CGRectMake(20, top, UIScreen.mainScreen.bounds.size.width - 40, 44) title:@"提交" titleColor:[UIColor whiteColor] backColor:color font:nil tag:tag target:target selector:selector];
     button.layer.cornerRadius = 3;
     return button;
 }

@@ -73,7 +73,7 @@
     for (int x = 0; x < 2; x ++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(x * (selectView.bounds.size.width - 60), 0, 60, 40);
-        [button setTitle:x?NSLocalizedString(@"Confirm", nil):NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+        [button setTitle:x?@"确认":@"取消" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:15];
         button.tag = x;

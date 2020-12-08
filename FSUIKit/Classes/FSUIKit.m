@@ -19,7 +19,7 @@ static CGRect oldframe;
 }
 
 + (void)alertOnCustomWindow:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler{
-    UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:NSLocalizedString(@"Cancel", nil) cancel:nil];
+    UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:@"取消" cancel:nil];
     [FSWindow presentViewController:controller animated:YES completion:nil];
 }
 
@@ -122,11 +122,11 @@ static CGRect oldframe;
 }
 
 + (void)showAlertWithMessageOnCustomWindow:(NSString *)message{
-    [self showAlertWithTitleOnCustomWindow:NSLocalizedString(@"Tips", nil) message:message ok:NSLocalizedString(@"OK", nil) handler:nil];
+    [self showAlertWithTitleOnCustomWindow:@"提示" message:message ok:@"OK" handler:nil];
 }
 
 + (void)showAlertWithMessageOnCustomWindow:(NSString *)message handler:(void (^)(UIAlertAction *action))handler{
-    [self showAlertWithTitleOnCustomWindow:NSLocalizedString(@"Tips", nil) message:message ok:NSLocalizedString(@"OK", nil) handler:handler];
+    [self showAlertWithTitleOnCustomWindow:@"提示" message:message ok:@"OK" handler:handler];
 }
 
 + (void)showAlertWithTitleOnCustomWindow:(NSString *)title message:(NSString *)message ok:(NSString *)ok handler:(void (^)(UIAlertAction *action))handler{
