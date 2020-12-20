@@ -7,6 +7,7 @@
 //
 
 #import "FSHalfView.h"
+#import "FSApp.h"
 
 @interface FSHalfView ()<UITableViewDelegate,UITableViewDataSource>
 
