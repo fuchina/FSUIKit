@@ -1,13 +1,13 @@
 //
-//  FSView.m
-//  FSBaseController
+//  FSImageView.m
+//  FSUIKit
 //
-//  Created by FudonFuchina on 2019/5/12.
+//  Created by FudonFuchina on 2021/7/31.
 //
 
-#import "FSView.h"
+#import "FSImageView.h"
 
-@implementation FSView
+@implementation FSImageView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -27,6 +27,7 @@
         self.click(self);
     }
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

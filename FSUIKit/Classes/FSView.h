@@ -11,8 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FSView : UIView
 
-// 单击和双击手势事件
-@property (nonatomic,copy) void (^tapClick)(FSView *view,NSInteger tapCount);
+@property (nonatomic,copy) void (^click)(FSView *view);
 
 @end
 
