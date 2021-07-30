@@ -7,7 +7,14 @@
 
 #import "FSView.h"
 
-@implementation FSView
+@implementation FSView {
+    UIView      *_tapBackView;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _tapBackView.frame = self.bounds;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -18,8 +25,11 @@
 }
 
 - (void)fs_add_tap_event_in_base_view{
+    _tapBackView = [[UIView alloc] initWithFrame:self.bounds];
+    [self addSubview:_tapBackView];
+    
     UITapGestureRecognizer *one = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_fs_tap_click_event:)];
-    [self addGestureRecognizer:one];
+    [_tapBackView addGestureRecognizer:one];
 }
 
 - (void)_fs_tap_click_event:(UITapGestureRecognizer *)tap {
