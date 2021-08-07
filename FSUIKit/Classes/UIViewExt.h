@@ -29,4 +29,7 @@ CGRect  CGRectMoveToCenter(CGRect rect, CGPoint center);
 - (void) moveBy: (CGPoint) delta;
 - (void) scaleBy: (CGFloat) scaleFactor;
 - (void) fitInSize: (CGSize) aSize;
+
+@property (nonatomic,readonly) UIEdgeInsets safeAreaInsets_fs;
+
 @end

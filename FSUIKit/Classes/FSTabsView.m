@@ -6,58 +6,52 @@
 //
 
 #import "FSTabsView.h"
+#import "FSTabView.h"
 
-@interface FSTabsView () <UITableViewDelegate,UITableViewDataSource>
+@interface FSTabsView ()
 
 @end
 
 @implementation FSTabsView
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    _tableView.frame = self.bounds;
-}
-
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 50;
-        _tableView.backgroundColor = UIColor.clearColor;
-        _tableView.tableFooterView = UIView.new;
-        [self addSubview:_tableView];
-    }
-    return _tableView;
-}
 
 - (void)setList:(NSArray<NSString *> *)list {
     _list = nil;
     if ([list isKindOfClass:NSArray.class] && list.count) {
         _list = list;
     }
-    [self.tableView reloadData];
-}
-
-#pragma mark UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.list.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"i";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
-    }
-    cell.textLabel.text = self.list[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    for (FSTabView *tab in self.subviews) {
+        if ([tab isKindOfClass:FSTabView.class]) {
+            tab.hidden = YES;
+        }
+    }
+    
+    if (!_list.count) {
+        return;
+    }
+    
+    CGFloat w = self.frame.size.width / list.count;
+    for (int x = 0; x < list.count; x ++) {
+        CGRect fr = CGRectMake(w * x, 0, w, self.frame.size.height);
+        FSTabView *tab = [self viewWithTheTag:x];
+        if (tab) {
+            tab.hidden = NO;
+            tab.frame = fr;
+        } else {
+            tab = [[FSTabView alloc] initWithFrame:fr];
+            tab.theTag = x;
+            [self addSubview:tab];
+            __weak typeof(self)this = self;
+            tab.click = ^(FSView * _Nonnull view) {
+                if (this.clickIndex) {
+                    this.clickIndex(this, view.theTag);
+                }
+            };
+        }
+        tab.label.text = list[x];
+    }
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

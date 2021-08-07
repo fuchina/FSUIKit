@@ -38,6 +38,17 @@
     }
 }
 
+- (FSView *)viewWithTheTag:(NSInteger)tag {
+    for (FSView *sub in self.subviews) {
+        if ([sub isKindOfClass:FSView.class]) {
+            if (sub.theTag == tag) {
+                return sub;
+            }
+        }
+    }
+    return nil;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -11,6 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FSView : UIView
 
+// 自定义的tag
+@property (nonatomic, assign) NSInteger     theTag;
+- (nullable __kindof FSView *)viewWithTheTag:(NSInteger)tag;
+
 @property (nonatomic,copy) void (^click)(FSView *view);
 
 @end

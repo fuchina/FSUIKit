@@ -189,4 +189,13 @@ CGRect CGRectMoveToCenter(CGRect rect, CGPoint center)
 	
 	self.frame = newframe;	
 }
+
+- (UIEdgeInsets)safeAreaInsets_fs {
+    if (@available(iOS 11.0, *)) {
+        return self.safeAreaInsets;
+    } else {
+        return UIEdgeInsetsZero;
+    }
+}
+
 @end
