@@ -23,6 +23,14 @@
     return _label;
 }
 
+- (void)setSelected:(BOOL)selected {
+    _selected = selected;
+    
+    if (self.selectedState) {
+        self.selectedState(self, selected);
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

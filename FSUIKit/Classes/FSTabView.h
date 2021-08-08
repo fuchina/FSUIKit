@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 是否选中，由外界记录
 @property (nonatomic, assign) BOOL          selected;
 
+@property (nonatomic, copy) void (^selectedState)(FSTabView *tab, BOOL selected);
+
 @end
 
 NS_ASSUME_NONNULL_END

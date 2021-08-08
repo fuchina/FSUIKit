@@ -6,6 +6,7 @@
 //
 
 #import "FSView.h"
+#import "FSTabView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSArray<NSString *>    *list;
 
 @property (nonatomic, copy) void (^clickIndex)(FSTabsView *view, NSInteger index);
+@property (nonatomic, copy) void (^selectedState)(FSTabView *tab, BOOL selected);
+
+- (void)selectedIndex:(NSInteger)index;
 
 @end
 

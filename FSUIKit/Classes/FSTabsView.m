@@ -6,7 +6,6 @@
 //
 
 #import "FSTabsView.h"
-#import "FSTabView.h"
 
 @interface FSTabsView ()
 
@@ -47,11 +46,27 @@
                     this.clickIndex(this, view.theTag);
                 }
             };
+            tab.selectedState = ^(FSTabView * _Nonnull tabV, BOOL selected) {
+                if (this.selectedState) {
+                    this.selectedState(tabV, selected);
+                }
+            };
         }
         tab.label.text = list[x];
     }
 }
 
+- (void)selectedIndex:(NSInteger)index {
+    for (FSTabView *tab in self.subviews) {
+        if ([tab isKindOfClass:FSTabView.class]) {
+            if (tab.theTag == index) {
+                tab.selected = YES;
+            } else {
+                tab.selected = NO;
+            }
+        }
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
