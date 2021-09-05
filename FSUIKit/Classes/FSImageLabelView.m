@@ -1,46 +1,117 @@
 //
 //  FSImageLabelView.m
-//  FSUIKit
+//  ShareEconomy
 //
-//  Created by FudonFuchina on 2021/7/31.
+//  Created by FudonFuchina on 16/5/14.
+//  Copyright © 2016年 FudonFuchina. All rights reserved.
 //
 
 #import "FSImageLabelView.h"
+#import <FSImage.h>
+#import "FSUIKit.h"
+
+@interface FSImageLabelView ()
+
+@property (nonatomic,strong) UIImageView    *imageView;
+@property (nonatomic,strong) UILabel        *label;
+
+@end
 
 @implementation FSImageLabelView
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    CGFloat x = ceil(self.frame.size.width * .25);
-    CGFloat w = ceil(self.frame.size.width * .5);
-    CGFloat top = ceil(self.frame.size.height * .1);
-    CGFloat h = ceil(self.frame.size.height * .7);
-    _imageView.frame = CGRectMake(x, top, w, w);
-    _label.frame = CGRectMake(0, h, self.frame.size.width, self.frame.size.height - h);
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self imageLabelDesignViews];
+    }
+    return self;
 }
 
-- (UIImageView *)imageView {
-    if (!_imageView) {
-        CGFloat x = ceil(self.frame.size.width * .25);
-        CGFloat w = ceil(self.frame.size.width * .5);
-        CGFloat top = ceil(self.frame.size.height * .1);
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, top, w, w)];
-        [self addSubview:_imageView];
-    }
-    return _imageView;
+- (void)imageLabelDesignViews{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageLabelTapAction)];
+    [self addGestureRecognizer:tap];
+    
+    _imageView = [[UIImageView alloc] init];
+    _imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    _imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self addSubview:_imageView];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_imageView(35)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_imageView(35)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:-10]];
+
+    _label = [[UILabel alloc] init];
+    _label.translatesAutoresizingMaskIntoConstraints = NO;
+    _label.font = [UIFont systemFontOfSize:13];
+    _label.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:_label];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_label]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_label(30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_label attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
 }
 
-- (UILabel *)label {
-    if (!_label) {
-        CGFloat top = ceil(self.frame.size.height * .7);
-        CGFloat h = ceil(self.frame.size.height * .3);
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, h)];
-        _label.font = [UIFont boldSystemFontOfSize:16];
-        _label.textAlignment = NSTextAlignmentCenter;
-        _label.textColor = UIColor.whiteColor;
-        [self addSubview:_label];
+- (void)imageLabelTapAction{
+    if (_block) {
+        _block(self);
     }
-    return _label;
+}
+
++ (FSImageLabelView *)imageLabelViewWithFrame:(CGRect)frame imageName:(NSString *)imageName text:(NSString *)text{
+    FSImageLabelView *view = [[FSImageLabelView alloc] initWithFrame:frame];
+    view.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    view.label.text = text;
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        UIImage *image = [UIImage imageNamed:imageName];
+        
+        BOOL decode = NO;
+        if (image && decode) {
+            image = [FSImage decodedImageWithImage:image];
+//            CGSize size = image.size;
+//            image = [FSImage compressImage:image width:70];
+//            CGSize reSize = image.size;
+        
+#if DEBUG
+//            NSLog(@"size：(%f,%f)-(%f,%f)",size.width,size.height,reSize.width,reSize.height);
+#endif
+        }
+        
+#if DEBUG
+        static NSMutableString *list = nil;
+        if (!list) {
+            list = NSMutableString.new;
+        }
+#endif
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([image isKindOfClass:UIImage.class]) {
+                view.imageView.image = image;
+            }
+#if DEBUG
+            else{
+                NSString *msg = [[NSString alloc] initWithFormat:@"图片为空（表明不受图片压缩的影响），text为：%@",text];
+                [list appendFormat:@"\n%@",msg];
+            }
+            
+            if (view == nil || view.imageView == nil) {
+//                [FSToast show:@"view为空"];
+                [list appendFormat:@"view为空"];
+            }
+            
+            if (list.length) {
+                static BOOL showed = NO;
+                if (showed == NO) {
+                    showed = YES;
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [FSUIKit showAlertWithMessageOnCustomWindow:list];
+                    });
+                }
+            }
+#endif
+            
+        });
+    });
+    return view;
 }
 
 /*
