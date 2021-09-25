@@ -17,7 +17,7 @@
 
 @implementation FSHalfView
 
-- (void)showHalfView:(BOOL)show{
+- (void)showHalfView:(BOOL)show {
     if (show) {
         self.frame = CGRectMake(0, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
         [UIView animateWithDuration:.3 animations:^{
