@@ -73,7 +73,7 @@
     [tapView addGestureRecognizer:tap];
     
     CGSize size = [UIScreen mainScreen].bounds.size;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.bounds.size.width, 0, size.width - 60, size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.bounds.size.width, 0, size.width - 60, self.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [[UIView alloc] init];
