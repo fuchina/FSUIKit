@@ -159,7 +159,7 @@ static CGRect oldframe;
 
 + (void)showMessageInMainThread:(NSString *)message{
     CGSize size = [UIScreen mainScreen].bounds.size;
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, _fs_statusAndNavigatorHeight(), size.width, size.height - _fs_statusAndNavigatorHeight())];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
     CGFloat width = size.width - 60;
     CGFloat height = MAX([FSCalculator textHeight:message font:[UIFont systemFontOfSize:15] labelWidth:width], 36);
