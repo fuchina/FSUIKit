@@ -15,4 +15,7 @@ typedef void(^TapCellBlock)(FSTapCell *bCell);
 
 @property (nonatomic,copy) TapCellBlock     block;
 
+// 配置cell元素
+- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font; // API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
 @end

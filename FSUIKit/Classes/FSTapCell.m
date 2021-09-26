@@ -43,4 +43,28 @@
     // Configure the view for the selected state
 }
 
+- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font {
+    if (@available(iOS 15.0, *)) {
+        UIListContentConfiguration *defaultContentConfiguration = self.defaultContentConfiguration;
+        defaultContentConfiguration.text = text;
+        if (!textColor) {
+            textColor = UIColor.blackColor;
+        }
+        defaultContentConfiguration.textProperties.color = textColor;
+        if (!font) {
+            font = [UIFont systemFontOfSize:17];
+        }
+        defaultContentConfiguration.textProperties.font = font;
+        self.contentConfiguration = defaultContentConfiguration;
+    } else {
+        self.textLabel.text = text;
+        if (textColor) {
+            self.textLabel.textColor = textColor;
+        }
+        if (font) {
+            self.textLabel.font = font;
+        }
+    }
+}
+
 @end
