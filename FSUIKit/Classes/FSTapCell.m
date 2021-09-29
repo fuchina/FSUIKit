@@ -43,28 +43,48 @@
     // Configure the view for the selected state
 }
 
-- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font {
+- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont *)font {
+    [self configurate:text textColor:textColor font:font detailText:nil detailFont:nil detailColor:nil];
+}
+
+- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font detailText:(NSString *)detailText detailFont:(UIFont *)detailFont detailColor:(UIColor *)detailColor {
+    if (!textColor) {
+        textColor = UIColor.blackColor;
+    }
+    if (!font) {
+        font = [UIFont systemFontOfSize:17];
+    }
+    
+    if (!detailColor) {
+        detailColor = [UIColor grayColor];
+    }
+    
+    if (!detailFont) {
+        detailFont = [UIFont systemFontOfSize:13];
+    }
+    
     if (@available(iOS 15.0, *)) {
         UIListContentConfiguration *defaultContentConfiguration = self.defaultContentConfiguration;
         defaultContentConfiguration.text = text;
-        if (!textColor) {
-            textColor = UIColor.blackColor;
-        }
         defaultContentConfiguration.textProperties.color = textColor;
-        if (!font) {
-            font = [UIFont systemFontOfSize:17];
+        if (detailText) {
+            defaultContentConfiguration.secondaryText = detailText;
         }
+
+        defaultContentConfiguration.secondaryTextProperties.font = detailFont;
+        defaultContentConfiguration.secondaryTextProperties.color = detailColor;
         defaultContentConfiguration.textProperties.font = font;
         self.contentConfiguration = defaultContentConfiguration;
     } else {
         self.textLabel.text = text;
-        if (textColor) {
-            self.textLabel.textColor = textColor;
-        }
-        if (font) {
-            self.textLabel.font = font;
-        }
+        self.textLabel.textColor = textColor;
+        self.textLabel.font = font;
+        self.detailTextLabel.font = detailFont;
+        self.detailTextLabel.text = detailText;
+        self.detailTextLabel.textColor = detailColor;
     }
 }
+
+
 
 @end
