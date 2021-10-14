@@ -35,6 +35,10 @@ static CGRect oldframe;
 }
 
 + (UIAlertController *)alertControllerWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler cancelTitle:(NSString *)cancelTitle cancel:(void (^)(UIAlertAction *action))cancel{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        style = UIAlertControllerStyleAlert;
+    }
+    
     NSInteger count = MIN(titles.count, styles.count);
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
     for (int x = 0; x < count; x ++) {
