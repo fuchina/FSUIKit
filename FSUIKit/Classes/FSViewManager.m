@@ -183,7 +183,7 @@
                    detailColor:(UIColor *)detailColor
                     detailFont:(UIFont *)detailFont
                           block:(TapCellBlock)block{
-    FSTapCell *cell = [[FSTapCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    FSTapCell *cell = [[FSTapCell alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 44)];
     if (text) {
         cell.textLabel.text = text;
     }
@@ -206,7 +206,6 @@
         cell.block = block;
     }
     cell.width = UIScreen.mainScreen.bounds.size.width;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 

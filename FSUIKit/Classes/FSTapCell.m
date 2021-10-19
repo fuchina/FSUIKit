@@ -8,83 +8,65 @@
 
 #import "FSTapCell.h"
 
-@implementation FSTapCell
+@implementation FSTapCell {
+    UIView      *_backTapView;
+}
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
+    return [self initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 44)];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
+        _backTapView = [[UIView alloc] initWithFrame:self.bounds];
+        [self addSubview:_backTapView];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
-        [self addGestureRecognizer:tap];
+        [_backTapView addGestureRecognizer:tap];
     }
     return self;
 }
 
 - (void)tapAction{
+    self->_backTapView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    self->_backTapView.alpha = 0.2;
+    [UIView animateWithDuration:.25 animations:^{
+        self->_backTapView.alpha = 0.1;
+    } completion:^(BOOL finished) {
+        self->_backTapView.alpha = 1;
+        self->_backTapView.backgroundColor = UIColor.clearColor;
+    }];
+    
     if (_block) {
         _block(self);
     }
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _backTapView.frame = self.bounds;
+    _textLabel.frame = CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height);
+    _detailTextLabel.frame = CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height);
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    [UIView animateWithDuration:.25 animations:^{
-        self.alpha = 0.28;
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:.25 animations:^{
-            self.alpha = 1;
-        }];
-    }];
-    // Configure the view for the selected state
+- (UILabel *)textLabel {
+    if (!_textLabel) {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height)];
+        _textLabel.textColor = UIColor.blackColor;
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
 }
 
-- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont *)font {
-    [self configurate:text textColor:textColor font:font detailText:nil detailFont:nil detailColor:nil];
+- (UILabel *)detailTextLabel {
+    if (!_detailTextLabel) {
+        _detailTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height)];
+        _detailTextLabel.textAlignment = NSTextAlignmentRight;
+        _detailTextLabel.textColor = UIColor.grayColor;
+        _detailTextLabel.font = [UIFont systemFontOfSize:14];
+        [self addSubview:_detailTextLabel];
+    }
+    return _detailTextLabel;
 }
-
-- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font detailText:(NSString *)detailText detailFont:(UIFont *)detailFont detailColor:(UIColor *)detailColor {
-    if (!textColor) {
-        textColor = UIColor.blackColor;
-    }
-    if (!font) {
-        font = [UIFont systemFontOfSize:17];
-    }
-    
-    if (!detailColor) {
-        detailColor = [UIColor grayColor];
-    }
-    
-    if (!detailFont) {
-        detailFont = [UIFont systemFontOfSize:13];
-    }
-    
-    if (@available(iOS 15.0, *)) {
-        UIListContentConfiguration *defaultContentConfiguration = self.defaultContentConfiguration;
-        defaultContentConfiguration.text = text;
-        defaultContentConfiguration.textProperties.color = textColor;
-        if (detailText) {
-            defaultContentConfiguration.secondaryText = detailText;
-        }
-
-        defaultContentConfiguration.secondaryTextProperties.font = detailFont;
-        defaultContentConfiguration.secondaryTextProperties.color = detailColor;
-        defaultContentConfiguration.textProperties.font = font;
-        self.contentConfiguration = defaultContentConfiguration;
-    } else {
-        self.textLabel.text = text;
-        self.textLabel.textColor = textColor;
-        self.textLabel.font = font;
-        self.detailTextLabel.font = detailFont;
-        self.detailTextLabel.text = detailText;
-        self.detailTextLabel.textColor = detailColor;
-    }
-}
-
-
 
 @end

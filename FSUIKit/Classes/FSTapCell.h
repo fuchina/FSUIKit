@@ -8,16 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class FSTapCell;
 typedef void(^TapCellBlock)(FSTapCell *bCell);
 
-@interface FSTapCell : UITableViewCell
+@interface FSTapCell : UIView
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier;
+    
 @property (nonatomic,copy) TapCellBlock     block;
 
-// 配置cell元素
-- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font; // API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
-
-- (void)configurate:(NSString *)text textColor:(UIColor *)textColor font:(UIFont*)font detailText:(NSString *)detailText detailFont:(UIFont *)detailFont detailColor:(UIColor *)detailColor;
+@property (nonatomic, strong) UILabel       *textLabel;
+@property (nonatomic, strong) UILabel       *detailTextLabel;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
