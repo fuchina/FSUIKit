@@ -58,6 +58,11 @@
                 this.refresh_footer();
             }
         }];
+        if (@available(iOS 11.0, *)) {
+            _tableView.mj_footer.ignoredScrollViewContentInsetBottom = self.safeAreaInsets.bottom;
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
