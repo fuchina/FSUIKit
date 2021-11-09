@@ -25,6 +25,15 @@ static CGRect oldframe;
 }
 
 + (void)alert:(UIAlertControllerStyle)style controller:(UIViewController *)pController title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler cancelTitle:(NSString *)cancelTitle cancel:(void (^)(UIAlertAction *action))cancel completion:(void (^)(void))completion{
+#if DEBUG
+    NSMutableArray *clears = [[NSMutableArray alloc] init];
+    for (int x = 0; x < titles.count; x ++) {
+        if (![clears containsObject:titles[x]]) {
+            [clears addObject:titles[x]];
+        }
+    }
+    NSAssert(clears.count == titles.count, @"有重复title");
+#endif
     UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:cancelTitle cancel:cancel];
     [pController presentViewController:controller animated:YES completion:completion];
 }
