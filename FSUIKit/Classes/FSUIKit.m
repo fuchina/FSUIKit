@@ -38,12 +38,12 @@ static CGRect oldframe;
     [pController presentViewController:controller animated:YES completion:completion];
 }
 
-+ (void)alert:(UIAlertControllerStyle)style controller:(UIViewController *)pController title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler{
++ (void)alert:(UIAlertControllerStyle)style controller:(UIViewController *)pController title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(FSAlertAction *action))handler {
     UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:@"取消" cancel:nil];
     [pController presentViewController:controller animated:YES completion:nil];
 }
 
-+ (UIAlertController *)alertControllerWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler cancelTitle:(NSString *)cancelTitle cancel:(void (^)(UIAlertAction *action))cancel{
++ (UIAlertController *)alertControllerWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(FSAlertAction *action))handler cancelTitle:(NSString *)cancelTitle cancel:(void (^)(FSAlertAction *action))cancel{
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         style = UIAlertControllerStyleAlert;
     }
@@ -51,16 +51,17 @@ static CGRect oldframe;
     NSInteger count = MIN(titles.count, styles.count);
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
     for (int x = 0; x < count; x ++) {
-        UIAlertAction *action = [UIAlertAction actionWithTitle:titles[x] style:[styles[x] integerValue] handler:^(UIAlertAction * _Nonnull action) {
+        FSAlertAction *action = [FSAlertAction actionWithTitle:titles[x] style:[styles[x] integerValue] handler:^(UIAlertAction * _Nonnull action) {
             [FSWindow dismiss];
             if (handler) {
                 handler(action);
             }
         }];
+        action.theTag = x;
         [controller addAction:action];
     }
     if ([cancelTitle isKindOfClass:NSString.class] && cancelTitle.length) {
-        UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        FSAlertAction *archiveAction = [FSAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [FSWindow dismiss];
             if (cancel) {
                 cancel(action);
