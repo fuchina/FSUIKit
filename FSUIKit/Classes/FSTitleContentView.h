@@ -10,7 +10,9 @@
 
 @interface FSTitleContentView : UIView
 
-@property (nonatomic,strong) UILabel    *label;
-@property (nonatomic,strong) UILabel    *contentLabel;
+@property (nonatomic, strong) UILabel    *label;
+@property (nonatomic, strong) UILabel    *contentLabel;
+
+@property (nonatomic, copy) void (^click)(FSTitleContentView *titleContentView);
 
 @end
