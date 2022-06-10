@@ -54,7 +54,7 @@ static CGRect oldframe;
         FSAlertAction *action = [FSAlertAction actionWithTitle:titles[x] style:[styles[x] integerValue] handler:^(UIAlertAction * _Nonnull action) {
             [FSWindow dismiss];
             if (handler) {
-                handler(action);
+                handler((FSAlertAction *)action);
             }
         }];
         action.theTag = x;
@@ -64,7 +64,7 @@ static CGRect oldframe;
         FSAlertAction *archiveAction = [FSAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [FSWindow dismiss];
             if (cancel) {
-                cancel(action);
+                cancel((FSAlertAction *)action);
             }
         }];
         [controller addAction:archiveAction];
