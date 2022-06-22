@@ -8,31 +8,7 @@
 
 #import "FSTitleContentView.h"
 
-@implementation FSTitleContentView {
-    UIView      *_tapView;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self tcDesignViews];
-    }
-    return self;
-}
-
-- (void)tcDesignViews{
-    _tapView = [[UIView alloc] initWithFrame:self.bounds];
-    [self insertSubview:_tapView atIndex:0];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickEvent)];
-    [_tapView addGestureRecognizer:tap];
-}
-
-- (void)clickEvent {
-    if (self.click) {
-        self.click(self);
-    }
-}
+@implementation FSTitleContentView
 
 - (UILabel *)label {
     if (!_label) {

@@ -6,9 +6,9 @@
 //  Copyright © 2018年 fuhope. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FSView.h"
 
-@interface FSTitleContentView : UIView
+@interface FSTitleContentView : FSView
 
 @property (nonatomic, strong) UILabel    *label;
 @property (nonatomic, strong) UILabel    *contentLabel;
