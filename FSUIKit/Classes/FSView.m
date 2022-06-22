@@ -38,8 +38,8 @@
     }
 }
 
-- (FSView *)viewWithTheTag:(NSInteger)tag {
-    for (FSView *sub in self.subviews) {
++ (FSView *)viewWithTheTag:(NSInteger)tag inView:(nonnull UIView *)inView {
+    for (FSView *sub in inView.subviews) {
         if ([sub isKindOfClass:FSView.class]) {
             if (sub.theTag == tag) {
                 return sub;
