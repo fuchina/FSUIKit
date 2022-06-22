@@ -32,7 +32,7 @@
     CGFloat w = self.frame.size.width / list.count;
     for (int x = 0; x < list.count; x ++) {
         CGRect fr = CGRectMake(w * x, 0, w, self.frame.size.height);
-        FSTabView *tab = [self viewWithTheTag:x];
+        FSTabView *tab = [FSView viewWithTheTag:x inView:self];
         if (tab) {
             tab.hidden = NO;
             tab.frame = fr;
