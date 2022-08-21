@@ -17,7 +17,7 @@ typedef void(^TapCellBlock)(FSTapCell *bCell);
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier;
     
-@property (nonatomic,copy) TapCellBlock     block;
+@property (nonatomic,copy) TapCellBlock     click;
 
 @property (nonatomic, strong) UILabel       *textLabel;
 @property (nonatomic, strong) UILabel       *detailTextLabel;
