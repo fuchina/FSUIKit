@@ -37,8 +37,8 @@
         self->_backTapView.backgroundColor = UIColor.clearColor;
     }];
     
-    if (_block) {
-        _block(self);
+    if (_click) {
+        _click(self);
     }
 }
 

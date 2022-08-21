@@ -203,7 +203,7 @@
         cell.detailTextLabel.font = detailFont;
     }
     if (block) {
-        cell.block = block;
+        cell.click = block;
     }
     cell.width = UIScreen.mainScreen.bounds.size.width;
     return cell;
