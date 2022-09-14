@@ -14,6 +14,16 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     _tapBackView.frame = self.bounds;
+    _gradientLayer.frame = self.bounds;
+}
+
+- (CAGradientLayer *)gradientLayer {
+    if (!_gradientLayer) {
+        _gradientLayer = [CAGradientLayer layer];
+        _gradientLayer.frame = self.bounds;
+        [self.layer insertSublayer:_gradientLayer atIndex:0];
+    }
+    return _gradientLayer;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
