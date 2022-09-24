@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewExt.h"
 
 typedef NS_ENUM(NSInteger, FSItemTitleMode) {
     FSItemTitleModeDefault,

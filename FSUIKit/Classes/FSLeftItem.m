@@ -84,7 +84,7 @@
     [self addSubview:_backImage];
     
     if (_mode == FSItemTitleModeDefault) {
-        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backImage.right + 3, 7, self.bounds.size.width - 14, 30)];
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backImage.frame.origin.x + _backImage.frame.size.width + 3, 7, self.bounds.size.width - 14, 30)];
         _textLabel.font = [UIFont systemFontOfSize:15];
         //    _textLabel.textColor = RGBCOLOR(31, 143, 228, 1);
         _textLabel.adjustsFontSizeToFitWidth = YES;
@@ -100,7 +100,7 @@
         
         _backImage.frame = CGRectMake(-5 + 5 * (_mode == FSItemTitleModeNOChar), 12, 11, 20);
         if (mode == FSItemTitleModeDefault) {
-            _textLabel.frame = CGRectMake(_backImage.right + 3, 7, self.bounds.size.width - 14, 30);
+            _textLabel.frame = CGRectMake(_backImage.frame.origin.x + _backImage.frame.size.width + 3, 7, self.bounds.size.width - 14, 30);
         }else{
             if (_textLabel) {
                 [_textLabel removeFromSuperview];

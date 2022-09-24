@@ -7,7 +7,6 @@
 //
 
 #import "FSViewManager.h"
-#import "UIViewExt.h"
 
 @implementation FSViewManager
 
@@ -205,7 +204,7 @@
     if (block) {
         cell.click = block;
     }
-    cell.width = UIScreen.mainScreen.bounds.size.width;
+    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, UIScreen.mainScreen.bounds.size.width, cell.frame.size.height);
     return cell;
 }
 
