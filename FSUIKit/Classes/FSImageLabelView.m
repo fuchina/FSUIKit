@@ -61,9 +61,8 @@
     view.imageView.contentMode = UIViewContentModeScaleAspectFill;
     view.label.text = text;
     
+    __block UIImage *image = [UIImage imageNamed:imageName];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        UIImage *image = [UIImage imageNamed:imageName];
-        
         BOOL decode = NO;
         if (image && decode) {
             image = [FSImage decodedImageWithImage:image];
