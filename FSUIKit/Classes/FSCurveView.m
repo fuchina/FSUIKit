@@ -6,6 +6,7 @@
 //
 
 #import "FSCurveView.h"
+#import "FSUIAdapter.h"
 
 @implementation FSCurveModel
 
@@ -37,6 +38,7 @@
     
     CGColorRef roundColor = UIColor.lightGrayColor.CGColor;
     _paths = [NSMutableArray new];
+    CGFloat point_margin = 15 + FSUIAdapter.sharedInstance.isIPad * 15;
     for (int x = 0; x < _lines.count; x ++) {
         FSCurveModel *m = _lines[x];
         FSBezierPath *path = [FSBezierPath bezierPath];
@@ -44,17 +46,20 @@
         NSValue *startPoint = m.points.firstObject;
         CGPoint startP = [startPoint CGPointValue];
         [path moveToPoint:startP];
+        BOOL addRound = m.points.count > point_margin;
         for (int i = 0; i < m.points.count; i ++) {
             NSValue *value = m.points[i];
             CGPoint p = [value CGPointValue];
             [path addLineToPoint:p];
             
             // 添加一个小球
-            CALayer *layr = [CALayer layer];
-            layr.frame = CGRectMake(p.x - 3, p.y - 3, 6, 6);
-            layr.cornerRadius = 3;
-            layr.backgroundColor = roundColor;
-            [self.layer addSublayer:layr];
+            if (addRound) {
+                CALayer *layr = [CALayer layer];
+                layr.frame = CGRectMake(p.x - 3, p.y - 3, 6, 6);
+                layr.cornerRadius = 3;
+                layr.backgroundColor = roundColor;
+                [self.layer addSublayer:layr];
+            }
         }
         
         path.lineWidth = m.lineWidth;
