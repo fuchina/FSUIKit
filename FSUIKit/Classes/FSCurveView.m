@@ -46,7 +46,7 @@
         NSValue *startPoint = m.points.firstObject;
         CGPoint startP = [startPoint CGPointValue];
         [path moveToPoint:startP];
-        BOOL addRound = m.points.count > point_margin;
+        BOOL addRound = m.points.count <= point_margin;
         for (int i = 0; i < m.points.count; i ++) {
             NSValue *value = m.points[i];
             CGPoint p = [value CGPointValue];
