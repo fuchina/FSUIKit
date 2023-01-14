@@ -37,6 +37,7 @@
     [super drawRect:rect];
     
     CGColorRef roundColor = UIColor.lightGrayColor.CGColor;
+    CGColorRef backColor = UIColor.whiteColor.CGColor;
     _paths = [NSMutableArray new];
     CGFloat point_margin = 15 + FSUIAdapter.sharedInstance.isIPad * 15;
     for (int x = 0; x < _lines.count; x ++) {
@@ -57,7 +58,9 @@
                 CALayer *layr = [CALayer layer];
                 layr.frame = CGRectMake(p.x - 3, p.y - 3, 6, 6);
                 layr.cornerRadius = 3;
-                layr.backgroundColor = roundColor;
+                layr.backgroundColor = backColor;
+                layr.borderColor = roundColor;
+                layr.borderWidth = 1;
                 [self.layer addSublayer:layr];
             }
         }
