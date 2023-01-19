@@ -55,13 +55,16 @@
             
             // 添加一个小球
             if (addRound) {
-                CALayer *layr = [CALayer layer];
-                layr.frame = CGRectMake(p.x - 3, p.y - 3, 6, 6);
-                layr.cornerRadius = 3;
-                layr.backgroundColor = backColor;
-                layr.borderColor = roundColor;
-                layr.borderWidth = 1;
-                [self.layer addSublayer:layr];
+                CGFloat y = p.y - 3;
+                if (y > 0) {
+                    CALayer *layr = [CALayer layer];
+                    layr.frame = CGRectMake(p.x - 3, y, 6, 6);
+                    layr.cornerRadius = 3;
+                    layr.backgroundColor = backColor;
+                    layr.borderColor = roundColor;
+                    layr.borderWidth = 1;
+                    [self.layer addSublayer:layr];
+                }
             }
         }
         
