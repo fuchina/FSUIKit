@@ -23,6 +23,12 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    _tableView.frame = self.bounds;
+}
+
 - (void)bestCellDesignViews{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) style:UITableViewStyleGrouped];
@@ -30,6 +36,9 @@
         _tableView.dataSource = self;
         _tableView.estimatedSectionHeaderHeight = 0;
         _tableView.estimatedSectionFooterHeight = 0;
+        if (@available(iOS 11.0, *)) {
+            _tableView.mj_footer.ignoredScrollViewContentInsetBottom = self.safeAreaInsets.bottom;
+        }
         [self addSubview:_tableView];
         
     }
