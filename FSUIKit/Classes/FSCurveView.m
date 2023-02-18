@@ -39,7 +39,7 @@
     CGColorRef roundColor = UIColor.lightGrayColor.CGColor;
     CGColorRef backColor = UIColor.whiteColor.CGColor;
     _paths = [NSMutableArray new];
-    CGFloat point_margin = 15 + FSUIAdapter.sharedInstance.isIPad * 15;
+    CGFloat point_margin = 15 + (FSUIAdapter.sharedInstance.isIPad ? 15 : 0);
     for (int x = 0; x < _lines.count; x ++) {
         FSCurveModel *m = _lines[x];
         FSBezierPath *path = [FSBezierPath bezierPath];
