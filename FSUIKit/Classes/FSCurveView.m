@@ -57,6 +57,10 @@
             if (addRound) {
                 CGFloat y = p.y - 3;
                 if (y > 0) {
+                    CGFloat x = p.x - 3;
+                    if (isnan(x)) {
+                        continue;
+                    }
                     CALayer *layr = [CALayer layer];
                     layr.frame = CGRectMake(p.x - 3, y, 6, 6);
                     layr.cornerRadius = 3;
