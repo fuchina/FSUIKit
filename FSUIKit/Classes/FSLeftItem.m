@@ -10,8 +10,7 @@
 
 @implementation FSBackItemView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
@@ -19,8 +18,7 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
     CGFloat red = 31 / 255.0;
@@ -33,7 +31,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextSetLineWidth(context, 2);  //线宽
+    CGContextSetLineWidth(context, 2.5);  //线宽
     CGContextSetAllowsAntialiasing(context, true);
     CGContextSetRGBStrokeColor(context, red, green, blue, alpha);  //线的颜色
     
@@ -55,8 +53,7 @@
 
 @implementation FSLeftItem
 
-- (void)setColor:(UIColor *)color
-{
+- (void)setColor:(UIColor *)color {
     if (_color != color) {
         _color = color;
         
@@ -66,8 +63,7 @@
     }
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self leftDesignViews];
@@ -75,26 +71,23 @@
     return self;
 }
 
-- (void)leftDesignViews
-{
+- (void)leftDesignViews {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActionItem)];
     [self addGestureRecognizer:tap];
     
-    _backImage = [[FSBackItemView alloc] initWithFrame:CGRectMake(-5 + 5 * (_mode == FSItemTitleModeNOChar), 12, 11, 20)];
+    _backImage = [[FSBackItemView alloc] initWithFrame:CGRectMake(- 6.5 + 5 * (_mode == FSItemTitleModeNOChar), 12, 11, 20)];
     [self addSubview:_backImage];
     
     if (_mode == FSItemTitleModeDefault) {
-        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backImage.frame.origin.x + _backImage.frame.size.width + 3, 7, self.bounds.size.width - 14, 30)];
-        _textLabel.font = [UIFont systemFontOfSize:15];
-        //    _textLabel.textColor = RGBCOLOR(31, 143, 228, 1);
-        _textLabel.adjustsFontSizeToFitWidth = YES;
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backImage.frame.origin.x + _backImage.frame.size.width + 10, 7, self.bounds.size.width, 30)];
+        _textLabel.font = [UIFont systemFontOfSize:17 weight:(UIFontWeightRegular)];
+//        _textLabel.adjustsFontSizeToFitWidth = YES;
         _textLabel.textColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1.0f];
         [self addSubview:_textLabel];
     }
 }
 
-- (void)setMode:(FSItemTitleMode)mode
-{
+- (void)setMode:(FSItemTitleMode)mode {
     if (_mode != mode) {
         _mode = mode;
         
@@ -110,13 +103,11 @@
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.alpha = .28;
 }
 
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self];
     if (!CGRectContainsPoint(self.frame, currentPoint)) {
@@ -126,22 +117,19 @@
     }
 }
 
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [UIView animateWithDuration:.3 animations:^{
         self.alpha = 1;
     }];
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [UIView animateWithDuration:.3 animations:^{
         self.alpha = 1;
     }];
 }
 
-- (void)tapActionItem
-{
+- (void)tapActionItem {
     if (self.tapBlock) {
         self.tapBlock();
     }
