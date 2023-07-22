@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(ios(8.0))
 @interface FSAlertAction : UIAlertAction
 
 @property (nonatomic, assign) NSInteger  theTag;

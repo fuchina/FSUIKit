@@ -37,7 +37,7 @@
                   textColor:(UIColor *)textColor
                   backColor:(UIColor *)backColor
                        font:(UIFont *)font
-              textAlignment:(NSTextAlignment)textAlignment;
+              textAlignment:(NSTextAlignment)textAlignment API_AVAILABLE(ios(6.0));
 
 + (UILabel *)suojinLabelWithSpace:(CGFloat)space frame:(CGRect)rect textColor:(UIColor *)textColor text:(NSString *)text;
 
@@ -47,7 +47,7 @@
                   backColor:(UIColor *)backColor
                        font:(UIFont *)font
               textAlignment:(NSTextAlignment)textAlignment
-                      block:(FSTapLabelBlock)block;
+                            block:(FSTapLabelBlock)block API_AVAILABLE(ios(6.0));
 
 + (FSTapCell *)tapCellWithText:(NSString *)text
                      textColor:(UIColor *)textColor
