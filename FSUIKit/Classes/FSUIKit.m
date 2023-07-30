@@ -8,7 +8,6 @@
 #import "FSUIKit.h"
 #import "FSWindow.h"
 #import "FSCalculator.h"
-#import "FSApp.h"
 
 static CGRect oldframe;
 
