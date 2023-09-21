@@ -64,6 +64,7 @@
     if (completion) {
         completion(self);
     }
+    
     if (remove) {
         [self removeFromSuperview];
     }

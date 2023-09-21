@@ -7,9 +7,7 @@
 
 #import "FSView.h"
 
-@implementation FSView {
-    UIView      *_tapBackView;
-}
+@implementation FSView
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -26,7 +24,7 @@
     return _gradientLayer;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self fs_add_tap_event_in_base_view];
@@ -34,7 +32,7 @@
     return self;
 }
 
-- (void)fs_add_tap_event_in_base_view{
+- (void)fs_add_tap_event_in_base_view {
     _tapBackView = [[UIView alloc] initWithFrame:self.bounds];
     [self addSubview:_tapBackView];
     
