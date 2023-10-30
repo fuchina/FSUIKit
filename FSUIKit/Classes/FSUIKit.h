@@ -48,6 +48,7 @@
 //+ (UIImage *)captureScrollView:(UIScrollView *)scrollView;
 + (void)captureScrollView:(UIScrollView *)scrollView finished:(void(^)(UIImage *image))completion;
 + (UIImage *)imageForUIView:(UIView *)view;
++ (UIImage *)imageForUIView:(UIView *)view scale:(CGFloat)scale;
 
 // 绘制虚线
 + (UIView *)createDashedLineWithFrame:(CGRect)lineFrame

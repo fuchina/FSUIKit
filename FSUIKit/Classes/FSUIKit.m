@@ -271,8 +271,12 @@ static CGRect oldframe;
     return viewImage;
 }
 
++ (UIImage *)imageForUIView:(nonnull UIView *)view {
+    return [self imageForUIView:view scale:0.0];
+}
+
 // 从FSViewToImage组件拷贝而来
-+ (UIImage *)imageForUIView:(nonnull UIView *)view{
++ (UIImage *)imageForUIView:(nonnull UIView *)view scale:(CGFloat)scale {
     CGSize size = view.bounds.size;
     CGRect savedFrame = view.frame;
     BOOL isScrollView = [view isKindOfClass:UIScrollView.class];
@@ -281,7 +285,7 @@ static CGRect oldframe;
         size = CGSizeMake(sView.frame.size.width,sView.contentSize.height + sView.contentInset.top + sView.contentInset.bottom);
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, size.width, size.height);
     }
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, scale);
     CGContextRef currnetContext = UIGraphicsGetCurrentContext();
     [view.layer renderInContext:currnetContext];
     
