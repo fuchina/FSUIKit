@@ -272,11 +272,6 @@ static CGRect oldframe;
 }
 
 + (UIImage *)imageForUIView:(nonnull UIView *)view {
-    return [self imageForUIView:view scale:0.0];
-}
-
-// 从FSViewToImage组件拷贝而来
-+ (UIImage *)imageForUIView:(nonnull UIView *)view scale:(CGFloat)scale {
     CGSize size = view.bounds.size;
     CGRect savedFrame = view.frame;
     BOOL isScrollView = [view isKindOfClass:UIScrollView.class];
@@ -285,12 +280,17 @@ static CGRect oldframe;
         size = CGSizeMake(sView.frame.size.width,sView.contentSize.height + sView.contentInset.top + sView.contentInset.bottom);
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, size.width, size.height);
     }
-    UIGraphicsBeginImageContextWithOptions(size, NO, scale);
-    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
-    [view.layer renderInContext:currnetContext];
     
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *image = nil;
+    if (@available(iOS 10.0, *)) {
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.prefersExtendedRange = YES;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:view.bounds.size format:format];
+        __weak typeof(view) weakView = view;
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            return [weakView.layer renderInContext:rendererContext.CGContext];
+        }];
+    }
     
     if (isScrollView) {
         view.frame = savedFrame;
