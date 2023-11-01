@@ -46,7 +46,7 @@
     [super layoutSubviews];
     _backTapView.frame = self.bounds;
     _textLabel.frame = CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height);
-    _detailTextLabel.frame = CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height);
+    _detailTextLabel.frame = CGRectMake(90, 0, self.frame.size.width - 105, self.frame.size.height);
 }
 
 - (UILabel *)textLabel {
@@ -60,7 +60,7 @@
 
 - (UILabel *)detailTextLabel {
     if (!_detailTextLabel) {
-        _detailTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height)];
+        _detailTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 0, self.frame.size.width - 105, self.frame.size.height)];
         _detailTextLabel.textAlignment = NSTextAlignmentRight;
         _detailTextLabel.textColor = UIColor.grayColor;
         _detailTextLabel.font = [UIFont systemFontOfSize:14];
