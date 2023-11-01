@@ -272,6 +272,10 @@ static CGRect oldframe;
 }
 
 + (UIImage *)imageForUIView:(nonnull UIView *)view {
+    if (view == nil) {
+        return nil;
+    }
+    
     CGSize size = view.bounds.size;
     CGRect savedFrame = view.frame;
     BOOL isScrollView = [view isKindOfClass:UIScrollView.class];
