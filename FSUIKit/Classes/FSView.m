@@ -57,6 +57,14 @@
     return nil;
 }
 
+- (void)dismiss {
+    [UIView animateWithDuration:.25 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 自定义的tag
 @property (nonatomic, assign) NSInteger                 theTag;
 
+- (void)dismiss;
+
 + (nullable __kindof FSView *)viewWithTheTag:(NSInteger)tag inView:(UIView *)inView;
 
 @end
