@@ -44,6 +44,11 @@
     if (self.click) {
         self.click(self);
     }
+    
+    if (self.clickLocation) {
+        CGPoint p = [tap locationInView:_tapBackView];
+        self.clickLocation(self, p);
+    }
 }
 
 + (FSView *)viewWithTheTag:(NSInteger)tag inView:(nonnull UIView *)inView {
