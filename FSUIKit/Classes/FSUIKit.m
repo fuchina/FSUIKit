@@ -271,45 +271,12 @@ static CGRect oldframe;
     return viewImage;
 }
 
-+ (UIImage *)imageForUIView:(nonnull UIView *)view {
-    if (view == nil) {
-        return nil;
-    }
-    
-    CGSize size = view.bounds.size;
-    CGRect savedFrame = view.frame;
-    BOOL isScrollView = [view isKindOfClass:UIScrollView.class];
-    if (isScrollView) {
-        UIScrollView *sView = (UIScrollView *)view;
-        size = CGSizeMake(sView.frame.size.width,sView.contentSize.height + sView.contentInset.top + sView.contentInset.bottom);
-        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, size.width, size.height);
-    }
-    
-    UIImage *image = nil;
-    if (@available(iOS 10.0, *)) {
-        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
-        if (@available(iOS 12.0, *)) {
-            format.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
-        }
-        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:view.bounds.size format:format];
-        __weak typeof(view) weakView = view;
-        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
-            return [weakView.layer renderInContext:rendererContext.CGContext];
-        }];
-    }
-    
-    if (isScrollView) {
-        view.frame = savedFrame;
-    }
-    return image;
-}
-
 + (void)captureScrollView:(UIScrollView *)scrollView finished:(void(^)(UIImage *image))completion{
     if (!completion) {
         return;
     }
     
-    UIImage * tableViewScreenshot = [self imageForUIView:scrollView];
+    UIImage * tableViewScreenshot = [FSImage imageForUIView:scrollView];
     completion(tableViewScreenshot);
     
 //    dispatch_async(dispatch_get_main_queue(), ^{

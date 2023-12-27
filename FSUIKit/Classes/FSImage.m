@@ -265,20 +265,36 @@
     return image;
 }
 
-+ (UIImage*)imageForUIView:(UIView*)view {
-    //    UIGraphicsBeginImageContext(view.bounds.size);// 只会生成屏幕所见的部分
-    CGSize size = view.bounds.size;
-    if ([view isKindOfClass:UIScrollView.class]) {
-        UIScrollView *sView = (UIScrollView *)view;
-        size = CGSizeMake(sView.frame.size.width,sView.contentSize.height+ sView.contentInset.top+ sView.contentInset.bottom);
++ (UIImage *)imageForUIView:(nonnull UIView *)view {
+    if (view == nil) {
+        return nil;
     }
-    UIGraphicsBeginImageContextWithOptions(size, YES, view.layer.contentsScale);
-    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
-    [view.layer renderInContext:currnetContext];
-    //    CGContextRestoreGState(currnetContext);
     
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    CGSize size = view.bounds.size;
+    CGRect savedFrame = view.frame;
+    BOOL isScrollView = [view isKindOfClass:UIScrollView.class];
+    if (isScrollView) {
+        UIScrollView *sView = (UIScrollView *)view;
+        size = CGSizeMake(sView.frame.size.width,sView.contentSize.height + sView.contentInset.top + sView.contentInset.bottom);
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, size.width, size.height);
+    }
+    
+    UIImage *image = nil;
+    if (@available(iOS 10.0, *)) {
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        if (@available(iOS 12.0, *)) {
+            format.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
+        }
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:view.bounds.size format:format];
+        __weak typeof(view) weakView = view;
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            return [weakView.layer renderInContext:rendererContext.CGContext];
+        }];
+    }
+    
+    if (isScrollView) {
+        view.frame = savedFrame;
+    }
     return image;
 }
 

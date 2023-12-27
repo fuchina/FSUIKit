@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FSAlertAction.h"
+#import "FSImage.h"
 
 @interface FSUIKit : NSObject
 
@@ -47,7 +48,6 @@
 
 //+ (UIImage *)captureScrollView:(UIScrollView *)scrollView;
 + (void)captureScrollView:(UIScrollView *)scrollView finished:(void(^)(UIImage *image))completion;
-+ (UIImage *)imageForUIView:(UIView *)view;
 
 // 绘制虚线
 + (UIView *)createDashedLineWithFrame:(CGRect)lineFrame
