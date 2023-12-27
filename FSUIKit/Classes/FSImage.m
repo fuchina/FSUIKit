@@ -10,11 +10,11 @@
 
 @implementation FSImage
 
-+ (UIImage *)imageFromColor:(UIColor *)color{
++ (UIImage *)imageFromColor:(UIColor *)color {
     return [self imageFromColor:color size:CGSizeMake(1, 10)];
 }
 
-+ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size{
++ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size {
     if (![color isKindOfClass:UIColor.class]) {
         return nil;
     }
@@ -32,9 +32,8 @@
 + (UIImage *)imageWithSize1:(CGSize)size
                  direction:(BOOL)isHorizon
                     ratios:(NSArray<NSNumber *> *)ratios
-                    colors:(UIColor *)colors,...NS_REQUIRES_NIL_TERMINATION
-{
-    if (!([ratios isKindOfClass:NSArray.class] && ratios.count)){
+                    colors:(UIColor *)colors,...NS_REQUIRES_NIL_TERMINATION {
+    if (!([ratios isKindOfClass:NSArray.class] && ratios.count)) {
         return nil;
     }
     
@@ -81,12 +80,11 @@
                 offsetLeft:(CGFloat)left
                offsetRight:(CGFloat)right
                     ratios:(NSArray<NSNumber *> *)ratios
-                    colors:(NSArray<UIColor *> *)colors
-{
-    if (!([ratios isKindOfClass:NSArray.class] && ratios.count)){
+                    colors:(NSArray<UIColor *> *)colors {
+    if (!([ratios isKindOfClass:NSArray.class] && ratios.count)) {
         return nil;
     }
-    if (!([ratios isKindOfClass:NSArray.class] && ratios.count)){
+    if (!([ratios isKindOfClass:NSArray.class] && ratios.count)) {
         return nil;
     }
     if (ratios.count != colors.count) {
@@ -130,8 +128,7 @@
 + (UIImage *)imageWithSize:(CGSize)size
            backgroundColor:(UIColor *)backgroundColor
                  mainColor:(UIColor *)mainColor
-               marginColor:(UIColor *)marginColor
-{
+               marginColor:(UIColor *)marginColor {
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     Class _class_Color = UIColor.class;
 
@@ -222,7 +219,7 @@
     return decompressedImage;
 }
 
-+ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth{
++ (UIImage *)compressImage:(UIImage *)sourceImage targetWidth:(CGFloat)targetWidth {
     CGFloat sourceWidth = sourceImage.size.width;
     CGFloat sourceHeight = sourceImage.size.height;
     CGFloat targetHeight = (targetWidth / sourceWidth) * sourceHeight;
@@ -233,7 +230,7 @@
     }
     
 //    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(targetWidth, targetHeight), NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(targetWidth, targetHeight), NO, 1.0);
     [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -268,7 +265,7 @@
     return image;
 }
 
-+ (UIImage*)imageForUIView:(UIView*)view{
++ (UIImage*)imageForUIView:(UIView*)view {
     //    UIGraphicsBeginImageContext(view.bounds.size);// 只会生成屏幕所见的部分
     CGSize size = view.bounds.size;
     if ([view isKindOfClass:UIScrollView.class]) {
