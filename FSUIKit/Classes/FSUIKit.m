@@ -288,7 +288,9 @@ static CGRect oldframe;
     UIImage *image = nil;
     if (@available(iOS 10.0, *)) {
         UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
-        format.prefersExtendedRange = YES;
+        if (@available(iOS 12.0, *)) {
+            format.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
+        }
         UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:view.bounds.size format:format];
         __weak typeof(view) weakView = view;
         image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
