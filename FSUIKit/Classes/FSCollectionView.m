@@ -71,6 +71,10 @@
 
 - (void)setContentOffset:(CGFloat)offset animated:(BOOL)animated {
     CGSize contentSize = _collectionView.contentSize;
+    if (contentSize.width < 1 && contentSize.height < 1) { // 会出现无效情况
+        return;
+    }
+    
     CGFloat offsetMax = contentSize.width - _collectionView.frame.size.width;
     if (offset > offsetMax) {
         offset = offsetMax;
