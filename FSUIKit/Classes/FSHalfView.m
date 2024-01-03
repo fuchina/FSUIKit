@@ -9,7 +9,7 @@
 #import "FSHalfView.h"
 #import "FSApp.h"
 
-@interface FSHalfView ()<UITableViewDelegate,UITableViewDataSource>
+@interface FSHalfView ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView    *tableView;
 
@@ -35,11 +35,12 @@
     _tableView.frame = CGRectMake(_leftWidth, 0, self.bounds.size.width - _leftWidth, self.bounds.size.height);
 }
 
-+ (FSHalfView *)showHalfViewInView:(UIView *)view leftWidth:(CGFloat)leftWidth {
-    FSHalfView *halfView = [[FSHalfView alloc] initWithFrame:view.bounds];
++ (FSHalfView *)showHalfViewInView:(UIView *)view frame:(CGRect)frame leftWidth:(CGFloat)leftWidth {
+    FSHalfView *halfView = [[FSHalfView alloc] initWithFrame: frame];
     dispatch_async(dispatch_get_main_queue(), ^{
         [halfView showHalfView:YES leftWidth:leftWidth];
     });
+    [view addSubview:halfView];
     return halfView;
 }
 
