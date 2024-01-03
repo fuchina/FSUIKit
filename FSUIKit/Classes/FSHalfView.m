@@ -77,8 +77,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = UIView.new;
-    _tableView.backgroundColor = UIColor.clearColor;
-    [self addSubview:_tableView];    
+    [self addSubview:_tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
