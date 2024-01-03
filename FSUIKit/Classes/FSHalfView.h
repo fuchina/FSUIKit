@@ -14,6 +14,6 @@
 @property (nonatomic,copy)void (^configCell)(UITableView *bTableView,NSIndexPath *bIndexPath,UITableViewCell *bCell);
 @property (nonatomic,copy)void (^selectCell)(UITableView *bTableView,NSIndexPath *bIndexPath);
 
-- (void)showHalfView:(BOOL)show;
+- (void)showHalfView:(BOOL)show leftWidth:(CGFloat)leftWidth;
 
 @end
