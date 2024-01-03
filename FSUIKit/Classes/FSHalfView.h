@@ -10,10 +10,10 @@
 
 @interface FSHalfView : UIView
 
-@property (nonatomic,strong) NSArray            *dataSource;
-@property (nonatomic,copy)void (^configCell)(UITableView *bTableView,NSIndexPath *bIndexPath,UITableViewCell *bCell);
-@property (nonatomic,copy)void (^selectCell)(UITableView *bTableView,NSIndexPath *bIndexPath);
+@property (nonatomic, copy) NSInteger (^numberOfRowsInSection)(UITableView *bTableView);
+@property (nonatomic, copy) void (^configCell)(UITableView *bTableView,NSIndexPath *bIndexPath,UITableViewCell *bCell);
+@property (nonatomic, copy) void (^selectCell)(UITableView *bTableView,NSIndexPath *bIndexPath);
 
-- (void)showHalfView:(BOOL)show leftWidth:(CGFloat)leftWidth;
++ (FSHalfView *)showHalfViewInView:(UIView *)view leftWidth:(CGFloat)leftWidth;
 
 @end

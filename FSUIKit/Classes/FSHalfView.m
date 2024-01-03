@@ -20,11 +20,27 @@
     UIView      *_tapView;
 }
 
+#if TARGET_IPHONE_SIMULATOR
+- (void)dealloc {
+    NSString *title = [[NSString alloc] initWithFormat:@"%@ dealloc",NSStringFromClass(self.class)];
+    NSLog(@"%@",title);
+}
+#else
+#endif
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     _tapView.frame = self.bounds;
     _tableView.frame = CGRectMake(_leftWidth, 0, self.bounds.size.width - _leftWidth, self.bounds.size.height);
+}
+
++ (FSHalfView *)showHalfViewInView:(UIView *)view leftWidth:(CGFloat)leftWidth {
+    FSHalfView *halfView = [[FSHalfView alloc] initWithFrame:view.bounds];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [halfView showHalfView:YES leftWidth:leftWidth];
+    });
+    return halfView;
 }
 
 - (void)showHalfView:(BOOL)show leftWidth:(CGFloat)leftWidth {
@@ -56,14 +72,6 @@
     return self;
 }
 
-- (void)setDataSource:(NSArray *)dataSource {
-    if (_dataSource != dataSource) {
-        _dataSource = dataSource;
-    }
-    
-    [_tableView reloadData];
-}
-
 - (void)halfDesignViews {
     _tapView = [[UIView alloc] initWithFrame:self.bounds];
     _tapView.backgroundColor = [UIColor blackColor];
@@ -76,12 +84,16 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.bounds.size.width, 0, size.width - _leftWidth, self.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.rowHeight = 50;
     _tableView.tableFooterView = UIView.new;
     [self addSubview:_tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    if (self.numberOfRowsInSection) {
+        return self.numberOfRowsInSection(tableView);
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
