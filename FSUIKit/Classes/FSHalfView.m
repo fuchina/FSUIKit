@@ -32,7 +32,6 @@
     [super layoutSubviews];
     
     _tapView.frame = self.bounds;
-    _tableView.frame = CGRectMake(_leftWidth, 0, self.bounds.size.width - _leftWidth, self.bounds.size.height);
 }
 
 + (FSHalfView *)showHalfViewInView:(UIView *)view frame:(CGRect)frame leftWidth:(CGFloat)leftWidth {
@@ -49,6 +48,7 @@
         _leftWidth = leftWidth;
         
         [UIView animateWithDuration:.3 animations:^{
+            self -> _tapView.alpha = .28;
             self.tableView.frame = CGRectMake(leftWidth, 0, self.bounds.size.width - leftWidth, self.bounds.size.height);
         }];
     } else {
@@ -76,7 +76,7 @@
 - (void)halfDesignViews {
     _tapView = [[UIView alloc] initWithFrame:self.bounds];
     _tapView.backgroundColor = [UIColor blackColor];
-    _tapView.alpha = .28;
+    _tapView.alpha = 0;
     [self addSubview:_tapView];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
     [_tapView addGestureRecognizer:tap];
