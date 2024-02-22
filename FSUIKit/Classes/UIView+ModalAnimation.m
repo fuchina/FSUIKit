@@ -16,7 +16,7 @@
 - (void)pushAnimated:(BOOL)flag toFrame:(CGRect)frame completion:(void (^ __nullable)(UIView *modalView))completion {
     if (flag) {
            self.frame = CGRectMake(0, UIScreen.mainScreen.bounds.size.height, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height);
-           [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:1 /*震动效果，0-1，越小越明显*/ initialSpringVelocity:0.5
+           [UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:1 /*震动效果，0-1，越小越明显*/ initialSpringVelocity:0.3
                                options:UIViewAnimationOptionCurveEaseOut
                             animations:^{
                                 self.frame = frame;
@@ -39,10 +39,10 @@
 
 - (void)popAnimated:(BOOL)flag toFrame:(CGRect)frame removeFromSuperView:(BOOL)remove completion:(void (^ __nullable)(UIView *modalView))completion {
     if (flag) {
-           [UIView animateWithDuration:.5
+           [UIView animateWithDuration:.3
                                  delay:0
                 usingSpringWithDamping:1 /*震动效果，0-1，越小越明显*/
-                 initialSpringVelocity:0.5
+                 initialSpringVelocity:0.3
                                options:UIViewAnimationOptionCurveEaseOut
                             animations:^{
                                 self.frame = frame;
