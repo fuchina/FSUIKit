@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.2'
   s.source_files = 'FSUIKit/Classes/*'
 
-  s.dependency   'FSWindow'
+  #s.dependency   'FSWindow'
   s.dependency   'MJRefresh','3.2.3'
   s.dependency   'FSCalculator'
   

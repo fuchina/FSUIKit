@@ -6,22 +6,11 @@
 //
 
 #import "FSUIKit.h"
-#import "FSWindow.h"
 #import "FSCalculator.h"
 
 static CGRect oldframe;
 
 @implementation FSUIKit
-
-+ (void)alertOnCustomWindow:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler cancelTitle:(NSString *)cancelTitle cancel:(void (^)(UIAlertAction *action))cancel completion:(void (^)(void))completion{
-    UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:cancelTitle cancel:cancel];
-    [FSWindow presentViewController:controller animated:YES completion:completion];
-}
-
-+ (void)alertOnCustomWindow:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler{
-    UIAlertController *controller = [self alertControllerWithStyle:style title:title message:message actionTitles:titles styles:styles handler:handler cancelTitle:@"取消" cancel:nil];
-    [FSWindow presentViewController:controller animated:YES completion:nil];
-}
 
 + (void)alert:(UIAlertControllerStyle)style controller:(UIViewController *)pController title:(NSString *)title message:(NSString *)message actionTitles:(NSArray<NSString *> *)titles styles:(NSArray<NSNumber *> *)styles handler:(void (^)(UIAlertAction *action))handler cancelTitle:(NSString *)cancelTitle cancel:(void (^)(UIAlertAction *action))cancel completion:(void (^)(void))completion {
 #if DEBUG
@@ -52,7 +41,6 @@ static CGRect oldframe;
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
     for (int x = 0; x < count; x ++) {
         FSAlertAction *action = [FSAlertAction actionWithTitle:titles[x] style:[styles[x] integerValue] handler:^(UIAlertAction * _Nonnull action) {
-            [FSWindow dismiss];
             if (handler) {
                 handler((FSAlertAction *)action);
             }
@@ -62,7 +50,6 @@ static CGRect oldframe;
     }
     if ([cancelTitle isKindOfClass:NSString.class] && cancelTitle.length) {
         FSAlertAction *archiveAction = [FSAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [FSWindow dismiss];
             if (cancel) {
                 cancel((FSAlertAction *)action);
             }
@@ -70,37 +57,6 @@ static CGRect oldframe;
         [controller addAction:archiveAction];
     }
     return controller;
-}
-
-+ (void)alertInputOnCustomWindow:(NSInteger)number title:(NSString *)title message:(NSString *)message ok:(NSString *)okTitle handler:(void (^)(UIAlertController *bAlert,UIAlertAction *action))handler cancel:(NSString *)cancelTitle handler:(void (^)(UIAlertAction *action))cancelHandler textFieldConifg:(void (^)(UITextField *textField))configurationHandler completion:(void (^)(void))completion{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    if (number > 0) {
-        for (int x = 0; x < number; x ++) {
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-                if (configurationHandler) {
-                    textField.tag = x;
-                    configurationHandler(textField);
-                }
-            }];
-        }
-    }
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [FSWindow dismiss];
-        if (cancelHandler) {
-            cancelHandler(action);
-        }
-    }];
-    __weak typeof(alertController)wAlertController = alertController;
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [FSWindow dismiss];
-        if (handler) {
-            handler(wAlertController,action);
-        }
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:okAction];
-    [FSWindow presentViewController:alertController animated:YES completion:completion];
 }
 
 + (void)alertInput:(NSInteger)number controller:(UIViewController *)controller title:(NSString *)title message:(NSString *)message ok:(NSString *)okTitle handler:(void (^)(UIAlertController *bAlert,UIAlertAction *action))handler cancel:(NSString *)cancelTitle handler:(void (^)(UIAlertAction *action))cancelHandler textFieldConifg:(void (^)(UITextField *textField))configurationHandler completion:(void (^)(void))completion{
@@ -134,26 +90,6 @@ static CGRect oldframe;
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [controller presentViewController:alertController animated:YES completion:completion];
-}
-
-+ (void)showAlertWithMessageOnCustomWindow:(NSString *)message{
-    [self showAlertWithTitleOnCustomWindow:@"提示" message:message ok:@"OK" handler:nil];
-}
-
-+ (void)showAlertWithMessageOnCustomWindow:(NSString *)message handler:(void (^)(UIAlertAction *action))handler{
-    [self showAlertWithTitleOnCustomWindow:@"提示" message:message ok:@"OK" handler:handler];
-}
-
-+ (void)showAlertWithTitleOnCustomWindow:(NSString *)title message:(NSString *)message ok:(NSString *)ok handler:(void (^)(UIAlertAction *action))handler{
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:ok style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [FSWindow dismiss];
-        if (handler) {
-            handler(action);
-        }
-    }];
-    [controller addAction:action];
-    [FSWindow presentViewController:controller animated:YES completion:nil];
 }
 
 + (void)showAlertWithMessage:(NSString *)message controller:(UIViewController *)controller{
