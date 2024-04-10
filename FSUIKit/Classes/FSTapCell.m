@@ -19,15 +19,16 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _backTapView = [[UIView alloc] initWithFrame:self.bounds];
+        _backTapView = [[UIView alloc] initWithFrame: self.bounds];
         [self addSubview:_backTapView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(tapAction)];
         [_backTapView addGestureRecognizer:tap];
     }
     return self;
 }
 
-- (void)tapAction{
+- (void)tapAction {
     self->_backTapView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
     self->_backTapView.alpha = 0.2;
     [UIView animateWithDuration:.25 animations:^{
