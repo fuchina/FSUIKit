@@ -11,16 +11,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class FSTapCell;
+
 typedef void(^TapCellBlock)(FSTapCell *bCell);
 
 @interface FSTapCell : UIView
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier;
     
-@property (nonatomic,copy) TapCellBlock     click;
+@property (nonatomic, copy)   TapCellBlock      click;
 
-@property (nonatomic, strong) UILabel       *textLabel;
-@property (nonatomic, strong) UILabel       *detailTextLabel;
+@property (nonatomic, strong) UILabel           *textLabel;
+@property (nonatomic, strong) UILabel           *detailTextLabel;
 
 @end
 
