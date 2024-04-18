@@ -52,10 +52,5 @@
  */
 + (UIImage *)imageGradualFromColorWithARed:(CGFloat)aRed aGreen:(CGFloat)aGreen aBlue:(CGFloat)aBlue aAlpha:(CGFloat)aAlpha toColorWithBRed:(CGFloat)bRed bGreen:(CGFloat)bGreen bBlue:(CGFloat)bBlue bAlpha:(CGFloat)bAlpha width:(CGFloat)width height:(CGFloat)height;
 
-/**
- * 屏幕截图，MT DEMO项目中有用
- */
-+ (UIImage *)screenShot;
-
 @end
 
