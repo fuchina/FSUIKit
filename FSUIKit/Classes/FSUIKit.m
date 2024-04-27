@@ -107,79 +107,6 @@ static CGRect oldframe;
     [pController presentViewController:controller animated:YES completion:nil];
 }
 
-+ (void)showMessageInMainThread:(NSString *)message{
-    CGSize size = [UIScreen mainScreen].bounds.size;
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    CGFloat width = size.width - 60;
-    CGFloat height = MAX([FSCalculator textHeight:message font:[UIFont systemFontOfSize:15] labelWidth:width], 36);
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(size.width / 2 - width / 2, size.height / 2 - height / 2, width, height)];
-    label.text = message;
-    label.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8f];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 0;
-    label.font = [UIFont systemFontOfSize:15];
-    label.layer.masksToBounds = YES;
-    label.layer.cornerRadius = 3;
-    [backView addSubview:label];
-    
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    [keyWindow addSubview:backView];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:.3 animations:^{
-            label.alpha = 0.0;
-        } completion:^(BOOL finished) {
-            [backView removeFromSuperview];
-        }];
-    });
-}
-
-+ (void)xuanzhuanView:(UIView *)view{
-    CGContextRef context=UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:1.0];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:view cache:YES];
-    [UIView setAnimationDelegate:self];
-    [UIView commitAnimations];
-}
-
-+ (void)showMessage:(NSString *)message{
-    if (![message respondsToSelector:@selector(length)] || [message length] == 0) {
-        return;
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self showMessageInMainThread:message];
-    });
-}
-
-+ (void)showFullScreenImage:(UIImageView *)avatarImageView{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIImage *image = avatarImageView.image;
-        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-        
-        oldframe = [avatarImageView convertRect:avatarImageView.bounds toView:window];
-        backgroundView.backgroundColor=[UIColor blackColor];
-        backgroundView.alpha=0;
-        UIImageView *imageView=[[UIImageView alloc]initWithFrame:oldframe];
-        imageView.image=image;
-        imageView.tag=1;
-        [backgroundView addSubview:imageView];
-        [window addSubview:backgroundView];
-        
-        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
-        [backgroundView addGestureRecognizer: tap];
-        [UIView animateWithDuration:0.3 animations:^{
-            imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width)/2, [UIScreen mainScreen].bounds.size.width, image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width);
-            backgroundView.alpha=1;
-        }completion:nil];
-    });
-}
-
 + (void)hideImage:(UITapGestureRecognizer*)tap{
     UIView *backgroundView=tap.view;
     UIImageView *imageView=(UIImageView*)[tap.view viewWithTag:1];
@@ -246,45 +173,6 @@ static CGRect oldframe;
     return image;
 }
 
-//全屏截图
-+ (UIImage *)shotFullScreen{
-    //    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    //    UIGraphicsBeginImageContext(window.bounds.size);
-    //    [window.layer renderInContext:UIGraphicsGetCurrentContext()];
-    //    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    //    UIGraphicsEndImageContext();
-    //    return image;
-    
-    UIWindow *screenWindow = [[UIApplication sharedApplication] keyWindow];
-    UIGraphicsBeginImageContextWithOptions(screenWindow.frame.size, NO, 0.0); // no ritina
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
-        if(window == screenWindow){
-            break;
-        }else{
-            [window.layer renderInContext:context];
-        }
-    }
-    
-    //    //    ////////////////////////
-    if ([screenWindow respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-        [screenWindow drawViewHierarchyInRect:screenWindow.bounds afterScreenUpdates:YES];
-    } else {
-        [screenWindow.layer renderInContext:context];
-    }
-    CGContextRestoreGState(context);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    screenWindow.layer.contents = nil;
-    UIGraphicsEndImageContext();
-    
-    float iOSVersion = [UIDevice currentDevice].systemVersion.floatValue;
-    if(iOSVersion < 8.0){
-        image = [self rotateUIInterfaceOrientationImage:image];
-    }
-    return image;
-}
-
 //Avilable in iOS 8.0 and later
 + (UIVisualEffectView *)effectViewWithFrame:(CGRect)frame{
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -292,31 +180,6 @@ static CGRect oldframe;
     effectView.frame = frame;
     return effectView;
 }
-
-+ (UIImage *)rotateUIInterfaceOrientationImage:(UIImage *)image{
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    switch (orientation) {
-        case UIInterfaceOrientationLandscapeRight:{
-            image = [UIImage imageWithCGImage:image.CGImage scale:1 orientation:UIImageOrientationLeft];
-        }break;
-        case UIInterfaceOrientationLandscapeLeft:{
-            image = [UIImage imageWithCGImage:image.CGImage scale:1 orientation:UIImageOrientationRight];
-        }break;
-        case UIInterfaceOrientationPortraitUpsideDown:{
-            image = [UIImage imageWithCGImage:image.CGImage scale:1 orientation:UIImageOrientationDown];
-        }break;
-        case UIInterfaceOrientationPortrait:{
-            image = [UIImage imageWithCGImage:image.CGImage scale:1 orientation:UIImageOrientationUp];
-        }break;
-        case UIInterfaceOrientationUnknown:{
-        }break;
-        default:
-            break;
-    }
-    
-    return image;
-}
-
 
 /**
  *  调整图片饱和度, 亮度, 对比度
