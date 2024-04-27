@@ -36,7 +36,7 @@
     return self;
 }
 
-- (void)dpDesignViews{
+- (void)dpDesignViews {
     UIView *backView = [[UIView alloc] initWithFrame:self.bounds];
     backView.backgroundColor = [UIColor blackColor];
     backView.alpha = .28;
@@ -45,7 +45,7 @@
     [backView addGestureRecognizer:tap];
 
     CGSize size = self.bounds.size;
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height, size.width, 240 + [FSDatePickerView isIPhoneX] * 34)];
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height, size.width, 240 + 34)];
     _mainView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_mainView];
     
@@ -90,10 +90,10 @@
     timeLabel.text = title;
     [selectView addSubview:timeLabel];
     
-    [self showAction:YES];
+    [self showAction: YES];
 }
 
-- (void)tap{
+- (void)tap {
     if (self.cancel) {
         self.cancel();
     }
@@ -113,10 +113,10 @@
     [self showAction:NO];
 }
 
-- (void)showAction:(BOOL)show{
+- (void)showAction:(BOOL)show {
     if (show) {
         [UIView animateWithDuration:.3 animations:^{
-            self.mainView.frame = CGRectMake(self.mainView.frame.origin.x, self.frame.size.height - 240 - [FSDatePickerView isIPhoneX] * 34, self.mainView.bounds.size.width, self.mainView.bounds.size.height);
+            self.mainView.frame = CGRectMake(self.mainView.frame.origin.x, self.frame.size.height - 240 - 34, self.mainView.bounds.size.width, self.mainView.bounds.size.height);
         }];
     }else{
         [UIView animateWithDuration:.3 animations:^{
@@ -131,38 +131,6 @@
     NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekday | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear fromDate:date];
     return components;
-}
-
-+ (BOOL)isIPhoneX{
-    if (@available(iOS 11.0, *)) {
-        static dispatch_once_t onceToken;
-        static BOOL result = NO;
-        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        if (window) {
-            dispatch_once(&onceToken, ^{
-                UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-                BOOL landscape = (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                    if (!landscape && window.safeAreaInsets.top > 0 && window.safeAreaInsets.bottom > 0) {
-                        result = YES;
-                    } else if (landscape && window.safeAreaInsets.left > 0 && window.safeAreaInsets.right > 0) {
-                        result = YES;
-                    } else {
-                        // nothing
-                    }
-                }
-            });
-        } else {
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                CGSize size = [UIScreen mainScreen].bounds.size;
-                if (MAX(size.width, size.height) >= 812) {
-                    result = YES;
-                }
-            }
-        }
-        return result;
-    }
-    return NO;
 }
 
 //- (void)datePickerValueChanged:(UIDatePicker *)datePicker
