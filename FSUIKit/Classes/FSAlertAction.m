@@ -7,6 +7,10 @@
 
 #import "FSAlertAction.h"
 
+@implementation FSAlertActionData
+
+@end
+
 @implementation FSAlertAction
 
 @end

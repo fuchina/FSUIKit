@@ -92,7 +92,7 @@ static CGRect oldframe;
     [controller presentViewController:alertController animated:YES completion:completion];
 }
 
-+ (void)alertInput:(NSInteger)number controller:(UIViewController *)controller title:(NSString *)title message:(NSString *)message left:(NSString *)leftTitle handler:(void (^)(UIAlertController *bAlert,UIAlertAction *action))leftHandler right:(NSString *)rightTitle handler:(void (^)(UIAlertController *bAlert,UIAlertAction *action))rightHandler textFieldConifg:(void (^)(UITextField *textField))configurationHandler completion:(void (^)(void))completion {
++ (void)alertInput:(NSInteger)number controller:(UIViewController *)controller title:(NSString *)title message:(NSString *)message buttons:(NSInteger)buttons buttonConfig:(void (^)(FSAlertActionData *data))buttonConfig textFieldConifg:(void (^)(UITextField *textField))textFieldConfig completion:(void (^)(void))completion {
     if (number < 1) {
         return;
     }
@@ -100,28 +100,32 @@ static CGRect oldframe;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle: title message: message preferredStyle: UIAlertControllerStyleAlert];
     for (int x = 0; x < number; x ++) {
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            if (configurationHandler) {
+            if (textFieldConfig) {
                 textField.tag = x;
-                configurationHandler(textField);
+                textFieldConfig(textField);
             }
         }];
     }
     
-    __weak typeof(alertController)wAlertController = alertController;
-    UIAlertAction *leftAction = [UIAlertAction actionWithTitle: leftTitle style: UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
-        if (leftHandler) {
-            leftHandler(wAlertController, action);
+    for (int x = 0; x < buttons; x ++) {
+        FSAlertActionData *data = [[FSAlertActionData alloc] init];
+        data.index = x;
+        data.style = UIAlertActionStyleDefault;
+        
+        if (buttonConfig) {
+            buttonConfig(data);
         }
-    }];
+        
+        FSAlertAction *action = [FSAlertAction actionWithTitle: data.title style: data.style handler: ^(UIAlertAction * _Nonnull action) {
+            FSAlertAction *act = (FSAlertAction *)action;
+            if (act.data.click) {
+                act.data.click(action);
+            }
+        }];
+        action.data = data;
+        [alertController addAction: action];
+    }
     
-    UIAlertAction *rightAction = [UIAlertAction actionWithTitle: rightTitle style: UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
-        if (rightHandler) {
-            rightHandler(wAlertController, action);
-        }
-    }];
-    
-    [alertController addAction: leftAction];
-    [alertController addAction: rightAction];
     [controller presentViewController: alertController animated: YES completion: completion];
 }
 
