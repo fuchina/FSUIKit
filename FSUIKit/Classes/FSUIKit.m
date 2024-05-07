@@ -92,6 +92,39 @@ static CGRect oldframe;
     [controller presentViewController:alertController animated:YES completion:completion];
 }
 
++ (void)alertInput:(NSInteger)number controller:(UIViewController *)controller title:(NSString *)title message:(NSString *)message left:(NSString *)leftTitle handler:(void (^)(UIAlertController *bAlert,UIAlertAction *action))leftHandler right:(NSString *)rightTitle handler:(void (^)(UIAlertController *bAlert,UIAlertAction *action))rightHandler textFieldConifg:(void (^)(UITextField *textField))configurationHandler completion:(void (^)(void))completion {
+    if (number < 1) {
+        return;
+    }
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle: title message: message preferredStyle: UIAlertControllerStyleAlert];
+    for (int x = 0; x < number; x ++) {
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            if (configurationHandler) {
+                textField.tag = x;
+                configurationHandler(textField);
+            }
+        }];
+    }
+    
+    __weak typeof(alertController)wAlertController = alertController;
+    UIAlertAction *leftAction = [UIAlertAction actionWithTitle: leftTitle style: UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
+        if (leftHandler) {
+            leftHandler(wAlertController, action);
+        }
+    }];
+    
+    UIAlertAction *rightAction = [UIAlertAction actionWithTitle: rightTitle style: UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
+        if (rightHandler) {
+            rightHandler(wAlertController, action);
+        }
+    }];
+    
+    [alertController addAction: leftAction];
+    [alertController addAction: rightAction];
+    [controller presentViewController: alertController animated: YES completion: completion];
+}
+
 + (void)showAlertWithMessage:(NSString *)message controller:(UIViewController *)controller{
     [self showAlertWithTitle:@"温馨提示" message:message ok:@"确定" controller:controller handler:nil];
 }
