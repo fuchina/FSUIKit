@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger             index;
 @property (nonatomic, copy)   NSString              *title;
 @property (nonatomic, assign) UIAlertActionStyle    style;
-@property (nonatomic, copy)   void (^click)(UIAlertAction *action);
+
+@property (nonatomic, copy)   void (^click)(UIAlertController *alert, UIAlertAction *action);
 
 @end
 

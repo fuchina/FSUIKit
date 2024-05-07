@@ -107,6 +107,7 @@ static CGRect oldframe;
         }];
     }
     
+    __weak typeof(alertController)wAlertController = alertController;
     for (int x = 0; x < buttons; x ++) {
         FSAlertActionData *data = [[FSAlertActionData alloc] init];
         data.index = x;
@@ -119,7 +120,7 @@ static CGRect oldframe;
         FSAlertAction *action = [FSAlertAction actionWithTitle: data.title style: data.style handler: ^(UIAlertAction * _Nonnull action) {
             FSAlertAction *act = (FSAlertAction *)action;
             if (act.data.click) {
-                act.data.click(action);
+                act.data.click(wAlertController, action);
             }
         }];
         action.data = data;
