@@ -57,6 +57,15 @@
                     detailFont:(UIFont *)detailFont
                          block:(TapCellBlock)block;
 
++ (FSTapCell *)tapCellWithText:(NSString *)text
+                      textColor:(UIColor *)textColor
+                          font:(UIFont *)font
+                    detailText:(NSString *)detailText
+                   detailColor:(UIColor *)detailColor
+                    detailFont:(UIFont *)detailFont
+                         frame:(CGRect)frame
+                         block:(TapCellBlock)block;
+
 + (UITextField *)textFieldWithFrame:(CGRect)frame placeholder:(NSString *)holder textColor:(UIColor *)textColor backColor:(UIColor *)backColor;
 
 + (UITextField *)textFieldWithFrame:(CGRect)frame

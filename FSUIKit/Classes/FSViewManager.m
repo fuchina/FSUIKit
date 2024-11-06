@@ -181,8 +181,19 @@
                     detailText:(NSString *)detailText
                    detailColor:(UIColor *)detailColor
                     detailFont:(UIFont *)detailFont
-                          block:(TapCellBlock)block{
-    FSTapCell *cell = [[FSTapCell alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 44)];
+                          block:(TapCellBlock)block {
+    return [self tapCellWithText: text textColor: textColor font: font detailText: detailText detailColor: detailColor detailFont: detailFont frame: CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 44) block: block];
+}
+
++ (FSTapCell *)tapCellWithText:(NSString *)text
+                      textColor:(UIColor *)textColor
+                          font:(UIFont *)font
+                    detailText:(NSString *)detailText
+                   detailColor:(UIColor *)detailColor
+                    detailFont:(UIFont *)detailFont
+                         frame:(CGRect)frame
+                          block:(TapCellBlock)block {
+    FSTapCell *cell = [[FSTapCell alloc] initWithFrame: frame];
     if (text) {
         cell.textLabel.text = text;
     }
@@ -208,8 +219,7 @@
     return cell;
 }
 
-+ (UITextField *)textFieldWithFrame:(CGRect)frame placeholder:(NSString *)holder textColor:(UIColor *)textColor backColor:(UIColor *)backColor
-{
++ (UITextField *)textFieldWithFrame:(CGRect)frame placeholder:(NSString *)holder textColor:(UIColor *)textColor backColor:(UIColor *)backColor {
     UITextField *textField = [[UITextField alloc] initWithFrame:frame];
     if (holder) {
         textField.placeholder = holder;
