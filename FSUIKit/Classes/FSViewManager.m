@@ -215,7 +215,6 @@
     if (block) {
         cell.click = block;
     }
-    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, UIScreen.mainScreen.bounds.size.width, cell.frame.size.height);
     return cell;
 }
 
