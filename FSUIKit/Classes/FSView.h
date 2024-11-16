@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FSView : UIView
 
 @property (nonatomic, strong, readonly) UIView          *tapBackView;
-@property (nonatomic,copy) void (^click)(FSView *view);
-@property (nonatomic,copy) void (^clickLocation)(FSView *view, CGPoint point);
+@property (nonatomic, copy) void (^click)(FSView *view);
+@property (nonatomic, copy) void (^clickLocation)(FSView *view, CGPoint point);
 
 /**
  *  渐变色

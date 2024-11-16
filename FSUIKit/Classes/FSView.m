@@ -19,7 +19,7 @@
     if (!_gradientLayer) {
         _gradientLayer = [CAGradientLayer layer];
         _gradientLayer.frame = self.bounds;
-        [self.layer insertSublayer:_gradientLayer atIndex:0];
+        [self.layer insertSublayer: _gradientLayer atIndex: 0];
     }
     return _gradientLayer;
 }
@@ -33,11 +33,11 @@
 }
 
 - (void)fs_add_tap_event_in_base_view {
-    _tapBackView = [[UIView alloc] initWithFrame:self.bounds];
-    [self addSubview:_tapBackView];
+    _tapBackView = [[UIView alloc] initWithFrame: self.bounds];
+    [self addSubview: _tapBackView];
     
-    UITapGestureRecognizer *one = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_fs_tap_click_event:)];
-    [_tapBackView addGestureRecognizer:one];
+    UITapGestureRecognizer *one = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(_fs_tap_click_event:)];
+    [_tapBackView addGestureRecognizer: one];
 }
 
 - (void)_fs_tap_click_event:(UITapGestureRecognizer *)tap {
@@ -46,7 +46,7 @@
     }
     
     if (self.clickLocation) {
-        CGPoint p = [tap locationInView:_tapBackView];
+        CGPoint p = [tap locationInView: _tapBackView];
         self.clickLocation(self, p);
     }
 }
