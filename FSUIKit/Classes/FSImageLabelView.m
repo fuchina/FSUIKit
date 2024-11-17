@@ -10,15 +10,9 @@
 #import <FSImage.h>
 #import "FSUIKit.h"
 
-@interface FSImageLabelView ()
-
-@property (nonatomic,strong) UIImageView    *imageView;
-
-@end
-
 @implementation FSImageLabelView
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self imageLabelDesignViews];
@@ -27,29 +21,29 @@
 }
 
 - (void)imageLabelDesignViews{
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageLabelTapAction)];
-    [self addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(imageLabelTapAction)];
+    [self addGestureRecognizer: tap];
     
     _imageView = [[UIImageView alloc] init];
     _imageView.translatesAutoresizingMaskIntoConstraints = NO;
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self addSubview:_imageView];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_imageView(35)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_imageView(35)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView)]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:-10]];
+    [self addSubview: _imageView];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[_imageView(35)]" options: 0 metrics: nil views: NSDictionaryOfVariableBindings(_imageView)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:[_imageView(35)]" options: 0 metrics: nil views: NSDictionaryOfVariableBindings(_imageView)]];
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: _imageView attribute:NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: self attribute: NSLayoutAttributeCenterX multiplier: 1 constant: 0]];
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: _imageView attribute: NSLayoutAttributeCenterY relatedBy: NSLayoutRelationEqual toItem: self attribute: NSLayoutAttributeCenterY multiplier: 1 constant: -10]];
 
     _label = [[UILabel alloc] init];
     _label.translatesAutoresizingMaskIntoConstraints = NO;
-    _label.font = [UIFont systemFontOfSize:13];
+    _label.font = [UIFont systemFontOfSize: 13];
     _label.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:_label];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_label]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_label(30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_label attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+    [self addSubview: _label];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|-0-[_label]-0-|" options: 0 metrics: nil views: NSDictionaryOfVariableBindings(_label)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:[_label(30)]" options: 0 metrics: nil views: NSDictionaryOfVariableBindings(_label)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem: _label attribute: NSLayoutAttributeBottom relatedBy: NSLayoutRelationEqual toItem: self attribute: NSLayoutAttributeBottom multiplier: 1 constant: 0]];
 }
 
-- (void)imageLabelTapAction{
+- (void)imageLabelTapAction {
     if (_block) {
         _block(self);
     }

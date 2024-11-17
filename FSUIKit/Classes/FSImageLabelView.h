@@ -13,6 +13,7 @@ typedef void(^FSImageLabelViewTapBlock)(FSImageLabelView *bImageLabelView);
 
 @interface FSImageLabelView : UIView
 
+@property (nonatomic,strong) UIImageView                *imageView;
 @property (nonatomic,strong) UILabel                    *label;
 
 @property (nonatomic,copy) FSImageLabelViewTapBlock     block;
