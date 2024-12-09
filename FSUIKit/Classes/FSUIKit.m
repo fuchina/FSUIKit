@@ -93,7 +93,7 @@ static CGRect oldframe;
     [controller presentViewController:alertController animated:YES completion:completion];
 }
 
-+ (UIAlertController *)alertInput:(NSInteger)number controller:(UIViewController *)controller title:(NSString *)title message:(NSString *)message buttons:(NSInteger)buttons buttonConfig:(void (^)(FSAlertActionData *data))buttonConfig textFieldConifg:(void (^)(UITextField *textField))textFieldConfig completion:(void (^)(void))completion {
++ (UIAlertController *)alertInput:(NSInteger)number controller:(UIViewController *)controller title:(NSString *)title message:(NSString *)message buttons:(NSInteger)buttons buttonConfig:(void (^)(FSAlertActionData *data))buttonConfig textFieldConifg:(void (^)(UITextField *textField))textFieldConfig completion:(void (^)(UIAlertController *alert))completion {
     if (number < 1) {
         return nil;
     }
@@ -128,7 +128,11 @@ static CGRect oldframe;
         [alertController addAction: action];
     }
     
-    [controller presentViewController: alertController animated: YES completion: completion];
+    [controller presentViewController: alertController animated: YES completion:^{
+        if (completion) {
+            completion(alertController);
+        }
+    }];
     return alertController;
 }
 
