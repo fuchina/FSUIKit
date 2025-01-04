@@ -115,6 +115,30 @@
     }
 }
 
+- (void)designViewsWithRows:(NSInteger)rows columns:(NSInteger)columns height:(CGFloat)height size:(void(^)(CGFloat *width, NSInteger row, NSInteger column))size grid:(void (^)(FSRealGridView *gridView, NSInteger row, NSInteger column))config {
+    
+    CGFloat x = 0;
+    CGFloat y = 0;
+    for (int row = 0; row < rows; row ++) {
+        for (int column = 0; column < columns; column ++) {
+            CGFloat width = 0;
+            if (size) {
+                size(&width, row, column);
+            }
+            
+            CGRect frame = CGRectMake(x, y, width, height);
+            FSRealGridView *grid = [[FSRealGridView alloc] initWithFrame: frame];
+            [self addSubview: grid];
+            config(grid, row, column);
+            
+            x += width;
+        }
+        
+        x = 0;
+        y += height;
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
