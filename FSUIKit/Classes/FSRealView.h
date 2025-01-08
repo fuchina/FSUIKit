@@ -26,8 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FSRealView : UIView
 
-- (void)designViews:(NSInteger)grids grid:(void (^)(FSRealGridView *gridView))grid;
-
 - (void)designViewsWithRows:(NSInteger)rows columns:(NSInteger)columns height:(CGFloat)height size:(void(^)(CGFloat *width, NSInteger row, NSInteger column))size grid:(void (^)(FSRealGridView *gridView, NSInteger row, NSInteger column))config;
 
 @end

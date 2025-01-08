@@ -55,7 +55,6 @@
 
 - (void)setLabelDefaultStyle {
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.font = [UIFont systemFontOfSize: 13];
     _label.adjustsFontSizeToFitWidth = YES;
 }
 
@@ -105,15 +104,6 @@
 @end
 
 @implementation FSRealView
-
-- (void)designViews:(NSInteger)grids grid:(void (^)(FSRealGridView *gridView))config {
-    for (int x = 0; x < grids; x ++) {
-        FSRealGridView *grid = [[FSRealGridView alloc] initWithFrame: CGRectZero];
-        grid.tag = x;
-        [self addSubview: grid];
-        config(grid);
-    }
-}
 
 - (void)designViewsWithRows:(NSInteger)rows columns:(NSInteger)columns height:(CGFloat)height size:(void(^)(CGFloat *width, NSInteger row, NSInteger column))size grid:(void (^)(FSRealGridView *gridView, NSInteger row, NSInteger column))config {
     
