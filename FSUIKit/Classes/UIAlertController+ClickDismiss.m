@@ -22,9 +22,22 @@
         backView.userInteractionEnabled = YES;
         FSTapGestureRecognizer *tap = [[FSTapGestureRecognizer alloc] initWithTarget: self action: @selector(tap:)];
         tap.clickBack = clickDismiss;
+        tap.numberOfTapsRequired = 1; // 单击需1次点击
+        tap.numberOfTouchesRequired = 1; // 单指操作
         [backView addGestureRecognizer: tap];
+        
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(handleDoubleTap:)];
+        doubleTap.numberOfTapsRequired = 2; // 双击需2次点击
+        doubleTap.numberOfTouchesRequired = 1; // 单指操作
+        [backView addGestureRecognizer: doubleTap];
+        
+        [tap requireGestureRecognizerToFail: doubleTap]; // 关键冲突解决逻辑[1,3,4](@ref)
     }
     return YES;
+}
+
+- (void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap {
+    [self dismissViewControllerAnimated: YES completion: nil];
 }
 
 -(void)tap:(FSTapGestureRecognizer *)tap {
