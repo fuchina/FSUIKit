@@ -12,7 +12,7 @@
 
 - (UILabel *)label {
     if (!_label) {
-        _label = [[UILabel alloc] initWithFrame:self.bounds];
+        _label = [[UILabel alloc] initWithFrame: self.bounds];
         [self addSubview:_label];
     }
     return _label;
@@ -20,9 +20,9 @@
 
 - (UILabel *)contentLabel {
     if (!_contentLabel) {
-        _contentLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        _contentLabel = [[UILabel alloc] initWithFrame: self.bounds];
         _contentLabel.textAlignment = NSTextAlignmentRight;
-        [self addSubview:_contentLabel];
+        [self addSubview: _contentLabel];
     }
     return _contentLabel;
 }
