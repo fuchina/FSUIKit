@@ -7,7 +7,7 @@
 //
 
 #import "FSImageLabelView.h"
-#import <FSImage.h>
+#import "FSImage.h"
 #import "FSUIKit.h"
 
 @implementation FSImageLabelView
