@@ -13,6 +13,8 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '12.0'
   s.source_files = 'FSUIKit/Classes/*'
+  
+  s.swift_version = '5.9'
 
   #s.dependency   'FSWindow'
   s.dependency   'MJRefresh','3.2.3'
