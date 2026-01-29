@@ -118,18 +118,6 @@ static CGRect oldframe;
     [pController presentViewController:controller animated:YES completion:nil];
 }
 
-+ (void)hideImage:(UITapGestureRecognizer*)tap{
-    UIView *backgroundView=tap.view;
-    UIImageView *imageView=(UIImageView*)[tap.view viewWithTag:1];
-    [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame = oldframe;
-        backgroundView.alpha=0;
-    }completion:^(BOOL finished) {
-        [backgroundView
-         removeFromSuperview];
-    }];
-}
-
 + (UIImage *)captureScrollView:(UIScrollView *)scrollView{
     CGRect frame = scrollView.frame;
     //设置控件显示的区域大小     key:显示
@@ -152,27 +140,6 @@ static CGRect oldframe;
     
     UIImage * tableViewScreenshot = [FSImage imageForUIView:scrollView];
     completion(tableViewScreenshot);
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        CGRect frame = scrollView.frame;
-//          //设置控件显示的区域大小     key:显示
-//        scrollView.frame = CGRectMake(0, scrollView.frame.origin.y, scrollView.contentSize.width, scrollView.contentSize.height);
-//        CALayer *layer = scrollView.layer;
-//        CGRect fr = scrollView.frame;
-//
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//            //设置截屏大小(截屏区域的大小必须要跟视图控件的大小一样)
-//                UIGraphicsBeginImageContextWithOptions(fr.size, YES, 0.0);
-//                [layer renderInContext:UIGraphicsGetCurrentContext()];
-//                UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-//                UIGraphicsEndImageContext();
-//
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                scrollView.frame = frame;
-//                completion(viewImage);
-//            });
-//        });
-//    });
 }
 
 //截取view生成一张图片
@@ -191,80 +158,6 @@ static CGRect oldframe;
     effectView.frame = frame;
     return effectView;
 }
-
-/**
- *  调整图片饱和度, 亮度, 对比度
- *
- *  @param image      目标图片
- *  @param saturation 饱和度
- *  @param brightness 亮度: -1.0 ~ 1.0
- *  @param contrast   对比度
- *
- */
-+ (UIImage *)colorControlsWithOriginalImage:(UIImage *)image
-                                 saturation:(CGFloat)saturation
-                                 brightness:(CGFloat)brightness
-                                   contrast:(CGFloat)contrast{
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [[CIImage alloc] initWithImage:image];
-    CIFilter *filter = [CIFilter filterWithName:@"CIColorControls"];
-    [filter setValue:inputImage forKey:kCIInputImageKey];
-    
-    [filter setValue:@(saturation) forKey:@"inputSaturation"];
-    [filter setValue:@(brightness) forKey:@"inputBrightness"];
-    [filter setValue:@(contrast) forKey:@"inputContrast"];
-    
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
-    UIImage *resultImage = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return resultImage;
-}
-
-// 怀旧 --> CIPhotoEffectInstant                         单色 --> CIPhotoEffectMono
-// 黑白 --> CIPhotoEffectNoir                            褪色 --> CIPhotoEffectFade
-// 色调 --> CIPhotoEffectTonal                           冲印 --> CIPhotoEffectProcess
-// 岁月 --> CIPhotoEffectTransfer                        铬黄 --> CIPhotoEffectChrome
-// CILinearToSRGBToneCurve, CISRGBToneCurveToLinear, CIGaussianBlur, CIBoxBlur, CIDiscBlur, CISepiaTone, CIDepthOfField
-+ (UIImage *)filterWithOriginalImage:(UIImage *)image filterName:(NSString *)name{
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [[CIImage alloc] initWithImage:image];
-    CIFilter *filter = [CIFilter filterWithName:name];
-    [filter setValue:inputImage forKey:kCIInputImageKey];
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
-    UIImage *resultImage = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return resultImage;
-}
-
-#pragma mark - 对图片进行模糊处理
-// CIGaussianBlur ---> 高斯模糊
-// CIBoxBlur      ---> 均值模糊(Available in iOS 9.0 and later)
-// CIDiscBlur     ---> 环形卷积模糊(Available in iOS 9.0 and later)
-// CIMedianFilter ---> 中值模糊, 用于消除图像噪点, 无需设置radius(Available in iOS 9.0 and later)
-// CIMotionBlur   ---> 运动模糊, 用于模拟相机移动拍摄时的扫尾效果(Available in iOS 9.0 and later)
-+ (UIImage *)blurWithOriginalImage:(UIImage *)image blurName:(NSString *)name radius:(NSInteger)radius{
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [[CIImage alloc] initWithImage:image];
-    CIFilter *filter;
-    if (name.length != 0) {
-        filter = [CIFilter filterWithName:name];
-        [filter setValue:inputImage forKey:kCIInputImageKey];
-        if (![name isEqualToString:@"CIMedianFilter"]) {
-            [filter setValue:@(radius) forKey:@"inputRadius"];
-        }
-        CIImage *result = [filter valueForKey:kCIOutputImageKey];
-        CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
-        UIImage *resultImage = [UIImage imageWithCGImage:cgImage];
-        CGImageRelease(cgImage);
-        return resultImage;
-    }else{
-        return nil;
-    }
-}
-
-
 
 //截取view中某个区域生成一张图片
 + (UIImage *)shotWithView:(UIView *)view scope:(CGRect)scope{
@@ -375,35 +268,6 @@ static CGRect oldframe;
     CGFloat page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     int currentPage = page;
     return currentPage;
-}
-
-+ (void)findSubView:(Class)ClassOfSubView inView:(UIView *)view completion:(void(^)(id subView))completion {
-    if (![view isKindOfClass:UIView.class]) {
-        return;
-    }
-    if (!completion) {
-        return;
-    }
-    if (!ClassOfSubView) {
-        return;
-    }
-    for (UIView *sub in view.subviews) {
-        if ([sub isKindOfClass:ClassOfSubView]) {
-            completion(sub);
-        }
-    }
-}
-
-+ (void)setCornerRadii:(CGSize)size forView:(UIView *)view withRectCorner:(UIRectCorner)corners {
-    if (![view isKindOfClass:UIView.class]) {
-        return;
-    }
-    
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:corners cornerRadii:size];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = view.bounds;
-    maskLayer.path = maskPath.CGPath;
-    view.layer.mask = maskLayer;
 }
 
 @end

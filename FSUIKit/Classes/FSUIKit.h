@@ -41,15 +41,7 @@
                             lineColor:(UIColor *)color;
 + (UIImage *)QRImageFromString:(NSString *)string;
 + (UIImage*)circleImage:(UIImage*)image withParam:(CGFloat)inset;
-#pragma mark - 对图片进行滤镜处理
-+ (UIImage *)filterWithOriginalImage:(UIImage *)image filterName:(NSString *)name;
-#pragma mark -  对图片进行模糊处理
-+ (UIImage *)blurWithOriginalImage:(UIImage *)image blurName:(NSString *)name radius:(NSInteger)radius;
 
 + (CGFloat)scrollViewPage:(UIScrollView *)scrollView;
-
-+ (void)findSubView:(Class)ClassOfSubView inView:(UIView *)view completion:(void(^)(id subView))completion;
-
-+ (void)setCornerRadii:(CGSize)size forView:(UIView *)view withRectCorner:(UIRectCorner)corners;
 
 @end
