@@ -9,7 +9,7 @@ import Foundation
 
 public class FSImageLabelViewS: FSViewS {
     
-    var                 imageView                   :  UIImageView?                  =  nil
+    public var          imageView                   :  UIImageView?                  =  nil
     public var          label                       :  UILabel?                      =  nil
 
     override init(frame: CGRect) {
@@ -28,8 +28,8 @@ public class FSImageLabelViewS: FSViewS {
         imageView?.contentMode = .scaleAspectFill
         self.addSubview(imageView!)
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[_imageView(35)]", metrics: nil, views: ["imageView": imageView!]))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[_imageView(35)]", metrics: nil, views: ["imageView": imageView!]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[imageView(35)]", metrics: nil, views: ["imageView": imageView!]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[imageView(35)]", metrics: nil, views: ["imageView": imageView!]))
         self.addConstraint(NSLayoutConstraint(item: imageView!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint(item: imageView!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: -10))
 
@@ -39,12 +39,14 @@ public class FSImageLabelViewS: FSViewS {
         label?.textAlignment = .center
         self.addSubview(label!)
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[_label]-0-|", metrics: nil, views: ["label": label!]))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[_label(30)]", metrics: nil, views: ["label": label!]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[label]-0-|", metrics: nil, views: ["label": label!]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label(30)]", metrics: nil, views: ["label": label!]))
         self.addConstraint(NSLayoutConstraint(item: label!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
     }
     
     public static func imageLabel(_ frame: CGRect, imageName: String, text: String) -> FSImageLabelViewS {
+        
+//        print("FSLog fr = ", frame)
         
         let view = FSImageLabelViewS(frame: frame)
         view.label?.text = text
