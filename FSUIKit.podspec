@@ -14,12 +14,16 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
   s.source_files = 'FSUIKit/Classes/**/*'
   
+#  s.module_name = 'FSUIKit'
+
+  s.frameworks = 'UIKit'
+  
   s.swift_version = '5.9'
 
-  #s.dependency   'FSWindow'
   s.dependency   'MJRefresh','3.2.3'
+  s.dependency   'WechatOpenSDK','1.8.3'
+
+  s.dependency   'FSKit'
   s.dependency   'FSCalculator'
-  
-  s.frameworks = 'UIKit'
 
 end

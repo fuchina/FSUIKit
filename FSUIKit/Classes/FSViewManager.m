@@ -8,6 +8,8 @@
 
 #import "FSViewManager.h"
 
+#import "FSUIKit-Swift.h"
+
 @implementation FSViewManager
 
 + (UIView *)viewWithFrame:(CGRect)frame backColor:(UIColor *)color
