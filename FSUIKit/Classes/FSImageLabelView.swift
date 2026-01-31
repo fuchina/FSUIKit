@@ -10,7 +10,7 @@ import Foundation
 public class FSImageLabelViewS: FSViewS {
     
     var                 imageView                   :  UIImageView?                  =  nil
-    var                 label                       :  UILabel?                      =  nil
+    public var          label                       :  UILabel?                      =  nil
 
     override init(frame: CGRect) {
         super.init(frame: frame)
