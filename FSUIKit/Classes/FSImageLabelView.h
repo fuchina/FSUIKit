@@ -1,23 +1,25 @@
+////
+////  FSImageLabelView.h
+////  ShareEconomy
+////
+////  Created by FudonFuchina on 16/5/14.
+////  Copyright © 2016年 FudonFuchina. All rights reserved.
+////
 //
-//  FSImageLabelView.h
-//  ShareEconomy
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 16/5/14.
-//  Copyright © 2016年 FudonFuchina. All rights reserved.
+//#import "FSUIKit-Swift.h"
 //
-
-#import <UIKit/UIKit.h>
-
-@class FSImageLabelView;
-typedef void(^FSImageLabelViewTapBlock)(FSImageLabelView *bImageLabelView);
-
-@interface FSImageLabelView : UIView
-
-@property (nonatomic,strong) UIImageView                *imageView;
-@property (nonatomic,strong) UILabel                    *label;
-
-@property (nonatomic,copy) FSImageLabelViewTapBlock     block;
-
-+ (FSImageLabelView *)imageLabelViewWithFrame:(CGRect)frame imageName:(NSString *)imageName text:(NSString *)text;
-
-@end
+////@class FSImageLabelView;
+////typedef void(^FSImageLabelViewTapBlock)(FSImageLabelView *bImageLabelView);
+//
+//@interface FSImageLabelView2 : fsview
+//
+////@property (nonatomic,strong) UIImageView                *imageView;
+////@property (nonatomic,strong) UILabel                    *label;
+//
+////@property (nonatomic,copy) FSImageLabelViewTapBlock     block;
+//
+////+ (FSImageLabelView *)imageLabelViewWithFrame:(CGRect)frame imageName:(NSString *)imageName text:(NSString *)text;
+//
+//@end

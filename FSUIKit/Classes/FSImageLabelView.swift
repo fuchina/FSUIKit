@@ -7,7 +7,8 @@
 
 import Foundation
 
-public class FSImageLabelViewS: FSViewS {
+@objc
+public class FSImageLabelView: FSViewS {
     
     public var          imageView                   :  UIImageView?                  =  nil
     public var          label                       :  UILabel?                      =  nil
@@ -44,11 +45,11 @@ public class FSImageLabelViewS: FSViewS {
         self.addConstraint(NSLayoutConstraint(item: label!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
     }
     
-    public static func imageLabel(_ frame: CGRect, imageName: String, text: String) -> FSImageLabelViewS {
+    @objc public static func imageLabel(_ frame: CGRect, imageName: String, text: String) -> FSImageLabelView {
         
 //        print("FSLog fr = ", frame)
         
-        let view = FSImageLabelViewS(frame: frame)
+        let view = FSImageLabelView(frame: frame)
         view.label?.text = text
 
         let image = UIImage(named: imageName)
