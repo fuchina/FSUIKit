@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/fuchina/FSUIKit.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '12.0'
-  s.source_files = 'FSUIKit/Classes/*'
+  s.source_files = 'FSUIKit/Classes/**/*'
   
   s.swift_version = '5.9'
 
