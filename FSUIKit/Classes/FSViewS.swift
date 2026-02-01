@@ -35,7 +35,7 @@ open class FSViewS: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.fs_add_tap_event_in_base_view()
