@@ -9,7 +9,7 @@ import Foundation
 
 open class FSViewS: UIView {
     
-    var         tapBackView                             :   UIView?                             =   nil
+    public var  tapBackView                             :   UIView?                             =   nil
     public var  click                                   :   ((FSViewS, CGPoint) ->  Void)?      =   nil
     
     var         theTag                                  :   Int                                 =   0
