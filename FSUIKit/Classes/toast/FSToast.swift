@@ -49,7 +49,7 @@ open class FSToastS: NSObject {
 
         back.alpha = 0;
         
-        UIView.animate(withDuration: 0.25) {
+        UIView.animate(withDuration: 0.1) {
             back.alpha = 1.0
         } completion: { Bool in
             

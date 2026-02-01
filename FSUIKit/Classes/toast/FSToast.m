@@ -7,12 +7,8 @@
 //
 
 #import "FSToast.h"
-#import "FSKit.h"
-#import <objc/runtime.h>
 
 #import "FSUIKit-Swift.h"
-
-static char _kAssociateToastTapKey;
 
 @implementation FSToast
 
