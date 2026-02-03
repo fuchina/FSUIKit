@@ -1,4 +1,4 @@
-// FSDatePickerViewS.swift
+// FSDatePickerView.swift
 // Translated from FSDatePickerView.h/m
 
 import UIKit
@@ -6,7 +6,7 @@ import UIKit
 public typealias FSDatePickerBlock = (Date) -> Void
 
 @objcMembers
-public class FSDatePickerViewS: UIView {
+public class FSDatePickerView: UIView {
     
     private var mainView: UIView!
     private var datePicker: UIDatePicker!

@@ -51,7 +51,7 @@ public class FSUIKit: NSObject {
         return controller
     }
     
-    static func alertInput(number: Int, controller: UIViewController, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
+    public static func alertInput(number: Int, controller: UIViewController, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
         
         if number < 1 {
             return UIAlertController()

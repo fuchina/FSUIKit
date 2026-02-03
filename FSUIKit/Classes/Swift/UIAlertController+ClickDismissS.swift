@@ -15,7 +15,7 @@ private var tapGestureKey: UInt8 = 0
 public extension UIAlertController {
     
     @discardableResult
-    func addTapEventS(_ clickDismiss: ((UIAlertController, CGPoint) -> Void)?) -> Bool {
+    func addTapEvent(_ clickDismiss: ((UIAlertController, CGPoint) -> Void)?) -> Bool {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }),
               let backView = keyWindow.subviews.last,

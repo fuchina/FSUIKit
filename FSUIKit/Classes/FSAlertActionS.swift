@@ -9,15 +9,15 @@ import Foundation
 
 public class FSAlertActionData {
     
-    var             index               :   Int                                             =   0
-    var             title               :   String                                          =   ""
-    var             style               :   UIAlertAction.Style                             =   .default
+    public var             index               :   Int                                             =   0
+    public var             title               :   String                                          =   ""
+    public var             style               :   UIAlertAction.Style                             =   .default
     
-    var             click               :   ((UIAlertController, UIAlertAction) -> Void)?   =   nil
+    public var             click               :   ((UIAlertController, UIAlertAction) -> Void)?   =   nil
 }
 
 public class FSAlertAction: UIAlertAction {
     
-    var             theTag              :   Int                                             =   0
-    var             data                :   FSAlertActionData                               =   FSAlertActionData()
+    public var             theTag              :   Int                                             =   0
+    public var             data                :   FSAlertActionData                               =   FSAlertActionData()
 }
