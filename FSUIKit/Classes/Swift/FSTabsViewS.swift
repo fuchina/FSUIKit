@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSTabsViewS: FSViewS {
+public class FSTabsViewS: FSView {
     
     public var list: [String]? {
         didSet {
@@ -28,25 +28,24 @@ public class FSTabsViewS: FSViewS {
         let w = frame.width / CGFloat(list.count)
         for (index, text) in list.enumerated() {
             let fr = CGRect(x: w * CGFloat(index), y: 0, width: w, height: frame.height)
-            var tab = FSViewS.view(withTheTag: index, in: self) as? FSTabViewS
-            
+            var tab: FSTabsViewS = FSView.viewWithTheTag(tag: index, view: self) as! FSTabsViewS
             if let existingTab = tab {
                 existingTab.isHidden = false
                 existingTab.frame = fr
             } else {
-                tab = FSTabViewS(frame: fr)
-                tab?.theTag = index
-                addSubview(tab!)
+                tab = FSTableViewS(frame: fr)
+                tab.theTag = index
+                addSubview(tab)
                 
-                tab?.click = { [weak self] view in
+                tab.click = { [weak self] view, p in
                     guard let self = self else { return }
                     self.clickIndex?(self, view.theTag)
                 }
-                tab?.selectedState = { [weak self] tabV, selected in
+                tab.selectedState = { [weak self] tabV, selected in
                     self?.selectedState?(tabV, selected)
                 }
             }
-            tab?.label.text = text
+            tab.label.text = text
         }
     }
     

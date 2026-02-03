@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class FSTitleContentViewS: FSViewS {
+open class FSTitleContentView: FSView {
     
     public lazy var label: UILabel = {
         let l = UILabel(frame: bounds)

@@ -1,13 +1,13 @@
+////
+////  FSLabel.h
+////  Expand
+////
+////  Created by Fudongdong on 2017/8/4.
+////  Copyright © 2017年 china. All rights reserved.
+////
 //
-//  FSLabel.h
-//  Expand
+//#import <UIKit/UIKit.h>
 //
-//  Created by Fudongdong on 2017/8/4.
-//  Copyright © 2017年 china. All rights reserved.
+//@interface FSLabel : UILabel
 //
-
-#import <UIKit/UIKit.h>
-
-@interface FSLabel : UILabel
-
-@end
+//@end

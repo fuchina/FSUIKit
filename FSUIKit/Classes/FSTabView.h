@@ -1,23 +1,23 @@
+////
+////  FSTabView.h
+////  FSUIKit
+////
+////  Created by FudonFuchina on 2021/8/7.
+////
 //
-//  FSTabView.h
-//  FSUIKit
+//#import "FSView.h"
 //
-//  Created by FudonFuchina on 2021/8/7.
+//NS_ASSUME_NONNULL_BEGIN
 //
-
-#import "FSView.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface FSTabView : FSView
-
-@property (nonatomic, strong) UILabel       *label;
-
-// 是否选中，由外界记录
-@property (nonatomic, assign) BOOL          selected;
-
-@property (nonatomic, copy) void (^selectedState)(FSTabView *tab, BOOL selected);
-
-@end
-
-NS_ASSUME_NONNULL_END
+//@interface FSTabView : FSView
+//
+//@property (nonatomic, strong) UILabel       *label;
+//
+//// 是否选中，由外界记录
+//@property (nonatomic, assign) BOOL          selected;
+//
+//@property (nonatomic, copy) void (^selectedState)(FSTabView *tab, BOOL selected);
+//
+//@end
+//
+//NS_ASSUME_NONNULL_END

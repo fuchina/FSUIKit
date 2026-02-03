@@ -1,17 +1,17 @@
+////
+////  FSShopClassView.h
+////  myhome
+////
+////  Created by FudonFuchina on 2016/12/4.
+////  Copyright © 2016年 fuhope. All rights reserved.
+////
 //
-//  FSShopClassView.h
-//  myhome
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 2016/12/4.
-//  Copyright © 2016年 fuhope. All rights reserved.
+//@interface FSShopClassView : UIView
 //
-
-#import <UIKit/UIKit.h>
-
-@interface FSShopClassView : UIView
-
-@property (nonatomic,assign) NSInteger              selectIndex;
-@property (nonatomic,strong) NSArray<NSString *>    *dataSource;
-@property (nonatomic,copy) void (^selectedBlock)(FSShopClassView *bView,NSInteger bIndex);
-
-@end
+//@property (nonatomic,assign) NSInteger              selectIndex;
+//@property (nonatomic,strong) NSArray<NSString *>    *dataSource;
+//@property (nonatomic,copy) void (^selectedBlock)(FSShopClassView *bView,NSInteger bIndex);
+//
+//@end

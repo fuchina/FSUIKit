@@ -1,36 +1,36 @@
+////
+////  FSTapScrollView.m
+////  ShareEconomy
+////
+////  Created by fudon on 16/6/8.
+////  Copyright © 2016年 FudonFuchina. All rights reserved.
+////
 //
-//  FSTapScrollView.m
-//  ShareEconomy
+//#import "FSTapScrollView.h"
 //
-//  Created by fudon on 16/6/8.
-//  Copyright © 2016年 FudonFuchina. All rights reserved.
+//@implementation FSTapScrollView
 //
-
-#import "FSTapScrollView.h"
-
-@implementation FSTapScrollView
-
-- (instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if (self) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActionInTapScrollView)];
-        [self addGestureRecognizer:tap];
-    }
-    return self;
-}
-
-- (void)tapActionInTapScrollView{
-    if (self.click) {
-        self.click(self);
-    }
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
-@end
+//- (instancetype)initWithFrame:(CGRect)frame{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActionInTapScrollView)];
+//        [self addGestureRecognizer:tap];
+//    }
+//    return self;
+//}
+//
+//- (void)tapActionInTapScrollView{
+//    if (self.click) {
+//        self.click(self);
+//    }
+//}
+//
+///*
+//// Only override drawRect: if you perform custom drawing.
+//// An empty implementation adversely affects performance during animation.
+//- (void)drawRect:(CGRect)rect {
+//    // Drawing code
+//}
+//*/
+//
+//@end

@@ -128,7 +128,7 @@ extension FSShareS: MFMessageComposeViewControllerDelegate {
         }
         
         if let msg = msg {
-            _ = FSToastS.toast(msg, duration: 2)
+            _ = FSToast.toast(msg, duration: 2)
         }
         controller.dismiss(animated: true, completion: nil)
     }

@@ -1,16 +1,16 @@
+////
+////  FSHorizonScrollView.h
+////  FSUIKit
+////
+////  Created by 扶冬冬 on 2023/7/11.
+////
 //
-//  FSHorizonScrollView.h
-//  FSUIKit
+//#import <UIKit/UIKit.h>
 //
-//  Created by 扶冬冬 on 2023/7/11.
+//NS_ASSUME_NONNULL_BEGIN
 //
-
-#import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface FSHorizonScrollView : UIScrollView
-
-@end
-
-NS_ASSUME_NONNULL_END
+//@interface FSHorizonScrollView : UIScrollView
+//
+//@end
+//
+//NS_ASSUME_NONNULL_END

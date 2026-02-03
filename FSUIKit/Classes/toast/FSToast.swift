@@ -10,7 +10,7 @@ import Foundation
 import FSKit
 import FSCalculator
 
-open class FSToastS: NSObject {
+open class FSToast: NSObject {
     
     @objc public static func toast(_ text: String, duration: Float) -> UIView {
         let ws = FSKitSwift.currentWindowScene()

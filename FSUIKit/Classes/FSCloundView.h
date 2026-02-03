@@ -1,14 +1,14 @@
+////
+////  FSCloundView.h
+////  FBRetainCycleDetector
+////
+////  Created by FudonFuchina on 2019/3/2.
+////
 //
-//  FSCloundView.h
-//  FBRetainCycleDetector
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 2019/3/2.
+//@interface FSCloundView : UIView
 //
-
-#import <UIKit/UIKit.h>
-
-@interface FSCloundView : UIView
-
-@property (nonatomic,assign)UIEdgeInsets margin;
-
-@end
+//@property (nonatomic,assign)UIEdgeInsets margin;
+//
+//@end

@@ -1,18 +1,18 @@
+////
+////  UIImage+Bundle.h
+////  FSUIKit
+////
+////  Created by FudonFuchina on 2021/7/31.
+////
 //
-//  UIImage+Bundle.h
-//  FSUIKit
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 2021/7/31.
+//NS_ASSUME_NONNULL_BEGIN
 //
-
-#import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface UIImage (Bundle)
-
-+ (UIImage *)imageWithBundle:(NSString *)bundle imageName:(NSString *)imageName;
-
-@end
-
-NS_ASSUME_NONNULL_END
+//@interface UIImage (Bundle)
+//
+//+ (UIImage *)imageWithBundle:(NSString *)bundle imageName:(NSString *)imageName;
+//
+//@end
+//
+//NS_ASSUME_NONNULL_END

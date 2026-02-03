@@ -8,7 +8,7 @@
 import Foundation
 
 @objc
-public class FSImageLabelView: FSViewS {
+public class FSImageLabelView: FSView {
     
     public var          imageView                   :  UIImageView?                  =  nil
     public var          label                       :  UILabel?                      =  nil

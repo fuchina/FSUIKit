@@ -1,20 +1,20 @@
+////
+////  FSButtonView.h
+////  FBRetainCycleDetector
+////
+////  Created by FudonFuchina on 2020/2/23.
+////
 //
-//  FSButtonView.h
-//  FBRetainCycleDetector
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 2020/2/23.
+//NS_ASSUME_NONNULL_BEGIN
 //
-
-#import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface FSButtonView : UIView
-
-@property (nonatomic,strong) UIButton *button;
-
-@property (nonatomic,copy) void (^tap)(FSButtonView *bView);
-
-@end
-
-NS_ASSUME_NONNULL_END
+//@interface FSButtonView : UIView
+//
+//@property (nonatomic,strong) UIButton *button;
+//
+//@property (nonatomic,copy) void (^tap)(FSButtonView *bView);
+//
+//@end
+//
+//NS_ASSUME_NONNULL_END

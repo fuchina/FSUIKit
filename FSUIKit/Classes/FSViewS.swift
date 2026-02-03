@@ -7,10 +7,10 @@
 
 import Foundation
 
-open class FSViewS: UIView {
+open class FSView: UIView {
     
     public var  tapBackView                             :   UIView?                             =   nil
-    public var  click                                   :   ((FSViewS, CGPoint) ->  Void)?      =   nil
+    public var  click                                   :   ((FSView, CGPoint) ->  Void)?       =   nil
     
     var         theTag                                  :   Int                                 =   0
     
@@ -61,11 +61,11 @@ open class FSViewS: UIView {
         }
     }
     
-    public static func viewWithTheTag(tag: Int, view: UIView) -> FSViewS? {
+    public static func viewWithTheTag(tag: Int, view: UIView) -> FSView? {
         
         for sub in view.subviews {
-            if sub is FSViewS {
-                let subs: FSViewS = sub as! FSViewS
+            if sub is FSView {
+                let subs: FSView = sub as! FSView
                 if subs.theTag == tag {
                     return subs
                 }

@@ -1,18 +1,18 @@
+////
+////  FSTapLabel.h
+////  ShareEconomy
+////
+////  Created by FudonFuchina on 16/7/3.
+////  Copyright © 2016年 FudonFuchina. All rights reserved.
+////
 //
-//  FSTapLabel.h
-//  ShareEconomy
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 16/7/3.
-//  Copyright © 2016年 FudonFuchina. All rights reserved.
+//@class FSTapLabel;
+//typedef void(^FSTapLabelBlock)(FSTapLabel *bLabel);
 //
-
-#import <UIKit/UIKit.h>
-
-@class FSTapLabel;
-typedef void(^FSTapLabelBlock)(FSTapLabel *bLabel);
-
-@interface FSTapLabel : UILabel
-
-@property (nonatomic,copy) FSTapLabelBlock  block;
-
-@end
+//@interface FSTapLabel : UILabel
+//
+//@property (nonatomic,copy) FSTapLabelBlock  block;
+//
+//@end

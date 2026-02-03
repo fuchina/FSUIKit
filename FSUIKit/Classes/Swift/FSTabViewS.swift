@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSTabViewS: FSViewS {
+public class FSTabViewS: FSView {
     
     private var _label: UILabel?
     

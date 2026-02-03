@@ -1,18 +1,18 @@
+////
+////  FSImageView.h
+////  FSUIKit
+////
+////  Created by FudonFuchina on 2021/7/31.
+////
 //
-//  FSImageView.h
-//  FSUIKit
+//#import <UIKit/UIKit.h>
 //
-//  Created by FudonFuchina on 2021/7/31.
+//NS_ASSUME_NONNULL_BEGIN
 //
-
-#import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface FSImageView : UIImageView
-
-@property (nonatomic, copy) void (^click)(FSImageView *view);
-
-@end
-
-NS_ASSUME_NONNULL_END
+//@interface FSImageView : UIImageView
+//
+//@property (nonatomic, copy) void (^click)(FSImageView *view);
+//
+//@end
+//
+//NS_ASSUME_NONNULL_END

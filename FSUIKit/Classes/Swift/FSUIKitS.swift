@@ -7,7 +7,7 @@ import UIKit
 public class FSUIKitS: NSObject {
     
     @available(iOS 8.0, *)
-    public static func alert(style: UIAlertController.Style, controller pController: UIViewController, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((FSAlertActionS) -> Void)?) -> UIAlertController {
+    public static func alert(style: UIAlertController.Style, controller pController: UIViewController, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
         let alertController = alertController(withStyle: style, title: title, message: message, actionTitles: titles, styles: styles, handler: handler, cancelTitle: "取消", cancel: nil)
         pController.present(alertController, animated: true, completion: nil)
         return alertController
@@ -20,7 +20,7 @@ public class FSUIKitS: NSObject {
         return alertController
     }
     
-    private static func alertController(withStyle style: UIAlertController.Style, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((UIAlertAction) -> Void)?, cancelTitle: String?, cancel: ((UIAlertAction) -> Void)?) -> UIAlertController {
+    private static func alertController(withStyle style: UIAlertController.Style, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((FSAlertAction) -> Void)?, cancelTitle: String?, cancel: ((FSAlertAction) -> Void)?) -> UIAlertController {
         var finalStyle = style
         if UIDevice.current.userInterfaceIdiom == .pad {
             finalStyle = .alert
@@ -31,16 +31,16 @@ public class FSUIKitS: NSObject {
         
         for x in 0..<count {
             let actionStyle = UIAlertAction.Style(rawValue: styles[x].intValue) ?? .default
-            let action = FSAlertActionS(title: titles[x], style: actionStyle) { action in
-                handler?(action)
+            let action = FSAlertAction(title: titles[x], style: actionStyle) { action in
+                handler?(action as! FSAlertAction)
             }
             action.theTag = x
             controller.addAction(action)
         }
         
         if let cancelTitle = cancelTitle, !cancelTitle.isEmpty {
-            let archiveAction = FSAlertActionS(title: cancelTitle, style: .cancel) { action in
-                cancel?(action)
+            let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { action in
+                cancel?(action as! FSAlertAction)
             }
             controller.addAction(archiveAction)
         }
@@ -48,7 +48,6 @@ public class FSUIKitS: NSObject {
         return controller
     }
     
-    @available(iOS 8.0, *)
     public static func alertInput(number: Int, controller: UIViewController, title: String?, message: String?, buttons: Int, buttonConfig: ((FSAlertActionData) -> Void)?, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController? {
         guard number >= 1 else { return nil }
         
@@ -67,8 +66,8 @@ public class FSUIKitS: NSObject {
             data.style = .default
             buttonConfig?(data)
             
-            let action = FSAlertActionS(title: data.title, style: data.style) { action in
-                if let fsAction = action as? FSAlertActionS, let click = fsAction.data?.click {
+            let action = FSAlertAction(title: data.title, style: data.style) { action in
+                if let fsAction = action as? FSAlertAction, let click = fsAction.data.click {
                     click(alertController, action)
                 }
             }

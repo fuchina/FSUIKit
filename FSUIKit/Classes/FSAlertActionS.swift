@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FSAlertActionDataS {
+public class FSAlertActionData {
     
     var             index               :   Int                                             =   0
     var             title               :   String                                          =   ""
@@ -16,8 +16,8 @@ class FSAlertActionDataS {
     var             click               :   ((UIAlertController, UIAlertAction) -> Void)?   =   nil
 }
 
-class FSAlertActionS: UIAlertAction {
+public class FSAlertAction: UIAlertAction {
     
     var             theTag              :   Int                                             =   0
-    var             data                :   FSAlertActionDataS                              =   FSAlertActionDataS()
+    var             data                :   FSAlertActionData                               =   FSAlertActionData()
 }
