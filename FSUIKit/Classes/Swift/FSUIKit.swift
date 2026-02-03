@@ -4,98 +4,112 @@
 import UIKit
 
 @objcMembers
-public class FSUIKitS: NSObject {
+public class FSUIKit: NSObject {
     
-    @available(iOS 8.0, *)
-    public static func alert(style: UIAlertController.Style, controller pController: UIViewController, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
-        let alertController = alertController(withStyle: style, title: title, message: message, actionTitles: titles, styles: styles, handler: handler, cancelTitle: "取消", cancel: nil)
-        pController.present(alertController, animated: true, completion: nil)
+    public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((UIAlertAction) -> Void)?, cancelTitle: String, cancel: ((UIAlertAction) -> Void)?, completion: (() -> Void)?) -> UIAlertController {
+        
+        let alertController = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: cancelTitle, cancel: cancel);
+        controller.present(alertController, animated: true, completion: completion)
         return alertController
     }
-    
-    @available(iOS 8.0, *)
-    public static func alert(style: UIAlertController.Style, controller pController: UIViewController, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((UIAlertAction) -> Void)?, cancelTitle: String?, cancel: ((UIAlertAction) -> Void)?, completion: (() -> Void)?) -> UIAlertController {
-        let alertController = alertController(withStyle: style, title: title, message: message, actionTitles: titles, styles: styles, handler: handler, cancelTitle: cancelTitle, cancel: cancel)
-        pController.present(alertController, animated: true, completion: completion)
-        return alertController
+
+    static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
+        
+        let ac = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: "取消", cancel: nil)
+        controller.present(ac, animated: true, completion: nil)
+        return ac
     }
     
-    private static func alertController(withStyle style: UIAlertController.Style, title: String?, message: String?, actionTitles titles: [String], styles: [NSNumber], handler: ((FSAlertAction) -> Void)?, cancelTitle: String?, cancel: ((FSAlertAction) -> Void)?) -> UIAlertController {
-        var finalStyle = style
+    static func alertControllerWithStyle(_ style1: UIAlertController.Style, title:String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ( (FSAlertAction) -> Void)?, cancelTitle: String, cancel: ((FSAlertAction) -> Void)?) -> UIAlertController {
+        
+        var style = style1
         if UIDevice.current.userInterfaceIdiom == .pad {
-            finalStyle = .alert
+            style = UIAlertController.Style.alert
         }
         
-        let count = min(titles.count, styles.count)
-        let controller = UIAlertController(title: title, message: message, preferredStyle: finalStyle)
+        let count = min(actionTitles.count, styles.count)
+        let controller = UIAlertController(title: title, message: message, preferredStyle: style)
         
-        for x in 0..<count {
-            let actionStyle = UIAlertAction.Style(rawValue: styles[x].intValue) ?? .default
-            let action = FSAlertAction(title: titles[x], style: actionStyle) { action in
-                handler?(action as! FSAlertAction)
-            }
-            action.theTag = x
+        for i in 0..<count {
+            let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { act in
+                if handler != nil {
+                    handler!(act as! FSAlertAction)
+                }
+            })
+            action.theTag = i
             controller.addAction(action)
         }
         
-        if let cancelTitle = cancelTitle, !cancelTitle.isEmpty {
-            let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { action in
-                cancel?(action as! FSAlertAction)
+        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { act in
+            if cancel != nil {
+                cancel!(act as! FSAlertAction)
             }
-            controller.addAction(archiveAction)
         }
+        
+        controller.addAction(archiveAction)
         
         return controller
     }
     
-    public static func alertInput(number: Int, controller: UIViewController, title: String?, message: String?, buttons: Int, buttonConfig: ((FSAlertActionData) -> Void)?, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController? {
-        guard number >= 1 else { return nil }
+    static func alertInput(number: Int, controller: UIViewController, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        for x in 0..<number {
-            alertController.addTextField { textField in
-                textField.tag = x
-                textFieldConfig?(textField)
-            }
+        if number < 1 {
+            return UIAlertController()
         }
         
-        for x in 0..<buttons {
-            let data = FSAlertActionData()
-            data.index = x
-            data.style = .default
-            buttonConfig?(data)
-            
-            let action = FSAlertAction(title: data.title, style: data.style) { action in
-                if let fsAction = action as? FSAlertAction, let click = fsAction.data.click {
-                    click(alertController, action)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        for i in 0..<number {
+            alert.addTextField { tf in
+                if textFieldConfig != nil {
+                    tf.tag = i
+                    textFieldConfig!(tf)
                 }
             }
-            action.data = data
-            alertController.addAction(action)
         }
         
-        controller.present(alertController, animated: true) {
-            completion?(alertController)
+        for i in 0..<buttons {
+            let data = FSAlertActionData()
+            data.index = i
+            data.style = .default
+
+            buttonConfig(data)
+            
+            let action = FSAlertAction(title: data.title, style: data.style) { [weak alert] m in
+                guard let alert else { return }
+
+                let act: FSAlertAction = m as! FSAlertAction
+                if act.data.click != nil {
+                    act.data.click!(alert, act)
+                }
+            }
+            
+            action.data = data
+            alert.addAction(action)
         }
-        return alertController
+        
+        controller.present(alert, animated: true) {
+            if completion != nil {
+                completion!(alert)
+            }
+        }
+        
+        return alert
     }
     
-    public static func showAlert(withMessage message: String, controller: UIViewController) {
-        showAlert(withTitle: "温馨提示", message: message, ok: "确定", controller: controller, handler: nil)
+    public static func showAlertWithMessage(message: String, controller: UIViewController) {
+        self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", controller: controller, handler: nil)
     }
     
-    @available(iOS 8.0, *)
-    public static func showAlert(withMessage message: String, controller: UIViewController, handler: ((UIAlertAction) -> Void)?) {
-        showAlert(withTitle: "温馨提示", message: message, ok: "确定", controller: controller, handler: handler)
+    public static func showAlertWithMessage(message: String, controller: UIViewController, handler: ((UIAlertAction) -> Void)?) {
+        self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", controller: controller, handler: handler)
     }
     
-    @available(iOS 8.0, *)
-    public static func showAlert(withTitle title: String?, message: String?, ok: String, controller pController: UIViewController, handler: ((UIAlertAction) -> Void)?) {
-        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    public static func showAlertWithTitle(title: String, message: String, ok: String, controller: UIViewController, handler: ((UIAlertAction) -> Void)?) {
+        let c = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: ok, style: .default, handler: handler)
-        controller.addAction(action)
-        pController.present(controller, animated: true, completion: nil)
+        c.addAction(action)
+        controller.present(c, animated: true, completion: nil)
     }
     
     @available(iOS 8.0, *)
