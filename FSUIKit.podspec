@@ -26,4 +26,10 @@ Pod::Spec.new do |s|
   s.dependency   'FSKit'
   s.dependency   'FSCalculator'
 
+  # 允许 Swift 访问 OC 依赖
+  s.pod_target_xcconfig = {
+    'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/WechatOpenSDK',
+    'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/WechatOpenSDK'
+  }
+
 end

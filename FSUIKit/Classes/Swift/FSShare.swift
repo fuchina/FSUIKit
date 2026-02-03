@@ -1,9 +1,11 @@
 // FSShare.swift
 // Translated from FSShare.h/m
-// Note: 微信SDK相关功能需要单独集成WechatOpenSDK
+// Note: 微信SDK相关功能需要集成WechatOpenSDK
 
 import UIKit
 import MessageUI
+
+//import WechatOpenSDK  暂不支持，需要OC桥接，后续实现
 
 @objcMembers
 public class FSShare: NSObject {
@@ -18,6 +20,124 @@ public class FSShare: NSObject {
         super.init()
     }
     
+    // MARK: - 微信注册
+    
+    public static func wechatAPIRegisterAppKey(_ appKey: String?) {
+//        #if !targetEnvironment(simulator)
+//        guard let appKey = appKey, !appKey.isEmpty else { return }
+//        WXApi.registerApp(appKey, universalLink: "")
+//        #endif
+    }
+    
+    public static func handleOpenUrl(_ url: URL) -> Bool {
+        return false
+//        let share = FSShare()
+//        return WXApi.handleOpen(url, delegate: share)
+    }
+    
+    // MARK: - 微信分享图片
+    
+    public static func wxImageShareAction(with image: UIImage?, controller: UIViewController, result completion: ((String?) -> Void)?) {
+//        guard let image = image, image.size.width > 1, image.size.height > 1 else {
+//            FSUIKit.showAlert(withMessage: "分享的不是图片", controller: controller)
+//            return
+//        }
+//        
+//        guard checkPhoneHasWechat(controller) else { return }
+//        
+//        let thumbImage = FSImage.compressImage(image, width: 50)
+//        
+//        let message = WXMediaMessage()
+//        message.setThumbImage(thumbImage)
+//        
+//        let ext = WXImageObject()
+//        ext.imageData = image.pngData()
+//        message.mediaObject = ext
+//        
+//        let req = SendMessageToWXReq()
+//        req.bText = false
+//        req.message = message
+//        req.scene = Int32(WXSceneSession.rawValue)
+//        WXApi.send(req)
+    }
+    
+    // MARK: - 微信文件分享
+    
+    public static func wxFileShareAction(withPath path: String?, fileName: String?, extension ext: String?, controller: UIViewController, result completion: ((String?) -> Void)?) {
+//        guard let path = path, let fileName = fileName, let ext = ext else { return }
+//        
+//        let manager = FileManager.default
+//        guard manager.fileExists(atPath: path) else { return }
+//        guard checkPhoneHasWechat(controller) else { return }
+//        
+//        let fileObject = WXFileObject()
+//        fileObject.fileExtension = ext
+//        fileObject.fileData = try? Data(contentsOf: URL(fileURLWithPath: path))
+//        
+//        let message = WXMediaMessage()
+//        message.title = "\(fileName).\(ext)"
+//        message.description = "文件分享"
+//        message.mediaObject = fileObject
+//        
+//        let req = SendMessageToWXReq()
+//        req.bText = false
+//        req.message = message
+//        req.scene = Int32(WXSceneSession.rawValue)
+//        WXApi.send(req)
+    }
+    
+    // MARK: - 微信文字分享
+    
+    public static func wxContentShare(_ content: String?, scene: Int32, controller: UIViewController) {
+        guard let content = content, !content.isEmpty else { return }
+        guard checkPhoneHasWechat(controller) else { return }
+        
+//        let req = SendMessageToWXReq()
+//        req.text = content
+//        req.bText = true
+//        req.scene = scene
+//        WXApi.send(req)
+    }
+    
+    // MARK: - 微信URL分享
+    
+    public static func wxUrlShareTitle(_ title: String?, description: String?, url: String?, controller: UIViewController) {
+        guard checkPhoneHasWechat(controller) else { return }
+        
+//        let ext = WXWebpageObject()
+//        ext.webpageUrl = url ?? ""
+//        
+//        let message = WXMediaMessage()
+//        message.title = title
+//        message.description = description
+//        message.setThumbImage(UIImage(named: "logo_wx_small"))
+//        message.mediaObject = ext
+//        
+//        let req = SendMessageToWXReq()
+//        req.bText = false
+//        req.message = message
+//        req.scene = Int32(WXSceneSession.rawValue)
+//        WXApi.send(req)
+    }
+    
+    // MARK: - 检查微信安装
+    
+    public static func checkPhoneHasWechat(_ controller: UIViewController) -> Bool {
+//        let hasInstalled = WXApi.isWXAppInstalled()
+//        if !hasInstalled {
+//            FSUIKit.alert(.actionSheet, controller: controller, title: "微信分享", message: "未安装微信，是否去下载？", actionTitles: ["下载"], styles: [NSNumber(value: UIAlertAction.Style.default.rawValue)]) { action in
+//                if let url = URL(string: WXApi.getWXAppInstallUrl()) {
+//                    if UIApplication.shared.canOpenURL(url) {
+//                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                    }
+//                }
+//            }
+//        }
+//        return hasInstalled
+        
+        return false
+    }
+    
     // MARK: - 短信分享
     
     public static func messageShare(withMessage message: String?, on controller: UIViewController, recipients: [String]?) {
@@ -30,7 +150,7 @@ public class FSShare: NSObject {
     
     public func messageShare(withMessage message: String?, on controller: UIViewController, recipients: [String]?, data fileData: Data?, fileName: String?, fileType: String?) {
         guard MFMessageComposeViewController.canSendText() else {
-            showAlert(message: "设备不支持发送短信", on: controller)
+            FSUIKit.showAlertWithMessage(message: "设备不支持发送短信", controller: controller)
             return
         }
         
@@ -44,7 +164,7 @@ public class FSShare: NSObject {
             picker.body = message
         }
         if let fileData = fileData {
-            let name = fileName ?? "\(Int(Date().timeIntervalSince1970))"
+            let name = (fileName?.isEmpty == false) ? fileName! : "\(Int(Date().timeIntervalSince1970))"
             picker.addAttachmentData(fileData, typeIdentifier: fileType ?? "", filename: name)
         }
         
@@ -63,7 +183,7 @@ public class FSShare: NSObject {
     
     public func emailShare(withSubject subject: String?, on controller: UIViewController, messageBody body: String?, recipients: [String]?, fileData data: Data?, fileName: String?, mimeType fileType: String?) {
         guard MFMailComposeViewController.canSendMail() else {
-            showAlert(message: "设备不支持发送邮件", on: controller)
+            FSUIKit.showAlertWithMessage(message: "设备不支持发送邮件", controller: controller)
             return
         }
         
@@ -88,7 +208,9 @@ public class FSShare: NSObject {
     
     // MARK: - UIDocumentInteractionController
     
-    public func openDocumentInteractionController(_ fileURL: URL, in controller: UIViewController) {
+    public func openDocumentInteractionController(_ fileURL: URL?, in controller: UIViewController) {
+        guard let fileURL = fileURL else { return }
+        
         if documentController == nil {
             documentController = UIDocumentInteractionController(url: fileURL)
             documentController?.delegate = self
@@ -98,18 +220,27 @@ public class FSShare: NSObject {
         
         let canOpen = documentController?.presentOpenInMenu(from: .zero, in: controller.view, animated: true) ?? false
         if !canOpen {
-            showAlert(message: "出现问题，不能打开", on: controller)
+            FSUIKit.showAlertWithMessage(message: "出现问题，不能打开", controller: controller)
         }
     }
-    
-    // MARK: - Helper
-    
-    private func showAlert(message: String, on controller: UIViewController) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确定", style: .default))
-        controller.present(alert, animated: true)
-    }
 }
+
+// MARK: - WXApiDelegate
+
+//extension FSShare: WXApiDelegate {
+//    public func onReq(_ req: BaseReq) {
+//        // Handle request
+//    }
+//    
+//    public func onResp(_ resp: BaseResp) {
+//        if resp is SendMessageToWXResp {
+//            if let windowScene = FSKit.currentWindowScene(),
+//               let rootVC = windowScene.keyWindow?.rootViewController {
+//                FSUIKit.showAlert(withMessage: resp.errStr, controller: rootVC)
+//            }
+//        }
+//    }
+//}
 
 // MARK: - MFMessageComposeViewControllerDelegate
 
