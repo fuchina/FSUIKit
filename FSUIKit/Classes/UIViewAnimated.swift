@@ -239,7 +239,7 @@ extension UIView {
             UIView.setAnimationsEnabled(oldState)
         }
         
-        guard let window = FSKitSwift.currentWindowScene()?.windows.first else {
+        guard let window = FSKit.currentWindowScene()?.windows.first else {
             completion?(false)
             return
         }
