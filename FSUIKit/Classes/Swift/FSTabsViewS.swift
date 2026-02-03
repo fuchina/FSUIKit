@@ -19,7 +19,7 @@ public class FSTabsViewS: FSView {
         // Hide existing tabs
         for sub in subviews {
             if let tab = sub as? FSTabViewS {
-                tab.isHidden = trueb
+                tab.isHidden = true
             }
         }
         
