@@ -1,4 +1,4 @@
-// FSShareS.swift
+// FSShare.swift
 // Translated from FSShare.h/m
 // Note: 微信SDK相关功能需要单独集成WechatOpenSDK
 
@@ -6,9 +6,9 @@ import UIKit
 import MessageUI
 
 @objcMembers
-public class FSShareS: NSObject {
+public class FSShare: NSObject {
     
-    public static let shared = FSShareS()
+    public static let shared = FSShare()
     
     public var result: ((Bool, String?) -> Void)?
     
@@ -113,7 +113,7 @@ public class FSShareS: NSObject {
 
 // MARK: - MFMessageComposeViewControllerDelegate
 
-extension FSShareS: MFMessageComposeViewControllerDelegate {
+extension FSShare: MFMessageComposeViewControllerDelegate {
     public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         var msg: String?
         switch result {
@@ -128,7 +128,7 @@ extension FSShareS: MFMessageComposeViewControllerDelegate {
         }
         
         if let msg = msg {
-            _ = FSToast.toast(msg, duration: 2)
+            _ = FSToastS.toast(msg, duration: 2)
         }
         controller.dismiss(animated: true, completion: nil)
     }
@@ -136,7 +136,7 @@ extension FSShareS: MFMessageComposeViewControllerDelegate {
 
 // MARK: - MFMailComposeViewControllerDelegate
 
-extension FSShareS: MFMailComposeViewControllerDelegate {
+extension FSShare: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         var msg: String?
         switch result {
@@ -161,7 +161,7 @@ extension FSShareS: MFMailComposeViewControllerDelegate {
 
 // MARK: - UIDocumentInteractionControllerDelegate
 
-extension FSShareS: UIDocumentInteractionControllerDelegate {
+extension FSShare: UIDocumentInteractionControllerDelegate {
     public func documentInteractionControllerDidDismissOpenInMenu(_ controller: UIDocumentInteractionController) {
         documentController = nil
     }
