@@ -3,7 +3,7 @@
 
 import UIKit
 
-public let FS_LineThicknessS: CGFloat = 0.5
+public let FS_LineThickness: CGFloat = 0.5
 
 @objcMembers
 public class FSViewManager: UIView {
