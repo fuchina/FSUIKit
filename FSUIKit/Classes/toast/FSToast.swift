@@ -12,6 +12,10 @@ import FSCalculator
 
 open class FSToast: NSObject {
     
+    @objc public static func show(_ text: String) {
+        _ = self.toast(text, duration: 2)
+    }
+    
     @objc public static func toast(_ text: String) -> UIView {        
         return self.toast(text, duration: 2)
     }

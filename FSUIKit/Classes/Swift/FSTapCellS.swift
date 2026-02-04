@@ -3,16 +3,16 @@
 
 import UIKit
 
-public typealias TapCellBlockS = (FSTapCellS) -> Void
+public typealias TapCellBlock = (FSTapCell) -> Void
 
 @objcMembers
-public class FSTapCellS: UIView {
+public class FSTapCell: UIView {
     
     private var _backTapView: UIView!
     private var _textLabel: UILabel?
     private var _detailTextLabel: UILabel?
     
-    public var click: TapCellBlockS?
+    public var click: TapCellBlock?
     
     public var textLabel: UILabel {
         if _textLabel == nil {

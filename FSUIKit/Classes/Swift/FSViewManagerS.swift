@@ -146,12 +146,12 @@ public class FSViewManager: UIView {
         return label
     }
     
-    public static func tapCell(withText text: String?, textColor: UIColor?, font: UIFont?, detailText: String?, detailColor: UIColor?, detailFont: UIFont?, block: TapCellBlockS?) -> FSTapCellS {
+    public static func tapCell(withText text: String?, textColor: UIColor?, font: UIFont?, detailText: String?, detailColor: UIColor?, detailFont: UIFont?, block: TapCellBlock?) -> FSTapCell {
         return tapCell(withText: text, textColor: textColor, font: font, detailText: detailText, detailColor: detailColor, detailFont: detailFont, frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44), block: block)
     }
     
-    public static func tapCell(withText text: String?, textColor: UIColor?, font: UIFont?, detailText: String?, detailColor: UIColor?, detailFont: UIFont?, frame: CGRect, block: TapCellBlockS?) -> FSTapCellS {
-        let cell = FSTapCellS(frame: frame)
+    public static func tapCell(withText text: String?, textColor: UIColor?, font: UIFont?, detailText: String?, detailColor: UIColor?, detailFont: UIFont?, frame: CGRect, block: TapCellBlock?) -> FSTapCell {
+        let cell = FSTapCell(frame: frame)
         if let t = text {
             cell.textLabel.text = t
         }
