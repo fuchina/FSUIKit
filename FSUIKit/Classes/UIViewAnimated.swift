@@ -17,7 +17,7 @@ extension UIView {
     }
     
     // MARK: - 摇晃动画（重载方法，对应 shake 系列）
-    func shake(count: Int) {
+    public func shake(count: Int) {
         shake(count: count, delegate: nil)
     }
     
