@@ -6,8 +6,8 @@ import UIKit
 @objcMembers
 public class FSDBJeViewS: UIView {
     
-    public var jeTF: FSLabelTextFieldS!
-    public var bzTF: FSLabelTextFieldS!
+    public var jeTF: FSLabelTextField!
+    public var bzTF: FSLabelTextField!
     public var tapEvent: ((FSDBJeViewS) -> Void)?
     
     public override init(frame: CGRect) {
@@ -28,7 +28,7 @@ public class FSDBJeViewS: UIView {
         
         let size = frame.size
         for x in 0..<2 {
-            let textField = FSLabelTextFieldS(
+            let textField = FSLabelTextField(
                 frame: CGRect(x: 0, y: 10 + 45 * CGFloat(x), width: size.width, height: 44),
                 text: x == 1 ? "备注" : "金额",
                 textFieldText: nil,
