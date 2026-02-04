@@ -12,20 +12,20 @@ public class FSCollectionView: UIView {
     
     public weak var scrollDelegate: UIScrollViewDelegate?
     
-    public var customFlowLayout: ((FSCollectionViewS) -> UICollectionViewFlowLayout)?
-    public var configFlowLayout: ((FSCollectionViewS, UICollectionViewFlowLayout) -> Void)?
-    public var configUICollectionView: ((FSCollectionViewS, UICollectionView) -> Void)?
-    public var identifierForIndexPath: ((FSCollectionViewS, IndexPath) -> String)?
-    public var cellForItemAtIndexPath: ((FSCollectionViewS, UICollectionViewCell, IndexPath) -> Void)?
-    public var numberOfItemsInSection: ((FSCollectionViewS, Int) -> Int)?
-    public var sizeForItemAtIndexPath: ((FSCollectionViewS, UICollectionViewLayout, IndexPath) -> CGSize)?
-    public var insetForSectionAtIndex: ((FSCollectionViewS, UICollectionViewLayout, Int) -> UIEdgeInsets)?
-    public var minimumLineSpacingForSectionAtIndex: ((FSCollectionViewS, UICollectionViewLayout, Int) -> CGFloat)?
-    public var minimumInteritemSpacingForSectionAtIndex: ((FSCollectionViewS, UICollectionViewLayout, Int) -> CGFloat)?
-    public var didSelectItemAtIndexPath: ((FSCollectionViewS, IndexPath) -> Void)?
-    public var indexOfPageChanged: ((FSCollectionViewS, IndexPath?) -> Void)?
-    public var willDisplayCell: ((FSCollectionViewS, UICollectionViewCell, IndexPath, Bool) -> Void)?
-    public var didEndDisplayingCell: ((FSCollectionViewS, UICollectionViewCell, IndexPath, Bool) -> Void)?
+    public var customFlowLayout: ((FSCollectionView) -> UICollectionViewFlowLayout)?
+    public var configFlowLayout: ((FSCollectionView, UICollectionViewFlowLayout) -> Void)?
+    public var configUICollectionView: ((FSCollectionView, UICollectionView) -> Void)?
+    public var identifierForIndexPath: ((FSCollectionView, IndexPath) -> String)?
+    public var cellForItemAtIndexPath: ((FSCollectionView, UICollectionViewCell, IndexPath) -> Void)?
+    public var numberOfItemsInSection: ((FSCollectionView, Int) -> Int)?
+    public var sizeForItemAtIndexPath: ((FSCollectionView, UICollectionViewLayout, IndexPath) -> CGSize)?
+    public var insetForSectionAtIndex: ((FSCollectionView, UICollectionViewLayout, Int) -> UIEdgeInsets)?
+    public var minimumLineSpacingForSectionAtIndex: ((FSCollectionView, UICollectionViewLayout, Int) -> CGFloat)?
+    public var minimumInteritemSpacingForSectionAtIndex: ((FSCollectionView, UICollectionViewLayout, Int) -> CGFloat)?
+    public var didSelectItemAtIndexPath: ((FSCollectionView, IndexPath) -> Void)?
+    public var indexOfPageChanged: ((FSCollectionView, IndexPath?) -> Void)?
+    public var willDisplayCell: ((FSCollectionView, UICollectionViewCell, IndexPath, Bool) -> Void)?
+    public var didEndDisplayingCell: ((FSCollectionView, UICollectionViewCell, IndexPath, Bool) -> Void)?
     
     public var collectionView: UICollectionView {
         if _collectionView == nil {
@@ -116,7 +116,7 @@ public class FSCollectionView: UIView {
     }
 }
 
-extension FSCollectionViewS: UICollectionViewDataSource {
+extension FSCollectionView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfItemsInSection?(self, section) ?? 0
     }
@@ -129,7 +129,7 @@ extension FSCollectionViewS: UICollectionViewDataSource {
     }
 }
 
-extension FSCollectionViewS: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension FSCollectionView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return sizeForItemAtIndexPath?(self, collectionViewLayout, indexPath) ?? .zero
     }

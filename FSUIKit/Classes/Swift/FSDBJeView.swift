@@ -8,7 +8,7 @@ public class FSDBJeView: UIView {
     
     public var jeTF: FSLabelTextField!
     public var bzTF: FSLabelTextField!
-    public var tapEvent: ((FSDBJeViewS) -> Void)?
+    public var tapEvent: ((FSDBJeView) -> Void)?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

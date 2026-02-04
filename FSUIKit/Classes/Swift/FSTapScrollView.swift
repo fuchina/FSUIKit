@@ -6,7 +6,7 @@ import UIKit
 @objcMembers
 public class FSTapScrollView: UIScrollView {
     
-    public var click: ((FSTapScrollViewS) -> Void)?
+    public var click: ((FSTapScrollView) -> Void)?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

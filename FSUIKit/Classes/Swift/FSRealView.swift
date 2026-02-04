@@ -31,7 +31,7 @@ public class FSRealGridView: UIView {
 @objcMembers
 public class FSRealView: UIView {
     
-    public func designViews(withRows rows: Int, columns: Int, height: CGFloat, configRow: ((CALayer, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, Int) -> Void)?, configColumn: ((CALayer, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, Int) -> Void)?, size: ((UnsafeMutablePointer<CGFloat>, Int, Int) -> Void)?, grid: ((FSRealGridViewS, Int, Int) -> Void)?) {
+    public func designViews(withRows rows: Int, columns: Int, height: CGFloat, configRow: ((CALayer, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, Int) -> Void)?, configColumn: ((CALayer, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, Int) -> Void)?, size: ((UnsafeMutablePointer<CGFloat>, Int, Int) -> Void)?, grid: ((FSRealGridView, Int, Int) -> Void)?) {
         
         var rowTop: CGFloat = 0
         for row in 0..<(rows + 1) {
@@ -74,7 +74,7 @@ public class FSRealView: UIView {
                 size?(&width, row, column)
                 
                 let frame = CGRect(x: x, y: y, width: width, height: height)
-                let gridView = FSRealGridViewS(frame: frame)
+                let gridView = FSRealGridView(frame: frame)
                 addSubview(gridView)
                 grid?(gridView, row, column)
                 

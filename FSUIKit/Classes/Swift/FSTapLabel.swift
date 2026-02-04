@@ -3,7 +3,7 @@
 
 import UIKit
 
-public typealias FSTapLabelBlockS = (FSTapLabelS) -> Void
+public typealias FSTapLabelBlockS = (FSTapLabel) -> Void
 
 @objcMembers
 public class FSTapLabel: UILabel {

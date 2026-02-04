@@ -9,7 +9,7 @@ public class FSButtonView: UIView {
     private var _backView: UIView!
     private var _button: UIButton?
     
-    public var tap: ((FSButtonViewS) -> Void)?
+    public var tap: ((FSButtonView) -> Void)?
     
     public var button: UIButton {
         if _button == nil {

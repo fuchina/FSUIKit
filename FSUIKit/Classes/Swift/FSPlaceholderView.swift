@@ -20,7 +20,7 @@ public class FSPlaceholderView: UIView {
         return _label!
     }
     
-    public var click: ((FSPlaceholderViewS) -> Void)?
+    public var click: ((FSPlaceholderView) -> Void)?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

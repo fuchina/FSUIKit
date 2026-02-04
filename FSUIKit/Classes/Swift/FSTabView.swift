@@ -24,7 +24,7 @@ public class FSTabView: FSView {
         }
     }
     
-    public var selectedState: ((FSTabViewS, Bool) -> Void)?
+    public var selectedState: ((FSTabView, Bool) -> Void)?
     
     public override func layoutSubviews() {
         super.layoutSubviews()

@@ -18,13 +18,13 @@ public enum FSClickModeS: Int {
 @objcMembers
 public class FSVanView: UIView {
     
-    private var _roundView: FSRoundVanViewS!
-    private var _label: FSLabelS?
+    private var _roundView: FSRoundVanView!
+    private var _label: FSLabel?
     
-    public var label: FSLabelS {
+    public var label: FSLabel {
         if _label == nil {
             let size = frame.size
-            let lbl = FSLabelS(frame: CGRect(x: 15, y: (size.height - 60) / 2, width: size.width - 30, height: 60))
+            let lbl = FSLabel(frame: CGRect(x: 15, y: (size.height - 60) / 2, width: size.width - 30, height: 60))
             lbl.font = UIFont.systemFont(ofSize: 14)
             lbl.textColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0)
             lbl.textAlignment = .center
@@ -34,7 +34,7 @@ public class FSVanView: UIView {
         return _label!
     }
     
-    public var status: FSLoadingStatusS = .default {
+    public var status: FSLoadingStatus = .default {
         didSet {
             switch status {
             case .loading:
@@ -66,7 +66,7 @@ public class FSVanView: UIView {
         
         let a: CGFloat = 1
         let b: CGFloat = 1
-        _roundView = FSRoundVanViewS(frame: CGRect(x: size.width / 2 - 12, y: size.height / 2 - 12, width: 24, height: 24))
+        _roundView = FSRoundVanView(frame: CGRect(x: size.width / 2 - 12, y: size.height / 2 - 12, width: 24, height: 24))
         _roundView.start()
         let grayColor = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: 1.0)
         _roundView.circleArray = [
@@ -83,7 +83,7 @@ public class FSVanView: UIView {
 }
 
 @objcMembers
-public class FSRoundVanViewS: UIView {
+public class FSRoundVanView: UIView {
     
     private var link: CADisplayLink?
     private var count: Int = 0

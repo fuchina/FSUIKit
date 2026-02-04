@@ -7,7 +7,7 @@ import UIKit
 public class FSTableView: UITableView {
     
     /// 用来获得tableView reloadData后的时机
-    public var layoutedSubviews: ((FSTableViewS) -> Void)?
+    public var layoutedSubviews: ((FSTableView) -> Void)?
     
     public override func layoutSubviews() {
         super.layoutSubviews()

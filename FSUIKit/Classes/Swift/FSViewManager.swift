@@ -6,7 +6,7 @@ import UIKit
 public let FS_LineThickness: CGFloat = 0.5
 
 @objcMembers
-public class FSViewManager: UIView {
+open class FSViewManager: UIView {
     
     public static func view(withFrame frame: CGRect, backColor color: UIColor?) -> UIView {
         let view = UIView(frame: frame)
@@ -129,8 +129,8 @@ public class FSViewManager: UIView {
     }
     
     @available(iOS 6.0, *)
-    public static func tapLabel(withFrame frame: CGRect, text: String?, textColor: UIColor?, backColor: UIColor?, font: UIFont?, textAlignment: NSTextAlignment, block: FSTapLabelBlockS?) -> FSTapLabelS {
-        let label = FSTapLabelS(frame: frame)
+    public static func tapLabel(withFrame frame: CGRect, text: String?, textColor: UIColor?, backColor: UIColor?, font: UIFont?, textAlignment: NSTextAlignment, block: FSTapLabelBlockS?) -> FSTapLabel {
+        let label = FSTapLabel(frame: frame)
         label.text = text
         if let tc = textColor {
             label.textColor = tc

@@ -67,7 +67,7 @@ public class FSReuseTableView: UIView {
     }
 }
 
-extension FSReuseTableViewS: UITableViewDelegate, UITableViewDataSource {
+extension FSReuseTableView: UITableViewDelegate, UITableViewDataSource {
     public func numberOfSections(in tableView: UITableView) -> Int {
         return numberOfSections?(tableView) ?? 0
     }

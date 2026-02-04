@@ -25,8 +25,8 @@ public class FSHalfView: UIView {
         _tapView.frame = bounds
     }
     
-    public static func showHalfView(in view: UIView, frame: CGRect, leftWidth: CGFloat) -> FSHalfViewS {
-        let halfView = FSHalfViewS(frame: frame)
+    public static func showHalfView(in view: UIView, frame: CGRect, leftWidth: CGFloat) -> FSHalfView {
+        let halfView = FSHalfView(frame: frame)
         DispatchQueue.main.async {
             halfView.showHalfView(true, leftWidth: leftWidth)
         }
@@ -84,7 +84,7 @@ public class FSHalfView: UIView {
     }
 }
 
-extension FSHalfViewS: UITableViewDelegate, UITableViewDataSource {
+extension FSHalfView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfRowsInSection?(tableView) ?? 0
     }

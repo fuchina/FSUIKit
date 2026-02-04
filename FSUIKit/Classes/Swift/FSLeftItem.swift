@@ -58,7 +58,7 @@ public class FSBackItemView: UIView {
 @objcMembers
 public class FSLeftItemS: UIView {
     
-    private var backImage: FSBackItemViewS!
+    private var backImage: FSBackItemView!
     
     public var mode: FSItemTitleMode = .default {
         didSet {
@@ -98,7 +98,7 @@ public class FSLeftItemS: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapActionItem))
         addGestureRecognizer(tap)
         
-        backImage = FSBackItemViewS(frame: CGRect(x: -6.5 + 5 * (mode == .noChar ? 1 : 0), y: 12, width: 11, height: 20))
+        backImage = FSBackItemView(frame: CGRect(x: -6.5 + 5 * (mode == .noChar ? 1 : 0), y: 12, width: 11, height: 20))
         addSubview(backImage)
         
         if mode == .default {

@@ -8,7 +8,7 @@ public class FSImageView: UIImageView {
     
     private var _backTapView: UIView!
     
-    public var click: ((FSImageViewS) -> Void)?
+    public var click: ((FSImageView) -> Void)?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

@@ -22,7 +22,7 @@ public class FSShopClassView: UIView {
         }
     }
     
-    public var selectedBlock: ((FSShopClassViewS, Int) -> Void)?
+    public var selectedBlock: ((FSShopClassView, Int) -> Void)?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,7 +49,7 @@ public class FSShopClassView: UIView {
     }
 }
 
-extension FSShopClassViewS: UITableViewDelegate, UITableViewDataSource {
+extension FSShopClassView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource?.count ?? 0
     }

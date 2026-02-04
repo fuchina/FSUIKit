@@ -146,7 +146,7 @@ public class FSUIKit: NSObject {
     }
     
     public static func captureScrollView(_ scrollView: UIScrollView, finished completion: @escaping (UIImage?) -> Void) {
-        let image = FSImageS.image(for: scrollView)
+        let image = FSImage.image(for: scrollView)
         completion(image)
     }
     

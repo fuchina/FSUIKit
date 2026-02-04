@@ -6,7 +6,7 @@ import UIKit
 @objcMembers
 public class FSBackgroundView: UIView {
     
-    public var tap: ((FSBackgroundViewS) -> Void)?
+    public var tap: ((FSBackgroundView) -> Void)?
     
     deinit {
         #if DEBUG
@@ -34,7 +34,7 @@ public class FSBackgroundView: UIView {
         backView.addGestureRecognizer(tapGesture)
     }
     
-    public func showView(_ view: UIView, completion: ((FSBackgroundViewS, Bool) -> Void)?) {
+    public func showView(_ view: UIView, completion: ((FSBackgroundView, Bool) -> Void)?) {
         view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: view.frame.width, height: view.frame.height)
         
         UIView.animate(withDuration: 0.25, animations: {
@@ -44,7 +44,7 @@ public class FSBackgroundView: UIView {
         })
     }
     
-    public func dismissView(_ view: UIView, completion: ((FSBackgroundViewS, Bool) -> Void)?) {
+    public func dismissView(_ view: UIView, completion: ((FSBackgroundView, Bool) -> Void)?) {
         UIView.animate(withDuration: 0.25, animations: {
             view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: view.frame.width, height: view.frame.height)
         }, completion: { finished in
