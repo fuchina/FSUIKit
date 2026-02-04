@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSCurveModelS: NSObject {
+public class FSCurveModel: NSObject {
     /// (x,y)坐标点
     public var points: [NSValue] = []
     public var lineColor: UIColor?
@@ -14,22 +14,22 @@ public class FSCurveModelS: NSObject {
 }
 
 @objcMembers
-public class FSBezierPathS: UIBezierPath {
-    public var model: FSCurveModelS?
+public class FSBezierPath: UIBezierPath {
+    public var model: FSCurveModel?
     public var index: Int = 0
 }
 
 @objcMembers
-public class FSCurveViewS: UIView {
+public class FSCurveView: UIView {
     
-    public var lines: [FSCurveModelS] = []
-    private var _paths: [FSBezierPathS] = []
+    public var lines: [FSCurveModel] = []
+    private var _paths: [FSBezierPath] = []
     
-    public var paths: [FSBezierPathS] {
+    public var paths: [FSBezierPath] {
         return _paths
     }
     
-    public func findPath(withIndex index: Int) -> FSBezierPathS? {
+    public func findPath(withIndex index: Int) -> FSBezierPath? {
         return _paths.first { $0.index == index }
     }
     
@@ -49,7 +49,7 @@ public class FSCurveViewS: UIView {
         let pointMargin: CGFloat = 15 + (isIPad ? 15 : 0)
         
         for (x, m) in lines.enumerated() {
-            let path = FSBezierPathS()
+            let path = FSBezierPath()
             path.index = x
             
             guard let startValue = m.points.first else { continue }
