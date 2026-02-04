@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSCloundViewS: UIView {
+public class FSCloundView: UIView {
     
     public var margin: UIEdgeInsets = .zero
     

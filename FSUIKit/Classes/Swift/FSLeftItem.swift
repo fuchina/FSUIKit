@@ -9,7 +9,7 @@ public enum FSItemTitleMode: Int {
 }
 
 @objcMembers
-public class FSBackItemViewS: UIView {
+public class FSBackItemView: UIView {
     
     public var mode: FSItemTitleMode = .default
     public var color: UIColor? {

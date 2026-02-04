@@ -6,7 +6,7 @@ import UIKit
 public typealias FSTapLabelBlockS = (FSTapLabelS) -> Void
 
 @objcMembers
-public class FSTapLabelS: UILabel {
+public class FSTapLabel: UILabel {
     
     public var block: FSTapLabelBlockS?
     

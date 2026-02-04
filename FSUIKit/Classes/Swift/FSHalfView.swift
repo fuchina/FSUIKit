@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSHalfViewS: UIView {
+public class FSHalfView: UIView {
     
     private var tableView: UITableView!
     private var _leftWidth: CGFloat = 0

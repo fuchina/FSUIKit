@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSAutoLayoutButtonsViewS: UIView {
+public class FSAutoLayoutButtonsView: UIView {
     
     private let keyValueButtonTag = 1000
     private var _height: CGFloat = 0
@@ -15,7 +15,7 @@ public class FSAutoLayoutButtonsViewS: UIView {
         }
     }
     
-    public var click: ((FSAutoLayoutButtonsViewS, Int) -> Void)?
+    public var click: ((FSAutoLayoutButtonsView, Int) -> Void)?
     public var configButton: ((UIButton) -> Void)?
     
     public var selfHeight: CGFloat {

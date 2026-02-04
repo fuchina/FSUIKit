@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSShopClassViewS: UIView {
+public class FSShopClassView: UIView {
     
     private var tableView: UITableView!
     private var frontCell: UITableViewCell?

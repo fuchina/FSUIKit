@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSUICommonS: UIView {
+public class FSUICommon: UIView {
     
     /// 添加四边阴影效果
     public static func addShadow(to view: UIView, with color: UIColor) {

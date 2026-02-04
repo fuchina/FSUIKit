@@ -5,7 +5,7 @@
 import UIKit
 
 @objcMembers
-public class FSReuseTableViewS: UIView {
+public class FSReuseTableView: UIView {
     
     public var tableView: UITableView!
     

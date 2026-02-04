@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSSwitchCellS: UITableViewCell {
+public class FSSwitchCell: UITableViewCell {
     
     private var _switch: UISwitch!
     

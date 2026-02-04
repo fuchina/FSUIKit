@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSCollectionViewS: UIView {
+public class FSCollectionView: UIView {
     
     private var _collectionView: UICollectionView?
     private var _isScrollToLeft: Bool = false

@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSTabsViewS: FSView {
+public class FSTabsView: FSView {
     
     public var list: [String]? {
         didSet {

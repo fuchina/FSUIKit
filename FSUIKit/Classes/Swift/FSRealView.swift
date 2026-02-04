@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSRealGridViewS: UIView {
+public class FSRealGridView: UIView {
     
     private var _label: UILabel?
     
@@ -29,7 +29,7 @@ public class FSRealGridViewS: UIView {
 }
 
 @objcMembers
-public class FSRealViewS: UIView {
+public class FSRealView: UIView {
     
     public func designViews(withRows rows: Int, columns: Int, height: CGFloat, configRow: ((CALayer, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, Int) -> Void)?, configColumn: ((CALayer, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, UnsafeMutablePointer<CGFloat>, Int) -> Void)?, size: ((UnsafeMutablePointer<CGFloat>, Int, Int) -> Void)?, grid: ((FSRealGridViewS, Int, Int) -> Void)?) {
         

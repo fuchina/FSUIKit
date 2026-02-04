@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSTapScrollViewS: UIScrollView {
+public class FSTapScrollView: UIScrollView {
     
     public var click: ((FSTapScrollViewS) -> Void)?
     

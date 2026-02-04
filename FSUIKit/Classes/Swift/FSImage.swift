@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSImageS: NSObject {
+public class FSImage: NSObject {
     
     public static func image(from color: UIColor) -> UIImage? {
         return image(from: color, size: CGSize(width: 1, height: 10))

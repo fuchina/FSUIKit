@@ -3,7 +3,7 @@
 
 import UIKit
 
-public enum FSLoadingStatusS: Int {
+public enum FSLoadingStatus: Int {
     case `default` = 0   // 无状态
     case loading = 1     // 加载中
     case noData = 2      // 无数据
@@ -16,7 +16,7 @@ public enum FSClickModeS: Int {
 }
 
 @objcMembers
-public class FSVanViewS: UIView {
+public class FSVanView: UIView {
     
     private var _roundView: FSRoundVanViewS!
     private var _label: FSLabelS?

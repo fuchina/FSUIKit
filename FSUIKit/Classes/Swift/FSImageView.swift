@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSImageViewS: UIImageView {
+public class FSImageView: UIImageView {
     
     private var _backTapView: UIView!
     

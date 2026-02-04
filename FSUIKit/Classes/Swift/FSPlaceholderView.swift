@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSPlaceholderViewS: UIView {
+public class FSPlaceholderView: UIView {
     
     private var _label: UILabel?
     

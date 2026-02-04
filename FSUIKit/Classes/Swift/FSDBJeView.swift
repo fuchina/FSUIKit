@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSDBJeViewS: UIView {
+public class FSDBJeView: UIView {
     
     public var jeTF: FSLabelTextField!
     public var bzTF: FSLabelTextField!

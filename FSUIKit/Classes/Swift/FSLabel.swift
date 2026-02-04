@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSLabelS: UILabel {
+public class FSLabel: UILabel {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

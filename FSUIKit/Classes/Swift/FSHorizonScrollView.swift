@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSHorizonScrollViewS: UIScrollView, UIGestureRecognizerDelegate {
+public class FSHorizonScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
     public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if panBack(gestureRecognizer) {

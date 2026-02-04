@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSBackgroundViewS: UIView {
+public class FSBackgroundView: UIView {
     
     public var tap: ((FSBackgroundViewS) -> Void)?
     

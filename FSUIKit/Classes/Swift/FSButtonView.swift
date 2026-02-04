@@ -4,7 +4,7 @@
 import UIKit
 
 @objcMembers
-public class FSButtonViewS: UIView {
+public class FSButtonView: UIView {
     
     private var _backView: UIView!
     private var _button: UIButton?
