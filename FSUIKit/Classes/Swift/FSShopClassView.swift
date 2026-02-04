@@ -3,8 +3,7 @@
 
 import UIKit
 
-@objcMembers
-public class FSShopClassView: UIView {
+open class FSShopClassView: UIView {
     
     private var tableView: UITableView!
     private var frontCell: UITableViewCell?
@@ -31,7 +30,7 @@ public class FSShopClassView: UIView {
         shopClassDesignViews()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         let rgb: CGFloat = 88 / 255.0
         _normalColor = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1)
