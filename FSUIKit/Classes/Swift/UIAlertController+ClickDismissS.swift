@@ -54,7 +54,7 @@ public extension UIAlertController {
         tap.clickBack?(self, point)
     }
     
-    func handleAlertClickS() {
+    func handleAlertClick() {
         let hasData = textFields?.contains { ($0.text?.count ?? 0) > 0 } ?? false
         if !hasData {
             dismiss(animated: true, completion: nil)
