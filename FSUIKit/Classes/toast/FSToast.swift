@@ -12,6 +12,10 @@ import FSCalculator
 
 open class FSToast: NSObject {
     
+    @objc public static func toast(_ text: String) -> UIView {        
+        return self.toast(text, duration: 2)
+    }
+    
     @objc public static func toast(_ text: String, duration: Float) -> UIView {
         let ws = FSKit.currentWindowScene()
         if ws == nil {

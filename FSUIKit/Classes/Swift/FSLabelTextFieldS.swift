@@ -4,11 +4,11 @@
 import UIKit
 
 @objcMembers
-public class FSLabelTextFieldS: UIView {
+public class FSLabelTextField: UIView {
     
     public var label: UILabel!
     public var textField: UITextField!
-    public var tapEvent: ((FSLabelTextFieldS) -> Void)?
+    public var tapEvent: ((FSLabelTextField) -> Void)?
     
     public convenience init(frame: CGRect, text: String?, textFieldText: String?, placeholder: String?) {
         self.init(frame: frame)
