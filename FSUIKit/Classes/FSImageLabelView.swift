@@ -46,9 +46,7 @@ public class FSImageLabelView: FSView {
     }
     
     @objc public static func imageLabel(_ frame: CGRect, imageName: String, text: String) -> FSImageLabelView {
-        
-//        print("FSLog fr = ", frame)
-        
+                
         let view = FSImageLabelView(frame: frame)
         view.label?.text = text
 
