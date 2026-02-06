@@ -97,11 +97,11 @@ public class FSUIKit: NSObject {
         return alert
     }
     
-    public static func showAlertWithMessage(message: String, controller: UIViewController) {
+    public static func showAlertWithMessage(_ message: String, controller: UIViewController) {
         self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", controller: controller, handler: nil)
     }
     
-    public static func showAlertWithMessage(message: String, controller: UIViewController, handler: ((UIAlertAction) -> Void)?) {
+    public static func showAlertWithMessage(_ message: String, controller: UIViewController, handler: ((UIAlertAction) -> Void)?) {
         self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", controller: controller, handler: handler)
     }
     
