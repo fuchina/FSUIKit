@@ -6,6 +6,7 @@ import UIKit
 @objcMembers
 public class FSUIKit: NSObject {
     
+    @discardableResult
     public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((UIAlertAction) -> Void)?, cancelTitle: String, cancel: ((UIAlertAction) -> Void)?, completion: (() -> Void)?) -> UIAlertController {
         
         let alertController = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: cancelTitle, cancel: cancel);
@@ -13,7 +14,8 @@ public class FSUIKit: NSObject {
         return alertController
     }
 
-    static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
+    @discardableResult
+    public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
         
         let ac = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: "取消", cancel: nil)
         controller.present(ac, animated: true, completion: nil)
@@ -51,6 +53,7 @@ public class FSUIKit: NSObject {
         return controller
     }
     
+    @discardableResult
     public static func alertInput(number: Int, controller: UIViewController, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
         
         if number < 1 {
@@ -112,7 +115,6 @@ public class FSUIKit: NSObject {
         controller.present(c, animated: true, completion: nil)
     }
     
-    @available(iOS 8.0, *)
     public static func effectView(withFrame frame: CGRect) -> UIVisualEffectView {
         let effect = UIBlurEffect(style: .light)
         let effectView = UIVisualEffectView(effect: effect)

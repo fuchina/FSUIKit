@@ -12,15 +12,13 @@ import FSCalculator
 
 open class FSToast: NSObject {
     
-    @objc public static func show(_ text: String) {
-        _ = self.toast(text, duration: 2)
-    }
-    
-    @objc public static func toast(_ text: String) -> UIView {        
+    @discardableResult
+    public static func toast(_ text: String) -> UIView {
         return self.toast(text, duration: 2)
     }
     
-    @objc public static func toast(_ text: String, duration: Float) -> UIView {
+    @discardableResult
+    public static func toast(_ text: String, duration: Float) -> UIView {
         let ws = FSKit.currentWindowScene()
         if ws == nil {
             return UIView()
@@ -34,7 +32,8 @@ open class FSToast: NSObject {
         return self.toast(text, duration: duration, to: window! )
     }
     
-    @objc public static func toast(_ text: String, duration: Float, to: UIView) -> UIView {
+    @discardableResult
+    public static func toast(_ text: String, duration: Float, to: UIView) -> UIView {
         
         let font = UIFont.systemFont(ofSize: 14)
         let width = FSCalculator.textWidth(text, font: font, labelHeight: 40)
