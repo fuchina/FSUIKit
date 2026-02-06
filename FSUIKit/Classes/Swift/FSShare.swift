@@ -150,7 +150,7 @@ public class FSShare: NSObject {
     
     public func messageShare(withMessage message: String?, on controller: UIViewController, recipients: [String]?, data fileData: Data?, fileName: String?, fileType: String?) {
         guard MFMessageComposeViewController.canSendText() else {
-            FSUIKit.showAlertWithMessage(message: "设备不支持发送短信", controller: controller)
+            FSUIKit.showAlertWithMessage("设备不支持发送短信", controller: controller)
             return
         }
         
@@ -183,7 +183,7 @@ public class FSShare: NSObject {
     
     public func emailShare(withSubject subject: String?, on controller: UIViewController, messageBody body: String?, recipients: [String]?, fileData data: Data?, fileName: String?, mimeType fileType: String?) {
         guard MFMailComposeViewController.canSendMail() else {
-            FSUIKit.showAlertWithMessage(message: "设备不支持发送邮件", controller: controller)
+            FSUIKit.showAlertWithMessage("设备不支持发送邮件", controller: controller)
             return
         }
         
@@ -220,7 +220,7 @@ public class FSShare: NSObject {
         
         let canOpen = documentController?.presentOpenInMenu(from: .zero, in: controller.view, animated: true) ?? false
         if !canOpen {
-            FSUIKit.showAlertWithMessage(message: "出现问题，不能打开", controller: controller)
+            FSUIKit.showAlertWithMessage("出现问题，不能打开", controller: controller)
         }
     }
 }
