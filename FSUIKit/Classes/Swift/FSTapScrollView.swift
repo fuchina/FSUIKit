@@ -3,8 +3,7 @@
 
 import UIKit
 
-@objcMembers
-public class FSTapScrollView: UIScrollView {
+open class FSTapScrollView: UIScrollView {
     
     public var click: ((FSTapScrollView) -> Void)?
     
@@ -13,7 +12,7 @@ public class FSTapScrollView: UIScrollView {
         setupTap()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setupTap()
     }
