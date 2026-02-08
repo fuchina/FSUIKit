@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSLabelTextField: UIView {
     
     public var label: UILabel!
@@ -17,7 +16,6 @@ public class FSLabelTextField: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        labelTextFieldDesignViews(text: nil, textFieldText: nil, placeholder: "请输入")
     }
     
     required init?(coder: NSCoder) {
@@ -26,11 +24,11 @@ public class FSLabelTextField: UIView {
     }
     
     private func labelTextFieldDesignViews(text: String?, textFieldText: String?, placeholder: String) {
+        
         let widthSelf = bounds.width
-        let heightSelf = bounds.height
         backgroundColor = .white
         
-        label = UILabel(frame: CGRect(x: 15, y: 0, width: widthSelf / 2, height: heightSelf))
+        label = UILabel(frame: CGRect(x: 15, y: 0, width: widthSelf / 2, height: frame.size.height))
         label.text = text
         addSubview(label)
         label.isUserInteractionEnabled = true
@@ -38,9 +36,10 @@ public class FSLabelTextField: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapClick))
         label.addGestureRecognizer(tap)
         
-        textField = UITextField(frame: CGRect(x: widthSelf / 3, y: 0, width: widthSelf * 2 / 3 - 15, height: heightSelf))
+        textField = UITextField(frame: CGRect(x: widthSelf / 3, y: 0, width: widthSelf * 2 / 3 - 15, height: frame.size.height))
         textField.placeholder = placeholder
-        textField.textColor = UIColor(red: 16/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
+        let rgb = 16 / 255.0
+        textField.textColor = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1.0)
         textField.autocorrectionType = .no
         textField.clearButtonMode = .whileEditing
         textField.autocapitalizationType = .none
