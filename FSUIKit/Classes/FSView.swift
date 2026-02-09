@@ -12,7 +12,7 @@ open class FSView: UIView {
     public var  tapBackView                             :   UIView?                             =   nil
     public var  click                                   :   ((FSView, CGPoint) ->  Void)?       =   nil
     
-    var         theTag                                  :   Int                                 =   0
+    public var  theTag                                  :   Int                                 =   0
     
     private var _gradientLayer                          :   CAGradientLayer?
 
@@ -75,7 +75,7 @@ open class FSView: UIView {
         return nil
     }
     
-    public func dismiss() {
+    open func dismiss() {
         UIView.animate(withDuration: 0.25) {
             self.alpha = 0
         } completion: { f in
