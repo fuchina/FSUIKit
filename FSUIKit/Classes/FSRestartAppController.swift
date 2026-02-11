@@ -13,6 +13,8 @@ open class FSRestartAppController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        
         rsDesignViews()
     }
     
