@@ -16,7 +16,7 @@ open class FSView: UIView {
     
     private var _gradientLayer                          :   CAGradientLayer?
 
-    lazy var gradientLayer: CAGradientLayer = {
+    public lazy var gradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
         g.frame = bounds
         self.layer.insertSublayer(g, at: 0)
