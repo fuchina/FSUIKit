@@ -5,8 +5,31 @@ import UIKit
 
 public class FSLabelTextField: UIView {
     
-    public var label: UILabel!
-    public var textField: UITextField!
+    public lazy var label: UILabel = {
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: frame.size.width / 2, height: frame.size.height))
+        addSubview(label)
+        label.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapClick))
+        label.addGestureRecognizer(tap)
+        
+        return label
+    }()
+    
+    public lazy var textField: UITextField = {
+        let textField = UITextField(frame: CGRect(x: frame.size.width / 3, y: 0, width: frame.size.width * 2 / 3 - 15, height: frame.size.height))
+        let rgb = 16 / 255.0
+        textField.textColor = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1.0)
+        textField.autocorrectionType = .no
+        textField.clearButtonMode = .whileEditing
+        textField.autocapitalizationType = .none
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.textAlignment = .right
+        addSubview(textField)
+        
+        return textField
+    }()
+    
     public var tapEvent: ((FSLabelTextField) -> Void)?
     
     public convenience init(frame: CGRect, text: String?, textFieldText: String?, placeholder: String?) {
@@ -28,25 +51,10 @@ public class FSLabelTextField: UIView {
         let widthSelf = bounds.width
         backgroundColor = .white
         
-        label = UILabel(frame: CGRect(x: 15, y: 0, width: widthSelf / 2, height: frame.size.height))
         label.text = text
-        addSubview(label)
-        label.isUserInteractionEnabled = true
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapClick))
-        label.addGestureRecognizer(tap)
-        
-        textField = UITextField(frame: CGRect(x: widthSelf / 3, y: 0, width: widthSelf * 2 / 3 - 15, height: frame.size.height))
-        textField.placeholder = placeholder
-        let rgb = 16 / 255.0
-        textField.textColor = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1.0)
-        textField.autocorrectionType = .no
-        textField.clearButtonMode = .whileEditing
-        textField.autocapitalizationType = .none
         textField.text = textFieldText
-        textField.font = UIFont.systemFont(ofSize: 15)
-        textField.textAlignment = .right
-        addSubview(textField)
+        textField.placeholder = placeholder
     }
     
     @objc private func tapClick() {
