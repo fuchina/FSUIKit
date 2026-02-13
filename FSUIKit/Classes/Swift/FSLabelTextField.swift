@@ -48,7 +48,6 @@ public class FSLabelTextField: UIView {
     
     private func labelTextFieldDesignViews(text: String?, textFieldText: String?, placeholder: String) {
         
-        let widthSelf = bounds.width
         backgroundColor = .white
         
         label.text = text
