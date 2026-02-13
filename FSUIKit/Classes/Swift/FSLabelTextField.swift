@@ -39,17 +39,16 @@ public class FSLabelTextField: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        labelTextFieldDesignViews(text: nil, textFieldText: nil, placeholder: "请输入")
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func labelTextFieldDesignViews(text: String?, textFieldText: String?, placeholder: String) {
-        
-        backgroundColor = .white
-        
+                
         label.text = text
         
         textField.text = textFieldText
