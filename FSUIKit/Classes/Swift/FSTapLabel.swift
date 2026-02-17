@@ -3,12 +3,11 @@
 
 import UIKit
 
-public typealias FSTapLabelBlockS = (FSTapLabel) -> Void
+public typealias FSTapLabelBlock = (FSTapLabel) -> Void
 
-@objcMembers
 public class FSTapLabel: UILabel {
     
-    public var block: FSTapLabelBlockS?
+    public var block: FSTapLabelBlock?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
