@@ -128,8 +128,7 @@ open class FSViewManager: UIView {
         return label
     }
     
-    @available(iOS 6.0, *)
-    public static func tapLabel(withFrame frame: CGRect, text: String?, textColor: UIColor?, backColor: UIColor?, font: UIFont?, textAlignment: NSTextAlignment, block: FSTapLabelBlockS?) -> FSTapLabel {
+    public static func tapLabel(withFrame frame: CGRect, text: String?, textColor: UIColor?, backColor: UIColor?, font: UIFont?, textAlignment: NSTextAlignment, block: FSTapLabelBlock?) -> FSTapLabel {
         let label = FSTapLabel(frame: frame)
         label.text = text
         if let tc = textColor {
