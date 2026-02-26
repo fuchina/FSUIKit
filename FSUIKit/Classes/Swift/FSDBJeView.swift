@@ -3,11 +3,47 @@
 
 import UIKit
 
-@objcMembers
-public class FSDBJeView: UIView {
+open class FSDBJeView: UIView {
     
-    public var jeTF: FSLabelTextField!
-    public var bzTF: FSLabelTextField!
+    public lazy var jeTF: FSLabelTextField = {
+        let textField = FSLabelTextField(
+            frame: CGRect(x: 0, y: 10, width: frame.size.width, height: 44),
+            text: "金额",
+            textFieldText: nil,
+            placeholder: "请输入金额"
+        )
+        
+        textField.textField.keyboardType = .decimalPad
+        addSubview(textField)
+        textField.label.font = UIFont.systemFont(ofSize: 17)
+        textField.label.textColor = .black
+        
+        let line = UIView(frame: CGRect(x: 15, y: textField.frame.origin.y + textField.frame.height, width: frame.size.width - 15, height: 0.6))
+        line.backgroundColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0)
+        addSubview(line)
+
+        return textField
+    }()
+    
+    public lazy var bzTF: FSLabelTextField = {
+        let textField = FSLabelTextField(
+            frame: CGRect(x: 0, y: 10 + 45, width: frame.size.width, height: 44),
+            text: "备注",
+            textFieldText: nil,
+            placeholder: "输入备注"
+        )
+        textField.textField.keyboardType = .default
+        addSubview(textField)
+        textField.label.font = UIFont.systemFont(ofSize: 17)
+        textField.label.textColor = .black
+        
+        let line = UIView(frame: CGRect(x: 15, y: textField.frame.origin.y + textField.frame.height, width: frame.size.width - 15, height: 0.6))
+        line.backgroundColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0)
+        addSubview(line)
+
+        return textField
+    }()
+    
     public var tapEvent: ((FSDBJeView) -> Void)?
     
     public override init(frame: CGRect) {
@@ -15,7 +51,7 @@ public class FSDBJeView: UIView {
         jeDesignViews()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         jeDesignViews()
     }
@@ -26,29 +62,8 @@ public class FSDBJeView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         addGestureRecognizer(tapGesture)
         
-        let size = frame.size
-        for x in 0..<2 {
-            let textField = FSLabelTextField(
-                frame: CGRect(x: 0, y: 10 + 45 * CGFloat(x), width: size.width, height: 44),
-                text: x == 1 ? "备注" : "金额",
-                textFieldText: nil,
-                placeholder: x == 1 ? "输入备注" : "请输入金额"
-            )
-            textField.textField.keyboardType = x == 1 ? .default : .decimalPad
-            addSubview(textField)
-            textField.label.font = UIFont.systemFont(ofSize: 17)
-            textField.label.textColor = .black
-            
-            let line = UIView(frame: CGRect(x: 15, y: textField.frame.origin.y + textField.frame.height, width: size.width - 15, height: 0.6))
-            line.backgroundColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0)
-            addSubview(line)
-            
-            if x == 1 {
-                bzTF = textField
-            } else {
-                jeTF = textField
-            }
-        }
+        _ = jeTF
+        _ = bzTF
     }
     
     @objc private func tapAction() {
