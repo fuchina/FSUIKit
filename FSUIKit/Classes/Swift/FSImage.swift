@@ -148,7 +148,6 @@ public class FSImage: NSObject {
     }
     
     public static func image(for view: UIView) -> UIImage? {
-        let size = view.bounds.size
         let savedFrame = view.frame
         let isScrollView = view is UIScrollView
         
