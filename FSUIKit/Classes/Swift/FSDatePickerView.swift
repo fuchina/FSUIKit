@@ -7,8 +7,26 @@ public typealias FSDatePickerBlock = (Date) -> Void
 
 public class FSDatePickerView: UIView {
     
-    private var mainView: UIView!
-    private var datePicker: UIDatePicker!
+    private lazy var mainView: UIView = {
+        let size = bounds.size
+        let v = UIView(frame: CGRect(x: 0, y: size.height, width: size.width, height: 240 + 34))
+        v.backgroundColor = .white
+        addSubview(v)
+        return v
+    }()
+    
+    private lazy var datePicker: UIDatePicker = {
+        let v = UIDatePicker()
+        v.datePickerMode = .date
+        v.preferredDatePickerStyle = .wheels
+        v.frame = CGRect(x: 0, y: 40, width: bounds.width, height: 200)
+        v.locale = Locale(identifier: "zh-CN")
+        v.minimumDate = Date().addingTimeInterval(-100 * 365 * 24 * 3600)
+        v.maximumDate = Date().addingTimeInterval(100 * 365 * 24 * 3600)
+        mainView.addSubview(v)
+        return v
+    }()
+    
     private var _date: Date?
     
     public var block: FSDatePickerBlock?
@@ -22,7 +40,6 @@ public class FSDatePickerView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        dpDesignViews()
     }
     
     required init?(coder: NSCoder) {
@@ -38,23 +55,7 @@ public class FSDatePickerView: UIView {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         backView.addGestureRecognizer(tapGesture)
-        
-        let size = bounds.size
-        mainView = UIView(frame: CGRect(x: 0, y: size.height, width: size.width, height: 240 + 34))
-        mainView.backgroundColor = .white
-        addSubview(mainView)
-        
-        datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        if #available(iOS 13.4, *) {
-            datePicker.preferredDatePickerStyle = .wheels
-        }
-        datePicker.frame = CGRect(x: 0, y: 40, width: bounds.width, height: 200)
-        datePicker.locale = Locale(identifier: "zh-CN")
-        datePicker.minimumDate = Date().addingTimeInterval(-100 * 365 * 24 * 3600)
-        datePicker.maximumDate = Date().addingTimeInterval(100 * 365 * 24 * 3600)
-        mainView.addSubview(datePicker)
-        
+                        
         if let date = _date {
             datePicker.date = date
         } else {
@@ -76,6 +77,7 @@ public class FSDatePickerView: UIView {
             selectView.addSubview(button)
         }
         
+        let size = bounds.size
         let comp = Self.component(for: Date())
         let title = "今天是\(comp.month ?? 0)月\(comp.day ?? 0)日"
         let timeLabel = UILabel(frame: CGRect(x: 60, y: 0, width: size.width - 120, height: selectView.bounds.height))
