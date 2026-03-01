@@ -5,7 +5,6 @@ import UIKit
 
 public typealias FSDatePickerBlock = (Date) -> Void
 
-@objcMembers
 public class FSDatePickerView: UIView {
     
     private var mainView: UIView!

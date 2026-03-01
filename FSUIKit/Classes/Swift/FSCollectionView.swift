@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSCollectionView: UIView {
     
     private var _collectionView: UICollectionView?

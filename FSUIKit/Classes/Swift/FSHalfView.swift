@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSHalfView: UIView {
     
     private var tableView: UITableView!

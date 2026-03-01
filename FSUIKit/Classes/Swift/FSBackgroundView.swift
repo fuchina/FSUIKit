@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSBackgroundView: UIView {
     
     public var tap: ((FSBackgroundView) -> Void)?

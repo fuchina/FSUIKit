@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSImageView: UIImageView {
     
     private var _backTapView: UIView!

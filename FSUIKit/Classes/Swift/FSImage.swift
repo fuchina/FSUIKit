@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSImage: NSObject {
     
     public static func image(from color: UIColor) -> UIImage? {

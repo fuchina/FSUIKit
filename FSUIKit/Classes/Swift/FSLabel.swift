@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSLabel: UILabel {
     
     public override init(frame: CGRect) {

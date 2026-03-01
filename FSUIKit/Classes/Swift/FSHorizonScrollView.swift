@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSHorizonScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
     public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {

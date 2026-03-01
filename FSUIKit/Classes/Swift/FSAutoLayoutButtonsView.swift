@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSAutoLayoutButtonsView: UIView {
     
     private let keyValueButtonTag = 1000

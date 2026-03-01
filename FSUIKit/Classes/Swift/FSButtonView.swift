@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSButtonView: UIView {
     
     private var _backView: UIView!

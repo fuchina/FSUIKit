@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSCloundView: UIView {
     
     public var margin: UIEdgeInsets = .zero

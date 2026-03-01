@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSCurveModel: NSObject {
     /// (x,y)坐标点
     public var points: [NSValue] = []
@@ -13,13 +12,11 @@ public class FSCurveModel: NSObject {
     public var lineJoinStyle: CGLineJoin = .miter
 }
 
-@objcMembers
 public class FSBezierPath: UIBezierPath {
     public var model: FSCurveModel?
     public var index: Int = 0
 }
 
-@objcMembers
 public class FSCurveView: UIView {
     
     public var lines: [FSCurveModel] = []
