@@ -55,7 +55,6 @@ public class FSBackItemView: UIView {
     }
 }
 
-@objcMembers
 public class FSLeftItemS: UIView {
     
     private var backImage: FSBackItemView!

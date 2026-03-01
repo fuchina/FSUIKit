@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSTableView: UITableView {
     
     /// 用来获得tableView reloadData后的时机

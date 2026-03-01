@@ -4,7 +4,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSReuseTableView: UIView {
     
     public var tableView: UITableView!

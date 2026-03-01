@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSTabView: FSView {
     
     private var _label: UILabel?

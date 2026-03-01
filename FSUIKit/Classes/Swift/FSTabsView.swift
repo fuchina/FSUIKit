@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSTabsView: FSView {
     
     public var list: [String]? {

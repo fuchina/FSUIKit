@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSSwitchCell: UITableViewCell {
     
     private var _switch: UISwitch!

@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSPlaceholderView: UIView {
     
     private var _label: UILabel?

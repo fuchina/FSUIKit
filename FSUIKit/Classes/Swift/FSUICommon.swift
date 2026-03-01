@@ -3,7 +3,6 @@
 
 import UIKit
 
-@objcMembers
 public class FSUICommon: UIView {
     
     /// 添加四边阴影效果

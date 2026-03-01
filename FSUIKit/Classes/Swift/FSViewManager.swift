@@ -5,7 +5,6 @@ import UIKit
 
 public let FS_LineThickness: CGFloat = 0.5
 
-@objcMembers
 open class FSViewManager: UIView {
     
     public static func view(withFrame frame: CGRect, backColor color: UIColor?) -> UIView {

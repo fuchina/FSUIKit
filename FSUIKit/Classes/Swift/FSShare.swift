@@ -7,7 +7,6 @@ import MessageUI
 
 //import WechatOpenSDK  暂不支持，需要OC桥接，后续实现
 
-@objcMembers
 public class FSShare: NSObject {
     
     public static let shared = FSShare()

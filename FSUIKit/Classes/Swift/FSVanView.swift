@@ -15,7 +15,6 @@ public enum FSClickModeS: Int {
     case other = 1       // 其他
 }
 
-@objcMembers
 public class FSVanView: UIView {
     
     private var _roundView: FSRoundVanView!
@@ -82,7 +81,6 @@ public class FSVanView: UIView {
     }
 }
 
-@objcMembers
 public class FSRoundVanView: UIView {
     
     private var link: CADisplayLink?
