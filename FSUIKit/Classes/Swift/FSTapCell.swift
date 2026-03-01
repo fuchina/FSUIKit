@@ -5,7 +5,6 @@ import UIKit
 
 public typealias TapCellBlock = (FSTapCell) -> Void
 
-@objcMembers
 public class FSTapCell: UIView {
     
     private var _backTapView: UIView!
