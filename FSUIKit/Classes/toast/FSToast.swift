@@ -8,7 +8,6 @@
 import Foundation
 
 import FSKit
-import FSCalculator
 
 open class FSToast: NSObject {
     
