@@ -24,7 +24,8 @@ Pod::Spec.new do |s|
   s.dependency   'WechatOpenSDK','1.8.3'
 
   s.dependency   'FSKit'
-  s.dependency   'FSCalculator'
+  
+#  s.dependency   'FSCalculator'
 
   # 允许 Swift 访问 OC 依赖
   s.pod_target_xcconfig = {
