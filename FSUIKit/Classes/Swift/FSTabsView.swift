@@ -39,7 +39,7 @@ public class FSTabsView: FSView {
                 addSubview(tab)
                 
                 tab.click = { [weak self] view, p in
-                    guard let self = self else { return }
+                    guard let self else { return }
                     if let tabView = view as? FSTabView {
                         self.clickIndex?(self, tabView.theTag)
                     }
