@@ -22,4 +22,11 @@ open class FSTitleContentView: FSView {
         return l
     }()
     
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        label.frame = bounds
+        contentLabel.frame = bounds
+    }
+    
 }
