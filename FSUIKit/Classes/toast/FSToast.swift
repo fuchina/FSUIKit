@@ -45,7 +45,7 @@ open class FSToast: NSObject {
             height = FSCalculator.textHeight(text, font: font, labelWidth: width) + 20
         }
                 
-        let label = UILabel(frame: CGRectMake(5, 0, width, height))
+        let label = UILabel(frame: CGRectMake(10, 0, width, height))
         label.textAlignment = .center
         label.font = font
         label.text = text
