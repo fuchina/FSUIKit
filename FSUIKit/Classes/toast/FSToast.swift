@@ -55,7 +55,7 @@ open class FSToast: NSObject {
         label.textColor = UIColor.white
         
         let y = to.bounds.size.height / 2 - height / 2
-        let back = UIView(frame: CGRect(x: x - 10, y: y, width: width + 20, height: height))
+        let back = UIView(frame: CGRect(x: x - 5, y: y, width: width + 10, height: height))
         back.backgroundColor = UIColor.init(red: 73.0 / 255, green: 80 / 255.0, blue: 86.0 / 255, alpha: 0.9)
         back.layer.cornerRadius = 3.0
         back.addSubview(label)
