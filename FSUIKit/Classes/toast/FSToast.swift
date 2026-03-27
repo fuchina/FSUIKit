@@ -42,7 +42,7 @@ open class FSToast: NSObject {
         if width > maxWidth {
             width = maxWidth
             
-            height = FSCalculator.textHeight(text, font: font, labelWidth: width)
+            height = FSCalculator.textHeight(text, font: font, labelWidth: width) + 20
         }
         
         let x = UIScreen.main.bounds.width / 2 - width / 2
@@ -51,6 +51,7 @@ open class FSToast: NSObject {
         label.textAlignment = .center
         label.font = font
         label.text = text
+        label.numberOfLines = 0
         label.textColor = UIColor.white
         
         let y = to.bounds.size.height / 2 - height / 2
