@@ -35,7 +35,12 @@ open class FSToast: NSObject {
     public static func toast(_ text: String, duration: Float, to: UIView) -> UIView {
         
         let font = UIFont.systemFont(ofSize: 14)
-        let width = FSCalculator.textWidth(text, font: font, labelHeight: 40)
+        var width = FSCalculator.textWidth(text, font: font, labelHeight: 40)
+        
+        let maxWidth = WIDTHFC - 30
+        if width > maxWidth {
+            width = maxWidth
+        }
         
         let x = UIScreen.main.bounds.width / 2 - width / 2
         
@@ -43,6 +48,7 @@ open class FSToast: NSObject {
         label.textAlignment = .center
         label.font = font
         label.text = text
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
         
         let y = to.bounds.size.height / 2 - 20
