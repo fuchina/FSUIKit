@@ -38,24 +38,25 @@ open class FSToast: NSObject {
         let font = UIFont.systemFont(ofSize: 14)
         var width = FSCalculator.textWidth(text, font: font, labelHeight: height)
         
-        let maxWidth = WIDTHFC - 30
+        let maxWidth = WIDTHFC - 30 - 20
         if width > maxWidth {
             width = maxWidth
             
             height = FSCalculator.textHeight(text, font: font, labelWidth: width) + 20
         }
-        
-        let x = UIScreen.main.bounds.width / 2 - width / 2
-        
-        let label = UILabel(frame: CGRectMake(10, 0, width, height))
+                
+        let label = UILabel(frame: CGRectMake(5, 0, width, height))
         label.textAlignment = .center
         label.font = font
         label.text = text
         label.numberOfLines = 0
         label.textColor = UIColor.white
         
+        let vWidth = width + 20
+        let x = UIScreen.main.bounds.width / 2 - vWidth / 2
+        
         let y = to.bounds.size.height / 2 - height / 2
-        let back = UIView(frame: CGRect(x: x - 5, y: y, width: width + 10, height: height))
+        let back = UIView(frame: CGRect(x: x, y: y, width: vWidth, height: height))
         back.backgroundColor = UIColor.init(red: 73.0 / 255, green: 80 / 255.0, blue: 86.0 / 255, alpha: 0.9)
         back.layer.cornerRadius = 3.0
         back.addSubview(label)
