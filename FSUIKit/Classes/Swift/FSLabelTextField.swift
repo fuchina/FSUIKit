@@ -42,6 +42,9 @@ public class FSLabelTextField: UIView {
         super.init(frame: frame)
         
         backgroundColor = .white
+        
+        _ = label
+        _ = textField
     }
     
     required init?(coder: NSCoder) {
