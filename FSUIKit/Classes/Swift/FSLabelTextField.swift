@@ -6,7 +6,7 @@ import UIKit
 public class FSLabelTextField: UIView {
     
     public lazy var label: UILabel = {
-        let label = UILabel(frame: CGRect(x: 15, y: 0, width: frame.size.width / 2, height: frame.size.height))
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: frame.size.width - 30, height: frame.size.height))
         addSubview(label)
         label.isUserInteractionEnabled = true
         
@@ -17,7 +17,7 @@ public class FSLabelTextField: UIView {
     }()
     
     public lazy var textField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: frame.size.width / 3, y: 0, width: frame.size.width * 2 / 3 - 15, height: frame.size.height))
+        let textField = UITextField(frame: CGRect(x: 100, y: 0, width: frame.size.width - 105, height: frame.size.height))
         let rgb = 16 / 255.0
         textField.textColor = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1.0)
         textField.autocorrectionType = .no
@@ -25,7 +25,8 @@ public class FSLabelTextField: UIView {
         textField.autocapitalizationType = .none
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.textAlignment = .right
-        addSubview(textField)
+        
+        insertSubview(textField, aboveSubview: label)
         
         return textField
     }()
