@@ -17,7 +17,7 @@ public class FSLabelTextField: UIView {
     }()
     
     public lazy var textField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 100, y: 0, width: frame.size.width - 105, height: frame.size.height))
+        let textField = UITextField(frame: CGRect(x: 100, y: 0, width: frame.size.width - 115, height: frame.size.height))
         let rgb = 16 / 255.0
         textField.textColor = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1.0)
         textField.autocorrectionType = .no
