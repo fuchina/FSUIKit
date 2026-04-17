@@ -2,6 +2,7 @@
 // Translated from FSImage.h/m
 
 import UIKit
+import Photos
 
 public class FSImage: NSObject {
     
@@ -146,30 +147,46 @@ public class FSImage: NSObject {
         return image
     }
     
-    public static func image(for view: UIView) -> UIImage? {
+    public static func image(for view: UIView, useDrawHierarchy: Bool = true, afterScreenUpdates: Bool = true) -> UIImage? {
         let savedFrame = view.frame
-        let isScrollView = view is UIScrollView
-        
-        if isScrollView, let sView = view as? UIScrollView {
-            let newSize = CGSize(width: sView.frame.width, height: sView.contentSize.height + sView.contentInset.top + sView.contentInset.bottom)
-            view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: newSize.width, height: newSize.height)
+        var savedContentOffset: CGPoint = .zero
+
+        if let scrollView = view as? UIScrollView {
+            savedContentOffset = scrollView.contentOffset
+
+            let width = max(scrollView.bounds.width, scrollView.contentSize.width + scrollView.contentInset.left + scrollView.contentInset.right)
+            let height = max(scrollView.bounds.height, scrollView.contentSize.height + scrollView.contentInset.top + scrollView.contentInset.bottom)
+            view.frame = CGRect(x: savedFrame.origin.x, y: savedFrame.origin.y, width: width, height: height)
+            scrollView.contentOffset = .zero
+            scrollView.layoutIfNeeded()
         }
-        
-        var image: UIImage?
-        if #available(iOS 10.0, *) {
-            let format = UIGraphicsImageRendererFormat()
-            if #available(iOS 12.0, *) {
-                format.preferredRange = .standard
+
+        defer {
+            if let scrollView = view as? UIScrollView {
+                scrollView.contentOffset = savedContentOffset
             }
-            let renderer = UIGraphicsImageRenderer(size: view.bounds.size, format: format)
-            image = renderer.image { context in
+            view.frame = savedFrame
+        }
+
+        let size = view.bounds.size
+        guard size.width > 0, size.height > 0 else { return nil }
+
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = UIScreen.main.scale
+        format.opaque = false
+
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+        let image = renderer.image { context in
+            if useDrawHierarchy {
+                let ok = view.drawHierarchy(in: view.bounds, afterScreenUpdates: afterScreenUpdates)
+                if !ok {
+                    view.layer.render(in: context.cgContext)
+                }
+            } else {
                 view.layer.render(in: context.cgContext)
             }
         }
-        
-        if isScrollView {
-            view.frame = savedFrame
-        }
+
         return image
     }
     
@@ -186,5 +203,50 @@ public class FSImage: NSObject {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+
+    public static func requestPhotoLibraryAddPermission(completion: @escaping (Bool) -> Void) {
+        if #available(iOS 14, *) {
+            let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+            if status == .authorized || status == .limited {
+                completion(true)
+                return
+            }
+            if status == .denied || status == .restricted {
+                completion(false)
+                return
+            }
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { newStatus in
+                completion(newStatus == .authorized || newStatus == .limited)
+            }
+        } else {
+            let status = PHPhotoLibrary.authorizationStatus()
+            if status == .authorized {
+                completion(true)
+                return
+            }
+            if status == .denied || status == .restricted {
+                completion(false)
+                return
+            }
+            PHPhotoLibrary.requestAuthorization { newStatus in
+                completion(newStatus == .authorized)
+            }
+        }
+    }
+
+    public static func saveToPhotoLibrary(_ image: UIImage, completion: @escaping (Bool) -> Void) {
+        requestPhotoLibraryAddPermission { granted in
+            guard granted else {
+                completion(false)
+                return
+            }
+
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetCreationRequest.creationRequestForAsset(from: image)
+            }, completionHandler: { success, _ in
+                completion(success)
+            })
+        }
     }
 }
