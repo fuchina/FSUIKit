@@ -49,7 +49,7 @@ import UIKit
         let bbi = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(doneAction))
         navigationItem.rightBarButtonItem = bbi
         
-        textView = UITextView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 300))
+        textView = UITextView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.bounds.width, height: view.bounds.height - 300))
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.backgroundColor = .clear
         view.addSubview(textView)
@@ -70,7 +70,7 @@ import UIKit
               let value = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
         let keyboardSize = value.cgRectValue.size
-        textView.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height
+        textView.frame.size.height = view.bounds.height - keyboardSize.height
     }
     
     // MARK: - FSNavigationControllerPopDelegate
