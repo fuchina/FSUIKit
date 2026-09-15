@@ -76,7 +76,7 @@ open class FSBaseController: UIViewController {
             return
         }
         
-        let fo = ws.interfaceOrientation
+        let fo = ws.effectiveGeometry.interfaceOrientation
         baseHandleChangeStatusBarOrientation(orientation: fo)
     }
     
