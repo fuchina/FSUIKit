@@ -173,7 +173,7 @@ public class FSImage: NSObject {
         guard size.width > 0, size.height > 0 else { return nil }
 
         let format = UIGraphicsImageRendererFormat.default()
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+        let s = FSKit.currentScene()?.screen ?? UIScreen()
         format.scale = s.scale
         format.opaque = false
 

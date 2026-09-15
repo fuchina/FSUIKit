@@ -71,7 +71,7 @@ open class FSBaseController: UIViewController {
     }
     
     func handleOrientationDidChange() {
-        let ws = FSKit.currentWindowScene()
+        let ws = FSKit.currentScene()
         guard let ws = ws else {
             return
         }

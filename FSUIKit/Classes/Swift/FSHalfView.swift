@@ -73,11 +73,8 @@ public class FSHalfView: UIView {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         _tapView.addGestureRecognizer(tapGesture)
-        
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        
-        let size = s.bounds.size
-        tableView = UITableView(frame: CGRect(x: bounds.width, y: 0, width: size.width - _leftWidth, height: frame.height), style: .plain)
+                
+        tableView = UITableView(frame: CGRect(x: bounds.width, y: 0, width: WIDTHFC - _leftWidth, height: frame.height), style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 50

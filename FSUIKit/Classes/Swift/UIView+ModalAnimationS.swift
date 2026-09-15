@@ -7,14 +7,12 @@ import FSKit
 public extension UIView {
     
     func pushAnimatedS(_ flag: Bool, completion: ((UIView) -> Void)?) {
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        pushAnimatedS(flag, toFrame: CGRect(x: 0, y: 0, width: s.bounds.width, height: s.bounds.height), completion: completion)
+        pushAnimatedS(flag, toFrame: CGRect(x: 0, y: 0, width: WIDTHFC, height: HEIGHTFC), completion: completion)
     }
     
     func pushAnimatedS(_ flag: Bool, toFrame frame: CGRect, completion: ((UIView) -> Void)?) {
         if flag {
-            let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-            self.frame = CGRect(x: 0, y: s.bounds.height, width: s.bounds.width, height: s.bounds.height)
+            self.frame = CGRect(x: 0, y: HEIGHTFC, width: WIDTHFC, height: HEIGHTFC)
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.25, options: .curveEaseOut, animations: {
                 self.frame = frame
             }, completion: { _ in
@@ -27,8 +25,7 @@ public extension UIView {
     }
     
     func popAnimatedS(_ flag: Bool, removeFromSuperView remove: Bool, completion: ((UIView) -> Void)?) {
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        popAnimatedS(flag, toFrame: CGRect(x: 0, y: s.bounds.height, width: s.bounds.width, height: s.bounds.height), removeFromSuperView: remove, completion: completion)
+        popAnimatedS(flag, toFrame: CGRect(x: 0, y: HEIGHTFC, width: WIDTHFC, height: HEIGHTFC), removeFromSuperView: remove, completion: completion)
     }
     
     func popAnimatedS(_ flag: Bool, toFrame frame: CGRect, removeFromSuperView remove: Bool, completion: ((UIView) -> Void)?) {

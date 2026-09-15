@@ -69,8 +69,7 @@ open class FSViewManager: UIView {
     
     public static func submitButton(withTop top: CGFloat, tag: Int, target: Any?, selector: Selector) -> UIButton {
         let color = UIColor(red: 18/255.0, green: 152/255.0, blue: 233/255.0, alpha: 1)
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        let button = self.button(withFrame: CGRect(x: 20, y: top, width: s.bounds.width - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, target: target, selector: selector)
+        let button = self.button(withFrame: CGRect(x: 20, y: top, width: WIDTHFC - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, target: target, selector: selector)
         button.layer.cornerRadius = 3
         return button
     }
@@ -147,8 +146,7 @@ open class FSViewManager: UIView {
     }
     
     public static func tapCell(withText text: String?, textColor: UIColor?, font: UIFont?, detailText: String?, detailColor: UIColor?, detailFont: UIFont?, block: TapCellBlock?) -> FSTapCell {
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        return tapCell(withText: text, textColor: textColor, font: font, detailText: detailText, detailColor: detailColor, detailFont: detailFont, frame: CGRect(x: 0, y: 0, width: s.bounds.width, height: 44), block: block)
+        return tapCell(withText: text, textColor: textColor, font: font, detailText: detailText, detailColor: detailColor, detailFont: detailFont, frame: CGRect(x: 0, y: 0, width: WIDTHFC, height: 44), block: block)
     }
     
     public static func tapCell(withText text: String?, textColor: UIColor?, font: UIFont?, detailText: String?, detailColor: UIColor?, detailFont: UIFont?, frame: CGRect, block: TapCellBlock?) -> FSTapCell {

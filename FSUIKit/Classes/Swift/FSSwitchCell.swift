@@ -28,8 +28,7 @@ public class FSSwitchCell: UITableViewCell {
     private func switchDesignViews() {
         isUserInteractionEnabled = true
         selectionStyle = .none
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        _switch = UISwitch(frame: CGRect(x: s.bounds.width - 71, y: 12, width: 51, height: 31))
+        _switch = UISwitch(frame: CGRect(x: WIDTHFC - 71, y: 12, width: 51, height: 31))
         _switch.addTarget(self, action: #selector(switchAction(_:)), for: .valueChanged)
         contentView.addSubview(_switch)
     }

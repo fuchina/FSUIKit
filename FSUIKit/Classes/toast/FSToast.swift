@@ -17,7 +17,7 @@ open class FSToast: NSObject {
     
     @discardableResult
     public static func toast(_ text: String, duration: Float) -> UIView {
-        let ws = FSKit.currentWindowScene()
+        let ws = FSKit.currentScene()
         if ws == nil {
             return UIView()
         }
@@ -52,8 +52,7 @@ open class FSToast: NSObject {
         label.textColor = UIColor.white
         
         let vWidth = width + 20
-        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
-        let x = s.bounds.width / 2 - vWidth / 2
+        let x = WIDTHFC / 2 - vWidth / 2
         
         let y = to.bounds.size.height / 2 - height / 2
         let back = UIView(frame: CGRect(x: x, y: y, width: vWidth, height: height))
