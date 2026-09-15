@@ -7,10 +7,10 @@
 
 import UIKit
 
-@objc open class FSTextViewController: FSBaseController, FSNavigationControllerPopDelegate {
+open class FSTextViewController: FSBaseController, FSNavigationControllerPopDelegate {
     
-    @objc public var text: String?
-    @objc public var completion: ((FSTextViewController, String?) -> Void)?
+    public var text: String?
+    public var completion: ((FSTextViewController, String?) -> Void)?
     
     private var textView: UITextView!
     private var canPop: Bool = false
@@ -46,7 +46,9 @@ import UIKit
     private func textDesignViews() {
         title = "请输入"
         
-        let bbi = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(doneAction))
+        let bbi = UIBarButtonItem(title: "确认", primaryAction: UIAction { [weak self] _ in
+            self?.doneAction()
+        })
         navigationItem.rightBarButtonItem = bbi
         
         textView = UITextView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.bounds.width, height: view.bounds.height - 300))
