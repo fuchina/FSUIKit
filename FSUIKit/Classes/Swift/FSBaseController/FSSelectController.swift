@@ -53,7 +53,7 @@ open class FSSelectController: FSBaseController, UITableViewDelegate, UITableVie
         let bbi = UIBarButtonItem(title: "确定", style: .plain, target: self, action: #selector(confirmSelected))
         navigationItem.rightBarButtonItem = bbi
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), style: .plain)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 55

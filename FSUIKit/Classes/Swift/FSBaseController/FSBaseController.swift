@@ -236,8 +236,8 @@ open class FSBaseController: UIViewController {
     
     open lazy var scrollView: FSTapScrollView = {
         
-        let scrollView = FSTapScrollView(frame: CGRect(x: 0, y: self.view.safeAreaInsets.top, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - self.view.safeAreaInsets.top))
-        scrollView.contentSize = CGSizeMake(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height + 10)
+        let scrollView = FSTapScrollView(frame: CGRect(x: 0, y: self.view.safeAreaInsets.top, width: view.bounds.size.width, height: view.bounds.size.height - self.view.safeAreaInsets.top))
+        scrollView.contentSize = CGSizeMake(view.bounds.size.width, view.bounds.size.height + 10)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.click = { [weak self] view in
@@ -249,9 +249,6 @@ open class FSBaseController: UIViewController {
         } else {
             self.view.insertSubview(scrollView, aboveSubview: _back_tap_view!)
         }
-        
-//        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapActionBase))
-//        scrollView.addGestureRecognizer(tap)
         
         if self.navigationController != nil {
             FSKit.fitScrollViewOperate(scrollView, navigationController: self.navigationController)
@@ -268,14 +265,14 @@ open class FSBaseController: UIViewController {
         
         if show {
             let blackWidth = 80
-            let blackRect = CGRect(x: Int(UIScreen.main.bounds.size.width / 2 - 40.0), y: (Int(UIScreen.main.bounds.size.height) / 2 - 40), width: blackWidth, height: blackWidth)
+            let blackRect = CGRect(x: Int(view.bounds.size.width / 2 - 40.0), y: (Int(view.bounds.size.height) / 2 - 40), width: blackWidth, height: blackWidth)
             
             if _baseLoadingView != nil {
                 self.view.bringSubviewToFront(_baseLoadingView!)
-                _baseLoadingView!.frame = UIScreen.main.bounds
+                _baseLoadingView!.frame = view.bounds
                 _baseBackView?.frame = blackRect
             } else {
-                _baseLoadingView = UIView(frame: UIScreen.main.bounds)
+                _baseLoadingView = UIView(frame: view.bounds)
                 self.view.addSubview(_baseLoadingView!)
                 
                 _baseBackView = UIView(frame: blackRect)
@@ -299,7 +296,7 @@ open class FSBaseController: UIViewController {
     
     open lazy var fs_bottomView: UIView = {
         let h = self.view.safeAreaInsets.bottom + 45
-        let bottomView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height - h, width: UIScreen.main.bounds.size.width, height: h))
+        let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.size.height - h, width: view.bounds.size.width, height: h))
         bottomView.backgroundColor = UIColor.white
         view.addSubview(bottomView)
         return bottomView
