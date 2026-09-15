@@ -2,6 +2,7 @@
 // Translated from FSAutoLayoutButtonsView.h/m
 
 import UIKit
+import FSKit
 
 public class FSAutoLayoutButtonsView: UIView {
     
@@ -33,7 +34,8 @@ public class FSAutoLayoutButtonsView: UIView {
         guard let texts = texts, !texts.isEmpty else { return }
         
         let font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        let sw = UIScreen.main.bounds.width
+        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+        let sw = s.bounds.width
         let lrMargin: CGFloat = 15
         let rightMargin = sw - lrMargin
         var offsetX: CGFloat = lrMargin

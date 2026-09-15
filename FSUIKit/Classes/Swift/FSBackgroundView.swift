@@ -2,6 +2,7 @@
 // Translated from FSBackgroundView.h/m
 
 import UIKit
+import FSKit
 
 public class FSBackgroundView: UIView {
     
@@ -34,18 +35,21 @@ public class FSBackgroundView: UIView {
     }
     
     public func showView(_ view: UIView, completion: ((FSBackgroundView, Bool) -> Void)?) {
-        view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: view.frame.width, height: view.frame.height)
+        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+        view.frame = CGRect(x: 0, y: s.bounds.height, width: view.frame.width, height: view.frame.height)
         
         UIView.animate(withDuration: 0.25, animations: {
-            view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - view.frame.height, width: view.frame.width, height: view.frame.height)
+            let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+            view.frame = CGRect(x: 0, y: s.bounds.height - view.frame.height, width: view.frame.width, height: view.frame.height)
         }, completion: { finished in
             completion?(self, finished)
         })
     }
     
     public func dismissView(_ view: UIView, completion: ((FSBackgroundView, Bool) -> Void)?) {
+        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
         UIView.animate(withDuration: 0.25, animations: {
-            view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: view.frame.width, height: view.frame.height)
+            view.frame = CGRect(x: 0, y: s.bounds.height, width: view.frame.width, height: view.frame.height)
         }, completion: { finished in
             completion?(self, finished)
         })

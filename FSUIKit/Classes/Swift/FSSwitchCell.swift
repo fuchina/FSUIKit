@@ -2,6 +2,7 @@
 // Translated from FSSwitchCell.h/m
 
 import UIKit
+import FSKit
 
 public class FSSwitchCell: UITableViewCell {
     
@@ -27,7 +28,8 @@ public class FSSwitchCell: UITableViewCell {
     private func switchDesignViews() {
         isUserInteractionEnabled = true
         selectionStyle = .none
-        _switch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.width - 71, y: 12, width: 51, height: 31))
+        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+        _switch = UISwitch(frame: CGRect(x: s.bounds.width - 71, y: 12, width: 51, height: 31))
         _switch.addTarget(self, action: #selector(switchAction(_:)), for: .valueChanged)
         contentView.addSubview(_switch)
     }

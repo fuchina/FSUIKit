@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import FSKit
 
 open class FSToast: NSObject {
@@ -53,7 +52,8 @@ open class FSToast: NSObject {
         label.textColor = UIColor.white
         
         let vWidth = width + 20
-        let x = UIScreen.main.bounds.width / 2 - vWidth / 2
+        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+        let x = s.bounds.width / 2 - vWidth / 2
         
         let y = to.bounds.size.height / 2 - height / 2
         let back = UIView(frame: CGRect(x: x, y: y, width: vWidth, height: height))

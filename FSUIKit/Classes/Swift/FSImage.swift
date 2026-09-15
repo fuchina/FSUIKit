@@ -3,6 +3,7 @@
 
 import UIKit
 import Photos
+import FSKit
 
 public class FSImage: NSObject {
     
@@ -172,7 +173,8 @@ public class FSImage: NSObject {
         guard size.width > 0, size.height > 0 else { return nil }
 
         let format = UIGraphicsImageRendererFormat.default()
-        format.scale = UIScreen.main.scale
+        let s = FSKit.currentWindowScene()?.screen ?? UIScreen()
+        format.scale = s.scale
         format.opaque = false
 
         let renderer = UIGraphicsImageRenderer(size: size, format: format)
