@@ -295,7 +295,7 @@ open class FSBaseController: UIViewController {
     }
     
     open lazy var fs_bottomView: UIView = {
-        let h = self.view.safeAreaInsets.bottom + 45
+        let h = view.safeAreaInsets.bottom + 45
         let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.size.height - h, width: view.bounds.size.width, height: h))
         bottomView.backgroundColor = UIColor.white
         view.addSubview(bottomView)
