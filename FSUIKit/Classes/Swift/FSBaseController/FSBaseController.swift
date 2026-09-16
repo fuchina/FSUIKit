@@ -29,6 +29,8 @@ open class FSBaseController: UIViewController {
     var             _baseBackView           :   UIView?                  =        nil
     
     var             _after_view_create      :   Bool                     =        false
+    
+    var             _bottom_view_created    :   Bool                     =        false
 
     deinit {
         #if TARGET_IPHONE_SIMULATOR
@@ -299,7 +301,17 @@ open class FSBaseController: UIViewController {
         let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.size.height - h, width: view.bounds.size.width, height: h))
         bottomView.backgroundColor = UIColor.white
         view.addSubview(bottomView)
+        _bottom_view_created = true
         return bottomView
     }()
     
+    open override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        
+        if _bottom_view_created {
+            let h = view.safeAreaInsets.bottom + 45
+            fs_bottomView.frame = CGRect(x: 0, y: view.bounds.size.height - h, width: view.bounds.size.width, height: h)
+        }
+    }
+        
 }
