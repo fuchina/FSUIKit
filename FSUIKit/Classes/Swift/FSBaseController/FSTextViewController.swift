@@ -79,7 +79,7 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
     
     // MARK: - FSNavigationControllerPopDelegate
     
-    @objc public func navigationShouldPopOnBackButton() -> Bool {
+    public func navigationShouldPopOnBackButton() -> Bool {
         if canPop {
             return true
         } else {
