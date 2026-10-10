@@ -7,8 +7,8 @@
 
 import UIKit
 
-public protocol FSNavigationControllerPopDelegate: AnyObject {
-    optional func navigationShouldPopOnBackButton() -> Bool
+@objc public protocol FSNavigationControllerPopDelegate: AnyObject {
+    @objc optional func navigationShouldPopOnBackButton() -> Bool
 }
 
 open class FSNavigationController: UINavigationController, UINavigationBarDelegate {
