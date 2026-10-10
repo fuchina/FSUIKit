@@ -12,7 +12,10 @@ public class FSReuseTableView: UIView {
         didSet {
             if refreshHeader != nil {
                 let refreshControl = UIRefreshControl()
-                refreshControl.addTarget(self, action: #selector(handleRefreshHeader), for: .valueChanged)
+                refreshControl.addAction(UIAction { [weak self] _ in
+                    guard let self else { return }
+                    self.handleRefreshHeader()
+                }, for: .valueChanged)
                 tableView.refreshControl = refreshControl
             }
         }
@@ -53,7 +56,7 @@ public class FSReuseTableView: UIView {
         addSubview(tableView)
     }
     
-    @objc private func handleRefreshHeader() {
+    private func handleRefreshHeader() {
         refreshHeader?()
     }
     

@@ -53,7 +53,10 @@ public class FSAutoLayoutButtonsView: UIView {
             button.tag = index + keyValueButtonTag + 1
             button.backgroundColor = .white
             button.setTitle(item, for: .normal)
-            button.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
+            button.addAction(UIAction { [weak self] action in
+                guard let self else { return }
+                self.btnClick(action.sender as! UIButton)
+            }, for: .touchUpInside)
             addSubview(button)
             
             offsetX += (w + xSpace)
@@ -63,7 +66,7 @@ public class FSAutoLayoutButtonsView: UIView {
         _height = offsetY + bh
     }
     
-    @objc private func btnClick(_ button: UIButton) {
+    private func btnClick(_ button: UIButton) {
         let index = button.tag - keyValueButtonTag - 1
         click?(self, index)
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 /// 用于少数几个页面的分页控制器，因为不复用，页面多了内存有压力
-@objc open class FSTabsController: UITabBarController {
+ open class FSTabsController: UITabBarController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()

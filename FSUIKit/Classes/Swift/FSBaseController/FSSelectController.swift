@@ -36,10 +36,10 @@ public typealias FSSelectControllerBlock = (FSSelectController, IndexPath, [FSSe
 
 open class FSSelectController: FSBaseController, UITableViewDelegate, UITableViewDataSource {
     
-    @objc public var models: [FSSelectModel] = []
-    @objc public var configCell: ((UITableViewCell, IndexPath, [FSSelectModel]) -> Void)?
-    @objc public var block: FSSelectControllerBlock?
-    @objc public var multiSelectCallback: ((FSSelectController, [FSSelectModel]) -> Void)?
+    public var models: [FSSelectModel] = []
+    public var configCell: ((UITableViewCell, IndexPath, [FSSelectModel]) -> Void)?
+    public var block: FSSelectControllerBlock?
+    public var multiSelectCallback: ((FSSelectController, [FSSelectModel]) -> Void)?
     
     private var tableView: UITableView!
     

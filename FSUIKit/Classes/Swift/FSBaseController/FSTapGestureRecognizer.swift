@@ -7,6 +7,6 @@
 
 import UIKit
 
-@objc open class FSTapGestureRecognizer: UITapGestureRecognizer {
-    @objc public var clickBack: ((UIAlertController, CGPoint) -> Void)?
+open class FSTapGestureRecognizer: UITapGestureRecognizer {
+    public var clickBack: ((UIAlertController, CGPoint) -> Void)?
 }

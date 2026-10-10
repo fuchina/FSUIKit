@@ -29,11 +29,14 @@ public class FSSwitchCell: UITableViewCell {
         isUserInteractionEnabled = true
         selectionStyle = .none
         _switch = UISwitch(frame: CGRect(x: WIDTHFC - 71, y: 12, width: 51, height: 31))
-        _switch.addTarget(self, action: #selector(switchAction(_:)), for: .valueChanged)
+        _switch.addAction(UIAction { [weak self] action in
+            guard let self else { return }
+            self.switchAction(action.sender as! UISwitch)
+        }, for: .valueChanged)
         contentView.addSubview(_switch)
     }
     
-    @objc private func switchAction(_ s: UISwitch) {
+    private func switchAction(_ s: UISwitch) {
         block?(s)
     }
 }

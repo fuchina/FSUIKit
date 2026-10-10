@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc open class FSShakeBaseController: FSBaseController {
+open class FSShakeBaseController: FSBaseController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ import UIKit
         }
     }
     
-    @objc open func shakeEndActionFromShakeBase() {
+    open func shakeEndActionFromShakeBase() {
         // 子类重写此方法处理摇一摇结束事件
     }
 }

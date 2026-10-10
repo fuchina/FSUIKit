@@ -7,11 +7,11 @@
 
 import UIKit
 
-@objc public protocol FSNavigationControllerPopDelegate: AnyObject {
-    @objc optional func navigationShouldPopOnBackButton() -> Bool
+public protocol FSNavigationControllerPopDelegate: AnyObject {
+    optional func navigationShouldPopOnBackButton() -> Bool
 }
 
-@objc open class FSNavigationController: UINavigationController, UINavigationBarDelegate {
+open class FSNavigationController: UINavigationController, UINavigationBarDelegate {
     
     open override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if topViewController != nil {

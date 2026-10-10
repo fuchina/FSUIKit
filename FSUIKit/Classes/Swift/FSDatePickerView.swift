@@ -73,7 +73,10 @@ public class FSDatePickerView: UIView {
             button.setTitleColor(.white, for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             button.tag = x
-            button.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+            button.addAction(UIAction { [weak self] action in
+                guard let self else { return }
+                self.buttonAction(action.sender as! UIButton)
+            }, for: .touchUpInside)
             selectView.addSubview(button)
         }
         
@@ -95,7 +98,7 @@ public class FSDatePickerView: UIView {
         showAction(false)
     }
     
-    @objc private func buttonAction(_ button: UIButton) {
+    private func buttonAction(_ button: UIButton) {
         if button.tag == 1 {
             block?(datePicker.date)
             showAction(false)

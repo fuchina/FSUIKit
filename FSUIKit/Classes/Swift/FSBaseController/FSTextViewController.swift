@@ -32,6 +32,7 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        
     }
     
     open override func componentWillMount() {
@@ -39,7 +40,7 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
         textDesignViews()
     }
     
-    @objc private func doneAction() {
+    private func doneAction() {
         completion?(self, textView.text)
     }
     

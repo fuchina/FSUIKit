@@ -7,7 +7,6 @@
 
 import Foundation
 
-@objc
 public class FSImageLabelView: FSView {
     
     public var          imageView                   :  UIImageView?                  =  nil
@@ -45,7 +44,7 @@ public class FSImageLabelView: FSView {
         self.addConstraint(NSLayoutConstraint(item: label!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
     }
     
-    @objc public static func imageLabel(_ frame: CGRect, imageName: String, text: String) -> FSImageLabelView {
+    public static func imageLabel(_ frame: CGRect, imageName: String, text: String) -> FSImageLabelView {
                 
         let view = FSImageLabelView(frame: frame)
         view.label?.text = text
