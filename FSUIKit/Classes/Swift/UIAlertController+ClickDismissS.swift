@@ -6,7 +6,7 @@ import ObjectiveC
 import FSKit
 
 // 自定义手势识别器
-public class FSTapGestureRecognizerS: UITapGestureRecognizer {
+public class FSTapGestureRecognizerS: FSTapGestureRecognizer {
     public var clickBack: ((UIAlertController, CGPoint) -> Void)?
 }
 
@@ -26,7 +26,10 @@ public extension UIAlertController {
         
         backView.isUserInteractionEnabled = true
         
-        let tap = FSTapGestureRecognizerS(target: self, action: #selector(handleTapS(_:)))
+        let tap = FSTapGestureRecognizerS.init { [weak self] tap in
+            guard let self else { return }
+            self.handleTapS(tap as! FSTapGestureRecognizerS)
+        }
         tap.clickBack = clickDismiss
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
@@ -52,7 +55,7 @@ public extension UIAlertController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func handleTapS(_ tap: FSTapGestureRecognizerS) {
+    private func handleTapS(_ tap: FSTapGestureRecognizerS) {
         guard let view = tap.view else { return }
         let point = tap.location(in: view)
         tap.clickBack?(self, point)
