@@ -11,7 +11,13 @@
 
 全组件约 20 处 `@objc`，**不能全去掉**：绝大多数是 ObjC 运行时回调入口
 （`#selector` 版 gesture / addTarget / NotificationCenter、`CADisplayLink`、`@objc optional` 协议前提）。
-删 `#selector` 指的方法会直接编译失败。仅 `FSTextViewController.swift` 的协议实现那处可删（已删，语义等价）。
+删 `#selector` 指的方法会直接编译失败。
+
+`FSTextViewController.swift` 已把 2 处 `@objc` **全部去掉**（2026-10-10）：
+协议实现那处直接删（自动推断）；`keyboardActionInPropertyBase` 那处改成
+**闭包版 `addObserver(forName:object:queue:using:)` + token 数组**，`deinit` 里手动 `removeObserver(token)`。
+⚠️ 闭包版**不会**自动注销（selector 版 iOS 9+ 会自动），必须手动清理，否则块常驻通知中心。
+→ 能省掉 `@objc` 的模式就这一个，其它 18 处要换成闭包需要额外包装类，收益不大。
 
 ## 脱离 Xcode 做真 `-typecheck` 的可行路子（已验证）
 
