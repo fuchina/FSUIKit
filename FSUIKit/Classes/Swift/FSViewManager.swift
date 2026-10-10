@@ -32,13 +32,6 @@ open class FSViewManager: UIView {
         return view
     }
     
-    public static func bbi(withTitle title: String, target: Any?, action selector: Selector) -> UIBarButtonItem {
-        return UIBarButtonItem(title: title, style: .plain, target: target, action: selector)
-    }
-    
-    public static func bbi(withSystemType type: UIBarButtonItem.SystemItem, target: Any?, action selector: Selector) -> UIBarButtonItem {
-        return UIBarButtonItem(barButtonSystemItem: type, target: target, action: selector)
-    }
     
     public static func segmentedControl(withTitles titles: [String], target: Any?, action selector: Selector) -> UISegmentedControl {
         let control = UISegmentedControl(items: titles)
@@ -72,18 +65,6 @@ open class FSViewManager: UIView {
         let button = self.button(withFrame: CGRect(x: 20, y: top, width: WIDTHFC - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, target: target, selector: selector)
         button.layer.cornerRadius = 3
         return button
-    }
-    
-    public static func barButtonItem(withCustomButton button: UIButton) -> UIBarButtonItem {
-        return UIBarButtonItem(customView: button)
-    }
-    
-    public static func barButtonItem(withTitle title: String, target: Any?, selector: Selector, tintColor: UIColor?) -> UIBarButtonItem {
-        let bbi = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)
-        if let tc = tintColor {
-            bbi.tintColor = tc
-        }
-        return bbi
     }
     
     public static func tableView(withFrame frame: CGRect, delegate: (UITableViewDelegate & UITableViewDataSource)?, style: UITableView.Style, footerView: UIView?) -> UITableView {

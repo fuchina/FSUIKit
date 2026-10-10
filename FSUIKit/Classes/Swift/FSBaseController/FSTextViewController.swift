@@ -47,7 +47,8 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
         title = "请输入"
         
         let bbi = UIBarButtonItem(title: "确认", primaryAction: UIAction { [weak self] _ in
-            self?.doneAction()
+            guard let self else { return }
+            self.doneAction()
         })
         navigationItem.rightBarButtonItem = bbi
         

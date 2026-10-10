@@ -43,14 +43,17 @@ open class FSSelectController: FSBaseController, UITableViewDelegate, UITableVie
     
     private var tableView: UITableView!
     
-    @objc func confirmSelected() {
+    func confirmSelected() {
         multiSelectCallback?(self, FSSelectModel.selectedModels(from: models))
     }
     
     open override func componentWillMount() {
         super.componentWillMount()
         
-        let bbi = UIBarButtonItem(title: "确定", style: .plain, target: self, action: #selector(confirmSelected))
+        let bbi = UIBarButtonItem(title: "确定", primaryAction: UIAction { [weak self] _ in
+            guard let self else { return }
+            self.confirmSelected()
+        })
         navigationItem.rightBarButtonItem = bbi
         
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .plain)
