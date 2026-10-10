@@ -14,6 +14,7 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
     
     private var textView: UITextView!
     private var canPop: Bool = false
+    private var keyboardObservers: [NSObjectProtocol] = []
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -26,12 +27,20 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
     }
     
     private func setupNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardActionInPropertyBase(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardActionInPropertyBase(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let center = NotificationCenter.default
+        keyboardObservers = [
+            center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] in
+                self?.keyboardActionInPropertyBase($0)
+            },
+            center.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] in
+                self?.keyboardActionInPropertyBase($0)
+            }
+        ]
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        keyboardObservers.forEach { NotificationCenter.default.removeObserver($0) }
+        keyboardObservers.removeAll()
         
     }
     
@@ -69,7 +78,7 @@ open class FSTextViewController: FSBaseController, FSNavigationControllerPopDele
         }
     }
     
-    @objc private func keyboardActionInPropertyBase(_ notification: Notification) {
+    private func keyboardActionInPropertyBase(_ notification: Notification) {
         guard let info = notification.userInfo,
               let value = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
