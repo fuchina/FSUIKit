@@ -2,6 +2,7 @@
 // Translated from FSImageView.h/m
 
 import UIKit
+import FSKit
 
 public class FSImageView: UIImageView {
     
@@ -34,11 +35,14 @@ public class FSImageView: UIImageView {
         _backTapView = UIView(frame: bounds)
         addSubview(_backTapView)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(fsTapClickEvent(_:)))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self.fsTapClickEvent(tap)
+        }
         _backTapView.addGestureRecognizer(tap)
     }
     
-    @objc private func fsTapClickEvent(_ tap: UITapGestureRecognizer) {
+    private func fsTapClickEvent(_ tap: UITapGestureRecognizer) {
         click?(self)
     }
     

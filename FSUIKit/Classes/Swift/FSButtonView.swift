@@ -2,6 +2,7 @@
 // Translated from FSButtonView.h/m
 
 import UIKit
+import FSKit
 
 public class FSButtonView: UIView {
     
@@ -36,11 +37,14 @@ public class FSButtonView: UIView {
         _backView = UIView(frame: bounds)
         addSubview(_backView)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapClick))
+        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self.tapClick()
+        }
         _backView.addGestureRecognizer(tapGesture)
     }
     
-    @objc private func tapClick() {
+    private func tapClick() {
         tap?(self)
     }
     

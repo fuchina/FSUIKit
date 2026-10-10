@@ -2,6 +2,7 @@
 // Translated from FSLabelTextField.h/m
 
 import UIKit
+import FSKit
 
 public class FSLabelTextField: UIView {
     
@@ -10,7 +11,10 @@ public class FSLabelTextField: UIView {
         addSubview(label)
         label.isUserInteractionEnabled = true
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapClick))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.tapClick()
+        }
         label.addGestureRecognizer(tap)
         
         return label
@@ -59,7 +63,7 @@ public class FSLabelTextField: UIView {
         textField.placeholder = placeholder
     }
     
-    @objc private func tapClick() {
+    private func tapClick() {
         tapEvent?(self)
     }
 }

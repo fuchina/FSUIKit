@@ -2,6 +2,7 @@
 // Translated from FSTapScrollView.h/m
 
 import UIKit
+import FSKit
 
 open class FSTapScrollView: UIScrollView {
     
@@ -18,11 +19,14 @@ open class FSTapScrollView: UIScrollView {
     }
     
     private func setupTap() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapActionInTapScrollView))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.tapActionInTapScrollView()
+        }
         addGestureRecognizer(tap)
     }
     
-    @objc private func tapActionInTapScrollView() {
+    private func tapActionInTapScrollView() {
         click?(self)
     }
 }

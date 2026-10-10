@@ -75,7 +75,6 @@ open class FSViewManager: UIView {
         return button
     }
     
-    /// 闭包版：不需要 target/selector，调用方的方法也不用写 @objc
     public static func button(withFrame frame: CGRect, title: String?, titleColor color: UIColor?, backColor: UIColor?, font: UIFont?, tag: Int, handler: ((UIButton) -> Void)?) -> UIButton {
         return makeButton(withFrame: frame, title: title, titleColor: color, backColor: backColor, font: font, tag: tag, handler: handler, target: nil, selector: nil)
     }
@@ -85,7 +84,6 @@ open class FSViewManager: UIView {
         return makeButton(withFrame: frame, title: title, titleColor: color, backColor: backColor, font: font, tag: tag, handler: nil, target: target, selector: selector)
     }
     
-    /// 闭包版：不需要 target/selector，调用方的方法也不用写 @objc
     public static func submitButton(withTop top: CGFloat, tag: Int, handler: ((UIButton) -> Void)?) -> UIButton {
         let color = UIColor(red: 18/255.0, green: 152/255.0, blue: 233/255.0, alpha: 1)
         let button = makeButton(withFrame: CGRect(x: 20, y: top, width: WIDTHFC - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, handler: handler, target: nil, selector: nil)

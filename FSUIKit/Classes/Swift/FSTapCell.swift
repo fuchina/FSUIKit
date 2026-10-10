@@ -2,6 +2,7 @@
 // Translated from FSTapCell.h/m
 
 import UIKit
+import FSKit
 
 public typealias TapCellBlock = (FSTapCell) -> Void
 
@@ -11,7 +12,10 @@ public class FSTapCell: UIView {
         let v = UIView(frame: bounds)
         addSubview(v)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.tapAction()
+        }
         v.addGestureRecognizer(tap)
 
         return v
@@ -45,7 +49,7 @@ public class FSTapCell: UIView {
         _ = backTapView
     }
         
-    @objc private func tapAction() {
+    private func tapAction() {
         backTapView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         backTapView.alpha = 0.2
         UIView.animate(withDuration: 0.25, animations: {

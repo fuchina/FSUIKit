@@ -2,6 +2,7 @@
 // Translated from FSTapLabel.h/m
 
 import UIKit
+import FSKit
 
 public typealias FSTapLabelBlock = (FSTapLabel) -> Void
 
@@ -21,11 +22,14 @@ public class FSTapLabel: UILabel {
     
     private func setupTap() {
         isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.tapAction()
+        }
         addGestureRecognizer(tap)
     }
     
-    @objc private func tapAction() {
+    private func tapAction() {
         block?(self)
     }
 }

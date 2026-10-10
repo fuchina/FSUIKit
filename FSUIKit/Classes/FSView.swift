@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FSKit
 
 open class FSView: UIView {
     
@@ -49,11 +50,14 @@ open class FSView: UIView {
         tapBackView = UIView(frame: bounds)
         self.addSubview(tapBackView!)
         
-        let one = UITapGestureRecognizer(target: self, action: #selector(_fs_tap_click_event(_:)))
+        let one = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self._fs_tap_click_event(tap)
+        }
         tapBackView!.addGestureRecognizer(one)
     }
     
-    @objc func _fs_tap_click_event(_ tap: UITapGestureRecognizer) {
+    func _fs_tap_click_event(_ tap: UITapGestureRecognizer) {
         
         if self.click != nil {
             let p = tap.location(in: tapBackView)

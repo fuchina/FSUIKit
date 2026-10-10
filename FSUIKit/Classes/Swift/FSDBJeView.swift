@@ -2,6 +2,7 @@
 // Translated from FSDBJeView.h/m
 
 import UIKit
+import FSKit
 
 open class FSDBJeView: UIView {
     
@@ -59,14 +60,17 @@ open class FSDBJeView: UIView {
     private func jeDesignViews() {
         backgroundColor = .white
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.tapAction()
+        }
         addGestureRecognizer(tapGesture)
         
         _ = jeTF
         _ = bzTF
     }
     
-    @objc private func tapAction() {
+    private func tapAction() {
         tapEvent?(self)
     }
 }

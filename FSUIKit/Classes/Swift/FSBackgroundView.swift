@@ -30,7 +30,10 @@ public class FSBackgroundView: UIView {
         backView.alpha = 0.28
         addSubview(backView)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismiss))
+        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self.dismiss()
+        }
         backView.addGestureRecognizer(tapGesture)
     }
     
@@ -52,7 +55,7 @@ public class FSBackgroundView: UIView {
         })
     }
     
-    @objc public func dismiss() {
+    public func dismiss() {
         tap?(self)
     }
 }

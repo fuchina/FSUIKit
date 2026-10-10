@@ -51,10 +51,6 @@ public class FSHalfView: UIView {
         }
     }
     
-    @objc private func tapAction() {
-        showHalfView(false, leftWidth: 0)
-    }
-    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         halfDesignViews()
@@ -71,7 +67,10 @@ public class FSHalfView: UIView {
         _tapView.alpha = 0
         addSubview(_tapView)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.tapAction()
+        }
         _tapView.addGestureRecognizer(tapGesture)
                 
         tableView = UITableView(frame: CGRect(x: bounds.width, y: 0, width: WIDTHFC - _leftWidth, height: frame.height), style: .plain)
@@ -80,6 +79,10 @@ public class FSHalfView: UIView {
         tableView.rowHeight = 50
         tableView.tableFooterView = UIView()
         addSubview(tableView)
+    }
+    
+    private func tapAction() {
+        showHalfView(false, leftWidth: 0)
     }
 }
 

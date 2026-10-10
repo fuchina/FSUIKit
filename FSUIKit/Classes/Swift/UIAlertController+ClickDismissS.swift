@@ -3,6 +3,7 @@
 
 import UIKit
 import ObjectiveC
+import FSKit
 
 // 自定义手势识别器
 public class FSTapGestureRecognizerS: UITapGestureRecognizer {
@@ -31,7 +32,10 @@ public extension UIAlertController {
         tap.numberOfTouchesRequired = 1
         backView.addGestureRecognizer(tap)
         
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapS(_:)))
+        let doubleTap = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self.handleDoubleTapS(tap)
+        }
         doubleTap.numberOfTapsRequired = 2
         doubleTap.numberOfTouchesRequired = 1
         backView.addGestureRecognizer(doubleTap)
@@ -44,7 +48,7 @@ public extension UIAlertController {
         return true
     }
     
-    @objc private func handleDoubleTapS(_ doubleTap: UITapGestureRecognizer) {
+    private func handleDoubleTapS(_ doubleTap: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     

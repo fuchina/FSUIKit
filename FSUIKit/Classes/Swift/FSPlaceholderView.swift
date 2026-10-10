@@ -2,6 +2,7 @@
 // Translated from FSPlaceholderView.h/m
 
 import UIKit
+import FSKit
 
 public class FSPlaceholderView: UIView {
     
@@ -32,11 +33,14 @@ public class FSPlaceholderView: UIView {
     }
     
     private func placeholderDesignViews() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(clickEvent))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+            guard let self else { return }
+            self.clickEvent()
+        }
         addGestureRecognizer(tap)
     }
     
-    @objc private func clickEvent() {
+    private func clickEvent() {
         click?(self)
     }
 }

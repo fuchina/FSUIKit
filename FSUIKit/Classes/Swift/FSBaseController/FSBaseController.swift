@@ -197,11 +197,14 @@ open class FSBaseController: UIViewController {
         _back_tap_view = UIView(frame: self.view.bounds)
         self.view.addSubview(_back_tap_view!)
                 
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapActionBase))
+        let tap = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self.tapActionBase()
+        }
         _back_tap_view?.addGestureRecognizer(tap)
     }
     
-    @objc open func tapActionBase() {
+    open func tapActionBase() {
         self.view.endEditing(true)
     }
     

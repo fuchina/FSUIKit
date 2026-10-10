@@ -2,6 +2,7 @@
 // Translated from FSDatePickerView.h/m
 
 import UIKit
+import FSKit
 
 public typealias FSDatePickerBlock = (Date) -> Void
 
@@ -53,7 +54,10 @@ public class FSDatePickerView: UIView {
         backView.alpha = 0.28
         addSubview(backView)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] tap in
+            guard let self else { return }
+            self.tapAction()
+        }
         backView.addGestureRecognizer(tapGesture)
                         
         if let date = _date {
@@ -93,7 +97,7 @@ public class FSDatePickerView: UIView {
         showAction(true)
     }
     
-    @objc private func tapAction() {
+    private func tapAction() {
         cancel?()
         showAction(false)
     }
