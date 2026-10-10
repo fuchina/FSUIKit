@@ -60,7 +60,7 @@ open class FSDBJeView: UIView {
     private func jeDesignViews() {
         backgroundColor = .white
         
-        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] _ in
+        let tapGesture = FSTapGestureRecognizer.init { [weak self] _ in
             guard let self else { return }
             self.tapAction()
         }

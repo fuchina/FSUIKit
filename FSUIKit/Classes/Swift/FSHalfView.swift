@@ -67,7 +67,7 @@ public class FSHalfView: UIView {
         _tapView.alpha = 0
         addSubview(_tapView)
         
-        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] _ in
+        let tapGesture = FSTapGestureRecognizer.init { [weak self] _ in
             guard let self else { return }
             self.tapAction()
         }

@@ -22,7 +22,7 @@ public class FSTapLabel: UILabel {
     
     private func setupTap() {
         isUserInteractionEnabled = true
-        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+        let tap = FSTapGestureRecognizer.init { [weak self] _ in
             guard let self else { return }
             self.tapAction()
         }

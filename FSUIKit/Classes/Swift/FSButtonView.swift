@@ -40,7 +40,7 @@ public class FSButtonView: UIView {
         _backView = UIView(frame: bounds)
         addSubview(_backView)
         
-        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] tap in
+        let tapGesture = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
             self.tapClick()
         }

@@ -30,7 +30,7 @@ public class FSBackgroundView: UIView {
         backView.alpha = 0.28
         addSubview(backView)
         
-        let tapGesture = FSClosureTapGestureRecognizer.init { [weak self] tap in
+        let tapGesture = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
             self.dismiss()
         }

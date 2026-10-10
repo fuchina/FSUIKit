@@ -50,7 +50,7 @@ open class FSView: UIView {
         tapBackView = UIView(frame: bounds)
         self.addSubview(tapBackView!)
         
-        let one = FSClosureTapGestureRecognizer.init { [weak self] tap in
+        let one = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
             self._fs_tap_click_event(tap)
         }

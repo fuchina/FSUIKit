@@ -32,7 +32,7 @@ public extension UIAlertController {
         tap.numberOfTouchesRequired = 1
         backView.addGestureRecognizer(tap)
         
-        let doubleTap = FSClosureTapGestureRecognizer.init { [weak self] tap in
+        let doubleTap = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
             self.handleDoubleTapS(tap)
         }

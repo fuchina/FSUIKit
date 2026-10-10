@@ -19,7 +19,7 @@ open class FSTapScrollView: UIScrollView {
     }
     
     private func setupTap() {
-        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+        let tap = FSTapGestureRecognizer.init { [weak self] _ in
             guard let self else { return }
             self.tapActionInTapScrollView()
         }

@@ -12,7 +12,7 @@ public class FSTapCell: UIView {
         let v = UIView(frame: bounds)
         addSubview(v)
         
-        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+        let tap = FSTapGestureRecognizer.init { [weak self] _ in
             guard let self else { return }
             self.tapAction()
         }

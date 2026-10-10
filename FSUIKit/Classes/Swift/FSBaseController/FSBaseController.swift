@@ -197,7 +197,7 @@ open class FSBaseController: UIViewController {
         _back_tap_view = UIView(frame: self.view.bounds)
         self.view.addSubview(_back_tap_view!)
                 
-        let tap = FSClosureTapGestureRecognizer.init { [weak self] tap in
+        let tap = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
             self.tapActionBase()
         }

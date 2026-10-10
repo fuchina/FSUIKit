@@ -11,7 +11,7 @@ public class FSLabelTextField: UIView {
         addSubview(label)
         label.isUserInteractionEnabled = true
         
-        let tap = FSClosureTapGestureRecognizer.init { [weak self] _ in
+        let tap = FSTapGestureRecognizer.init { [weak self] _ in
             guard let self else { return }
             self.tapClick()
         }

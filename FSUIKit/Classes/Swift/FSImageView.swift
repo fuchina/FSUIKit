@@ -35,7 +35,7 @@ public class FSImageView: UIImageView {
         _backTapView = UIView(frame: bounds)
         addSubview(_backTapView)
         
-        let tap = FSClosureTapGestureRecognizer.init { [weak self] tap in
+        let tap = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
             self.fsTapClickEvent(tap)
         }
