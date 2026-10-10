@@ -16,7 +16,10 @@ public class FSButtonView: UIView {
             let btn = UIButton(type: .system)
             btn.frame = CGRect(x: 5, y: frame.height / 2 - 18, width: frame.width - 10, height: 36)
             btn.layer.cornerRadius = 18
-            btn.addTarget(self, action: #selector(tapClick), for: .touchUpInside)
+            btn.addAction(UIAction { [weak self] _ in
+                guard let self else { return }
+                self.tapClick()
+            }, for: .touchUpInside)
             addSubview(btn)
             _button = btn
         }
