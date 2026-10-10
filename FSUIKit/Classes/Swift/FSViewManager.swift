@@ -39,7 +39,16 @@ open class FSViewManager: UIView {
         return control
     }
     
-    public static func button(withFrame frame: CGRect, title: String?, titleColor color: UIColor?, backColor: UIColor?, font: UIFont?, tag: Int, target: Any?, selector: Selector?) -> UIButton {
+    // MARK: - Button
+    private static func makeButton(withFrame frame: CGRect,
+                                   title: String?,
+                                   titleColor color: UIColor?,
+                                   backColor: UIColor?,
+                                   font: UIFont?,
+                                   tag: Int,
+                                   handler: ((UIButton) -> Void)?,
+                                   target: Any?,
+                                   selector: Selector?) -> UIButton {
         let button = UIButton(type: .system)
         button.frame = frame
         if let t = title {
@@ -49,7 +58,13 @@ open class FSViewManager: UIView {
         if let bc = backColor {
             button.backgroundColor = bc
         }
-        if let t = target, let s = selector {
+        if let h = handler {
+            // 弱捕获 button：UIAction 由 button 持有，强捕获会成环
+            button.addAction(UIAction { [weak button] _ in
+                guard let button else { return }
+                h(button)
+            }, for: .touchUpInside)
+        } else if let t = target, let s = selector {
             button.addTarget(t, action: s, for: .touchUpInside)
         }
         if let f = font {
@@ -60,9 +75,28 @@ open class FSViewManager: UIView {
         return button
     }
     
+    /// 闭包版：不需要 target/selector，调用方的方法也不用写 @objc
+    public static func button(withFrame frame: CGRect, title: String?, titleColor color: UIColor?, backColor: UIColor?, font: UIFont?, tag: Int, handler: ((UIButton) -> Void)?) -> UIButton {
+        return makeButton(withFrame: frame, title: title, titleColor: color, backColor: backColor, font: font, tag: tag, handler: handler, target: nil, selector: nil)
+    }
+    
+    @available(*, deprecated, message: "改用 button(withFrame:title:titleColor:backColor:font:tag:handler:)")
+    public static func button(withFrame frame: CGRect, title: String?, titleColor color: UIColor?, backColor: UIColor?, font: UIFont?, tag: Int, target: Any?, selector: Selector?) -> UIButton {
+        return makeButton(withFrame: frame, title: title, titleColor: color, backColor: backColor, font: font, tag: tag, handler: nil, target: target, selector: selector)
+    }
+    
+    /// 闭包版：不需要 target/selector，调用方的方法也不用写 @objc
+    public static func submitButton(withTop top: CGFloat, tag: Int, handler: ((UIButton) -> Void)?) -> UIButton {
+        let color = UIColor(red: 18/255.0, green: 152/255.0, blue: 233/255.0, alpha: 1)
+        let button = makeButton(withFrame: CGRect(x: 20, y: top, width: WIDTHFC - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, handler: handler, target: nil, selector: nil)
+        button.layer.cornerRadius = 3
+        return button
+    }
+    
+    @available(*, deprecated, message: "改用 submitButton(withTop:tag:handler:)")
     public static func submitButton(withTop top: CGFloat, tag: Int, target: Any?, selector: Selector) -> UIButton {
         let color = UIColor(red: 18/255.0, green: 152/255.0, blue: 233/255.0, alpha: 1)
-        let button = self.button(withFrame: CGRect(x: 20, y: top, width: WIDTHFC - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, target: target, selector: selector)
+        let button = makeButton(withFrame: CGRect(x: 20, y: top, width: WIDTHFC - 40, height: 44), title: "提交", titleColor: .white, backColor: color, font: nil, tag: tag, handler: nil, target: target, selector: selector)
         button.layer.cornerRadius = 3
         return button
     }
