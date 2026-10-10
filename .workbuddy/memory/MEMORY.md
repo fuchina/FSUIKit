@@ -3,7 +3,7 @@
 ## 工程现状
 
 - 组件本体 `FSUIKit/Classes` **100% Swift**，无 `.h/.m`。`FSUIKitSample` 里的 ObjC 是历史残留。
-- 依赖：MJRefresh / WechatOpenSDK / **FSKit**（本地源码 `/Users/pwrd/Documents/GitHub/Private/FSKit`，35 个纯 Swift）。
+- 依赖：MJRefresh / WechatOpenSDK / **FSKit**（本地源码 `/Users/dongdongfu/Documents/GitHub/Private/FSKit`，纯 Swift）。
   实际还隐式用到 Pods 里的 FSCalculator / FSWindow（如 `FSView`），podspec 未声明。
 - deployment_target = 18.0，swift_version = 5.9。
 
@@ -18,6 +18,20 @@
 **闭包版 `addObserver(forName:object:queue:using:)` + token 数组**，`deinit` 里手动 `removeObserver(token)`。
 ⚠️ 闭包版**不会**自动注销（selector 版 iOS 9+ 会自动），必须手动清理，否则块常驻通知中心。
 → 能省掉 `@objc` 的模式就这一个，其它 18 处要换成闭包需要额外包装类，收益不大。
+
+## 跨模块继承：FSKit 的类是 `public`，不是 `open`（2026-10-10）
+
+FSUIKit 里继承 FSKit 的类会报
+`Cannot inherit from non-open class 'X' outside of its defining module` ——
+`public` 只保证跨模块**可用**，跨模块**继承**必须 `open`。
+
+**先判断父类在不在本模块**：
+- 在 FSUIKit 自己模块内（`FSView.swift`、`FSBaseController/FSBaseController.swift`）⇒ `public` 也能继承，不报错。
+- 在 FSKit 里（目前只有 `FSTapGestureRecognizer`）⇒ 报错。
+
+已解决 1 例：`FSTapGestureRecognizerS`（`UIAlertController+ClickDismissS.swift`）**整个子类删掉** ——
+父类本就有 `onTap` 闭包，子类多加的 `clickBack` 是多余的。**不动 FSKit**。
+⇒ 以后再遇到，先想「这个子类是不是真的需要」，再考虑要不要去 FSKit 加 `open`。
 
 ## 脱离 Xcode 做真 `-typecheck` 的可行路子（已验证）
 

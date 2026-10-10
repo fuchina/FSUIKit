@@ -5,11 +5,6 @@ import UIKit
 import ObjectiveC
 import FSKit
 
-// 自定义手势识别器
-public class FSTapGestureRecognizerS: FSTapGestureRecognizer {
-    public var clickBack: ((UIAlertController, CGPoint) -> Void)?
-}
-
 // 用于关联对象的key
 private var tapGestureKey: UInt8 = 0
 
@@ -26,11 +21,12 @@ public extension UIAlertController {
         
         backView.isUserInteractionEnabled = true
         
-        let tap = FSTapGestureRecognizerS.init { [weak self] tap in
+        let tap = FSTapGestureRecognizer.init { [weak self] tap in
             guard let self else { return }
-            self.handleTapS(tap as! FSTapGestureRecognizerS)
+            guard let view = tap.view else { return }
+            let point = tap.location(in: view)
+            clickDismiss?(self, point)
         }
-        tap.clickBack = clickDismiss
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
         backView.addGestureRecognizer(tap)
@@ -53,12 +49,6 @@ public extension UIAlertController {
     
     private func handleDoubleTapS(_ doubleTap: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    private func handleTapS(_ tap: FSTapGestureRecognizerS) {
-        guard let view = tap.view else { return }
-        let point = tap.location(in: view)
-        tap.clickBack?(self, point)
     }
     
     func handleAlertClick() {
