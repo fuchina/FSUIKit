@@ -2,6 +2,7 @@
 // Translated from FSVanView.h/m
 
 import UIKit
+import FSKit
 
 public enum FSLoadingStatus: Int {
     case `default` = 0   // 无状态
@@ -83,7 +84,7 @@ public class FSVanView: UIView {
 
 public class FSRoundVanView: UIView {
     
-    private var link: CADisplayLink?
+    private var link: FSCADisplayLink?
     private var count: Int = 0
     
     public var circleArray: [[String: Any]]? {
@@ -117,7 +118,10 @@ public class FSRoundVanView: UIView {
     
     public func start() {
         if link == nil {
-            link = CADisplayLink(target: self, selector: #selector(execAnimation))
+            link = FSCADisplayLink.init(handler: { [weak self] link in
+                guard let self else { return }
+                self.execAnimation()
+            })
             link?.add(to: .main, forMode: .common)
         }
         link?.isPaused = false
@@ -127,7 +131,7 @@ public class FSRoundVanView: UIView {
         link?.isPaused = true
     }
     
-    @objc private func execAnimation() {
+    private func execAnimation() {
         let shares: CGFloat = 25.0
         let delta = 2 * CGFloat.pi / shares
         transform = CGAffineTransform(rotationAngle: CGFloat(count) * delta)
