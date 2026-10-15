@@ -1,51 +1,54 @@
 //
 //  FSSelectSectionController.swift
+//  FSUIKit
 //
-//  Translated from Objective-C
+//  2026-10-15 全 SwiftUI 化：
+//  原 `FSSelectSectionController: FSBaseController`（UITableView grouped + 分组回调）
+//  → `FSSelectSectionScreen`（List grouped + Section）。
 //
 
 import UIKit
+import SwiftUI
 
-public typealias FSSelectSectionBlock = (FSSelectSectionController, [[String]], Int, Int) -> Void
+/// 分组选择列表（原 `FSSelectSectionController`）
+public struct FSSelectSectionScreen: View {
 
-open class FSSelectSectionController: FSBaseController, UITableViewDataSource, UITableViewDelegate {
-    
     public var array: [[String]] = []
-    public var block: FSSelectSectionBlock?
-    
-    open override func componentWillMount() {
-        super.componentWillMount()
-        
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .grouped)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.estimatedSectionHeaderHeight = 0
-        tableView.estimatedSectionFooterHeight = 0
-        view.addSubview(tableView)
+    /// 原 FSSelectSectionBlock：点击 (array, section, row)
+    var onSelect: (Int, Int) -> Void
+
+    public init(array: [[String]], onSelect: @escaping (Int, Int) -> Void) {
+        self.array = array
+        self.onSelect = onSelect
     }
-        
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return array.count
-    }
-    
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array[section].count
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "i"
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+
+    public var body: some View {
+        List {
+            ForEach(Array(array.enumerated()), id: \.offset) { section, rows in
+                Section {
+                    ForEach(Array(rows.enumerated()), id: \.offset) { row, title in
+                        Button {
+                            onSelect(section, row)
+                        } label: {
+                            HStack {
+                                Text(title)
+                                Spacer()
+                                // 原 accessoryType = .disclosureIndicator
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .listRowBackground(Color(.systemBackground))
+                    }
+                }
+            }
         }
-        cell?.textLabel?.text = array[indexPath.section][indexPath.row]
-        cell?.accessoryType = .disclosureIndicator
-        return cell!
-    }
-    
-    // MARK: - UITableViewDelegate
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        block?(self, array, indexPath.section, indexPath.row)
+        .listStyle(.grouped)
+        // 原 estimatedSectionHeaderHeight = 0 / estimatedSectionFooterHeight = 0
+        .environment(\.defaultMinListHeaderHeight, 0)
+        .environment(\.defaultMinListFooterHeight, 0)
     }
 }
