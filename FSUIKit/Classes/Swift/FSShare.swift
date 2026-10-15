@@ -258,7 +258,7 @@ extension FSShare: MFMessageComposeViewControllerDelegate {
         }
         
         if let msg = msg {
-            _ = FSToast.toast(msg, duration: 2)
+            FSToast.toast(msg, duration: 2)
         }
         controller.dismiss(animated: true, completion: nil)
     }
@@ -283,7 +283,7 @@ extension FSShare: MFMailComposeViewControllerDelegate {
         }
         
         if let msg = msg {
-            _ = FSToast.toast(msg, duration: 2)
+            FSToast.toast(msg, duration: 2)
         }
         controller.dismiss(animated: true, completion: nil)
     }
