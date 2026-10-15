@@ -7,14 +7,10 @@ import MessageUI
 
 //import WechatOpenSDK  暂不支持，需要OC桥接，后续实现
 
-/// Swift 6 语言模式（2026-10-15）：本类涉及 `UIActivityViewController` /
-/// `MFMessageComposeViewController` 等 UI 呈现，并调用同样主隔离的
-/// `FSUIKit.showAlertWithMessage`，故整体标注主隔离。
-@MainActor
 public class FSShare: NSObject {
     
-    /// 类本身已标 `@MainActor`，静态单例随之主隔离，无需再 uncheck。
-    public static let shared = FSShare()
+    // Swift 6 语言模式：`FSShare` 非 Sendable 类型，静态单例需显式声明。
+    public nonisolated(unsafe) static let shared = FSShare()
     
     public var result: ((Bool, String?) -> Void)?
     
@@ -248,7 +244,7 @@ public class FSShare: NSObject {
 
 // MARK: - MFMessageComposeViewControllerDelegate
 
-extension FSShare: @preconcurrency MFMessageComposeViewControllerDelegate {
+extension FSShare: MFMessageComposeViewControllerDelegate {
     public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         var msg: String?
         switch result {
@@ -271,7 +267,7 @@ extension FSShare: @preconcurrency MFMessageComposeViewControllerDelegate {
 
 // MARK: - MFMailComposeViewControllerDelegate
 
-extension FSShare: @preconcurrency MFMailComposeViewControllerDelegate {
+extension FSShare: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         var msg: String?
         switch result {
@@ -296,7 +292,7 @@ extension FSShare: @preconcurrency MFMailComposeViewControllerDelegate {
 
 // MARK: - UIDocumentInteractionControllerDelegate
 
-extension FSShare: @preconcurrency UIDocumentInteractionControllerDelegate {
+extension FSShare: UIDocumentInteractionControllerDelegate {
     public func documentInteractionControllerDidDismissOpenInMenu(_ controller: UIDocumentInteractionController) {
         documentController = nil
     }

@@ -10,11 +10,6 @@ import UIKit
 
 import FSKit
 
-/// Swift 6 语言模式（2026-10-15）：本类是 UI 工具集，内部构造 `UIAlertController` /
-/// `FSAlertAction` / `addTextField` 等 **全部为 `@MainActor` 的 UIKit API**。
-/// 此前是 nonisolated，Swift 6 的区域隔离分析会把这些调用判为
-/// `sending … risks causing data races`。按语义正确的方式补主隔离标注。
-@MainActor
 public class FSUIKit: NSObject {
     
     @discardableResult
@@ -47,7 +42,7 @@ public class FSUIKit: NSObject {
         var specs: [FSAlertActionSpec] = []
 
         for i in 0..<count {
-            let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { act in
+            let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { @MainActor act in
                 if handler != nil {
                     handler!(act as! FSAlertAction)
                 }
@@ -62,7 +57,7 @@ public class FSUIKit: NSObject {
             })
         }
         
-        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { act in
+        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { @MainActor act in
             if cancel != nil {
                 cancel!(act as! FSAlertAction)
             }
@@ -99,7 +94,7 @@ public class FSUIKit: NSObject {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         for i in 0..<number {
-            alert.addTextField { tf in
+            alert.addTextField { @MainActor tf in
                 if textFieldConfig != nil {
                     tf.tag = i
                     textFieldConfig!(tf)
