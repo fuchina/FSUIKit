@@ -9,27 +9,23 @@ import Foundation
 import FSKit
 
 open class FSToast: NSObject {
-    
-    @discardableResult
-    public static func toast(_ text: String) -> UIView {
-        return self.toast(text, duration: 2)
+
+    //  2026-10-15 全 SwiftUI 化：
+    //  `toast(_:)` / `toast(_:duration:)` 原来要构造 UIView 加到 window 上，必须有 UIView 宿主；
+    //  现改为把文案塞进 `FSToastCenter`（SwiftUI 全局浮层），由根视图渲染。
+    //  ⇒ 全项目 348 处调用点无需改动，也不再依赖 UIView / UIViewController。
+    //  返回值保留（调用处多为 `_ =`，改 Void 亦可兼容），但已无实际用途。
+
+    public static func toast(_ text: String) {
+        self.toast(text, duration: 2)
     }
-    
-    @discardableResult
-    public static func toast(_ text: String, duration: Float) -> UIView {
-        let ws = FSKit.currentScene()
-        if ws == nil {
-            return UIView()
-        }
-        
-        let window: UIWindow? = ws?.windows.first ?? nil
-        if window == nil {
-            return UIView()
-        }
-        
-        return self.toast(text, duration: duration, to: window! )
+
+    public static func toast(_ text: String, duration: Float) {
+        FSToastCenter.shared.show(text, duration: Double(duration))
     }
-    
+
+    /// ⚠️ 旧通道：显式挂到某个 UIView 上（UIKit 集成场景，如模态 UIKit 页）。
+    /// 全项目仅 87 处调用，均为 `_ =` 丢弃返回值。待这些场景一并 SwiftUI 化后可删。
     @discardableResult
     public static func toast(_ text: String, duration: Float, to: UIView) -> UIView {
         
