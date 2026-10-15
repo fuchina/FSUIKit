@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'UIKit'
   
-  s.swift_version = '5.9'
+  s.swift_version = '6'
 
   s.dependency   'MJRefresh','3.2.3'
   s.dependency   'WechatOpenSDK','1.8.3'
