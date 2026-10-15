@@ -47,8 +47,7 @@ public struct FSSelectSectionScreen: View {
             }
         }
         .listStyle(.grouped)
-        // 原 estimatedSectionHeaderHeight = 0 / estimatedSectionFooterHeight = 0
+        // 原 estimatedSectionHeaderHeight = 0（空 Section 头不占位）
         .environment(\.defaultMinListHeaderHeight, 0)
-        .environment(\.defaultMinListFooterHeight, 0)
     }
 }
