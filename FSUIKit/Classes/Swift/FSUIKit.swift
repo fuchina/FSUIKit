@@ -41,11 +41,15 @@ public class FSUIKit: NSObject {
         
         var specs: [FSAlertActionSpec] = []
 
+        // Swift 6 语言模式：`FSAlertAction`（`UIAlertAction` 子类）的 init 是 @MainActor 隔离，
+        // 传入的 handler 闭包会被「送」到主隔离域 ⇒ 闭包须为 @Sendable（UIAlertAction 的
+        // handler 由 UIKit 在主线程回调），其中捕获的非 Sendable 调用方闭包用
+        // FSUncheckedSendable 装箱后跨域携带。本类保持 nonisolated（见 FSAlertCenter 注释）。
+        let handlerBox = FSUncheckedSendable(handler)
+
         for i in 0..<count {
-            let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { @MainActor act in
-                if handler != nil {
-                    handler!(act as! FSAlertAction)
-                }
+            let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { @Sendable act in
+                handlerBox.value?(act as! FSAlertAction)
             })
             action.theTag = i
             controller.addAction(action)
@@ -57,11 +61,10 @@ public class FSUIKit: NSObject {
             })
         }
         
-        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { @MainActor act in
-            if cancel != nil {
-                cancel!(act as! FSAlertAction)
-            }
-        }
+        let cancelBox = FSUncheckedSendable(cancel)
+        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel, handler: { @Sendable act in
+            cancelBox.value?(act as! FSAlertAction)
+        })
         
         controller.addAction(archiveAction)
 
@@ -93,13 +96,16 @@ public class FSUIKit: NSObject {
         // 弹窗本身交给 FSAlertCenter 渲染。
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
+        // `addTextField` 的 configurationHandler 同样由 UIKit 在主线程回调，
+        // 故声明 @Sendable；内部用 MainActor.assumeIsolated 恢复主隔离域后再碰 UIKit。
+        let tfConfigBox = FSUncheckedSendable(textFieldConfig)
         for i in 0..<number {
-            alert.addTextField { @MainActor tf in
-                if textFieldConfig != nil {
+            alert.addTextField(configurationHandler: { @Sendable tf in
+                MainActor.assumeIsolated {
                     tf.tag = i
-                    textFieldConfig!(tf)
+                    tfConfigBox.value?(tf)
                 }
-            }
+            })
         }
 
         let textFields = alert.textFields ?? []
