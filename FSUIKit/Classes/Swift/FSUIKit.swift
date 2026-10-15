@@ -1,7 +1,14 @@
 // FSUIKitS.swift
 // Translated from FSUIKit.h/m
+//
+//  2026-10-15 全 SwiftUI 化：`alert / alertInput / showAlertWithMessage` 原来构造
+//  UIAlertController 后 `controller.present(...)`，必须有 UIViewController 宿主；
+//  现改为交给 `FSAlertCenter`（SwiftUI 全局弹窗，由根视图渲染）。
+//  签名保持不变、`controller` 参数被忽略 ⇒ 全项目 343 处调用点一行都不用改。
 
 import UIKit
+
+import FSKit
 
 public class FSUIKit: NSObject {
     
@@ -9,7 +16,8 @@ public class FSUIKit: NSObject {
     public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((UIAlertAction) -> Void)?, cancelTitle: String, cancel: ((UIAlertAction) -> Void)?, completion: (() -> Void)?) -> UIAlertController {
         
         let alertController = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: cancelTitle, cancel: cancel);
-        controller.present(alertController, animated: true, completion: completion)
+        // 2026-10-15：弹窗已由 FSAlertCenter（SwiftUI 全局弹窗）渲染
+        completion?()
         return alertController
     }
 
@@ -17,7 +25,7 @@ public class FSUIKit: NSObject {
     public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
         
         let ac = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: "取消", cancel: nil)
-        controller.present(ac, animated: true, completion: nil)
+        // 2026-10-15：弹窗已由 FSAlertCenter（SwiftUI 全局弹窗）渲染
         return ac
     }
     
@@ -31,6 +39,8 @@ public class FSUIKit: NSObject {
         let count = min(actionTitles.count, styles.count)
         let controller = UIAlertController(title: title, message: message, preferredStyle: style)
         
+        var specs: [FSAlertActionSpec] = []
+
         for i in 0..<count {
             let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { act in
                 if handler != nil {
@@ -39,6 +49,12 @@ public class FSUIKit: NSObject {
             })
             action.theTag = i
             controller.addAction(action)
+
+            specs.append(FSAlertActionSpec(title: actionTitles[i], style: styles[i]) {
+                if handler != nil {
+                    handler!(action)
+                }
+            })
         }
         
         let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel) { act in
@@ -48,7 +64,20 @@ public class FSUIKit: NSObject {
         }
         
         controller.addAction(archiveAction)
-        
+
+        specs.append(FSAlertActionSpec(title: cancelTitle, style: .cancel) {
+            if cancel != nil {
+                cancel!(archiveAction)
+            }
+        })
+
+        // 2026-10-15：交给 SwiftUI 全局弹窗渲染
+        // （仍返回 UIAlertController 仅为签名兼容，已不再被 present，全项目 0 处真实使用其返回值）
+        FSAlertCenter.shared.show(FSAlertSpec(isAlert: (style == UIAlertController.Style.alert),
+                                              title: title,
+                                              message: message,
+                                              actions: specs))
+
         return controller
     }
     
@@ -59,8 +88,11 @@ public class FSUIKit: NSObject {
             return UIAlertController()
         }
         
+        // 2026-10-15 全 SwiftUI 化：仍建一个 UIAlertController 作 **数据容器**（不 present），
+        // 让调用方在 `data.click` 里读 `alert.textFields` 的既有写法继续可用；
+        // 弹窗本身交给 FSAlertCenter 渲染。
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
+
         for i in 0..<number {
             alert.addTextField { tf in
                 if textFieldConfig != nil {
@@ -69,33 +101,43 @@ public class FSUIKit: NSObject {
                 }
             }
         }
-        
+
+        let textFields = alert.textFields ?? []
+        var specs: [FSAlertActionSpec] = []
+
         for i in 0..<buttons {
             let data = FSAlertActionData()
             data.index = i
             data.style = .default
 
             buttonConfig(data)
-            
-            let action = FSAlertAction(title: data.title, style: data.style) { [weak alert] m in
-                guard let alert else { return }
 
-                let act: FSAlertAction = m as! FSAlertAction
-                if act.data.click != nil {
-                    act.data.click!(alert, act)
+            let act = FSAlertAction(title: data.title, style: data.style, handler: nil)
+            act.data = data
+
+            specs.append(FSAlertActionSpec(title: data.title, style: data.style) {
+                // 把 SwiftUI 输入框的文本回写进容器，保持 `alert.textFields` 语义
+                for (idx, tf) in textFields.enumerated() where idx < FSAlertCenter.shared.inputTexts.count {
+                    tf.text = FSAlertCenter.shared.inputTexts[idx]
                 }
-            }
-            
-            action.data = data
-            alert.addAction(action)
+                if data.click != nil {
+                    data.click!(alert, act)
+                }
+            })
         }
-        
-        controller.present(alert, animated: true) {
-            if completion != nil {
-                completion!(alert)
-            }
+
+        let inputs = textFields.map { tf in
+            FSAlertInputSpec(placeholder: tf.placeholder ?? "", keyboardType: tf.keyboardType) { _ in }
         }
-        
+
+        FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
+                                              title: title,
+                                              message: message,
+                                              actions: specs,
+                                              inputs: inputs))
+
+        completion?(alert)
+
         return alert
     }
     
@@ -108,10 +150,14 @@ public class FSUIKit: NSObject {
     }
     
     public static func showAlertWithTitle(title: String, message: String, ok: String, controller: UIViewController, handler: ((UIAlertAction) -> Void)?) {
-        let c = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: ok, style: .default, handler: handler)
-        c.addAction(action)
-        controller.present(c, animated: true, completion: nil)
+        // 2026-10-15 全 SwiftUI 化：改走 FSAlertCenter
+        let action = UIAlertAction(title: ok, style: .default, handler: nil)
+        FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
+                                              title: title,
+                                              message: message,
+                                              actions: [FSAlertActionSpec(title: ok, style: .default) {
+                                                  handler?(action)
+                                              }]))
     }
     
     public static func effectView(withFrame frame: CGRect) -> UIVisualEffectView {
