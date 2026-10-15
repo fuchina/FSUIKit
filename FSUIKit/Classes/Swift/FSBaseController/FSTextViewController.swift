@@ -16,6 +16,7 @@
 
 import UIKit
 import SwiftUI
+import FSKit
 
 /// 长文本输入页（原 `FSTextViewController`）
 public struct FSTextViewScreen: View {
