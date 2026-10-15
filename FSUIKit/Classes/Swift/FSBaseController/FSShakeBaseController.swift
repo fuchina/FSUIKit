@@ -3,7 +3,6 @@
 //  FSUIKit
 //
 //  2026-10-15 全 SwiftUI 化：
-//  原 `FSShakeBaseController: FSBaseController`（first responder + motionEnded 摇一摇）
 //  → `View.fsShakeToEdit(_:)` modifier（零尺寸探针接管 first responder）。
 //  原 open class 无任何子类 / 调用点（全项目 grep 证实），随本次迁移移除。
 //

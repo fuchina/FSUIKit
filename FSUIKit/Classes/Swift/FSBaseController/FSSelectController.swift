@@ -3,7 +3,6 @@
 //  FSUIKit
 //
 //  2026-10-15 全 SwiftUI 化：
-//  原 `FSSelectController: FSBaseController`（UITableView + navigationItem「确定」按钮）
 //  → `FSSelectScreen`（List + toolbar「确定」）。
 //  `FSSelectModel` 数据模型保留（调用方仍在用 `fastModels(withTexts:)`）。
 //

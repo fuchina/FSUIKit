@@ -3,7 +3,6 @@
 //  FSUIKit
 //
 //  2026-10-15 全 SwiftUI 化：
-//  原 `FSTextViewController: FSBaseController`（UITextView + navigationItem「确认」按钮）
 //  → `FSTextViewScreen`（TextEditor + toolbar「确认」）。
 //
 //  顺带修复已知缺陷：UIKit 版被 `UIViewControllerRepresentable` 承载时，
