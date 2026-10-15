@@ -1,6 +1,5 @@
 //
 //  FSSelectController.swift
-//  FSBaseController
 //
 //  Translated from Objective-C
 //

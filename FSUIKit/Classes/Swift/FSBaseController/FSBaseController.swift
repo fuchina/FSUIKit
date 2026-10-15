@@ -1,7 +1,4 @@
 //
-//  FSBaseControllerS.swift
-//  FSBaseController
-//
 //  Created by pwrd on 2026/1/29.
 //
 
@@ -134,7 +131,6 @@ open class FSBaseController: UIViewController {
     /// 内存泄漏自检：页面被 pop / dismiss 离场后，延迟若干秒检查自身是否已释放。
     /// 若仍存活且已脱离视图层级（parent / navigation / present / window 皆无），判定为疑似泄漏，
     /// 投递 FS_BE_LEAK_NOTIFICATION（object=提示文案）。是否弹 toast 由 App 层决定
-    /// （基类不能反向依赖 FSJZKit 判 Fudon，否则与 FSJZKit→FSBaseController 形成循环依赖）。
     private func checkForLeakIfLeaving() {
         // 仅在「真正离场」时检查：pop（移出父控制器）或 modal dismiss
         guard isMovingFromParent || isBeingDismissed else { return }

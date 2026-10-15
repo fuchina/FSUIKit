@@ -1,6 +1,5 @@
 //
 //  FSTabsController.swift
-//  FSBaseController
 //
 //  Translated from Objective-C
 //

@@ -1,6 +1,5 @@
 //
 //  FSNavigationController.swift
-//  FSBaseController
 //
 //  Translated from Objective-C
 //
