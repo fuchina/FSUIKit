@@ -6,7 +6,10 @@ import ObjectiveC
 import FSKit
 
 // 用于关联对象的key
-private var tapGestureKey: UInt8 = 0
+//
+// Swift 6 语言模式：它是全局 `var`，被判为并发不安全的共享可变状态。
+// 这里仅取其**地址**当 key（`&tapGestureKey`），从不读写值，故 uncheck 是安全的。
+nonisolated(unsafe) private var tapGestureKey: UInt8 = 0
 
 public extension UIAlertController {
     

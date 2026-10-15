@@ -10,6 +10,11 @@ import UIKit
 
 import FSKit
 
+/// Swift 6 语言模式（2026-10-15）：本类是 UI 工具集，内部构造 `UIAlertController` /
+/// `FSAlertAction` / `addTextField` 等 **全部为 `@MainActor` 的 UIKit API**。
+/// 此前是 nonisolated，Swift 6 的区域隔离分析会把这些调用判为
+/// `sending … risks causing data races`。按语义正确的方式补主隔离标注。
+@MainActor
 public class FSUIKit: NSObject {
     
     @discardableResult
