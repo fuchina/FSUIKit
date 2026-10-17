@@ -119,26 +119,10 @@ public class FSShare: NSObject {
 //        req.scene = Int32(WXSceneSession.rawValue)
 //        WXApi.send(req)
     }
-    
-    // MARK: - 检查微信安装
-    
-    public static func checkPhoneHasWechat(_ controller: UIViewController) -> Bool {
-//        let hasInstalled = WXApi.isWXAppInstalled()
-//        if !hasInstalled {
-//            FSUIKit.alert(.actionSheet, controller: controller, title: "微信分享", message: "未安装微信，是否去下载？", actionTitles: ["下载"], styles: [NSNumber(value: UIAlertAction.Style.default.rawValue)]) { action in
-//                if let url = URL(string: WXApi.getWXAppInstallUrl()) {
-//                    if UIApplication.shared.canOpenURL(url) {
-//                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                    }
-//                }
-//            }
-//        }
-//        return hasInstalled
         
+    public static func checkPhoneHasWechat(_ controller: UIViewController) -> Bool {
         return false
     }
-    
-    // MARK: - 短信分享
     
     public static func messageShare(withMessage message: String?, on controller: UIViewController, recipients: [String]?) {
         messageShare(withMessage: message, on: controller, recipients: recipients, data: nil, fileName: nil, fileType: nil)
