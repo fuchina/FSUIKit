@@ -74,10 +74,6 @@ public class FSUIKit: NSObject {
             }
         })
 
-        // 2026-10-15：交给 SwiftUI 全局弹窗渲染
-        // （仍返回 UIAlertController 仅为签名兼容，已不再被 present，全项目 0 处真实使用其返回值）
-        // 2026-10-17：把容器一并交给 FSAlertCenter —— 调用方随后在 completion 里调
-        // `addTapEvent` 时，靠它认领「点遮罩关闭」的是哪一条弹窗。
         FSAlertCenter.shared.show(FSAlertSpec(isAlert: (style == UIAlertController.Style.alert),
                                               title: title,
                                               message: message,
@@ -88,19 +84,12 @@ public class FSUIKit: NSObject {
     }
     
     @discardableResult
-    public static func alertInput(number: Int, controller: UIViewController, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
+    public static func alertInput(number: Int, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
         
-        // 2026-10-17：输入框数量限定 1…5；传入的不是 1…5 一律按 1 个处理
-        // （自绘弹窗里再多会把面板撑得过高，键盘一弹就顶到屏幕上沿）
         let count = (1...5).contains(number) ? number : 1
         
-        // 2026-10-15 全 SwiftUI 化：仍建一个 UIAlertController 作 **数据容器**（不 present），
-        // 让调用方在 `data.click` 里读 `alert.textFields` 的既有写法继续可用；
-        // 弹窗本身交给 FSAlertCenter 渲染。
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        // `addTextField` 的 configurationHandler 同样由 UIKit 在主线程回调，
-        // 故声明 @Sendable；内部用 MainActor.assumeIsolated 恢复主隔离域后再碰 UIKit。
         let tfConfigBox = FSUncheckedSendable(textFieldConfig)
         for i in 0..<count {
             alert.addTextField(configurationHandler: { @Sendable tf in
@@ -134,10 +123,7 @@ public class FSUIKit: NSObject {
                 }
             })
         }
-
-        // 2026-10-17：带上 `tf.text` —— 改造时漏了初始文本，调用方
-        // `textFieldConfig` 里 `tf.text = model.bz` 的预填（记账弹窗的备注）会看不到。
-        // 顺带把 `clearButtonMode` 带过去（自绘输入框要自己画清除按钮）。
+        
         let inputs = textFields.map { tf in
             FSAlertInputSpec(placeholder: tf.placeholder ?? "",
                              keyboardType: tf.keyboardType,
@@ -157,8 +143,6 @@ public class FSUIKit: NSObject {
         return alert
     }
     
-    // 2026-10-17：`handler` 默认值 = nil，调用方可直接 `showAlertWithMessage("xxx")`，
-    // 不必再写 `handler: nil`。既有传 nil 的调用点签名不变，照旧编译。
     public static func showAlertWithMessage(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", handler: handler)
     }
