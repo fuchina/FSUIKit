@@ -18,7 +18,12 @@ public struct FSAlertInputConfig {
     public init() {}
 }
 
-public class FSUIKit: NSObject {
+/// 组件对外 API 的命名空间（纯 `static`，无实例状态）
+///
+/// 2026-10-17：原来继承 `NSObject`，只为「可能被 ObjC 调用」的历史包袱 ——
+/// 实际全项目无一处 ObjC 调用、无 `@objc` 成员、无实例化，`NSObject` 全无作用。
+/// 改成无 case 的 `enum`：天然不可实例化，也没有 ObjC 运行时开销。
+public enum FSUIKit {
 
     public static func alert(style: FSAlertStyle,
                              controller: UIViewController?,
