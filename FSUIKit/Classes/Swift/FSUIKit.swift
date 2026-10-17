@@ -16,6 +16,9 @@ public struct FSAlertInputConfig {
 
     public var autocapitalization: TextInputAutocapitalization?
 
+    /// 关闭自动更正（拼音简写 / 编码类输入，默认关）
+    public var autocorrectionDisabled: Bool = true
+
     public init() {}
 }
 
@@ -113,6 +116,7 @@ public enum FSUIKit {
                                            text: cfg.text,
                                            showsClearButton: cfg.showsClearButton,
                                            autocapitalization: cfg.autocapitalization,
+                                           autocorrectionDisabled: cfg.autocorrectionDisabled,
                                            commit: { _ in }))
         }
 
