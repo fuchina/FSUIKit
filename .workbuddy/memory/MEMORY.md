@@ -45,6 +45,54 @@ FSUIKit 里继承 FSKit 的类会报
 
 命令见 `2026-10-10.md`。**校验通过 ≠ 工程能构建**，结论要写明「纯源码校验，未跑构建」。
 
+## `alertInput` 已彻底摘掉 UIKit 中介（2026-10-17）
+
+旧实现：造一个**不上屏**的 `UIAlertController`，用 `addTextField` 跑调用方的
+`textFieldConfig`，再把 placeholder/keyboardType/text 读回来塞进 `FSAlertInputSpec`——
+容器和输入框全程只当中介。
+
+新签名（`FSUIKit.alertInput`）：
+
+```swift
+alertInput(number:title:message:buttons:
+           buttonConfig: (FSAlertActionData) -> Void,
+           inputConfig: (inout FSAlertInputConfig) -> Void = { _ in },
+           tapOutsideToDismiss: Bool = true,
+           tapOutsideCanDismiss: (([String]) -> Bool)? = nil)      // 返回 Void，无返回值
+```
+
+- `FSAlertInputConfig`：`tag`（=原 `tf.tag`，多输入框靠它分框）、`placeholder`、`text`、
+  `keyboardType`、`clearButtonMode`、`autocapitalizationType`。
+- `FSAlertActionData.click`：`((UIAlertController, UIAlertAction) -> Void)?` →
+  **`((FSAlertAction, [String]) -> Void)?`**（第二参直接给输入文本，按顺序）。
+- `completion` 里的 `addTapEvent` 收敛成 `tapOutsideToDismiss`；原 `completion: nil` 的两处
+  （`FSAccountController` 配置图/透明度）显式传 `tapOutsideToDismiss: false`。
+- 「有内容就不关」（原 `UIAlertController.handleAlertClick`）用
+  `tapOutsideCanDismiss: { $0.allSatisfy { $0.isEmpty } }` 表达，FSKit 里配套加了
+  `FSAlertSpec.tapOutsideCanDismiss`。
+
+⚠️ **62 处调用点已全部迁移**（FSJZBus 10 / FSJZKit 14 / Tututu 12 / FSCounter 10 /
+FSAccount 9 / FSPassword 2 / FSToDo 2 / FSOSS 1 / oldaccount 2），净减约 270 行。
+以后再写 `textFieldConfig:` / `alert.textFields` / `completion: { $0.addTapEvent }` 都已编不过。
+
+**行为降级 1 处**：`FSPMController.handleAlertClick(_:point:)` 原来点遮罩会按点击位置切换
+输入框焦点（借 `isFirstResponder` / `becomeFirstResponder`，UIKit 专有）。SwiftUI 自绘弹窗
+里没有这层 API，现简化为「有内容不关、无内容关」，丢掉焦点切换；用户可直接点输入框换焦点。
+`FSPMController` 里 `handleAlertClick` / `isClickUp` 与 `FSPMListController.handleAlertClick` 已删。
+
+**保留未动**：`UIAlertController+ClickDismissS.swift` 的 `addTapEvent`（FSAccount / Tututu /
+FSOSS 等对普通 `alert()` 仍在用），只对 `alertInput` 这条路径失效。
+
+## `-Xfrontend -disable-sandbox` 能救 SwiftUI 宏（2026-10-17）
+
+脱离 Xcode 用 `swiftc` 编 FSKit 时，只要文件里有 `@State` / `@FocusState` 就报
+`external macro implementation type 'SwiftUIMacros.StateMacro' could not be found` /
+`swift-plugin-server produced malformed response`。原来靠「排除那几个文件」绕开，
+但 FSAlertCenter 等文件也用了 `@State` 后就绕不开了。
+
+**正解**：加 `-Xfrontend -disable-sandbox`，全量 41 文件一次过，不用排除任何文件。
+（与 `xcodebuild -disable-sandbox` 是同一个根因：swift-plugin-server 不能套第二层 sandbox。）
+
 ## 本机环境坑
 
 - `find` 在 `/Applications/Xcode.app` 下被沙箱挡住（静默返回空），找 Xcode 内部文件用 `ls`/`Glob`。

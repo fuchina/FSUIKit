@@ -5,10 +5,38 @@
 //  UIAlertController 后 `controller.present(...)`，必须有 UIViewController 宿主；
 //  现改为交给 `FSAlertCenter`（SwiftUI 全局弹窗，由根视图渲染）。
 //  签名保持不变、`controller` 参数被忽略 ⇒ 全项目 343 处调用点一行都不用改。
+//
+//  2026-10-17 `alertInput` 摘掉 UIKit 中介：原实现造一个**不上屏**的 UIAlertController，
+//  靠 `addTextField` 跑调用方的 `textFieldConfig`，再把 placeholder / keyboardType / text
+//  读回来塞进 `FSAlertInputSpec` —— 容器和输入框全程只当中介。
+//  现改为纯数据 `FSAlertInputConfig`，`click` 直接拿 `[String]`，
+//  `completion` 里的 `addTapEvent` 收敛成 `tapOutsideToDismiss`。
+//  ⚠️ 这是 breaking change：10 处调用点同步改了（FSJZBus）。
 
 import UIKit
 
 import FSKit
+
+/// 输入弹窗的输入框配置（原 `textFieldConfig: (UITextField) -> Void`）
+///
+/// 属性名与 `UITextField` 对齐，调用方只改闭包标签、不疑属性写法。
+public struct FSAlertInputConfig {
+
+    /// 第几个输入框（0 起，对应原 `UITextField.tag`）——
+    /// `number > 1` 时调用方靠它区分「这是表名框还是字段值框」。
+    /// 由 `alertInput` 在回调前写入，调用方只读。
+    public var tag: Int = 0
+
+    public var placeholder: String = ""
+    /// 初始文本（原 `tf.text` 预填）
+    public var text: String = ""
+    public var keyboardType: UIKeyboardType = .default
+    /// `.never` = 不显示清除按钮（原 `tf.clearButtonMode`）
+    public var clearButtonMode: UITextField.ViewMode = .never
+    public var autocapitalizationType: UITextAutocapitalizationType = .sentences
+
+    public init() {}
+}
 
 public class FSUIKit: NSObject {
     
@@ -83,24 +111,40 @@ public class FSUIKit: NSObject {
         return controller
     }
     
-    @discardableResult
-    public static func alertInput(number: Int, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
-        
-        let count = (1...5).contains(number) ? number : 1
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    /// 输入弹窗（纯 SwiftUI 渲染，不再构造 `UIAlertController` / `UITextField`）
+    ///
+    /// - Parameters:
+    ///   - buttonConfig: 逐个配置按钮（同原签名）
+    ///   - inputConfig: 输入框配置（原 `textFieldConfig: (UITextField) -> Void`）
+    ///   - tapOutsideToDismiss: 点遮罩是否关闭。原 `completion` 里那 10 处
+    ///     `alert.addTapEvent { controller.dismiss(...) }` 收敛到这里 ——
+    ///     回调内容本就只是 dismiss，在 SwiftUI 路径下已是空操作。
+    ///   - tapOutsideCanDismiss: 点遮罩时的附加条件，返回 false 则不关。
+    ///     原 `UIAlertController.handleAlertClick()` 的「有内容就不关」用它表达。
+    public static func alertInput(number: Int,
+                                  title: String,
+                                  message: String,
+                                  buttons: Int,
+                                  buttonConfig: (FSAlertActionData) -> Void,
+                                  inputConfig: (inout FSAlertInputConfig) -> Void = { _ in },
+                                  tapOutsideToDismiss: Bool = true,
+                                  tapOutsideCanDismiss: (([String]) -> Bool)? = nil) {
 
-        let tfConfigBox = FSUncheckedSendable(textFieldConfig)
+        let count = (1...5).contains(number) ? number : 1
+
+        var inputs: [FSAlertInputSpec] = []
         for i in 0..<count {
-            alert.addTextField(configurationHandler: { @Sendable tf in
-                MainActor.assumeIsolated {
-                    tf.tag = i
-                    tfConfigBox.value?(tf)
-                }
-            })
+            var cfg = FSAlertInputConfig()
+            cfg.tag = i
+            inputConfig(&cfg)
+            inputs.append(FSAlertInputSpec(placeholder: cfg.placeholder,
+                                           keyboardType: cfg.keyboardType,
+                                           text: cfg.text,
+                                           showsClearButton: cfg.clearButtonMode != .never,
+                                           autocapitalization: cfg.autocapitalizationType,
+                                           commit: { _ in }))
         }
 
-        let textFields = alert.textFields ?? []
         var specs: [FSAlertActionSpec] = []
 
         for i in 0..<buttons {
@@ -114,33 +158,21 @@ public class FSUIKit: NSObject {
             act.data = data
 
             specs.append(FSAlertActionSpec(title: data.title, style: data.style) {
-                // 把 SwiftUI 输入框的文本回写进容器，保持 `alert.textFields` 语义
-                for (idx, tf) in textFields.enumerated() where idx < FSAlertCenter.shared.inputTexts.count {
-                    tf.text = FSAlertCenter.shared.inputTexts[idx]
-                }
+                // 输入文本取自中心：`FSAlertDialog.run` 已先 commit、后 dismiss，
+                // 且 `dismiss` 不清 `inputTexts` ⇒ 这里读到的就是用户刚输入的值。
                 if data.click != nil {
-                    data.click!(alert, act)
+                    data.click!(act, FSAlertCenter.shared.inputTexts)
                 }
             })
-        }
-        
-        let inputs = textFields.map { tf in
-            FSAlertInputSpec(placeholder: tf.placeholder ?? "",
-                             keyboardType: tf.keyboardType,
-                             text: tf.text ?? "",
-                             showsClearButton: tf.clearButtonMode != .never) { _ in }
         }
 
         FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
                                               title: title,
                                               message: message,
                                               actions: specs,
-                                              inputs: inputs),
-                                  container: alert)
-
-        completion?(alert)
-
-        return alert
+                                              inputs: inputs,
+                                              tapOutsideToDismiss: tapOutsideToDismiss,
+                                              tapOutsideCanDismiss: tapOutsideCanDismiss))
     }
     
     public static func showAlertWithMessage(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -188,91 +220,5 @@ public class FSUIKit: NSObject {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
-    }
-    
-    public static func captureScrollView(_ scrollView: UIScrollView, finished completion: @escaping (UIImage?) -> Void) {
-        let image = FSImage.image(for: scrollView)
-        completion(image)
-    }
-    
-    public static func createDashedLine(withFrame lineFrame: CGRect, lineLength length: Int, lineSpacing spacing: Int, lineColor color: UIColor) -> UIView {
-        let dashedLine = UIView(frame: lineFrame)
-        dashedLine.backgroundColor = .clear
-        
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.bounds = dashedLine.bounds
-        shapeLayer.position = CGPoint(x: dashedLine.frame.width / 2, y: dashedLine.frame.height)
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = color.cgColor
-        shapeLayer.lineWidth = dashedLine.frame.height
-        shapeLayer.lineJoin = .round
-        shapeLayer.lineDashPattern = [NSNumber(value: length), NSNumber(value: spacing)]
-        
-        let path = CGMutablePath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: dashedLine.frame.width, y: 0))
-        shapeLayer.path = path
-        
-        dashedLine.layer.addSublayer(shapeLayer)
-        return dashedLine
-    }
-    
-    public static func qrImage(from string: String?) -> UIImage? {
-        let sourceString = string ?? ""
-        guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
-        filter.setDefaults()
-        
-        let data = sourceString.data(using: .utf8)
-        filter.setValue(data, forKey: "inputMessage")
-        
-        guard let ciImage = filter.outputImage else { return nil }
-        return createNonInterpolatedUIImage(from: ciImage, withSize: 960)
-    }
-    
-    private static func createNonInterpolatedUIImage(from image: CIImage, withSize size: CGFloat) -> UIImage? {
-        let extent = image.extent.integral
-        let scale = min(size / extent.width, size / extent.height)
-        let width = Int(extent.width * scale)
-        let height = Int(extent.height * scale)
-        
-        guard let cs = CGColorSpace(name: CGColorSpace.linearGray),
-              let bitmapRef = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: cs, bitmapInfo: CGImageAlphaInfo.none.rawValue) else { return nil }
-        
-        let context = CIContext(options: nil)
-        guard let bitmapImage = context.createCGImage(image, from: extent) else { return nil }
-        
-        bitmapRef.interpolationQuality = .none
-        bitmapRef.scaleBy(x: scale, y: scale)
-        bitmapRef.draw(bitmapImage, in: extent)
-        
-        guard let scaledImage = bitmapRef.makeImage() else { return nil }
-        return UIImage(cgImage: scaledImage)
-    }
-    
-    public static func circleImage(_ image: UIImage, withParam inset: CGFloat) -> UIImage? {
-        UIGraphicsBeginImageContext(image.size)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        
-        context.setLineWidth(2)
-        context.setStrokeColor(UIColor.clear.cgColor)
-        
-        let rect = CGRect(x: inset, y: inset, width: image.size.width - inset * 2.0, height: image.size.height - inset * 2.0)
-        context.addEllipse(in: rect)
-        context.clip()
-        
-        image.draw(in: rect)
-        context.addEllipse(in: rect)
-        context.strokePath()
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-    
-    public static func scrollViewPage(_ scrollView: UIScrollView) -> CGFloat {
-        let pageWidth = scrollView.frame.width
-        if pageWidth < 0.01 { return 0 }
-        let page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
-        return page
     }
 }
