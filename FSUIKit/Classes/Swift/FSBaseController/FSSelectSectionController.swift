@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import FSKit
 
 /// 分组选择列表（原 `FSSelectSectionController`）
 public struct FSSelectSectionScreen: View {
@@ -48,5 +49,6 @@ public struct FSSelectSectionScreen: View {
         .listStyle(.grouped)
         // 原 estimatedSectionHeaderHeight = 0（空 Section 头不占位）
         .environment(\.defaultMinListHeaderHeight, 0)
+        .debugDealloc("FSSelectSectionScreen")
     }
 }

@@ -9,6 +9,7 @@
 
 import UIKit
 import SwiftUI
+import FSKit
 
 open class FSSelectModel: NSObject {
 
@@ -96,5 +97,6 @@ public struct FSSelectScreen: View {
                 }
             }
         }
+        .debugDealloc("FSSelectScreen")
     }
 }
