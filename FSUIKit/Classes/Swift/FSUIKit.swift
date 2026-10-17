@@ -157,11 +157,13 @@ public class FSUIKit: NSObject {
         return alert
     }
     
-    public static func showAlertWithMessage(_ message: String, handler: ((UIAlertAction) -> Void)?) {
+    // 2026-10-17：`handler` 默认值 = nil，调用方可直接 `showAlertWithMessage("xxx")`，
+    // 不必再写 `handler: nil`。既有传 nil 的调用点签名不变，照旧编译。
+    public static func showAlertWithMessage(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", handler: handler)
     }
     
-    public static func showAlertWithTitle(title: String, message: String, ok: String, handler: ((UIAlertAction) -> Void)?) {
+    public static func showAlertWithTitle(title: String, message: String, ok: String, handler: ((UIAlertAction) -> Void)? = nil) {
         // 2026-10-15 全 SwiftUI 化：改走 FSAlertCenter
         let action = UIAlertAction(title: ok, style: .default, handler: nil)
         FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
