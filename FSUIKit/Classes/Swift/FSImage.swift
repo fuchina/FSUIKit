@@ -218,8 +218,10 @@ public class FSImage: NSObject {
                 completion(false)
                 return
             }
+            // 2026-10-17：该回调是 @Sendable 闭包，completion 非 Sendable，装箱后捕获。
+            let box = FSUncheckedSendable(completion)
             PHPhotoLibrary.requestAuthorization(for: .addOnly) { newStatus in
-                completion(newStatus == .authorized || newStatus == .limited)
+                box.value(newStatus == .authorized || newStatus == .limited)
             }
         } else {
             let status = PHPhotoLibrary.authorizationStatus()
@@ -231,13 +233,17 @@ public class FSImage: NSObject {
                 completion(false)
                 return
             }
+            // 2026-10-17：同上。
+            let box = FSUncheckedSendable(completion)
             PHPhotoLibrary.requestAuthorization { newStatus in
-                completion(newStatus == .authorized)
+                box.value(newStatus == .authorized)
             }
         }
     }
 
     public static func saveToPhotoLibrary(_ image: UIImage, completion: @escaping (Bool) -> Void) {
+        // 2026-10-17：下面 performChanges 的 completionHandler 是 @Sendable，装箱后捕获。
+        let box = FSUncheckedSendable(completion)
         requestPhotoLibraryAddPermission { granted in
             guard granted else {
                 completion(false)
@@ -247,7 +253,7 @@ public class FSImage: NSObject {
             PHPhotoLibrary.shared().performChanges({
                 PHAssetCreationRequest.creationRequestForAsset(from: image)
             }, completionHandler: { success, _ in
-                completion(success)
+                box.value(success)
             })
         }
     }

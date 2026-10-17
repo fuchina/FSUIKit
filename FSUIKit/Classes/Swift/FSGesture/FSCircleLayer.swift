@@ -9,7 +9,10 @@
 import UIKit
 import QuartzCore
 
-public class FSCircleLayer: CALayer {
+// 2026-10-17：CALayer 在 SDK 里是 nonisolated，子类被默认主隔离化后会与
+// init()/draw(in:) 等 nonisolated 覆写冲突。CALayer 是 Core Animation 对象，
+// 本就与主隔离域无关，故显式 nonisolated。
+public nonisolated class FSCircleLayer: CALayer {
     
     public var index: Int = 0
     

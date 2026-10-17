@@ -9,8 +9,8 @@ import MessageUI
 
 public class FSShare: NSObject {
     
-    // Swift 6 语言模式：`FSShare` 非 Sendable 类型，静态单例需显式声明。
-    public nonisolated(unsafe) static let shared = FSShare()
+    // 2026-10-17：Pod 与主 App 统一为默认主隔离后，nonisolated(unsafe) 反而报错，故移除。
+    public static let shared = FSShare()
     
     public var result: ((Bool, String?) -> Void)?
     
