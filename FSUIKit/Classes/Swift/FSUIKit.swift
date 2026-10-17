@@ -22,14 +22,14 @@ public struct FSAlertInputConfig {
 public enum FSUIKit {
 
     public static func alert(style: FSAlertStyle,
-                             title: String,
-                             message: String,
-                             actionTitles: [String],
-                             styles: [FSAlertActionStyle],
-                             handler: ((FSAlertAction) -> Void)?,
-                             cancelTitle: String,
-                             cancel: ((FSAlertAction) -> Void)?,
-                             completion: (() -> Void)?) {
+                             title: String = "",
+                             message: String = "",
+                             actionTitles: [String] = [],
+                             styles: [FSAlertActionStyle] = [],
+                             handler: ((FSAlertAction) -> Void)? = nil,
+                             cancelTitle: String = "取消",
+                             cancel: ((FSAlertAction) -> Void)? = nil,
+                             completion: (() -> Void)? = nil) {
 
         showAlertSpec(style,
                                  title: title,
@@ -43,30 +43,28 @@ public enum FSUIKit {
     }
 
     public static func alert(style: FSAlertStyle,
-                             title: String,
-                             message: String,
-                             actionTitles: [String],
-                             styles: [FSAlertActionStyle],
-                             handler: ((FSAlertAction) -> Void)?) {
+                             title: String = "",
+                             message: String = "",
+                             actionTitles: [String] = [],
+                             styles: [FSAlertActionStyle] = [],
+                             handler: ((FSAlertAction) -> Void)? = nil) {
 
         showAlertSpec(style,
                                  title: title,
                                  message: message,
                                  actionTitles: actionTitles,
                                  styles: styles,
-                                 handler: handler,
-                                 cancelTitle: "取消",
-                                 cancel: nil)
+                                 handler: handler)
     }
 
     static func showAlertSpec(_ style1: FSAlertStyle,
-                                         title: String,
-                                         message: String,
-                                         actionTitles: [String],
-                                         styles: [FSAlertActionStyle],
-                                         handler: ((FSAlertAction) -> Void)?,
-                                         cancelTitle: String,
-                                         cancel: ((FSAlertAction) -> Void)?) {
+                                         title: String = "",
+                                         message: String = "",
+                                         actionTitles: [String] = [],
+                                         styles: [FSAlertActionStyle] = [],
+                                         handler: ((FSAlertAction) -> Void)? = nil,
+                                         cancelTitle: String = "取消",
+                                         cancel: ((FSAlertAction) -> Void)? = nil) {
 
         let style: FSAlertStyle = UIDevice.current.userInterfaceIdiom == .pad ? .alert : style1
 
