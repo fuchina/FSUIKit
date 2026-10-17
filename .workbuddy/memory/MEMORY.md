@@ -123,10 +123,21 @@ FSSqlite3DataController / FSAddSubjectController 的闭包签名），`_ = FSUIK
 `private weak var alertController: UIViewController?`，用于锁屏时 `dismiss`。返回值没了之后，
 属性和 7 处赋值全删，`handleScreenLock()` 改成 `FSAlertCenter.shared.dismiss()`。
 
-⚠️ **仍未收编**：业务代码里还有 7 处绕过 FSUIKit 直接造 `UIAlertController` 并 `present`：
-`FSWebKitController`(2)、`FSDayProfitTrendController`(1)、`FSUpdateDayProfitController`(1)、
-`FSAccountController`(3)、`FSAddMobanController`(1)，以及 FSKit 的 `FSLocationSupport.swift`(1)。
-它们跟 `FSAlertCenter` 是**两套弹窗系统并存**，UIKit present 的会盖在 SwiftUI overlay 上。
+⚠️ **已收编**（2026-10-17 第三轮）：业务代码里 7 处绕过 FSUIKit、直接造 `UIAlertController`
+并 `present` 的弹窗全部改走 `FSUIKit.alert` / `showAlertWithTitle`：
+
+| 文件 | 原写法 | 改成 |
+|---|---|---|
+| `FSWebKitController`(2) | JS alert / confirm 先 present 再回调 | `showAlertWithTitle` / `alert(... cancel:)`，`completionHandler` 用 `MainActor.assumeIsolated` 包一层 |
+| `FSDayProfitTrendController`(1) | 保存分享图 | `alert(.alert, actionTitles: ["保存"])` |
+| `FSUpdateDayProfitController`(1) | 删除日盈 | 同上，styles `[.destructive]` |
+| `FSAccountController`(3) | 说明/刷新/配置头 | 三处改 `alert`；**无按钮的 2 秒自动关提示**改 `FSAlertCenter.shared.show(FSAlertSpec(actions: []))` + 延迟 `dismiss()` |
+| `FSAddMobanController`(1) | 错误弹窗 | `showAlertWithTitle(title: "错误", ...)` |
+| `FSKit/FSLocationSupport`(1) | 导航方式选择 | FSKit 不能依赖 FSUIKit，直接用 `FSAlertCenter.shared.show(FSAlertSpec(.actionSheet))` |
+
+连带：`FSAlertDialog` 在 `actions.isEmpty` 时不再画按钮区（否则留 34pt 空白）。
+
+**现状：11 个仓库的 `.swift` 源码里 `UIAlertController` / `UIAlertAction` 已 0 处代码引用，只剩注释。**
 
 ## 本机环境坑
 
