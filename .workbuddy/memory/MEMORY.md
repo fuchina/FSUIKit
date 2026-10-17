@@ -168,6 +168,45 @@ SwiftUI 的 `horizontalSizeClass` 在静态方法里拿不到；`UITraitCollecti
 1 处 `autocapitalizationType` → `autocapitalization`）。`cfg.keyboardType = .numberPad`
 这类写法因为同名 case 一處未动。
 
+## FSKit 的 `× NSObject` 清理结果（2026-10-17 第五轮）
+
+21 个 `class Xxx: NSObject` 里 **17 个已清、4 个必须留**：
+
+**改 `enum`（10 个纯静态命名空间，全项目 0 实例化 / 0 类型标注 / 0 子类）**
+`FSKit`、`FSDate`、`GTMBase64`、`RSA`、`KRAes`、`FSCryptor`、`FSCalculator`、
+`FSPdf`、`FSURLSessionManager`、`FSLocationSupport`
+
+**去 NSObject 但保留 class（7 个，有实例状态）**
+`FSApp`、`FSUIAdapter`（单例，`private override init` → `private init`，删 `super.init()`）、
+`FSLunarDate`、`FSXIRR`、`FSLocation`、`FSLocationResult`、`FSUIAdapterModel`
+
+**必须留 NSObject（4 个）**
+| 类 | 原因 |
+|---|---|
+| `FSModelCoder` | `NSSecureCoding` 协议要求 |
+| `FSLocationManager` | `CLLocationManagerDelegate` |
+| `_FSDisplayLinkProxy` | `CADisplayLink(target:selector:)` 要求 |
+| `FSEntity` | **57 个子类**跨 5 个项目；`required public override init()` 一动就牵连子类，收益不值风险 |
+
+**两个踩坑点**：
+1. `enum` 里不允许 `class func` / `class var` → `FSKit` 里有 1 处 `class func` 要改 `static func`。
+2. `FSKit.bundle(withName:)` 用 `Bundle(for: FSKit.self)`，而 enum 的 metatype 不是 `AnyClass`
+   → 加了个空类 `FSKitBundleToken` 当锚点（文件末尾 `private final class`）。
+
+## ⚠️ 用户并行改过 `alert` 签名（2026-10-17 20:08 commit a83c078）
+
+`FSUIKit.alert` 的 `controller:` 参数已被**用户自己删掉**（连带 115 处调用点），
+且所有参数都加了默认值（`title: String = ""` / `styles: = []` / `handler: = nil` …）。
+现在签名是：
+
+```swift
+FSUIKit.alert(style:title:message:actionTitles:styles:handler:cancelTitle:cancel:completion:)
+FSUIKit.alert(style:title:message:actionTitles:styles:handler:)
+```
+
+**再写 `controller:` 会报 `extra argument 'controller' in call`。**
+他也在 `FSShare.swift` 有独立 commit（9328ea4）。
+
 ## 本机环境坑
 
 - `find` 在 `/Applications/Xcode.app` 下被沙箱挡住（静默返回空），找 Xcode 内部文件用 `ls`/`Glob`。
