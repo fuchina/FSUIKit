@@ -190,35 +190,4 @@ public class FSUIKit: NSObject {
                                               }]))
     }
     
-    public static func effectView(withFrame frame: CGRect) -> UIVisualEffectView {
-        let effect = UIBlurEffect(style: .light)
-        let effectView = UIVisualEffectView(effect: effect)
-        effectView.frame = frame
-        return effectView
-    }
-    
-    public static func shot(with view: UIView, scope: CGRect) -> UIImage? {
-        guard let fullImage = shot(with: view),
-              let imageRef = fullImage.cgImage?.cropping(to: scope) else { return nil }
-        
-        UIGraphicsBeginImageContext(scope.size)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        
-        let rect = CGRect(x: 0, y: 0, width: scope.width, height: scope.height)
-        context.translateBy(x: 0, y: rect.height)
-        context.scaleBy(x: 1.0, y: -1.0)
-        context.draw(imageRef, in: rect)
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-    
-    public static func shot(with view: UIView) -> UIImage? {
-        UIGraphicsBeginImageContext(view.bounds.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
 }
