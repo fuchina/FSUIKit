@@ -2,18 +2,8 @@ import UIKit
 import SwiftUI
 import FSKit
 
-/// 输入弹窗的输入框配置（原 `textFieldConfig: (UITextField) -> Void`）
-///
-/// 2026-10-17：去掉了这里最后的 UIKit 输入框类型 ——
-/// `keyboardType` 换成自有 `FSAlertKeyboard`（SwiftUI 没有自己的键盘枚举，内核仍是 UIKit，
-/// 由 `FSAlertDialog` 渲染时映射）；`clearButtonMode: UITextField.ViewMode` 换成
-/// `showsClearButton: Bool`（本来渲染就是自绘的 xmark 按钮，`whileEditing`/`always` 无区别）；
-/// `autocapitalizationType` 换成 SwiftUI 原生的 `TextInputAutocapitalization`。
 public struct FSAlertInputConfig {
-
-    /// 第几个输入框（0 起，对应原 `UITextField.tag`）——
-    /// `number > 1` 时调用方靠它区分「这是表名框还是字段值框」。
-    /// 由 `alertInput` 在回调前写入，调用方只读。
+    
     public var tag: Int = 0
 
     public var placeholder: String = ""
@@ -22,10 +12,8 @@ public struct FSAlertInputConfig {
 
     public var keyboardType: FSAlertKeyboard = .default
 
-    /// 有内容时右侧显示清除按钮（原 `clearButtonMode != .never`）
     public var showsClearButton: Bool = false
 
-    /// 自动大写；nil = 交给系统默认
     public var autocapitalization: TextInputAutocapitalization?
 
     public init() {}
@@ -34,7 +22,6 @@ public struct FSAlertInputConfig {
 public enum FSUIKit {
 
     public static func alert(style: FSAlertStyle,
-                             controller: AnyObject?,
                              title: String,
                              message: String,
                              actionTitles: [String],
@@ -56,7 +43,6 @@ public enum FSUIKit {
     }
 
     public static func alert(style: FSAlertStyle,
-                             controller: AnyObject?,
                              title: String,
                              message: String,
                              actionTitles: [String],
