@@ -39,76 +39,91 @@ public struct FSAlertInputConfig {
 }
 
 public class FSUIKit: NSObject {
-    
-    @discardableResult
-    public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((UIAlertAction) -> Void)?, cancelTitle: String, cancel: ((UIAlertAction) -> Void)?, completion: (() -> Void)?) -> UIAlertController {
-        
-        let alertController = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: cancelTitle, cancel: cancel);
+
+    /// 普通弹窗（alert / actionSheet）
+    ///
+    /// 2026-10-17：返回 `Void`（原来返回只是数据容器的 `UIAlertController`，无人使用）；
+    /// `handler` / `cancel` 的入参从 `UIAlertAction` 换成纯 Swift 的 `FSAlertAction`
+    /// （`title` / `style` 照旧可读）；`style` / `styles` 换成 FSKit 的
+    /// `FSAlertStyle` / `FSAlertActionStyle`，调用点 `.alert` / `.destructive` 字面量不用改。
+    ///
+    /// - Parameter controller: 已无作用（弹窗由根视图渲染），保留只为不破坏调用点。
+    public static func alert(style: FSAlertStyle,
+                             controller: UIViewController?,
+                             title: String,
+                             message: String,
+                             actionTitles: [String],
+                             styles: [FSAlertActionStyle],
+                             handler: ((FSAlertAction) -> Void)?,
+                             cancelTitle: String,
+                             cancel: ((FSAlertAction) -> Void)?,
+                             completion: (() -> Void)?) {
+
+        showAlertSpec(style,
+                                 title: title,
+                                 message: message,
+                                 actionTitles: actionTitles,
+                                 styles: styles,
+                                 handler: handler,
+                                 cancelTitle: cancelTitle,
+                                 cancel: cancel)
         // 2026-10-15：弹窗已由 FSAlertCenter（SwiftUI 全局弹窗）渲染
         completion?()
-        return alertController
     }
 
-    @discardableResult
-    public static func alert(style: UIAlertController.Style, controller: UIViewController, title: String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ((FSAlertAction) -> Void)?) -> UIAlertController {
-        
-        let ac = self.alertControllerWithStyle(style, title: title, message: message, actionTitles: actionTitles, styles: styles, handler: handler, cancelTitle: "取消", cancel: nil)
-        // 2026-10-15：弹窗已由 FSAlertCenter（SwiftUI 全局弹窗）渲染
-        return ac
+    /// 普通弹窗（省略取消按钮与 completion 的便捷版）
+    public static func alert(style: FSAlertStyle,
+                             controller: UIViewController?,
+                             title: String,
+                             message: String,
+                             actionTitles: [String],
+                             styles: [FSAlertActionStyle],
+                             handler: ((FSAlertAction) -> Void)?) {
+
+        showAlertSpec(style,
+                                 title: title,
+                                 message: message,
+                                 actionTitles: actionTitles,
+                                 styles: styles,
+                                 handler: handler,
+                                 cancelTitle: "取消",
+                                 cancel: nil)
     }
-    
-    static func alertControllerWithStyle(_ style1: UIAlertController.Style, title:String, message: String, actionTitles: [String], styles: [UIAlertAction.Style], handler: ( (FSAlertAction) -> Void)?, cancelTitle: String, cancel: ((FSAlertAction) -> Void)?) -> UIAlertController {
-        
-        var style = style1
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            style = UIAlertController.Style.alert
-        }
-        
+
+    static func showAlertSpec(_ style1: FSAlertStyle,
+                                         title: String,
+                                         message: String,
+                                         actionTitles: [String],
+                                         styles: [FSAlertActionStyle],
+                                         handler: ((FSAlertAction) -> Void)?,
+                                         cancelTitle: String,
+                                         cancel: ((FSAlertAction) -> Void)?) {
+
+        // iPad 上 actionSheet 强制转 alert（原 `UIAlertController` 的做法）
+        let style: FSAlertStyle = UIDevice.current.userInterfaceIdiom == .pad ? .alert : style1
+
         let count = min(actionTitles.count, styles.count)
-        let controller = UIAlertController(title: title, message: message, preferredStyle: style)
-        
         var specs: [FSAlertActionSpec] = []
 
-        // Swift 6 语言模式：`FSAlertAction`（`UIAlertAction` 子类）的 init 是 @MainActor 隔离，
-        // 传入的 handler 闭包会被「送」到主隔离域 ⇒ 闭包须为 @Sendable（UIAlertAction 的
-        // handler 由 UIKit 在主线程回调），其中捕获的非 Sendable 调用方闭包用
-        // FSUncheckedSendable 装箱后跨域携带。本类保持 nonisolated（见 FSAlertCenter 注释）。
-        let handlerBox = FSUncheckedSendable(handler)
-
         for i in 0..<count {
-            let action = FSAlertAction(title: actionTitles[i], style: styles[i], handler: { @Sendable act in
-                handlerBox.value?(act as! FSAlertAction)
-            })
+            let action = FSAlertAction(title: actionTitles[i], style: styles[i])
             action.theTag = i
-            controller.addAction(action)
 
             specs.append(FSAlertActionSpec(title: actionTitles[i], style: styles[i]) {
-                if handler != nil {
-                    handler!(action)
-                }
+                handler?(action)
             })
         }
-        
-        let cancelBox = FSUncheckedSendable(cancel)
-        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel, handler: { @Sendable act in
-            cancelBox.value?(act as! FSAlertAction)
-        })
-        
-        controller.addAction(archiveAction)
+
+        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel)
 
         specs.append(FSAlertActionSpec(title: cancelTitle, style: .cancel) {
-            if cancel != nil {
-                cancel!(archiveAction)
-            }
+            cancel?(archiveAction)
         })
 
-        FSAlertCenter.shared.show(FSAlertSpec(isAlert: (style == UIAlertController.Style.alert),
+        FSAlertCenter.shared.show(FSAlertSpec(style: style,
                                               title: title,
                                               message: message,
-                                              actions: specs),
-                                  container: controller)
-
-        return controller
+                                              actions: specs))
     }
     
     /// 输入弹窗（纯 SwiftUI 渲染，不再构造 `UIAlertController` / `UITextField`）
@@ -154,7 +169,7 @@ public class FSUIKit: NSObject {
 
             buttonConfig(data)
 
-            let act = FSAlertAction(title: data.title, style: data.style, handler: nil)
+            let act = FSAlertAction(title: data.title, style: data.style)
             act.data = data
 
             specs.append(FSAlertActionSpec(title: data.title, style: data.style) {
@@ -166,7 +181,7 @@ public class FSUIKit: NSObject {
             })
         }
 
-        FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
+        FSAlertCenter.shared.show(FSAlertSpec(style: .alert,
                                               title: title,
                                               message: message,
                                               actions: specs,
@@ -175,14 +190,14 @@ public class FSUIKit: NSObject {
                                               tapOutsideCanDismiss: tapOutsideCanDismiss))
     }
     
-    public static func showAlertWithMessage(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+    public static func showAlertWithMessage(_ message: String, handler: ((FSAlertAction) -> Void)? = nil) {
         self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", handler: handler)
     }
     
-    public static func showAlertWithTitle(title: String, message: String, ok: String, handler: ((UIAlertAction) -> Void)? = nil) {
+    public static func showAlertWithTitle(title: String, message: String, ok: String, handler: ((FSAlertAction) -> Void)? = nil) {
         // 2026-10-15 全 SwiftUI 化：改走 FSAlertCenter
-        let action = UIAlertAction(title: ok, style: .default, handler: nil)
-        FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
+        let action = FSAlertAction(title: ok, style: .default)
+        FSAlertCenter.shared.show(FSAlertSpec(style: .alert,
                                               title: title,
                                               message: message,
                                               actions: [FSAlertActionSpec(title: ok, style: .default) {

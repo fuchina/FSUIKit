@@ -93,6 +93,41 @@ FSOSS 等对普通 `alert()` 仍在用），只对 `alertInput` 这条路径失�
 **正解**：加 `-Xfrontend -disable-sandbox`，全量 41 文件一次过，不用排除任何文件。
 （与 `xcodebuild -disable-sandbox` 是同一个根因：swift-plugin-server 不能套第二层 sandbox。）
 
+## FSUIKit 弹窗 API 已全 Swift 化（2026-10-17 第二轮）
+
+第一轮摘掉的是 `alertInput` 内部的 `UIAlertController`，第二轮连**对外签名**里的 UIKit 类型也全清了：
+
+| 原 | 现 |
+|---|---|
+| `style: UIAlertController.Style` | `style: FSAlertStyle`（`.alert` / `.actionSheet`） |
+| `styles: [UIAlertAction.Style]` | `styles: [FSAlertActionStyle]`（`.default` / `.cancel` / `.destructive`） |
+| `handler: ((UIAlertAction) -> Void)?` | `handler: ((FSAlertAction) -> Void)?` |
+| `-> UIAlertController` | `-> Void`（两个重载合并成一个） |
+| `FSAlertSpec(isAlert: Bool, ...)` | `FSAlertSpec(style: FSAlertStyle, ...)` |
+
+- `FSAlertStyle` / `FSAlertActionStyle` 定义在 **FSKit**（FSUIKit 依赖它，不能反向），
+  `FSAlertActionSpec.style` 同批换掉。
+- `FSAlertAction` 不再继承 `UIAlertAction`，改纯 class；**`title` 刻意保持 `String?`**
+  （与 `UIAlertAction.title` 同型）⇒ 调用点 `action.title ?? ""` / `if let` 全不用改。
+- `UIAlertController+ClickDismissS.swift` **整个删除**（`addTapEvent` / `handleAlertClick`
+  全仓库 0 调用；`FSAlertCenter` 的 `container` / `containerID` / `enableTapOutsideDismiss`
+  / `dismissByOutsideTap` 一并清掉，点遮罩直接 `center.dismiss()`）。
+- `alertControllerWithStyle` 改名为 `showAlertSpec`（已经不造 controller 了）。
+
+**调用点只改了 48 处机械替换**（28 文件）：`UIAlertAction.Style` → `FSAlertActionStyle`（16 处，
+含 HAToolController / FSAddProductController / FSBeListController / FSAccountDetailController /
+FSSqlite3DataController / FSAddSubjectController 的闭包签名），`_ = FSUIKit.alert(` → `FSUIKit.alert(`
+（32 处，返回值变 Void 后 `_ =` 会报警告）。`.alert` / `.destructive` 这些字面量**一处没动**。
+
+**唯一真正的逻辑改动**：`HAToolController` 原来把 alert 返回值存进
+`private weak var alertController: UIViewController?`，用于锁屏时 `dismiss`。返回值没了之后，
+属性和 7 处赋值全删，`handleScreenLock()` 改成 `FSAlertCenter.shared.dismiss()`。
+
+⚠️ **仍未收编**：业务代码里还有 7 处绕过 FSUIKit 直接造 `UIAlertController` 并 `present`：
+`FSWebKitController`(2)、`FSDayProfitTrendController`(1)、`FSUpdateDayProfitController`(1)、
+`FSAccountController`(3)、`FSAddMobanController`(1)，以及 FSKit 的 `FSLocationSupport.swift`(1)。
+它们跟 `FSAlertCenter` 是**两套弹窗系统并存**，UIKit present 的会盖在 SwiftUI overlay 上。
+
 ## 本机环境坑
 
 - `find` 在 `/Applications/Xcode.app` 下被沙箱挡住（静默返回空），找 Xcode 内部文件用 `ls`/`Glob`。
