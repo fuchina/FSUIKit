@@ -76,10 +76,13 @@ public class FSUIKit: NSObject {
 
         // 2026-10-15：交给 SwiftUI 全局弹窗渲染
         // （仍返回 UIAlertController 仅为签名兼容，已不再被 present，全项目 0 处真实使用其返回值）
+        // 2026-10-17：把容器一并交给 FSAlertCenter —— 调用方随后在 completion 里调
+        // `addTapEvent` 时，靠它认领「点遮罩关闭」的是哪一条弹窗。
         FSAlertCenter.shared.show(FSAlertSpec(isAlert: (style == UIAlertController.Style.alert),
                                               title: title,
                                               message: message,
-                                              actions: specs))
+                                              actions: specs),
+                                  container: controller)
 
         return controller
     }
@@ -132,15 +135,20 @@ public class FSUIKit: NSObject {
             })
         }
 
+        // 2026-10-17：带上 `tf.text` —— 改造时漏了初始文本，调用方
+        // `textFieldConfig` 里 `tf.text = model.bz` 的预填（记账弹窗的备注）会看不到。
         let inputs = textFields.map { tf in
-            FSAlertInputSpec(placeholder: tf.placeholder ?? "", keyboardType: tf.keyboardType) { _ in }
+            FSAlertInputSpec(placeholder: tf.placeholder ?? "",
+                             keyboardType: tf.keyboardType,
+                             text: tf.text ?? "") { _ in }
         }
 
         FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
                                               title: title,
                                               message: message,
                                               actions: specs,
-                                              inputs: inputs))
+                                              inputs: inputs),
+                                  container: alert)
 
         completion?(alert)
 
