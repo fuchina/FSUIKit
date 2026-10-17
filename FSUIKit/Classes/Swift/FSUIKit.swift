@@ -1,32 +1,40 @@
 import UIKit
+import SwiftUI
 import FSKit
 
+/// 输入弹窗的输入框配置（原 `textFieldConfig: (UITextField) -> Void`）
+///
+/// 2026-10-17：去掉了这里最后的 UIKit 输入框类型 ——
+/// `keyboardType` 换成自有 `FSAlertKeyboard`（SwiftUI 没有自己的键盘枚举，内核仍是 UIKit，
+/// 由 `FSAlertDialog` 渲染时映射）；`clearButtonMode: UITextField.ViewMode` 换成
+/// `showsClearButton: Bool`（本来渲染就是自绘的 xmark 按钮，`whileEditing`/`always` 无区别）；
+/// `autocapitalizationType` 换成 SwiftUI 原生的 `TextInputAutocapitalization`。
 public struct FSAlertInputConfig {
 
+    /// 第几个输入框（0 起，对应原 `UITextField.tag`）——
+    /// `number > 1` 时调用方靠它区分「这是表名框还是字段值框」。
+    /// 由 `alertInput` 在回调前写入，调用方只读。
     public var tag: Int = 0
 
     public var placeholder: String = ""
 
     public var text: String = ""
 
-    public var keyboardType: UIKeyboardType = .default
+    public var keyboardType: FSAlertKeyboard = .default
 
-    public var clearButtonMode: UITextField.ViewMode = .never
+    /// 有内容时右侧显示清除按钮（原 `clearButtonMode != .never`）
+    public var showsClearButton: Bool = false
 
-    public var autocapitalizationType: UITextAutocapitalizationType = .sentences
+    /// 自动大写；nil = 交给系统默认
+    public var autocapitalization: TextInputAutocapitalization?
 
     public init() {}
 }
 
-/// 组件对外 API 的命名空间（纯 `static`，无实例状态）
-///
-/// 2026-10-17：原来继承 `NSObject`，只为「可能被 ObjC 调用」的历史包袱 ——
-/// 实际全项目无一处 ObjC 调用、无 `@objc` 成员、无实例化，`NSObject` 全无作用。
-/// 改成无 case 的 `enum`：天然不可实例化，也没有 ObjC 运行时开销。
 public enum FSUIKit {
 
     public static func alert(style: FSAlertStyle,
-                             controller: UIViewController?,
+                             controller: AnyObject?,
                              title: String,
                              message: String,
                              actionTitles: [String],
@@ -48,7 +56,7 @@ public enum FSUIKit {
     }
 
     public static func alert(style: FSAlertStyle,
-                             controller: UIViewController?,
+                             controller: AnyObject?,
                              title: String,
                              message: String,
                              actionTitles: [String],
@@ -119,8 +127,8 @@ public enum FSUIKit {
             inputs.append(FSAlertInputSpec(placeholder: cfg.placeholder,
                                            keyboardType: cfg.keyboardType,
                                            text: cfg.text,
-                                           showsClearButton: cfg.clearButtonMode != .never,
-                                           autocapitalization: cfg.autocapitalizationType,
+                                           showsClearButton: cfg.showsClearButton,
+                                           autocapitalization: cfg.autocapitalization,
                                            commit: { _ in }))
         }
 

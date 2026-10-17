@@ -139,6 +139,35 @@ FSSqlite3DataController / FSAddSubjectController 的闭包签名），`_ = FSUIK
 
 **现状：11 个仓库的 `.swift` 源码里 `UIAlertController` / `UIAlertAction` 已 0 处代码引用，只剩注释。**
 
+## 输入框配置也不再暴露 UIKit 类型（2026-10-17 第四轮）
+
+`FSAlertInputConfig`（FSUIKit）与 `FSAlertInputSpec`（FSKit）现在长这样：
+
+| 原 | 现 |
+|---|---|
+| `keyboardType: UIKeyboardType` | `keyboardType: FSAlertKeyboard`（FSKit 自有枚举） |
+| `clearButtonMode: UITextField.ViewMode` | `showsClearButton: Bool` |
+| `autocapitalizationType: UITextAutocapitalizationType` | `autocapitalization: TextInputAutocapitalization?` |
+| `alert(controller: UIViewController?)` | `alert(controller: AnyObject?)` |
+
+- **`FSAlertKeyboard` 只是「藏起来」，不是真替换**：SwiftUI 没有自己的键盘枚举，
+  `View.keyboardType(_:)` 参数就是 `UIKeyboardType`。枚举里 6 个 case
+  （default / asciiCapable / alphabet / numbersAndPunctuation / numberPad / decimalPad）
+  由 `FSAlertDialog` 渲染时映射回去。**内核仍是 UIKit**，如实写明。
+- `TextInputAutocapitalization` 是真 SwiftUI 类型，直接透传给 `.textInputAutocapitalization`，
+  原来那个 `swiftUI(autocap:)` 转换函数已删。
+- `clearButtonMode` 本来就只有 `!= .never` 一个判定（渲染还是自绘 xmark），
+  换成 `Bool` 更诚实；`whileEditing` 与 `always` 在自绘里无区别。
+- `controller` 参数早已无用，`UIViewController?` → `AnyObject?`，126 处调用点零改动。
+
+⚠️ **`UIDevice.current.userInterfaceIdiom` 换不掉**（`showAlertSpec` 的 iPad 强制转 alert）。
+SwiftUI 的 `horizontalSizeClass` 在静态方法里拿不到；`UITraitCollection.current` 在无 view
+上下文时可能是 `.unspecified`，风险大于收益。保留。
+
+调用点机械替换 26 处 / 12 文件（25 处 `clearButtonMode` → `showsClearButton`，
+1 处 `autocapitalizationType` → `autocapitalization`）。`cfg.keyboardType = .numberPad`
+这类写法因为同名 case 一處未动。
+
 ## 本机环境坑
 
 - `find` 在 `/Applications/Xcode.app` 下被沙箱挡住（静默返回空），找 Xcode 内部文件用 `ls`/`Glob`。
