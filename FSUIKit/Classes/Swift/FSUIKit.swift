@@ -90,9 +90,9 @@ public class FSUIKit: NSObject {
     @discardableResult
     public static func alertInput(number: Int, controller: UIViewController, title: String, message: String, buttons: Int, buttonConfig: (FSAlertActionData) -> Void, textFieldConfig: ((UITextField) -> Void)?, completion: ((UIAlertController) -> Void)?) -> UIAlertController {
         
-        if number < 1 {
-            return UIAlertController()
-        }
+        // 2026-10-17：输入框数量限定 1…5；传入的不是 1…5 一律按 1 个处理
+        // （自绘弹窗里再多会把面板撑得过高，键盘一弹就顶到屏幕上沿）
+        let count = (1...5).contains(number) ? number : 1
         
         // 2026-10-15 全 SwiftUI 化：仍建一个 UIAlertController 作 **数据容器**（不 present），
         // 让调用方在 `data.click` 里读 `alert.textFields` 的既有写法继续可用；
@@ -102,7 +102,7 @@ public class FSUIKit: NSObject {
         // `addTextField` 的 configurationHandler 同样由 UIKit 在主线程回调，
         // 故声明 @Sendable；内部用 MainActor.assumeIsolated 恢复主隔离域后再碰 UIKit。
         let tfConfigBox = FSUncheckedSendable(textFieldConfig)
-        for i in 0..<number {
+        for i in 0..<count {
             alert.addTextField(configurationHandler: { @Sendable tf in
                 MainActor.assumeIsolated {
                     tf.tag = i
@@ -137,10 +137,12 @@ public class FSUIKit: NSObject {
 
         // 2026-10-17：带上 `tf.text` —— 改造时漏了初始文本，调用方
         // `textFieldConfig` 里 `tf.text = model.bz` 的预填（记账弹窗的备注）会看不到。
+        // 顺带把 `clearButtonMode` 带过去（自绘输入框要自己画清除按钮）。
         let inputs = textFields.map { tf in
             FSAlertInputSpec(placeholder: tf.placeholder ?? "",
                              keyboardType: tf.keyboardType,
-                             text: tf.text ?? "") { _ in }
+                             text: tf.text ?? "",
+                             showsClearButton: tf.clearButtonMode != .never) { _ in }
         }
 
         FSAlertCenter.shared.show(FSAlertSpec(isAlert: true,
