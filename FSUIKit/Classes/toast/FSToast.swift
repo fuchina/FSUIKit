@@ -9,12 +9,8 @@ import Foundation
 import FSKit
 
 open class FSToast: NSObject {
-
-    public static func toast(_ text: String) {
-        self.toast(text, duration: 2)
-    }
-
-    public static func toast(_ text: String, duration: Double) {
+    
+    public static func toast(_ text: String, duration: Double = 2) {
         FSToastCenter.shared.show(text, duration: duration)
     }
 }
