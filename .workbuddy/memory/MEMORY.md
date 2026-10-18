@@ -16,6 +16,11 @@
 `MainActor.assumeIsolated` 切主线程）+ `XxxOverlay`（View，观察 center 渲染）。
 `FSToastCenter` / `FSAlertCenter` / `FSLoadingCenter` 等都在 **FSKit**（FSUIKit 依赖它，不能反向）。
 
+**自适应宽气泡的通用写法**（2026-10-18 FSToastOverlay 踩坑）：`frame(maxWidth:)` 若挂在
+`background` **内侧**（即直接挂在 `Text` 上），`frame` 自身会撑满上限，背景跟着变固定宽；
+正确顺序是「`Text` → padding/minHeight/fixedSize → `background` → `clipShape` → `frame(maxWidth:)` 放最外层」。
+`Text` 在有限提议下是 tight-fit 的，短文案按内容宽、超长才吃到上限并换行。
+
 ## 弹窗（FSAlertCenter，已 100% SwiftUI）
 
 - 对外签名里**没有** UIKit 类型：`style: FSAlertStyle` / `styles: [FSAlertActionStyle]` /
