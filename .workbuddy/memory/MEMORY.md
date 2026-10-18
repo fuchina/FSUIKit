@@ -31,6 +31,24 @@
   （commit a83c078：删掉 `controller:`、参数全加默认值）。**再写 `controller:` 会报 extra argument。**
 - 11 个仓库 `.swift` 里 `UIAlertController` / `UIAlertAction` **只剩注释**。
 
+## iOS 26 系统 alert 的硬指标（2026-10-18 实测，iPhone 17 Pro / iOS 26.5 模拟器）
+
+自绘想「完全像系统」时按这张表对，别再凭截图猜：
+
+- 面板 **320 × 264**，圆角 **34**；垂直位置是**安全区内居中**（874 屏 → y=319），不是整屏居中。
+- 按钮 **横排**：每个 140×48、间距 8、左右边距 16、圆角 ≈ 24（capsule）。3 个及以上才转竖排。
+- 输入行高 **48**（当前代码写 45），输入块圆角 ≈ 16，左右边距 16。
+- 遮罩 = 黑色 0.2（背景 200 → 160），`view.alpha` 0→1。
+- 入场 **没有缩放**（面板 transform 恒 1.0），只有 opacity；曲线是
+  `CASpringAnimation damping=45.71 stiffness=522.35 mass=1 v0=0 duration=0.404`（ζ=1.0，不过冲）。
+  SwiftUI 等价：`.interpolatingSpring(stiffness: 522.35, damping: 45.71)`。
+- 面板亮度 rgb(201)，**边缘有 ~19pt 的高光带 rgb(228)** —— 这是 Liquid Glass 的私有折射，SwiftUI 复刻不了。
+- 材质实测（灰背景 + 0.2 遮罩）：`regularMaterial` 232 / `thinMaterial` 213 / `ultraThinMaterial` 190 /
+  `glassEffect(.clear)` 185 / `white.opacity(0.43)` 201。**没有一档能同时对上亮度和模糊。**
+
+⇒ 结论：自绘最多做到「像」，要做到「完全一致」只能用 `UIAlertController` 本尊（present 层级）。
+探针工程与手法见 `2026-10-18.md`。
+
 ## `@objc` / NSObject 盘点
 
 - 约 20 处 `@objc` 绝大多数是 ObjC 运行时回调入口（`#selector`、`CADisplayLink`、
