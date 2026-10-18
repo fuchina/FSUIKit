@@ -5,7 +5,6 @@
 //  2026-10-15 全 SwiftUI 化：
 //  → `FSTextViewScreen`（TextEditor + toolbar「确认」）。
 //
-//  顺带修复已知缺陷：UIKit 版被 `UIViewControllerRepresentable` 承载时，
 //  `navigationItem.rightBarButtonItem`（确认）在 SwiftUI 导航栏下不显示
 //  ⇒ `completion` 触发不到（备注改不进去）。SwiftUI 版无此问题。
 //

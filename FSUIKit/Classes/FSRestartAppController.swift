@@ -3,7 +3,6 @@
 //  FSUIKit
 //
 //  2026-10-15 全 SwiftUI 化：
-//  原 `FSRestartAppController: UIViewController`（白底 + 一个居中的可点 FSTapLabel）
 //  → `FSRestartScreen`（SwiftUI 视图）+ `RestartAppBridge`（两种入口）。
 //
 //  呈现方式仍走 UIKit：① 模态 present（契约边界：模态层不做 SwiftUI 化）
