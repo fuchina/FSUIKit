@@ -8,7 +8,7 @@
 import Foundation
 import FSKit
 
-open class FSToast: NSObject {
+public enum FSToast {
     
     public static func toast(_ text: String, duration: Double = 2) {
         FSToastCenter.shared.show(text, duration: duration)
