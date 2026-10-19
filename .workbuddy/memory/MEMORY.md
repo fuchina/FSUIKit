@@ -58,6 +58,33 @@
 ⇒ 结论：自绘最多做到「像」，要做到「完全一致」只能用 `UIAlertController` 本尊（present 层级）。
 探针工程与手法见 `2026-10-18.md`。
 
+## 原生 UIAlertController 的层级与「点外关闭」（2026-10-19 实测，iOS 26.5 + 18.5）
+
+- `alert.view` **就是面板矩形**（iOS 26: 320×172/264/320，圆角 34；iOS 18: **270×141/198/257**）。
+  ⚠️ 自绘的 320 宽 / 34 圆角只在 iOS 26 成立，iOS 18 设备上差一截（270 / 约 14）。
+- 遮罩是 `presentationController.containerView`（全屏 `UITransitionView`）里的一个 `bg=black@0.20` 的 UIView，
+  **不是** alert.view 的一部分。`modalPresentationStyle = .overFullScreen`。
+- 点外关闭：手势必须挂 **containerView**（挂 alert.view 收不到，hitTest 直接 nil）；
+  delegate 用 `!touch.view.isDescendant(of: alert.view)` 判定，免疫几何/transform/私有类名；
+  `cancelsTouchesInView = false`。
+- **present 必须串行**：alert 在显示时 present 第二条会**静默失败**（无 completion、view.window == nil、无 warning）。
+  在 dismiss completion 里 present 可靠。⇒ 需要 pending 队列。
+- alert 在主 window 的 `UITransitionView` 里，层级**高于** rootViewController.view
+  ⇒ SwiftUI 的 toast/loading overlay 会被遮罩盖住（换原生后要接受的回归）。
+
+## 弹窗现状（2026-10-19 起）
+
+- `FSAlertCenter` 的 **alert 后端已换成 `UIAlertController`**（`FSAlertDialog` 自绘保留但不再被引用）。
+  `actionSheet` 仍走 SwiftUI `confirmationDialog`。`FSAlertHost` 只剩 actionSheet。
+- 队列：`pending` + `activeAlert`，50ms 重试上限 5s；present 必须串行（不串行会**静默失败**）。
+- `FSUIKit.alert` / `alertInput` / `showAlertWith*` / `.fsAlert` **签名与可调用性均保持原样**
+  （曾试过标 `@available(*, unavailable)`，用户要求「接口保留、直接接到新实现」，已撤销）。
+  内部统一走 `FSAlertCenter` → `UIAlertController`，370 处调用点零改动。
+- 点外关闭：`tapOutsideToDismiss` 是总开关，`tapOutsideCanDismiss` 只是附加条件。
+  **2026-10-19 起默认 `true`**（`FSAlertSpec.init` 的默认值），即所有 alert 都能点空白区关闭；
+  危险确认类弹窗可显式传 `false`。
+
+
 ## `@objc` / NSObject 盘点
 
 - 约 20 处 `@objc` 绝大多数是 ObjC 运行时回调入口（`#selector`、`CADisplayLink`、

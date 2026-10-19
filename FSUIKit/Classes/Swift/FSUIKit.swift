@@ -149,10 +149,16 @@ public enum FSUIKit {
     }
     
     public static func showAlertWithMessage(_ message: String, handler: ((FSAlertAction) -> Void)? = nil) {
-        self.showAlertWithTitle(title: "温馨提示", message: message, ok: "确定", handler: handler)
+        showAlert(title: "温馨提示", message: message, ok: "确定", handler: handler)
     }
     
     public static func showAlertWithTitle(title: String, message: String, ok: String, handler: ((FSAlertAction) -> Void)? = nil) {
+        showAlert(title: title, message: message, ok: ok, handler: handler)
+    }
+
+    /// 上面两个 `showAlertWith...` 门面的**实际实现**。
+    /// 门面签名保持原样（业务方照旧调用），实现统一收在这里。
+    static func showAlert(title: String, message: String, ok: String, handler: ((FSAlertAction) -> Void)?) {
 
         let action = FSAlertAction(title: ok, style: .default)
         FSAlertCenter.shared.show(FSAlertSpec(style: .alert,
@@ -162,7 +168,6 @@ public enum FSUIKit {
                                                   handler?(action)
                                               }]))
     }
-    
 }
 
 // MARK: - SwiftUI 修饰器版 alert（对应系统 `.alert(_:isPresented:actions:message:)`）
