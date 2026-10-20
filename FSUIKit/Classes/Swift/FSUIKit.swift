@@ -60,6 +60,25 @@ public enum FSUIKit {
                                  handler: handler)
     }
 
+    /// 「纯按钮菜单」：居中 alert，**不追加取消按钮**，靠点空白区关闭。
+    ///
+    /// 与 `alert(style: .alert, ...)` 的唯一差别就是不生成取消按钮。
+    /// 别去改 `alert` 的默认值 —— 全项目 113 处调用依赖「默认有取消」。
+    public static func alertMenu(title: String = "",
+                                 message: String = "",
+                                 actionTitles: [String] = [],
+                                 styles: [FSAlertActionStyle] = [],
+                                 handler: ((FSAlertAction) -> Void)? = nil) {
+
+        showAlertSpec(.alert,
+                      title: title,
+                      message: message,
+                      actionTitles: actionTitles,
+                      styles: styles,
+                      handler: handler,
+                      cancelTitle: "")
+    }
+
     static func showAlertSpec(_ style1: FSAlertStyle,
                                          title: String = "",
                                          message: String = "",
