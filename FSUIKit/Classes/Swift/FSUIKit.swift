@@ -83,11 +83,15 @@ public enum FSUIKit {
             })
         }
 
-        let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel)
+        // cancelTitle 传空 = 不要取消按钮（点空白区即可关闭，见 FSAlertSpec.tapOutsideToDismiss）。
+        // 原来无条件 append，传空会渲染成一个空白按钮。
+        if cancelTitle.isEmpty == false {
+            let archiveAction = FSAlertAction(title: cancelTitle, style: .cancel)
 
-        specs.append(FSAlertActionSpec(title: cancelTitle, style: .cancel) {
-            cancel?(archiveAction)
-        })
+            specs.append(FSAlertActionSpec(title: cancelTitle, style: .cancel) {
+                cancel?(archiveAction)
+            })
+        }
 
         FSAlertCenter.shared.show(FSAlertSpec(style: style,
                                               title: title,
