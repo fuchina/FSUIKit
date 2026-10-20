@@ -88,7 +88,7 @@ public enum FSUIKit {
     }
     
     public static func alertInput(number: Int,
-                                  title: String,
+                                  title: String = "",
                                   message: String = "",
                                   buttons: Int,
                                   buttonConfig: (FSAlertActionData) -> Void,
