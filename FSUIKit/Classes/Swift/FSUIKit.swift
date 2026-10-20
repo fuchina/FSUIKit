@@ -89,7 +89,7 @@ public enum FSUIKit {
     
     public static func alertInput(number: Int,
                                   title: String,
-                                  message: String,
+                                  message: String = "",
                                   buttons: Int,
                                   buttonConfig: (FSAlertActionData) -> Void,
                                   inputConfig: (inout FSAlertInputConfig) -> Void = { _ in },
@@ -144,7 +144,7 @@ public enum FSUIKit {
         showAlert(title: "温馨提示", message: message, ok: "确定", handler: handler)
     }
     
-    public static func showAlertWithTitle(title: String, message: String, ok: String, handler: ((FSAlertAction) -> Void)? = nil) {
+    public static func showAlertWithTitle(title: String = "", message: String = "", ok: String, handler: ((FSAlertAction) -> Void)? = nil) {
         showAlert(title: title, message: message, ok: ok, handler: handler)
     }
 
