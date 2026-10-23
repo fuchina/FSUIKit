@@ -56,3 +56,31 @@ public struct FSTextViewScreen: View {
         .debugDealloc("FSTextViewScreen")
     }
 }
+
+// MARK: - 路由 · FSTextViewScreen
+
+public struct FSTextViewPage: FSPageTarget {
+
+    public let text: String?
+    /// 需要额外设标题时传（原调用点的 `.navigationTitle(...)`）
+    public let title: String?
+    public let onDone: (String?) -> Void
+
+    public init(text: String? = nil,
+                title: String? = nil,
+                onDone: @escaping (String?) -> Void) {
+        self.text = text
+        self.title = title
+        self.onDone = onDone
+    }
+
+    public var fsPageName: String { "FSTextViewScreen" }
+
+    public static func fsMakeView(_ page: Self, router: FSNavRouter) -> AnyView {
+        let view = FSTextViewScreen(text: page.text, onDone: page.onDone)
+        if let title = page.title {
+            return AnyView(view.navigationTitle(title))
+        }
+        return AnyView(view)
+    }
+}

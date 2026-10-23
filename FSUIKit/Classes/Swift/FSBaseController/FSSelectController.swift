@@ -100,3 +100,37 @@ public struct FSSelectScreen: View {
         .debugDealloc("FSSelectScreen")
     }
 }
+
+
+// MARK: - 路由 · FSSelectScreen
+
+public struct FSSelectPage: FSPageTarget {
+
+    public let models: [FSSelectModel]
+    public let title: String
+    public let rowContent: ((FSSelectModel) -> AnyView)?
+    public let onSelect: (Int) -> Void
+    public let onConfirm: (() -> Void)?
+
+    public init(models: [FSSelectModel],
+                title: String = "",
+                rowContent: ((FSSelectModel) -> AnyView)? = nil,
+                onSelect: @escaping (Int) -> Void,
+                onConfirm: (() -> Void)? = nil) {
+        self.models = models
+        self.title = title
+        self.rowContent = rowContent
+        self.onSelect = onSelect
+        self.onConfirm = onConfirm
+    }
+
+    public var fsPageName: String { "FSSelectScreen" }
+
+    public static func fsMakeView(_ page: Self, router: FSNavRouter) -> AnyView {
+        AnyView(FSSelectScreen(models: page.models,
+                               rowContent: page.rowContent,
+                               onSelect: page.onSelect,
+                               onConfirm: page.onConfirm)
+            .navigationTitle(page.title))
+    }
+}
