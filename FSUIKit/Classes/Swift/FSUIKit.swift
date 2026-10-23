@@ -302,7 +302,7 @@ private struct FSAlertPresenter: ViewModifier {
 
     @Binding var isPresented: Bool
 
-    @ObservedObject private var center = FSAlertCenter.shared
+    private let center = FSAlertCenter.shared
     /// 这一次是我们弹的那条，用来区分"我们被关了"和"别人弹了新的"
     @State private var showingID: UUID?
 
