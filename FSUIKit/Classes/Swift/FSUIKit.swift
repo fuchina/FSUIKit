@@ -24,8 +24,14 @@ public struct FSAlertInputConfig {
 
 public enum FSUIKit {
 
-    public static func alert(style: FSAlertStyle = .alert,
-                             title: String = "",
+    /// 全局 alert。**只有 `.alert` 一种形态**。
+    ///
+    /// 2026-10-29：原 `style: FSAlertStyle = .alert` 首参已删。理由 ——
+    /// - 全库 16 个组件库、90+ 调用点，无一处传它；
+    /// - iPad 上本来就被硬改成 `.alert`（原实现在这里判断 idiom），传入 `.actionSheet` 语义已不成立；
+    /// - actionSheet 的职责在 SwiftUI 的 `.confirmationDialog` / `.fsTapAnchoredDialog` 那边，
+    ///   `fsAlert` 修饰器版也同样写死 `.alert`，这里跟它对齐。
+    public static func alert(title: String = "",
                              message: String = "",
                              actionTitles: [String] = [],
                              styles: [FSAlertActionStyle] = [],
@@ -34,27 +40,23 @@ public enum FSUIKit {
                              cancel: ((FSAlertAction) -> Void)? = nil,
                              completion: (() -> Void)? = nil) {
 
-        showAlertSpec(style,
-                                 title: title,
-                                 message: message,
-                                 actionTitles: actionTitles,
-                                 styles: styles,
-                                 handler: handler,
-                                 cancelTitle: cancelTitle,
-                                 cancel: cancel)
+        showAlertSpec(title: title,
+                      message: message,
+                      actionTitles: actionTitles,
+                      styles: styles,
+                      handler: handler,
+                      cancelTitle: cancelTitle,
+                      cancel: cancel)
         completion?()
     }
 
-    static func showAlertSpec(_ style1: FSAlertStyle = .alert,
-                                         title: String = "",
-                                         message: String = "",
-                                         actionTitles: [String] = [],
-                                         styles: [FSAlertActionStyle] = [],
-                                         handler: ((FSAlertAction) -> Void)? = nil,
-                                         cancelTitle: String = "",
-                                         cancel: ((FSAlertAction) -> Void)? = nil) {
-
-        let style: FSAlertStyle = UIDevice.current.userInterfaceIdiom == .pad ? .alert : style1
+    static func showAlertSpec(title: String = "",
+                              message: String = "",
+                              actionTitles: [String] = [],
+                              styles: [FSAlertActionStyle] = [],
+                              handler: ((FSAlertAction) -> Void)? = nil,
+                              cancelTitle: String = "",
+                              cancel: ((FSAlertAction) -> Void)? = nil) {
 
         let count = min(actionTitles.count, styles.count)
         var specs: [FSAlertActionSpec] = []
@@ -78,7 +80,7 @@ public enum FSUIKit {
             })
         }
 
-        FSAlertCenter.shared.show(FSAlertSpec(style: style,
+        FSAlertCenter.shared.show(FSAlertSpec(style: .alert,
                                               title: title,
                                               message: message,
                                               actions: specs))
