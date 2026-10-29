@@ -24,9 +24,6 @@ public struct FSAlertInputConfig {
 
 public enum FSUIKit {
 
-    /// 弹窗。
-    /// - `style` 默认 `.alert`（居中）；要底部/锚点形态再显式传 `.actionSheet`。
-    /// - `cancelTitle` 默认空 = 不生成取消按钮（点空白区即可关闭，见 `FSAlertSpec.tapOutsideToDismiss`）。
     public static func alert(style: FSAlertStyle = .alert,
                              title: String = "",
                              message: String = "",
