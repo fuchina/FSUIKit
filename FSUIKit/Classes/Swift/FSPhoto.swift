@@ -1,11 +1,15 @@
-// FSImageS.swift
-// Translated from FSImage.h/m
+// FSPhoto.swift
+//
+// 原 `FSImage.h/m` 的 Swift 版。
+// ★ 2026-10-30：画色块 / 渐变 / 强制解码 / 视图截图那些方法都已删除
+//   （SwiftUI 里这些活由 `Color` / `LinearGradient` / `ImageRenderer` 直接干掉），
+//   这个类只剩「压缩位图」和「存相册」两件事，名字随之 `FSImage` → `FSPhoto`。
 
 import UIKit
 import Photos
 import FSKit
 
-public class FSImage: NSObject {
+public class FSPhoto: NSObject {
     
     /// 等比缩到指定宽度（按**像素**缩，与屏幕缩放无关）
     ///
