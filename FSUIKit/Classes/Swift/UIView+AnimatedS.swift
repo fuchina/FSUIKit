@@ -190,43 +190,4 @@ public extension UIView {
         rotationAnimation.fillMode = .forwards
         layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
-
-    /// 【Controller】交叉溶解动画（0.4s动画时间）
-    static func crossDissolveS(to viewController: UIViewController, animations: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        crossDissolveS(to: viewController, duration: 0.4, animations: animations, completion: completion)
-    }
-
-    /// 【Controller】交叉溶解动画（自定义动画时间）
-    static func crossDissolveS(to viewController: UIViewController, duration: TimeInterval, animations: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        viewController.modalTransitionStyle = .crossDissolve
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-
-        let animationsBlock: () -> Void = {
-            let oldState = UIView.areAnimationsEnabled
-            UIView.setAnimationsEnabled(false)
-            animations?()
-            UIView.setAnimationsEnabled(oldState)
-        }
-
-        UIView.transition(with: UIApplication.shared.delegate!.window!!, duration: duration, options: options, animations: animationsBlock, completion: completion)
-    }
-
-    /// 【View】交叉溶解动画（0.25s动画时间）
-    static func crossDissolveS(with view: UIView, animations: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        crossDissolveS(with: view, duration: 0.25, animations: animations, completion: completion)
-    }
-
-    /// 【View】交叉溶解动画（自定义动画时间）
-    static func crossDissolveS(with view: UIView, duration: TimeInterval, animations: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-
-        let animationsBlock: () -> Void = {
-            let oldState = UIView.areAnimationsEnabled
-            UIView.setAnimationsEnabled(false)
-            animations?()
-            UIView.setAnimationsEnabled(oldState)
-        }
-
-        UIView.transition(with: view, duration: duration, options: options, animations: animationsBlock, completion: completion)
-    }
 }
