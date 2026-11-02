@@ -9,7 +9,7 @@ import Foundation
 import FSKit
 
 public enum FSToast {
-    
+
     public static func toast(_ text: String, duration: Double = 2) {
         FSToastCenter.shared.show(text, duration: duration)
     }

@@ -5,11 +5,11 @@ import UIKit
 import FSKit
 
 public extension UIView {
-    
+
     func pushAnimatedS(_ flag: Bool, completion: ((UIView) -> Void)?) {
         pushAnimatedS(flag, toFrame: CGRect(x: 0, y: 0, width: WIDTHFC, height: HEIGHTFC), completion: completion)
     }
-    
+
     func pushAnimatedS(_ flag: Bool, toFrame frame: CGRect, completion: ((UIView) -> Void)?) {
         if flag {
             self.frame = CGRect(x: 0, y: HEIGHTFC, width: WIDTHFC, height: HEIGHTFC)
@@ -23,11 +23,11 @@ public extension UIView {
             completion?(self)
         }
     }
-    
+
     func popAnimatedS(_ flag: Bool, removeFromSuperView remove: Bool, completion: ((UIView) -> Void)?) {
         popAnimatedS(flag, toFrame: CGRect(x: 0, y: HEIGHTFC, width: WIDTHFC, height: HEIGHTFC), removeFromSuperView: remove, completion: completion)
     }
-    
+
     func popAnimatedS(_ flag: Bool, toFrame frame: CGRect, removeFromSuperView remove: Bool, completion: ((UIView) -> Void)?) {
         if flag {
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.25, options: .curveEaseOut, animations: {
@@ -40,10 +40,10 @@ public extension UIView {
             popCallbackS(remove: remove, completion: completion)
         }
     }
-    
+
     private func popCallbackS(remove: Bool, completion: ((UIView) -> Void)?) {
         completion?(self)
-        
+
         if remove {
             frame = CGRect(x: 10000, y: 0, width: 0, height: 0)
             isHidden = true

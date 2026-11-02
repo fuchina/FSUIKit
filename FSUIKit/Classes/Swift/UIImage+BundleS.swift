@@ -4,7 +4,7 @@
 import UIKit
 
 public extension UIImage {
-    
+
     static func imageS(withBundle bundle: String, imageName: String) -> UIImage? {
         let mainBundle = Bundle.main
         guard let bundlePath = mainBundle.path(forResource: bundle, ofType: "bundle"),

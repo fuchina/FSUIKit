@@ -10,7 +10,7 @@ import Photos
 import FSKit
 
 public class FSPhoto: NSObject {
-    
+
     /// 等比缩到指定宽度（按**像素**缩，与屏幕缩放无关）
     ///
     /// ★ 2026-10-30：`UIGraphicsBeginImageContext*` 系列自 iOS 17 起弃用，改用 `UIGraphicsImageRenderer`。
@@ -35,7 +35,7 @@ public class FSPhoto: NSObject {
             sourceImage.draw(in: CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight))
         }
     }
-    
+
     public static func requestPhotoLibraryAddPermission(completion: @escaping (Bool) -> Void) {
         if #available(iOS 14, *) {
             let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)

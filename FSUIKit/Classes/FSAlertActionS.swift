@@ -14,11 +14,11 @@ import Foundation
 import FSKit
 
 public class FSAlertActionData {
-    
+
     public var             index               :   Int                                             =   0
     public var             title               :   String                                          =   ""
     public var             style               :   FSAlertActionStyle                              =   .default
-    
+
     /// 点按钮时回调：第一参是本按钮（`data.index` 区分是哪个），第二参是输入框文本（按顺序）
     ///
     /// 2026-10-17：原签名是 `(UIAlertController, UIAlertAction)`，调用方靠

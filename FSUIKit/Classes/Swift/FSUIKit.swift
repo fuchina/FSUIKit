@@ -3,7 +3,7 @@ import SwiftUI
 import FSKit
 
 public struct FSAlertInputConfig {
-    
+
     public var tag: Int = 0
 
     public var placeholder: String = ""
@@ -85,7 +85,7 @@ public enum FSUIKit {
                                               message: message,
                                               actions: specs))
     }
-    
+
     public static func alertInput(number: Int,
                                   title: String = "",
                                   message: String = "",
@@ -138,11 +138,11 @@ public enum FSUIKit {
                                               tapOutsideToDismiss: tapOutsideToDismiss,
                                               tapOutsideCanDismiss: tapOutsideCanDismiss))
     }
-    
+
     public static func showAlertWithMessage(_ message: String, handler: ((FSAlertAction) -> Void)? = nil) {
         showAlert(title: "温馨提示", message: message, ok: "确定", handler: handler)
     }
-    
+
     public static func showAlertWithTitle(title: String = "", message: String = "", ok: String, handler: ((FSAlertAction) -> Void)? = nil) {
         showAlert(title: title, message: message, ok: ok, handler: handler)
     }
