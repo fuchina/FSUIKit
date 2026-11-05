@@ -13,7 +13,7 @@
 import Foundation
 import FSKit
 
-public class FSAlertActionData {
+public final class FSAlertActionData {
 
     public var             index               :   Int                                             =   0
     public var             title               :   String                                          =   ""
@@ -28,7 +28,7 @@ public class FSAlertActionData {
 }
 
 /// 一个弹窗按钮（`alert` / `alertInput` 的 handler 收到的就是它）
-public class FSAlertAction {
+public final class FSAlertAction {
 
     /// 与原来的 `UIAlertAction.title` 同类型（可选），调用点 `action.title ?? ""` 不用改
     public let title: String?

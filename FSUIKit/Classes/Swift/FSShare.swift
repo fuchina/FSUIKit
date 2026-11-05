@@ -7,7 +7,7 @@ import MessageUI
 
 //import WechatOpenSDK  暂不支持，需要OC桥接，后续实现
 
-public class FSShare: NSObject {
+public final class FSShare: NSObject {
 
     // 2026-10-17：Pod 与主 App 统一为默认主隔离后，nonisolated(unsafe) 反而报错，故移除。
     public static let shared = FSShare()
