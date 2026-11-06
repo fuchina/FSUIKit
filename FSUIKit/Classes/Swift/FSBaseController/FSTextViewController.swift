@@ -74,7 +74,6 @@ public struct FSTextViewPage: FSPageTarget {
         self.onDone = onDone
     }
 
-    nonisolated public static var fsPageName: String { "FSTextViewScreen" }
     public static func fsMakeView(_ page: Self, router: FSNavRouter) -> AnyView {
         let view = FSTextViewScreen(text: page.text, onDone: page.onDone)
         if let title = page.title {

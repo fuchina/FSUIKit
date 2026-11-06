@@ -126,7 +126,6 @@ public struct FSSelectPage: FSPageTarget {
         self.onConfirm = onConfirm
     }
 
-    nonisolated public static var fsPageName: String { "FSSelectScreen" }
     public static func fsMakeView(_ page: Self, router: FSNavRouter) -> AnyView {
         AnyView(FSSelectScreen(models: page.models,
                                rowContent: page.rowContent,
