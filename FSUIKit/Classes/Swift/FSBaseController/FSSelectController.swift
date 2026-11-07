@@ -99,7 +99,7 @@ public struct FSSelectScreen: View {
                 }
             }
         }
-        .debugDealloc("FSSelectScreen")
+        .debugDealloc(FSSelectPage.self)
     }
 }
 

@@ -42,7 +42,7 @@ public struct FSRestartScreen: View {
                 }
         }
         .ignoresSafeArea()
-        .debugDealloc("FSRestartScreen")
+        .debugDeallocUnrouted("FSRestartScreen")
     }
 
     private var title: String {

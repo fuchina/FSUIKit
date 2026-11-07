@@ -53,7 +53,7 @@ public struct FSTextViewScreen: View {
         }
         // 原 textView.becomeFirstResponder()（进入即聚焦）
         .onAppear { focused = true }
-        .debugDealloc("FSTextViewScreen")
+        .debugDealloc(FSTextViewPage.self)
     }
 }
 
