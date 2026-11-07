@@ -1,5 +1,5 @@
 //
-//  FSRestartAppController.swift
+//  FSRestartAppScreen.swift
 //  FSUIKit
 //
 //  2026-10-15 全 SwiftUI 化：
