@@ -10,6 +10,9 @@ public struct FSAlertInputConfig {
 
     public var text: String = ""
 
+    /// 密码框（回显圆点）。2026-11-11 新增，供「需要管理密码」这类弹窗使用。
+    public var isSecure: Bool = false
+
     public var keyboardType: FSAlertKeyboard = .default
 
     public var showsClearButton: Bool = false
@@ -105,6 +108,7 @@ public enum FSUIKit {
             inputs.append(FSAlertInputSpec(placeholder: cfg.placeholder,
                                            keyboardType: cfg.keyboardType,
                                            text: cfg.text,
+                                           isSecure: cfg.isSecure,
                                            showsClearButton: cfg.showsClearButton,
                                            autocapitalization: cfg.autocapitalization,
                                            autocorrectionDisabled: cfg.autocorrectionDisabled,
