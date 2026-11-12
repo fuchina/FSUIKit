@@ -11,7 +11,8 @@ import UIKit
 import SwiftUI
 import FSKit
 
-open class FSSelectModel {
+/// ★ 2026-11-12：`nonisolated` —— `FSAlertModel.fastModels` 已在后台执行器上构造它。
+open nonisolated class FSSelectModel {
     /// 原由 NSObject 隐式提供 `public init()`；改为纯 Swift 后合成的 init 只有 internal 级，跨模块会断，故显式声明。
     public init() {}
 
